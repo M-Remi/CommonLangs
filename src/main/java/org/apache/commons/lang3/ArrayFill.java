@@ -52,9 +52,7 @@ public final class ArrayFill {
      * @see Arrays#fill(byte[],byte)
      */
     public static byte[] fill(final byte[] a, final byte val) {
-        if (a != null) {
 
-        }
         return a;
     }
 
