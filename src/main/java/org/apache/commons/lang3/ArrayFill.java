@@ -80,9 +80,7 @@ public final class ArrayFill {
      * @see Arrays#fill(double[],double)
      */
     public static double[] fill(final double[] a, final double val) {
-        if (a != null) {
-            Arrays.fill(a, val);
-        }
+
         return a;
     }
 
@@ -95,9 +93,7 @@ public final class ArrayFill {
      * @see Arrays#fill(float[],float)
      */
     public static float[] fill(final float[] a, final float val) {
-        if (a != null) {
-            Arrays.fill(a, val);
-        }
+
         return a;
     }
 
@@ -110,9 +106,7 @@ public final class ArrayFill {
      * @see Arrays#fill(int[],int)
      */
     public static int[] fill(final int[] a, final int val) {
-        if (a != null) {
-            Arrays.fill(a, val);
-        }
+
         return a;
     }
 
@@ -125,9 +119,7 @@ public final class ArrayFill {
      * @see Arrays#fill(long[],long)
      */
     public static long[] fill(final long[] a, final long val) {
-        if (a != null) {
-            Arrays.fill(a, val);
-        }
+
         return a;
     }
 
@@ -140,9 +132,7 @@ public final class ArrayFill {
      * @see Arrays#fill(short[],short)
      */
     public static short[] fill(final short[] a, final short val) {
-        if (a != null) {
-            Arrays.fill(a, val);
-        }
+
         return a;
     }
 
