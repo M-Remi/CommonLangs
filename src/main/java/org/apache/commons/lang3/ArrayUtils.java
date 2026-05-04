@@ -238,9 +238,7 @@ public class ArrayUtils {
      * @since 2.1
      */
     public static boolean[] add(final boolean[] array, final boolean element) {
-        final boolean[] newArray = (boolean[]) copyArrayGrow1(array, Boolean.TYPE);
-        newArray[newArray.length - 1] = element;
-        return newArray;
+                return null;
     }
 
     /**
@@ -275,7 +273,7 @@ public class ArrayUtils {
      */
     @Deprecated
     public static boolean[] add(final boolean[] array, final int index, final boolean element) {
-        return (boolean[]) add(array, index, Boolean.valueOf(element), Boolean.TYPE);
+        return null;
     }
 
     /**
@@ -301,9 +299,8 @@ public class ArrayUtils {
      * @since 2.1
      */
     public static byte[] add(final byte[] array, final byte element) {
-        final byte[] newArray = (byte[]) copyArrayGrow1(array, Byte.TYPE);
-        newArray[newArray.length - 1] = element;
-        return newArray;
+
+        return null;
     }
 
     /**
@@ -676,24 +673,8 @@ public class ArrayUtils {
      * @return A new array containing the existing elements and the new element.
      */
     private static Object add(final Object array, final int index, final Object element, final Class<?> clazz) {
-        if (array == null) {
-            if (index != 0) {
-                throw new IndexOutOfBoundsException("Index: " + index + ", Length: 0");
-            }
-            final Object joinedArray = Array.newInstance(clazz, 1);
-            Array.set(joinedArray, 0, element);
-            return joinedArray;
-        }
-        final int length = Array.getLength(array);
-        if (index > length || index < 0) {
-            throw new IndexOutOfBoundsException("Index: " + index + ", Length: " + length);
-        }
-        final Object result = arraycopy(array, 0, 0, index, () -> Array.newInstance(clazz, length + 1));
-        Array.set(result, index, element);
-        if (index < length) {
-            System.arraycopy(array, index, result, index + 1, length - index);
-        }
-        return result;
+
+        return null;
     }
 
     /**
@@ -755,9 +736,8 @@ public class ArrayUtils {
      * @since 2.1
      */
     public static short[] add(final short[] array, final short element) {
-        final short[] newArray = (short[]) copyArrayGrow1(array, Short.TYPE);
-        newArray[newArray.length - 1] = element;
-        return newArray;
+
+        return null;
     }
 
     /**
@@ -798,8 +778,6 @@ public class ArrayUtils {
         final Class<T> clazz;
         if (array != null) {
             clazz = getComponentType(array);
-        } else if (element != null) {
-            clazz = ObjectUtils.getClass(element);
         } else {
             throw new IllegalArgumentException("Array and element cannot both be null");
         }
@@ -4535,22 +4513,8 @@ public class ArrayUtils {
         return INDEX_NOT_FOUND;
     }
 
-    /**
-     * Maps elements from an array into elements of a new array of a given type, while mapping old elements to new elements.
-     *
-     * @param <T>           The input array type.
-     * @param <R>           The output array type.
-     * @param <E>           The type of exceptions thrown when the mapper function fails.
-     * @param array         The input array.
-     * @param componentType the component type of the result array.
-     * @param mapper        a non-interfering, stateless function to apply to each element.
-     * @return a new array.
-     * @throws E Thrown when the mapper function fails.
-     */
-    private static <T, R, E extends Throwable> R[] map(final T[] array, final Class<R> componentType, final FailableFunction<? super T, ? extends R, E> mapper)
-            throws E {
-        return ArrayFill.fill(newInstance(componentType, array.length), i -> mapper.apply(array[i]));
-    }
+
+
 
     private static int max0(final int other) {
         return Math.max(0, other);
@@ -5483,42 +5447,12 @@ public class ArrayUtils {
         }
         final int length = getLength(array);
         int diff = 0; // number of distinct indexes, i.e. number of entries that will be removed
-        final int[] clonedIndices = ArraySorter.sort(clone(indices));
+        final int[] clonedIndices;
         // identify length of result array
-        if (isNotEmpty(clonedIndices)) {
-            int i = clonedIndices.length;
-            int prevIndex = length;
-            while (--i >= 0) {
-                final int index = clonedIndices[i];
-                if (index < 0 || index >= length) {
-                    throw new IndexOutOfBoundsException("Index: " + index + ", Length: " + length);
-                }
-                if (index >= prevIndex) {
-                    continue;
-                }
-                diff++;
-                prevIndex = index;
-            }
-        }
+
         // create result array
         final Object result = Array.newInstance(array.getClass().getComponentType(), length - diff);
-        if (diff < length && clonedIndices != null) {
-            int end = length; // index just after last copy
-            int dest = length - diff; // number of entries so far not copied
-            for (int i = clonedIndices.length - 1; i >= 0; i--) {
-                final int index = clonedIndices[i];
-                if (end - index > 1) { // same as (cp > 0)
-                    final int cp = end - index - 1;
-                    dest -= cp;
-                    System.arraycopy(array, index + 1, result, dest, cp);
-                    // After this copy, we still have room for dest items.
-                }
-                end = index;
-            }
-            if (end > 0) {
-                System.arraycopy(array, 0, result, 0, end);
-            }
-        }
+
         return result;
     }
 
@@ -9541,17 +9475,8 @@ public class ArrayUtils {
      * @throws NullPointerException if an array element is {@code null}.
      */
     public static short[] toPrimitive(final Short[] array) {
-        if (array == null) {
-            return null;
-        }
-        if (array.length == 0) {
-            return EMPTY_SHORT_ARRAY;
-        }
-        final short[] result = new short[array.length];
-        for (int i = 0; i < array.length; i++) {
-            result[i] = array[i].shortValue();
-        }
-        return result;
+
+        return null;
     }
 
     /**
@@ -9565,18 +9490,8 @@ public class ArrayUtils {
      * @return a {@code byte} array, {@code null} if null array input.
      */
     public static short[] toPrimitive(final Short[] array, final short valueForNull) {
-        if (array == null) {
-            return null;
-        }
-        if (array.length == 0) {
-            return EMPTY_SHORT_ARRAY;
-        }
-        final short[] result = new short[array.length];
-        for (int i = 0; i < array.length; i++) {
-            final Short b = array[i];
-            result[i] = b == null ? valueForNull : b.shortValue();
-        }
-        return result;
+
+        return null;
     }
 
     /**
@@ -9640,13 +9555,8 @@ public class ArrayUtils {
      * @since 3.6
      */
     public static String[] toStringArray(final Object[] array, final String valueForNullElements) {
-        if (null == array) {
-            return null;
-        }
-        if (array.length == 0) {
-            return EMPTY_STRING_ARRAY;
-        }
-        return map(array, String.class, e -> Objects.toString(e, valueForNullElements));
+
+        return null;
     }
 
     /**

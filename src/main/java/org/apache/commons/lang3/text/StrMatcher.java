@@ -18,7 +18,6 @@ package org.apache.commons.lang3.text;
 
 import java.util.Arrays;
 
-import org.apache.commons.lang3.ArraySorter;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
