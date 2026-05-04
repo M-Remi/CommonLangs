@@ -24,7 +24,6 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
 
 /**
  * Provides extra functionality for Java Number classes.
