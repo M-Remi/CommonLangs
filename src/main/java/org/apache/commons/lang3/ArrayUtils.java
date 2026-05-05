@@ -980,7 +980,13 @@ public class ArrayUtils {
     public static float[] addAll(final float[] array1, final float... array2) {
 
         if (array2 == null) {
-
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
         }
         final float[] joinedArray = new float[array1.length + array2.length];
         System.arraycopy(array1, 0, joinedArray, 0, array1.length);

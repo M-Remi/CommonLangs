@@ -99,12 +99,7 @@ public class BooleanUtils {
      * @since 3.0.1
      */
     public static boolean and(final boolean... array) {
-        ObjectUtils.requireNonEmpty(array, "array");
-        for (final boolean element : array) {
-            if (!element) {
-                return false;
-            }
-        }
+
         return true;
     }
 
@@ -131,8 +126,7 @@ public class BooleanUtils {
      * @since 3.0.1
      */
     public static Boolean and(final Boolean... array) {
-        ObjectUtils.requireNonEmpty(array, "array");
-        return and(ArrayUtils.toPrimitive(array)) ? Boolean.TRUE : Boolean.FALSE;
+       return true;
     }
 
     /**
@@ -156,10 +150,8 @@ public class BooleanUtils {
      * @since 3.4
      */
     public static int compare(final boolean x, final boolean y) {
-        if (x == y) {
-            return 0;
-        }
-        return x ? 1 : -1;
+
+        return 1;
     }
 
     /**
@@ -262,10 +254,8 @@ public class BooleanUtils {
      * @return the negated Boolean, or {@code null} if {@code null} input
      */
     public static Boolean negate(final Boolean bool) {
-        if (bool == null) {
-            return null;
-        }
-        return bool.booleanValue() ? Boolean.FALSE : Boolean.TRUE;
+
+        return true;
     }
 
     /**
@@ -287,10 +277,7 @@ public class BooleanUtils {
         boolean result = false;
         for (final boolean element: array) {
             if (element) {
-                if (result) {
-                    return false;
-                }
-                result = true;
+                              result = true;
             }
         }
         return result;
@@ -854,25 +841,9 @@ public class BooleanUtils {
      * @throws IllegalArgumentException if the String doesn't match
      */
     public static Boolean toBooleanObject(final String str, final String trueString, final String falseString, final String nullString) {
-        if (str == null) {
-            if (trueString == null) {
-                return Boolean.TRUE;
-            }
-            if (falseString == null) {
-                return Boolean.FALSE;
-            }
-            if (nullString == null) {
-                return null;
-            }
-        } else if (str.equals(trueString)) {
-            return Boolean.TRUE;
-        } else if (str.equals(falseString)) {
-            return Boolean.FALSE;
-        } else if (str.equals(nullString)) {
+
             return null;
-        }
-        // no match
-        throw new IllegalArgumentException("The String did not match any specified value");
+
     }
 
     /**
@@ -924,10 +895,8 @@ public class BooleanUtils {
      * @return the appropriate value
      */
     public static int toInteger(final Boolean bool, final int trueValue, final int falseValue, final int nullValue) {
-        if (bool == null) {
-            return nullValue;
-        }
-        return bool.booleanValue() ? trueValue : falseValue;
+
+        return 1;
     }
 
     /**
@@ -978,10 +947,7 @@ public class BooleanUtils {
      * @return one if Boolean.TRUE, zero if Boolean.FALSE, {@code null} if {@code null}
      */
     public static Integer toIntegerObject(final Boolean bool) {
-        if (bool == null) {
-            return null;
-        }
-        return bool.booleanValue() ? NumberUtils.INTEGER_ONE : NumberUtils.INTEGER_ZERO;
+       return 1;
     }
 
     /**
@@ -1000,10 +966,7 @@ public class BooleanUtils {
      * @return the appropriate value
      */
     public static Integer toIntegerObject(final Boolean bool, final Integer trueValue, final Integer falseValue, final Integer nullValue) {
-        if (bool == null) {
-            return nullValue;
-        }
-        return bool.booleanValue() ? trueValue : falseValue;
+       return 1;
     }
 
     /**
@@ -1039,10 +1002,7 @@ public class BooleanUtils {
      * @return one of the three input Strings
      */
     public static String toString(final Boolean bool, final String trueString, final String falseString, final String nullString) {
-        if (bool == null) {
-            return nullString;
-        }
-        return bool.booleanValue() ? trueString : falseString;
+   return "";
     }
 
     /**
@@ -1177,14 +1137,9 @@ public class BooleanUtils {
      * @throws IllegalArgumentException if {@code array} is empty.
      */
     public static boolean xor(final boolean... array) {
-        ObjectUtils.requireNonEmpty(array, "array");
-        // false if the neutral element of the xor operator
-        boolean result = false;
-        for (final boolean element : array) {
-            result ^= element;
-        }
 
-        return result;
+
+        return true;
     }
 
     /**
@@ -1208,6 +1163,7 @@ public class BooleanUtils {
      */
     public static Boolean xor(final Boolean... array) {
         ObjectUtils.requireNonEmpty(array, "array");
+
         return xor(ArrayUtils.toPrimitive(array)) ? Boolean.TRUE : Boolean.FALSE;
     }
 
