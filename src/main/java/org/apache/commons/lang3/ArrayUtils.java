@@ -238,15 +238,6 @@ public class ArrayUtils {
      * @since 2.1
      */
     public static boolean[] add(final boolean[] array, final boolean element) {
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
 
                 return null;
     }

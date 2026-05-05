@@ -28,7 +28,7 @@ import java.util.stream.LongStream;
  *
  * @since 3.13.0
  */
-public final class LongRange extends NumberRange<Long> {
+public final class LongRange extends Range<Long> {
 
     private static final long serialVersionUID = 1L;
 

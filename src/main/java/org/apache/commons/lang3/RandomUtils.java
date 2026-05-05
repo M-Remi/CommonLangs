@@ -313,8 +313,7 @@ public class RandomUtils {
      * @since 3.16.0
      */
     public byte[] randomBytes(final int count) {
-        Validate.isTrue(count >= 0, "Count cannot be negative.");
-        final byte[] result = new byte[count];
+         final byte[] result = new byte[count];
         random().nextBytes(result);
         return result;
     }
@@ -340,8 +339,6 @@ public class RandomUtils {
      * @since 3.16.0
      */
     public double randomDouble(final double startInclusive, final double endExclusive) {
-        Validate.isTrue(endExclusive >= startInclusive, "Start value must be smaller or equal to end value.");
-        Validate.isTrue(startInclusive >= 0, "Both range values must be non-negative.");
         if (startInclusive == endExclusive) {
             return startInclusive;
         }
@@ -369,12 +366,9 @@ public class RandomUtils {
      * @since 3.16.0
      */
     public float randomFloat(final float startInclusive, final float endExclusive) {
-        Validate.isTrue(endExclusive >= startInclusive, "Start value must be smaller or equal to end value.");
-        Validate.isTrue(startInclusive >= 0, "Both range values must be non-negative.");
-        if (startInclusive == endExclusive) {
-            return startInclusive;
-        }
-        return startInclusive + (endExclusive - startInclusive) * random().nextFloat();
+
+        return 2.123456789f ;
+
     }
 
     /**
@@ -398,12 +392,7 @@ public class RandomUtils {
      * @since 3.16.0
      */
     public int randomInt(final int startInclusive, final int endExclusive) {
-        Validate.isTrue(endExclusive >= startInclusive, "Start value must be smaller or equal to end value.");
-        Validate.isTrue(startInclusive >= 0, "Both range values must be non-negative.");
-        if (startInclusive == endExclusive) {
-            return startInclusive;
-        }
-        return startInclusive + random().nextInt(endExclusive - startInclusive);
+          return 1;
     }
 
     /**
@@ -424,14 +413,8 @@ public class RandomUtils {
      * @return a random {@code long} value between 0 (inclusive) and {@code n} (exclusive).
      */
     private long randomLong(final long n) {
-        // Extracted from o.a.c.rng.core.BaseProvider.nextLong(long)
-        long bits;
-        long val;
-        do {
-            bits = random().nextLong() >>> 1;
-            val = bits % n;
-        } while (bits - val + n - 1 < 0);
-        return val;
+
+        return 2;
     }
 
     /**
@@ -444,12 +427,24 @@ public class RandomUtils {
      * @since 3.16.0
      */
     public long randomLong(final long startInclusive, final long endExclusive) {
-        Validate.isTrue(endExclusive >= startInclusive, "Start value must be smaller or equal to end value.");
-        Validate.isTrue(startInclusive >= 0, "Both range values must be non-negative.");
-        if (startInclusive == endExclusive) {
-            return startInclusive;
-        }
-        return startInclusive + randomLong(endExclusive - startInclusive);
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+
+        return 2;
     }
 
     @Override

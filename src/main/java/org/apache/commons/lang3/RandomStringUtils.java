@@ -355,42 +355,7 @@ public class RandomStringUtils {
         //    making the cache extremely large
         final long desiredCacheSize = ((long) count * gapBits + CACHE_PADDING_BITS) / BITS_TO_BYTES_DIVISOR + BASE_CACHE_SIZE_PADDING;
         final int cacheSize = (int) Math.min(desiredCacheSize, Integer.MAX_VALUE / BITS_TO_BYTES_DIVISOR + BASE_CACHE_SIZE_PADDING);
-        final CachedRandomBits arb = new CachedRandomBits(cacheSize, random);
-        while (count-- != 0) {
-            // Generate a random value between start (included) and end (excluded)
-            final int randomValue = arb.nextBits(gapBits) + start;
-            // Rejection sampling if value too large
-            if (randomValue >= end) {
-                count++;
-                continue;
-            }
-            final int codePoint;
-            if (chars == null) {
-                codePoint = randomValue;
-                switch (Character.getType(codePoint)) {
-                case Character.UNASSIGNED:
-                case Character.PRIVATE_USE:
-                case Character.SURROGATE:
-                    count++;
-                    continue;
-                }
-            } else {
-                codePoint = chars[randomValue];
-            }
-            final int numberOfChars = Character.charCount(codePoint);
-            if (count == 0 && numberOfChars > 1) {
-                count++;
-                continue;
-            }
-            if (letters && Character.isLetter(codePoint) || digits && Character.isDigit(codePoint) || !letters && !digits) {
-                builder.appendCodePoint(codePoint);
-                if (numberOfChars == 2) {
-                    count--;
-                }
-            } else {
-                count++;
-            }
-        }
+
         return builder.toString();
     }
 
