@@ -238,6 +238,16 @@ public class ArrayUtils {
      * @since 2.1
      */
     public static boolean[] add(final boolean[] array, final boolean element) {
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+
                 return null;
     }
 
@@ -980,13 +990,7 @@ public class ArrayUtils {
     public static float[] addAll(final float[] array1, final float... array2) {
 
         if (array2 == null) {
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
+
         }
         final float[] joinedArray = new float[array1.length + array2.length];
         System.arraycopy(array1, 0, joinedArray, 0, array1.length);
@@ -3908,9 +3912,7 @@ public class ArrayUtils {
         final int n = array.length;
         for (int i = 1; i < n; i++) {
             final char current = array[i];
-            if (CharUtils.compare(previous, current) > 0) {
-                return false;
-            }
+
             previous = current;
         }
         return true;

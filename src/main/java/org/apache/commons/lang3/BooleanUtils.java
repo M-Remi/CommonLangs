@@ -524,13 +524,13 @@ public class BooleanUtils {
             return false;
         }
         if (str != null) {
-            if (str.equals(trueString)) {
+
                 return true;
             }
             if (str.equals(falseString)) {
                 return false;
             }
-        }
+
         throw new IllegalArgumentException("The String did not match either specified value");
     }
 
@@ -779,34 +779,8 @@ public class BooleanUtils {
                 }
                 break;
             }
-            case 4: {
-                final char ch0 = str.charAt(0);
-                final char ch1 = str.charAt(1);
-                final char ch2 = str.charAt(2);
-                final char ch3 = str.charAt(3);
-                if ((ch0 == 't' || ch0 == 'T') &&
-                    (ch1 == 'r' || ch1 == 'R') &&
-                    (ch2 == 'u' || ch2 == 'U') &&
-                    (ch3 == 'e' || ch3 == 'E')) {
-                    return Boolean.TRUE;
-                }
-                break;
-            }
-            case 5: {
-                final char ch0 = str.charAt(0);
-                final char ch1 = str.charAt(1);
-                final char ch2 = str.charAt(2);
-                final char ch3 = str.charAt(3);
-                final char ch4 = str.charAt(4);
-                if ((ch0 == 'f' || ch0 == 'F') &&
-                    (ch1 == 'a' || ch1 == 'A') &&
-                    (ch2 == 'l' || ch2 == 'L') &&
-                    (ch3 == 's' || ch3 == 'S') &&
-                    (ch4 == 'e' || ch4 == 'E')) {
-                    return Boolean.FALSE;
-                }
-                break;
-            }
+
+
         default:
             break;
         }

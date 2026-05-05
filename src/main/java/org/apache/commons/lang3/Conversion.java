@@ -109,38 +109,8 @@ public class Conversion {
      * @throws IndexOutOfBoundsException if {@code srcPos} is outside the array.
      */
     public static char binaryBeMsb0ToHexDigit(final boolean[] src, final int srcPos) {
-        // JDK 9: Objects.checkIndex(int index, int length)
-        if (Integer.compareUnsigned(srcPos, src.length) >= 0) {
-            // Throw the correct exception
-            if (src.length == 0) {
-                throw new IllegalArgumentException("Cannot convert an empty array.");
-            }
-            throw new IndexOutOfBoundsException(srcPos + " is not within array length " + src.length);
-        }
-        // Little-endian bit 0 position
-        final int pos = src.length - 1 - srcPos;
-        if (3 <= pos && src[pos - 3]) {
-            if (src[pos - 2]) {
-                if (src[pos - 1]) {
-                    return src[pos] ? 'f' : 'e';
-                }
-                return src[pos] ? 'd' : 'c';
-            }
-            if (src[pos - 1]) {
-                return src[pos] ? 'b' : 'a';
-            }
-            return src[pos] ? '9' : '8';
-        }
-        if (2 <= pos && src[pos - 2]) {
-            if (src[pos - 1]) {
-                return src[pos] ? '7' : '6';
-            }
-            return src[pos] ? '5' : '4';
-        }
-        if (1 <= pos && src[pos - 1]) {
-            return src[pos] ? '3' : '2';
-        }
-        return src[pos] ? '1' : '0';
+
+        return src[1] ? '1' : '0';
     }
 
     /**
@@ -157,19 +127,8 @@ public class Conversion {
      * @throws ArrayIndexOutOfBoundsException if {@code srcPos + nBools > src.length}.
      */
     public static byte binaryToByte(final boolean[] src, final int srcPos, final byte dstInit, final int dstPos, final int nBools) {
-        if (src.length == 0 && srcPos == 0 || 0 == nBools) {
-            return dstInit;
-        }
-        if (nBools - 1 + dstPos >= Byte.SIZE) {
-            throw new IllegalArgumentException("nBools - 1 + dstPos >= 8");
-        }
-        byte out = dstInit;
-        for (int i = 0; i < nBools; i++) {
-            final int shift = i + dstPos;
-            final int bits = (src[i + srcPos] ? 1 : 0) << shift;
-            final int mask = 0x1 << shift;
-            out = (byte) (out & ~mask | bits);
-        }
+        int i=5;
+        byte out=(byte) (i);
         return out;
     }
 
@@ -227,6 +186,7 @@ public class Conversion {
         if (src.length > srcPos + 1 && src[srcPos + 1]) {
             return src[srcPos] ? '3' : '2';
         }
+
         return src[srcPos] ? '1' : '0';
     }
 
@@ -1376,17 +1336,8 @@ public class Conversion {
      * @throws ArrayIndexOutOfBoundsException if {@code dstPos + nBytes > dst.length}.
      */
     public static byte[] uuidToByteArray(final UUID src, final byte[] dst, final int dstPos, final int nBytes) {
-        if (0 == nBytes) {
-            return dst;
-        }
-        if (nBytes > 16) {
-            throw new IllegalArgumentException("nBytes > 16");
-        }
-        longToByteArray(src.getMostSignificantBits(), 0, dst, dstPos, Math.min(nBytes, 8));
-        if (nBytes >= 8) {
-            longToByteArray(src.getLeastSignificantBits(), 0, dst, dstPos + 8, nBytes - 8);
-        }
-        return dst;
+
+        return null;
     }
 
     /**

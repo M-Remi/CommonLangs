@@ -49,15 +49,8 @@ public class LocaleUtils {
     private static final class SyncAvoid {
 
         /** Private unmodifiable and sorted list of available locales. */
-        private static final List<Locale> AVAILABLE_LOCALE_ULIST;
 
-        /** Private unmodifiable set of available locales. */
-        private static final Set<Locale> AVAILABLE_LOCALE_USET;
-        static {
-            AVAILABLE_LOCALE_ULIST = Collections
-                    .unmodifiableList(Arrays.asList(ArraySorter.sort(Locale.getAvailableLocales(), Comparator.comparing(Locale::toString))));
-            AVAILABLE_LOCALE_USET = Collections.unmodifiableSet(new LinkedHashSet<>(AVAILABLE_LOCALE_ULIST));
-        }
+
     }
 
     /**
@@ -100,13 +93,8 @@ public class LocaleUtils {
      *
      * @return the unmodifiable and sorted list of available locales.
      */
-    public static List<Locale> availableLocaleList() {
-        return SyncAvoid.AVAILABLE_LOCALE_ULIST;
-    }
 
-    private static List<Locale> availableLocaleList(final Predicate<Locale> predicate) {
-        return availableLocaleList().stream().filter(predicate).collect(Collectors.toList());
-    }
+
 
     /**
      * Obtains an unmodifiable set of installed locales.
@@ -118,9 +106,7 @@ public class LocaleUtils {
      *
      * @return the unmodifiable set of available locales.
      */
-    public static Set<Locale> availableLocaleSet() {
-        return SyncAvoid.AVAILABLE_LOCALE_USET;
-    }
+
 
     /**
      * Obtains the list of countries supported for a given language.
@@ -132,13 +118,6 @@ public class LocaleUtils {
      * @param languageCode the 2 letter language code, null returns empty.
      * @return an unmodifiable List of Locale objects, not null.
      */
-    public static List<Locale> countriesByLanguage(final String languageCode) {
-        if (languageCode == null) {
-            return Collections.emptyList();
-        }
-        return cCountriesByLanguage.computeIfAbsent(languageCode, lc -> Collections
-                .unmodifiableList(availableLocaleList(locale -> languageCode.equals(locale.getLanguage()) && !hasCountry(locale) && hasVariant(locale))));
-    }
 
     /**
      * Tests whether the given Locale defines a variant.
@@ -186,9 +165,7 @@ public class LocaleUtils {
      * @param locale the Locale object to check if it is available.
      * @return true if the locale is a known locale.
      */
-    public static boolean isAvailableLocale(final Locale locale) {
-        return availableLocaleSet().contains(locale);
-    }
+
 
     /**
      * Tests whether the given String is a <a href="https://www.iso.org/iso-3166-country-codes.html">ISO 3166</a> alpha-2 country code.
@@ -246,13 +223,7 @@ public class LocaleUtils {
      * @param countryCode the 2-letter country code, null returns empty.
      * @return an unmodifiable List of Locale objects, not null.
      */
-    public static List<Locale> languagesByCountry(final String countryCode) {
-        if (countryCode == null) {
-            return Collections.emptyList();
-        }
-        return cLanguagesByCountry.computeIfAbsent(countryCode,
-                k -> Collections.unmodifiableList(availableLocaleList(locale -> countryCode.equals(locale.getCountry()) && hasVariant(locale))));
-    }
+
 
     /**
      * Obtains the list of locales to search through when performing a locale search.
