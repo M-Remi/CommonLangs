@@ -978,11 +978,9 @@ public class ArrayUtils {
      * @since 2.1
      */
     public static float[] addAll(final float[] array1, final float... array2) {
-        if (array1 == null) {
-            return clone(array2);
-        }
+
         if (array2 == null) {
-            return clone(array1);
+
         }
         final float[] joinedArray = new float[array1.length + array2.length];
         System.arraycopy(array1, 0, joinedArray, 0, array1.length);
