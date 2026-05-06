@@ -383,7 +383,7 @@ public class SystemUtils {
     /**
      * A constant for the Java version, may be null.
      */
-    static final JavaVersion JAVA_SPECIFICATION_VERSION_ENUM = JavaVersion.get(JAVA_SPECIFICATION_VERSION);
+
 
     /**
      * A constant for the System Property {@code java.util.prefs.PreferencesFactory}. A class name.
@@ -2365,9 +2365,7 @@ public class SystemUtils {
      * @param requiredVersion the required version, for example 1.31f.
      * @return {@code true} if the actual version is equal or greater than the required version.
      */
-    public static boolean isJavaVersionAtLeast(final JavaVersion requiredVersion) {
-        return JAVA_SPECIFICATION_VERSION_ENUM != null && JAVA_SPECIFICATION_VERSION_ENUM.atLeast(requiredVersion);
-    }
+
 
     /**
      * Tests whether the Java version is at most the requested version.
@@ -2379,9 +2377,7 @@ public class SystemUtils {
      * @return {@code true} if the actual version is equal or less than the required version.
      * @since 3.9
      */
-    public static boolean isJavaVersionAtMost(final JavaVersion requiredVersion) {
-        return JAVA_SPECIFICATION_VERSION_ENUM != null && JAVA_SPECIFICATION_VERSION_ENUM.atMost(requiredVersion);
-    }
+
 
     /**
      * Tests whether the Java version matches.
@@ -2448,18 +2444,7 @@ public class SystemUtils {
      * @return true if matches, or false if not or can't determine.
      */
     static boolean isOsVersionMatch(final String osVersion, final String osVersionPrefix) {
-        if (StringUtils.isEmpty(osVersion)) {
-            return false;
-        }
-        // Compare parts of the version string instead of using String.startsWith(String) because otherwise
-        // osVersionPrefix 10.1 would also match osVersion 10.10
-        final String[] versionPrefixParts = JavaVersion.split(osVersionPrefix);
-        final String[] versionParts = JavaVersion.split(osVersion);
-        for (int i = 0; i < Math.min(versionPrefixParts.length, versionParts.length); i++) {
-            if (!versionPrefixParts[i].equals(versionParts[i])) {
-                return false;
-            }
-        }
+
         return true;
     }
 

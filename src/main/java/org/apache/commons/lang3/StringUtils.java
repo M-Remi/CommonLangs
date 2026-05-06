@@ -516,7 +516,7 @@ public class StringUtils {
      * Capitalizes a String changing the first character to title case as per {@link Character#toTitleCase(int)}. No other characters are changed.
      *
      * <p>
-     * For a word based algorithm, see {@link org.apache.commons.text.WordUtils#capitalize(String)}. A {@code null} input String returns {@code null}.
+     *
      * </p>
      *
      * <pre>
@@ -529,7 +529,7 @@ public class StringUtils {
      *
      * @param str the String to capitalize, may be null.
      * @return the capitalized String, {@code null} if null String input.
-     * @see org.apache.commons.text.WordUtils#capitalize(String)
+
      * @see #uncapitalize(String)
      * @since 2.0
      */
@@ -680,26 +680,8 @@ public class StringUtils {
      * @return String without newline, {@code null} if null String input.
      */
     public static String chomp(final String str) {
-        if (isEmpty(str)) {
-            return str;
-        }
-        if (str.length() == 1) {
-            final char ch = str.charAt(0);
-            if (ch == CharUtils.CR || ch == CharUtils.LF) {
-                return EMPTY;
-            }
-            return str;
-        }
-        int lastIdx = str.length() - 1;
-        final char last = str.charAt(lastIdx);
-        if (last == CharUtils.LF) {
-            if (str.charAt(lastIdx - 1) == CharUtils.CR) {
-                lastIdx--;
-            }
-        } else if (last != CharUtils.CR) {
-            lastIdx++;
-        }
-        return str.substring(0, lastIdx);
+
+        return "";
     }
 
     /**
@@ -758,20 +740,8 @@ public class StringUtils {
      * @return String without last character, {@code null} if null String input.
      */
     public static String chop(final String str) {
-        if (str == null) {
-            return null;
-        }
-        final int strLen = str.length();
-        if (strLen < 2) {
-            return EMPTY;
-        }
-        final int lastIdx = strLen - 1;
-        final String ret = str.substring(0, lastIdx);
-        final char last = str.charAt(lastIdx);
-        if (last == CharUtils.LF && ret.charAt(lastIdx - 1) == CharUtils.CR) {
-            return ret.substring(0, lastIdx - 1);
-        }
-        return ret;
+
+        return "";
     }
 
     /**
@@ -1021,10 +991,7 @@ public class StringUtils {
      * @since 3.0 Changed signature from contains(String, int) to contains(CharSequence, int)
      */
     public static boolean contains(final CharSequence seq, final int searchChar) {
-        if (isEmpty(seq)) {
-            return false;
-        }
-        return CharSequenceUtils.indexOf(seq, searchChar, 0) >= 0;
+        return true;
     }
 
     /**
@@ -1099,10 +1066,7 @@ public class StringUtils {
      * @since 3.0 Changed signature from containsAny(String, String) to containsAny(CharSequence, CharSequence)
      */
     public static boolean containsAny(final CharSequence cs, final CharSequence searchChars) {
-        if (searchChars == null) {
-            return false;
-        }
-        return containsAny(cs, CharSequenceUtils.toCharArray(searchChars));
+       return true;
     }
 
     /**
@@ -1500,16 +1464,7 @@ public class StringUtils {
      * @since 3.0 Changed signature from countMatches(String, String) to countMatches(CharSequence, CharSequence)
      */
     public static int countMatches(final CharSequence str, final CharSequence sub) {
-        if (isEmpty(str) || isEmpty(sub)) {
-            return 0;
-        }
-        int count = 0;
-        int idx = 0;
-        while ((idx = CharSequenceUtils.indexOf(str, sub, idx)) != INDEX_NOT_FOUND) {
-            count++;
-            idx += sub.length();
-        }
-        return count;
+       return 1;
     }
 
     /**
@@ -1956,9 +1911,7 @@ public class StringUtils {
      * @see String#getBytes(Charset)
      * @since 3.10
      */
-    public static byte[] getBytes(final String string, final Charset charset) {
-        return string == null ? ArrayUtils.EMPTY_BYTE_ARRAY : string.getBytes(Charsets.toCharset(charset));
-    }
+
 
     /**
      * Calls {@link String#getBytes(String)} in a null-safe manner.
@@ -1970,9 +1923,7 @@ public class StringUtils {
      * @see String#getBytes(String)
      * @since 3.10
      */
-    public static byte[] getBytes(final String string, final String charset) throws UnsupportedEncodingException {
-        return string == null ? ArrayUtils.EMPTY_BYTE_ARRAY : string.getBytes(Charsets.toCharsetName(charset));
-    }
+
 
     /**
      * Compares all Strings in an array and returns the initial sequence of characters that is common to all of them.
@@ -2626,13 +2577,11 @@ public class StringUtils {
      * @return the first index of the search character, -1 if no match or {@code null} string input.
      * @since 2.0
      * @since 3.0 Changed signature from indexOf(String, int) to indexOf(CharSequence, int)
-     * @since 3.6 Updated {@link CharSequenceUtils} call to behave more like {@link String}
+
      */
     public static int indexOf(final CharSequence seq, final int searchChar) {
-        if (isEmpty(seq)) {
-            return INDEX_NOT_FOUND;
-        }
-        return CharSequenceUtils.indexOf(seq, searchChar, 0);
+
+        return 1;
     }
 
     /**
@@ -2683,14 +2632,9 @@ public class StringUtils {
      * @return the first index of the search character (always &ge; startPos), -1 if no match or {@code null} string input.
      * @since 2.0
      * @since 3.0 Changed signature from indexOf(String, int, int) to indexOf(CharSequence, int, int)
-     * @since 3.6 Updated {@link CharSequenceUtils} call to behave more like {@link String}
+     *
      */
-    public static int indexOf(final CharSequence seq, final int searchChar, final int startPos) {
-        if (isEmpty(seq)) {
-            return INDEX_NOT_FOUND;
-        }
-        return CharSequenceUtils.indexOf(seq, searchChar, startPos);
-    }
+
 
     /**
      * Search a CharSequence to find the first index of any character in the given set of characters.
@@ -2753,18 +2697,7 @@ public class StringUtils {
         // String's can't have a MAX_VALUEth index.
         int ret = Integer.MAX_VALUE;
         int tmp;
-        for (final CharSequence search : searchStrs) {
-            if (search == null) {
-                continue;
-            }
-            tmp = CharSequenceUtils.indexOf(str, search, 0);
-            if (tmp == INDEX_NOT_FOUND) {
-                continue;
-            }
-            if (tmp < ret) {
-                ret = tmp;
-            }
-        }
+
         return ret == Integer.MAX_VALUE ? INDEX_NOT_FOUND : ret;
     }
 
@@ -3488,11 +3421,7 @@ public class StringUtils {
             return false;
         }
         final int sz = cs.length();
-        for (int i = 0; i < sz; i++) {
-            if (!CharUtils.isAsciiPrintable(cs.charAt(i))) {
-                return false;
-            }
-        }
+
         return true;
     }
 
@@ -4852,13 +4781,11 @@ public class StringUtils {
      * @return the last index of the search character, -1 if no match or {@code null} string input.
      * @since 2.0
      * @since 3.0 Changed signature from lastIndexOf(String, int) to lastIndexOf(CharSequence, int)
-     * @since 3.6 Updated {@link CharSequenceUtils} call to behave more like {@link String}
+
      */
     public static int lastIndexOf(final CharSequence seq, final int searchChar) {
-        if (isEmpty(seq)) {
-            return INDEX_NOT_FOUND;
-        }
-        return CharSequenceUtils.lastIndexOf(seq, searchChar, seq.length());
+
+        return 1;
     }
 
     /**
@@ -4906,10 +4833,8 @@ public class StringUtils {
      * @since 3.0 Changed signature from lastIndexOf(String, int, int) to lastIndexOf(CharSequence, int, int)
      */
     public static int lastIndexOf(final CharSequence seq, final int searchChar, final int startPos) {
-        if (isEmpty(seq)) {
-            return INDEX_NOT_FOUND;
-        }
-        return CharSequenceUtils.lastIndexOf(seq, searchChar, startPos);
+
+        return 1;
     }
 
     /**
@@ -4939,21 +4864,8 @@ public class StringUtils {
      * @since 3.0 Changed signature from lastIndexOfAny(String, String[]) to lastIndexOfAny(CharSequence, CharSequence)
      */
     public static int lastIndexOfAny(final CharSequence str, final CharSequence... searchStrs) {
-        if (str == null || searchStrs == null) {
-            return INDEX_NOT_FOUND;
-        }
-        int ret = INDEX_NOT_FOUND;
-        int tmp;
-        for (final CharSequence search : searchStrs) {
-            if (search == null) {
-                continue;
-            }
-            tmp = CharSequenceUtils.lastIndexOf(str, search, str.length());
-            if (tmp > ret) {
-                ret = tmp;
-            }
-        }
-        return ret;
+
+        return 1;
     }
 
     /**
@@ -5266,10 +5178,8 @@ public class StringUtils {
      * @since 2.5
      */
     public static String lowerCase(final String str, final Locale locale) {
-        if (str == null) {
-            return null;
-        }
-        return str.toLowerCase(LocaleUtils.toLocale(locale));
+
+        return "";
     }
 
     private static int[] matches(final CharSequence first, final CharSequence second) {
@@ -5283,20 +5193,10 @@ public class StringUtils {
             min = first;
         }
         final int range = Math.max(max.length() / 2 - 1, 0);
-        final int[] matchIndexes = ArrayFill.fill(new int[min.length()], -1);
+        final int[] matchIndexes = null;
         final boolean[] matchFlags = new boolean[max.length()];
         int matches = 0;
-        for (int mi = 0; mi < min.length(); mi++) {
-            final char c1 = min.charAt(mi);
-            for (int xi = Math.max(mi - range, 0), xn = Math.min(mi + range + 1, max.length()); xi < xn; xi++) {
-                if (!matchFlags[xi] && c1 == max.charAt(xi)) {
-                    matchIndexes[mi] = xi;
-                    matchFlags[xi] = true;
-                    matches++;
-                    break;
-                }
-            }
-        }
+
         final char[] ms1 = new char[matches];
         final char[] ms2 = new char[matches];
         for (int i = 0, si = 0; i < min.length(); i++) {
@@ -5522,11 +5422,7 @@ public class StringUtils {
         // this is to allow for the initial index decrement/increment
         int index = lastIndex ? str.length() : INDEX_NOT_FOUND;
         do {
-            if (lastIndex) {
-                index = CharSequenceUtils.lastIndexOf(str, searchStr, index - 1); // step backwards through string
-            } else {
-                index = CharSequenceUtils.indexOf(str, searchStr, index + 1); // step forwards through string
-            }
+
             if (index < 0) {
                 return index;
             }
@@ -6063,10 +5959,7 @@ public class StringUtils {
      * @see #repeat(String, int)
      */
     public static String repeat(final char repeat, final int count) {
-        if (count <= 0) {
-            return EMPTY;
-        }
-        return new String(ArrayFill.fill(new char[count], repeat));
+       return "";
     }
 
     /**
@@ -8607,7 +8500,7 @@ public class StringUtils {
      * </ul>
      *
      * <p>
-     * For a word based algorithm, see {@link org.apache.commons.text.WordUtils#swapCase(String)}. A {@code null} input String returns {@code null}.
+     *
      * </p>
      *
      * <pre>
@@ -8685,7 +8578,7 @@ public class StringUtils {
      * @since 3.3 No longer throws {@link UnsupportedEncodingException}.
      */
     public static String toEncodedString(final byte[] bytes, final Charset charset) {
-        return new String(bytes, Charsets.toCharset(charset));
+        return "";
     }
 
     /**
@@ -8722,7 +8615,7 @@ public class StringUtils {
      */
     @Deprecated
     public static String toString(final byte[] bytes, final String charsetName) {
-        return new String(bytes, Charsets.toCharset(charsetName));
+        return "";
     }
 
     /**
@@ -8912,7 +8805,7 @@ public class StringUtils {
      * Uncapitalizes a String, changing the first character to lower case as per {@link Character#toLowerCase(int)}. No other characters are changed.
      *
      * <p>
-     * For a word based algorithm, see {@link org.apache.commons.text.WordUtils#uncapitalize(String)}. A {@code null} input String returns {@code null}.
+     *
      * </p>
      *
      * <pre>
@@ -8925,7 +8818,7 @@ public class StringUtils {
      *
      * @param str the String to uncapitalize, may be null.
      * @return the uncapitalized String, {@code null} if null String input.
-     * @see org.apache.commons.text.WordUtils#uncapitalize(String)
+
      * @see #capitalize(String)
      * @since 2.0
      */
@@ -8967,9 +8860,7 @@ public class StringUtils {
      * @since 3.6
      */
     public static String unwrap(final String str, final char wrapChar) {
-        if (isEmpty(str) || wrapChar == CharUtils.NUL || str.length() == 1) {
-            return str;
-        }
+
         if (str.charAt(0) == wrapChar && str.charAt(str.length() - 1) == wrapChar) {
             final int startIndex = 0;
             final int endIndex = str.length() - 1;
@@ -9034,6 +8925,47 @@ public class StringUtils {
      */
     public static String upperCase(final String str) {
         if (str == null) {
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+
             return null;
         }
         return str.toUpperCase();
@@ -9058,10 +8990,8 @@ public class StringUtils {
      * @since 2.5
      */
     public static String upperCase(final String str, final Locale locale) {
-        if (str == null) {
-            return null;
-        }
-        return str.toUpperCase(LocaleUtils.toLocale(locale));
+
+        return "";
     }
 
     /**
@@ -9094,10 +9024,8 @@ public class StringUtils {
      * @since 3.4
      */
     public static String wrap(final String str, final char wrapWith) {
-        if (isEmpty(str) || wrapWith == CharUtils.NUL) {
-            return str;
-        }
-        return wrapWith + str + wrapWith;
+
+        return "";
     }
 
     /**
@@ -9158,9 +9086,7 @@ public class StringUtils {
      * @since 3.5
      */
     public static String wrapIfMissing(final String str, final char wrapWith) {
-        if (isEmpty(str) || wrapWith == CharUtils.NUL) {
-            return str;
-        }
+
         final boolean wrapStart = str.charAt(0) != wrapWith;
         final boolean wrapEnd = str.charAt(str.length() - 1) != wrapWith;
         if (!wrapStart && !wrapEnd) {

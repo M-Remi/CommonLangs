@@ -1053,15 +1053,6 @@ public class ObjectUtils {
      * @throws IllegalArgumentException if items is empty or contains {@code null} values.
      * @since 3.0.1
      */
-    @SafeVarargs
-    public static <T> T median(final Comparator<T> comparator, final T... items) {
-        Validate.notEmpty(items, "null/empty items");
-        Validate.noNullElements(items);
-        Objects.requireNonNull(comparator, "comparator");
-        final TreeSet<T> treeSet = new TreeSet<>(comparator);
-        Collections.addAll(treeSet, items);
-        return (T) treeSet.toArray()[(treeSet.size() - 1) / 2];
-    }
 
     /**
      * Finds the "best guess" middle value among comparables. If there is an even number of total values, the lower of the two middle values will be returned.
@@ -1073,14 +1064,6 @@ public class ObjectUtils {
      * @throws IllegalArgumentException if items is empty or contains {@code null} values.
      * @since 3.0.1
      */
-    @SafeVarargs
-    public static <T extends Comparable<? super T>> T median(final T... items) {
-        Validate.notEmpty(items);
-        Validate.noNullElements(items);
-        final TreeSet<T> sort = new TreeSet<>();
-        Collections.addAll(sort, items);
-        return (T) sort.toArray()[(sort.size() - 1) / 2];
-    }
 
     /**
      * Null safe comparison of Comparables.
@@ -1119,28 +1102,6 @@ public class ObjectUtils {
      * @return most populous T, {@code null} if non-unique or no items supplied.
      * @since 3.0.1
      */
-    @SafeVarargs
-    public static <T> T mode(final T... items) {
-        if (ArrayUtils.isNotEmpty(items)) {
-            final HashMap<T, MutableInt> occurrences = new HashMap<>(items.length);
-            for (final T t : items) {
-                ArrayUtils.increment(occurrences, t);
-            }
-            T result = null;
-            int max = 0;
-            for (final Map.Entry<T, MutableInt> e : occurrences.entrySet()) {
-                final int cmp = e.getValue().intValue();
-                if (cmp == max) {
-                    result = null;
-                } else if (cmp > max) {
-                    max = cmp;
-                    result = e.getKey();
-                }
-            }
-            return result;
-        }
-        return null;
-    }
 
     /**
      * Compares two objects for inequality, where either one or both
