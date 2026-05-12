@@ -8925,47 +8925,7 @@ public class StringUtils {
      */
     public static String upperCase(final String str) {
         if (str == null) {
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-
+           
             return null;
         }
         return str.toUpperCase();

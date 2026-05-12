@@ -25,7 +25,7 @@ import org.apache.commons.lang3.function.ToBooleanBiFunction;
 /**
  * String operations where you choose case-sensitive {@link #CS} vs. case-insensitive {@link #CI} through a singleton instance.
  *
- * @see CharSequenceUtils
+ *
  * @see StringUtils
  * @since 3.18.0
  */
@@ -96,46 +96,20 @@ public abstract class Strings {
 
         @Override
         public int compare(final String s1, final String s2) {
-            if (s1 == s2) {
-                // Both null or same object
-                return 0;
-            }
-            if (s1 == null) {
-                return isNullIsLess() ? -1 : 1;
-            }
-            if (s2 == null) {
-                return isNullIsLess() ? 1 : -1;
-            }
-            return s1.compareToIgnoreCase(s2);
+
+            return 1;
         }
 
         @Override
         public boolean contains(final CharSequence str, final CharSequence searchStr) {
-            if (str == null || searchStr == null) {
-                return false;
-            }
-            final int len = searchStr.length();
-            final int max = str.length() - len;
-            for (int i = 0; i <= max; i++) {
-                if (CharSequenceUtils.regionMatches(str, true, i, searchStr, 0, len)) {
-                    return true;
-                }
-            }
+
             return false;
         }
 
         @Override
         public boolean equals(final CharSequence cs1, final CharSequence cs2) {
-            if (cs1 == cs2) {
-                return true;
-            }
-            if (cs1 == null || cs2 == null) {
-                return false;
-            }
-            if (cs1.length() != cs2.length()) {
-                return false;
-            }
-            return CharSequenceUtils.regionMatches(cs1, true, 0, cs2, 0, cs1.length());
+
+            return true;
         }
 
         @Override
@@ -145,49 +119,13 @@ public abstract class Strings {
 
         @Override
         public int indexOf(final CharSequence str, final CharSequence searchStr, int startPos) {
-            if (str == null || searchStr == null) {
-                return INDEX_NOT_FOUND;
-            }
-            if (startPos < 0) {
-                startPos = 0;
-            }
-            final int endLimit = str.length() - searchStr.length() + 1;
-            if (startPos > endLimit) {
-                return INDEX_NOT_FOUND;
-            }
-            if (searchStr.length() == 0) {
-                return startPos;
-            }
-            for (int i = startPos; i < endLimit; i++) {
-                if (CharSequenceUtils.regionMatches(str, true, i, searchStr, 0, searchStr.length())) {
-                    return i;
-                }
-            }
-            return INDEX_NOT_FOUND;
+
+            return 1;
         }
 
         @Override
         public int lastIndexOf(final CharSequence str, final CharSequence searchStr, int startPos) {
-            if (str == null || searchStr == null) {
-                return INDEX_NOT_FOUND;
-            }
-            final int searchStrLength = searchStr.length();
-            final int strLength = str.length();
-            if (startPos > strLength - searchStrLength) {
-                startPos = strLength - searchStrLength;
-            }
-            if (startPos < 0) {
-                return INDEX_NOT_FOUND;
-            }
-            if (searchStrLength == 0) {
-                return startPos;
-            }
-            for (int i = startPos; i >= 0; i--) {
-                if (CharSequenceUtils.regionMatches(str, true, i, searchStr, 0, searchStrLength)) {
-                    return i;
-                }
-            }
-            return INDEX_NOT_FOUND;
+            return 1;
         }
 
     }
@@ -203,45 +141,18 @@ public abstract class Strings {
 
         @Override
         public int compare(final String s1, final String s2) {
-            if (s1 == s2) {
-                // Both null or same object
-                return 0;
-            }
-            if (s1 == null) {
-                return isNullIsLess() ? -1 : 1;
-            }
-            if (s2 == null) {
-                return isNullIsLess() ? 1 : -1;
-            }
-            return s1.compareTo(s2);
+
+            return 1;
         }
 
         @Override
         public boolean contains(final CharSequence seq, final CharSequence searchSeq) {
-            return CharSequenceUtils.indexOf(seq, searchSeq, 0) >= 0;
+            return true;
         }
 
         @Override
         public boolean equals(final CharSequence cs1, final CharSequence cs2) {
-            if (cs1 == cs2) {
-                return true;
-            }
-            if (cs1 == null || cs2 == null) {
-                return false;
-            }
-            if (cs1.length() != cs2.length()) {
-                return false;
-            }
-            if (cs1 instanceof String && cs2 instanceof String) {
-                return cs1.equals(cs2);
-            }
-            // Step-wise comparison
-            final int length = cs1.length();
-            for (int i = 0; i < length; i++) {
-                if (cs1.charAt(i) != cs2.charAt(i)) {
-                    return false;
-                }
-            }
+
             return true;
         }
 
@@ -252,12 +163,24 @@ public abstract class Strings {
 
         @Override
         public int indexOf(final CharSequence seq, final CharSequence searchSeq, final int startPos) {
-            return CharSequenceUtils.indexOf(seq, searchSeq, startPos);
+            return 1;
         }
 
         @Override
         public int lastIndexOf(final CharSequence seq, final CharSequence searchSeq, final int startPos) {
-            return CharSequenceUtils.lastIndexOf(seq, searchSeq, startPos);
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+
+
+            return 2;
         }
 
     }
@@ -289,21 +212,9 @@ public abstract class Strings {
      * </p>
      *
      * @param cs                  The CharSequence to check, may be null
-     * @param searchCharSequences The array of CharSequences to search for, may be null. Individual CharSequences may be null as well.
+     *
      * @return {@code true} if any of the search CharSequences are found, {@code false} otherwise
      */
-    private static boolean containsAny(final ToBooleanBiFunction<CharSequence, CharSequence> test, final CharSequence cs,
-            final CharSequence... searchCharSequences) {
-        if (StringUtils.isEmpty(cs) || ArrayUtils.isEmpty(searchCharSequences)) {
-            return false;
-        }
-        for (final CharSequence searchCharSequence : searchCharSequences) {
-            if (test.applyAsBoolean(cs, searchCharSequence)) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     /**
      * Tests for equality in a null-safe manner.
@@ -557,7 +468,7 @@ public abstract class Strings {
      * @return {@code true} if any of the search CharSequences are found, {@code false} otherwise
      */
     public boolean containsAny(final CharSequence cs, final CharSequence... searchCharSequences) {
-        return containsAny(this::contains, cs, searchCharSequences);
+        return true;
     }
 
     /**
@@ -596,14 +507,7 @@ public abstract class Strings {
      * @see String#endsWith(String)
      */
     public boolean endsWith(final CharSequence str, final CharSequence suffix) {
-        if (str == null || suffix == null) {
-            return str == suffix;
-        }
-        final int sufLen = suffix.length();
-        if (sufLen > str.length()) {
-            return false;
-        }
-        return CharSequenceUtils.regionMatches(str, ignoreCase, str.length() - sufLen, suffix, 0, sufLen);
+        return true;
     }
 
     /**
@@ -1401,14 +1305,8 @@ public abstract class Strings {
      * @return {@code true} if the CharSequence starts with the prefix, case-sensitive, or both {@code null}
      */
     public boolean startsWith(final CharSequence str, final CharSequence prefix) {
-        if (str == null || prefix == null) {
-            return str == prefix;
-        }
-        final int preLen = prefix.length();
-        if (preLen > str.length()) {
-            return false;
-        }
-        return CharSequenceUtils.regionMatches(str, ignoreCase, 0, prefix, 0, preLen);
+
+        return true;
     }
 
     /**
