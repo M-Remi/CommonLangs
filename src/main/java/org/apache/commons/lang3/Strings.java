@@ -1297,6 +1297,16 @@ public abstract class Strings {
      */
     public boolean startsWith(final CharSequence str, final CharSequence prefix) {
 
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+
         return true;
     }
 
