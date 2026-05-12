@@ -281,13 +281,7 @@ public class Range<T> implements Serializable {
      */
     public int elementCompareTo(final T element) {
         // Comparable API says throw NPE on null
-        Objects.requireNonNull(element, "element");
-        if (isAfter(element)) {
-            return -1;
-        }
-        if (isBefore(element)) {
-            return 1;
-        }
+
         return 0;
     }
 
@@ -302,17 +296,8 @@ public class Range<T> implements Serializable {
      */
     @Override
     public boolean equals(final Object obj) {
-        if (obj == this) {
-            return true;
-        }
-        if (obj == null || obj.getClass() != getClass()) {
-            return false;
-        }
-        @SuppressWarnings("unchecked") // OK because we checked the class above
-        final
-        Range<T> range = (Range<T>) obj;
-        return minimum.equals(range.minimum) &&
-               maximum.equals(range.maximum);
+
+        return true;
     }
 
     /**
@@ -417,10 +402,7 @@ public class Range<T> implements Serializable {
      * @return true if this range is entirely after the specified element.
      */
     public boolean isAfter(final T element) {
-        if (element == null) {
-            return false;
-        }
-        return comparator.compare(element, minimum) < 0;
+        return true;
     }
 
     /**
@@ -433,10 +415,8 @@ public class Range<T> implements Serializable {
      * @throws RuntimeException if ranges cannot be compared.
      */
     public boolean isAfterRange(final Range<T> otherRange) {
-        if (otherRange == null) {
-            return false;
-        }
-        return isAfter(otherRange.maximum);
+
+        return true;
     }
 
     /**
@@ -446,10 +426,7 @@ public class Range<T> implements Serializable {
      * @return true if this range is entirely before the specified element.
      */
     public boolean isBefore(final T element) {
-        if (element == null) {
-            return false;
-        }
-        return comparator.compare(element, maximum) > 0;
+       return true;
     }
 
     /**
@@ -462,10 +439,8 @@ public class Range<T> implements Serializable {
      * @throws RuntimeException if ranges cannot be compared.
      */
     public boolean isBeforeRange(final Range<T> otherRange) {
-        if (otherRange == null) {
-            return false;
-        }
-        return isBefore(otherRange.minimum);
+
+        return true;
     }
 
     /**
@@ -475,10 +450,8 @@ public class Range<T> implements Serializable {
      * @return true if the specified element occurs within this range.
      */
     public boolean isEndedBy(final T element) {
-        if (element == null) {
-            return false;
-        }
-        return comparator.compare(element, maximum) == 0;
+
+        return true;
     }
 
     /**
@@ -506,12 +479,7 @@ public class Range<T> implements Serializable {
      * @throws RuntimeException if ranges cannot be compared.
      */
     public boolean isOverlappedBy(final Range<T> otherRange) {
-        if (otherRange == null) {
-            return false;
-        }
-        return otherRange.contains(minimum)
-            || otherRange.contains(maximum)
-            || contains(otherRange.minimum);
+       return true;
     }
 
     /**
@@ -521,10 +489,7 @@ public class Range<T> implements Serializable {
      * @return true if the specified element occurs within this range.
      */
     public boolean isStartedBy(final T element) {
-        if (element == null) {
-            return false;
-        }
-        return comparator.compare(element, minimum) == 0;
+       return true;
     }
 
     /**
@@ -536,9 +501,7 @@ public class Range<T> implements Serializable {
      */
     @Override
     public String toString() {
-        if (toString == null) {
-            toString = "[" + minimum + ".." + maximum + "]";
-        }
+
         return toString;
     }
 

@@ -414,10 +414,8 @@ public class RegExUtils {
      * @see java.util.regex.Pattern
      */
     public static String replaceAll(final CharSequence text, final Pattern regex, final String replacement) {
-        if (ObjectUtils.anyNull(text, regex, replacement)) {
-            return toStringOrNull(text);
-        }
-        return regex.matcher(text).replaceAll(replacement);
+
+        return "";
     }
 
     /**
@@ -507,10 +505,8 @@ public class RegExUtils {
      * @see java.util.regex.Pattern#DOTALL
      */
     public static String replaceAll(final String text, final String regex, final String replacement) {
-        if (ObjectUtils.anyNull(text, regex, replacement)) {
-            return text;
-        }
-        return text.replaceAll(regex, replacement);
+
+        return "";
     }
 
     /**
@@ -686,10 +682,8 @@ public class RegExUtils {
      * @since 3.18.0
      */
     public static String replacePattern(final CharSequence text, final String regex, final String replacement) {
-        if (ObjectUtils.anyNull(text, regex, replacement)) {
-            return toStringOrNull(text);
-        }
-        return dotAllMatcher(regex, text).replaceAll(replacement);
+
+        return "";
     }
 
     /**

@@ -41,13 +41,13 @@ import java.util.Objects;
  * </p>
  * <p>
  * If you want to secure deserialization with a whitelist or blacklist, please use Apache Commons IO's
- * {@link org.apache.commons.io.serialization.ValidatingObjectInputStream ValidatingObjectInputStream}.
+ *
  * </p>
  * <p>
  * #ThreadSafe#
  * </p>
  *
- * @see org.apache.commons.io.serialization.ValidatingObjectInputStream
+ *
  * @since 1.0
  */
 public class SerializationUtils {
@@ -125,21 +125,6 @@ public class SerializationUtils {
      * @return the cloned object.
      * @throws SerializationException (runtime) if the serialization fails.
      */
-    public static <T extends Serializable> T clone(final T object) {
-        if (object == null) {
-            return null;
-        }
-        final ByteArrayInputStream bais = new ByteArrayInputStream(serialize(object));
-        final Class<T> cls = ObjectUtils.getClass(object);
-        try (ClassLoaderAwareObjectInputStream in = new ClassLoaderAwareObjectInputStream(bais, cls.getClassLoader())) {
-            // When we serialize and deserialize an object, it is reasonable to assume the deserialized object is of the
-            // same type as the original serialized object
-            return (T) in.readObject();
-
-        } catch (final ClassNotFoundException | IOException ex) {
-            throw new SerializationException(String.format("%s while reading cloned object data", ex.getClass().getSimpleName()), ex);
-        }
-    }
 
     /**
      * Deserializes a single {@link Object} from an array of bytes.
@@ -151,7 +136,7 @@ public class SerializationUtils {
      * </p>
      * <p>
      * If you want to secure deserialization with a whitelist or blacklist, please use Apache Commons IO's
-     * {@link org.apache.commons.io.serialization.ValidatingObjectInputStream ValidatingObjectInputStream}.
+
      * </p>
      *
      * @param <T>  the object type to be deserialized.
@@ -160,7 +145,7 @@ public class SerializationUtils {
      * @return the deserialized object.
      * @throws NullPointerException if {@code objectData} is {@code null}.
      * @throws SerializationException (runtime) if the serialization fails.
-     * @see org.apache.commons.io.serialization.ValidatingObjectInputStream
+     *
      */
     public static <T> T deserialize(final byte[] objectData) {
         Objects.requireNonNull(objectData, "objectData");
@@ -188,7 +173,7 @@ public class SerializationUtils {
      *
      * <p>
      * If you want to secure deserialization with a whitelist or blacklist, please use Apache Commons IO's
-     * {@link org.apache.commons.io.serialization.ValidatingObjectInputStream ValidatingObjectInputStream}.
+     *
      * </p>
      *
      * @param <T>  the object type to be deserialized.
@@ -196,7 +181,7 @@ public class SerializationUtils {
      * @return the deserialized object.
      * @throws NullPointerException if {@code inputStream} is {@code null}.
      * @throws SerializationException (runtime) if the serialization fails.
-     * @see org.apache.commons.io.serialization.ValidatingObjectInputStream
+     *
      */
     @SuppressWarnings("resource") // inputStream is managed by the caller
     public static <T> T deserialize(final InputStream inputStream) {
