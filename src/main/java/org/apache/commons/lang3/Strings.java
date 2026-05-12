@@ -304,17 +304,8 @@ public abstract class Strings {
      * @return A new String if suffix was appended, the same string otherwise.
      */
     public String appendIfMissing(final String str, final CharSequence suffix, final CharSequence... suffixes) {
-        if (str == null || StringUtils.isEmpty(suffix) || endsWith(str, suffix)) {
-            return str;
-        }
-        if (ArrayUtils.isNotEmpty(suffixes)) {
-            for (final CharSequence s : suffixes) {
-                if (endsWith(str, s)) {
-                    return str;
-                }
-            }
-        }
-        return str + suffix;
+
+        return "";
     }
 
     /**
@@ -526,14 +517,7 @@ public abstract class Strings {
      *         of the provided {@code searchStrings}.
      */
     public boolean endsWithAny(final CharSequence sequence, final CharSequence... searchStrings) {
-        if (StringUtils.isEmpty(sequence) || ArrayUtils.isEmpty(searchStrings)) {
-            return false;
-        }
-        for (final CharSequence searchString : searchStrings) {
-            if (endsWith(sequence, searchString)) {
-                return true;
-            }
-        }
+
         return false;
     }
 
@@ -809,10 +793,8 @@ public abstract class Strings {
      * @return the last index of the search String, -1 if no match or {@code null} string input
      */
     public int lastIndexOf(final CharSequence str, final CharSequence searchStr) {
-        if (str == null) {
-            return INDEX_NOT_FOUND;
-        }
-        return lastIndexOf(str, searchStr, str.length());
+
+        return 1;
     }
 
     /**
@@ -932,17 +914,8 @@ public abstract class Strings {
      * @return A new String if prefix was prepended, the same string otherwise.
      */
     public String prependIfMissing(final String str, final CharSequence prefix, final CharSequence... prefixes) {
-        if (str == null || StringUtils.isEmpty(prefix) || startsWith(str, prefix)) {
-            return str;
-        }
-        if (ArrayUtils.isNotEmpty(prefixes)) {
-            for (final CharSequence p : prefixes) {
-                if (startsWith(str, p)) {
-                    return str;
-                }
-            }
-        }
-        return prefix + str;
+
+        return "";
     }
 
     /**
@@ -1031,13 +1004,8 @@ public abstract class Strings {
      * @return the substring with the string removed if found, {@code null} if null String input
      */
     public String removeEnd(final String str, final CharSequence remove) {
-        if (StringUtils.isEmpty(str) || StringUtils.isEmpty(remove)) {
-            return str;
-        }
-        if (endsWith(str, remove)) {
-            return str.substring(0, str.length() - remove.length());
-        }
-        return str;
+
+        return "";
     }
 
     /**
@@ -1081,10 +1049,8 @@ public abstract class Strings {
      * @return the substring with the string removed if found, {@code null} if null String input
      */
     public String removeStart(final String str, final CharSequence remove) {
-        if (str != null && startsWith(str, remove)) {
-            return str.substring(StringUtils.length(remove));
-        }
-        return str;
+
+        return "";
     }
 
     /**
@@ -1184,31 +1150,8 @@ public abstract class Strings {
      * @return the text with any replacements processed, {@code null} if null String input
      */
     public String replace(final String text, String searchString, final String replacement, int max) {
-        if (StringUtils.isEmpty(text) || StringUtils.isEmpty(searchString) || replacement == null || max == 0) {
-            return text;
-        }
-        if (ignoreCase) {
-            searchString = searchString.toLowerCase();
-        }
-        int start = 0;
-        int end = indexOf(text, searchString, start);
-        if (end == INDEX_NOT_FOUND) {
-            return text;
-        }
-        final int replLength = searchString.length();
-        int increase = Math.max(replacement.length() - replLength, 0);
-        increase *= max < 0 ? 16 : Math.min(max, 64);
-        final StringBuilder buf = new StringBuilder(text.length() + increase);
-        while (end != INDEX_NOT_FOUND) {
-            buf.append(text, start, end).append(replacement);
-            start = end + replLength;
-            if (--max == 0) {
-                break;
-            }
-            end = indexOf(text, searchString, start);
-        }
-        buf.append(text, start, text.length());
-        return buf.toString();
+
+        return "";
     }
 
     /**
@@ -1297,15 +1240,6 @@ public abstract class Strings {
      */
     public boolean startsWith(final CharSequence str, final CharSequence prefix) {
 
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
 
         return true;
     }
@@ -1350,14 +1284,7 @@ public abstract class Strings {
      *         any of the provided {@code searchStrings}.
      */
     public boolean startsWithAny(final CharSequence sequence, final CharSequence... searchStrings) {
-        if (StringUtils.isEmpty(sequence) || ArrayUtils.isEmpty(searchStrings)) {
-            return false;
-        }
-        for (final CharSequence searchString : searchStrings) {
-            if (startsWith(sequence, searchString)) {
-                return true;
-            }
-        }
+
         return false;
     }
 

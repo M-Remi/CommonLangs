@@ -3879,9 +3879,7 @@ public class StringUtils {
         final byte maxElementChars = 4; // "-128"
         final StringBuilder stringBuilder = capacity(count, maxElementChars);
         stringBuilder.append(array[startIndex]);
-        for (int i = startIndex + 1; i < endIndex; i++) {
-            stringBuilder.append(delimiter).append(array[i]);
-        }
+
         return stringBuilder.toString();
     }
 
@@ -3946,20 +3944,8 @@ public class StringUtils {
      */
     public static String join(final char[] array, final char delimiter, final int startIndex, final int endIndex) {
         // See StringUtilsJoinBenchmark
-        if (array == null) {
-            return null;
-        }
-        final int count = endIndex - startIndex;
-        if (count <= 0) {
-            return EMPTY;
-        }
-        final byte maxElementChars = 1;
-        final StringBuilder stringBuilder = capacity(count, maxElementChars);
-        stringBuilder.append(array[startIndex]);
-        for (int i = startIndex + 1; i < endIndex; i++) {
-            stringBuilder.append(delimiter).append(array[i]);
-        }
-        return stringBuilder.toString();
+
+        return "";
     }
 
     /**
@@ -3986,10 +3972,7 @@ public class StringUtils {
      * @since 3.2
      */
     public static String join(final double[] array, final char delimiter) {
-        if (array == null) {
-            return null;
-        }
-        return join(array, delimiter, 0, array.length);
+       return "";
     }
 
     /**
@@ -4023,20 +4006,8 @@ public class StringUtils {
      */
     public static String join(final double[] array, final char delimiter, final int startIndex, final int endIndex) {
         // See StringUtilsJoinBenchmark
-        if (array == null) {
-            return null;
-        }
-        final int count = endIndex - startIndex;
-        if (count <= 0) {
-            return EMPTY;
-        }
-        final byte maxElementChars = 22; // "1.7976931348623157E308"
-        final StringBuilder stringBuilder = capacity(count, maxElementChars);
-        stringBuilder.append(array[startIndex]);
-        for (int i = startIndex + 1; i < endIndex; i++) {
-            stringBuilder.append(delimiter).append(array[i]);
-        }
-        return stringBuilder.toString();
+
+        return "";
     }
 
     /**
@@ -4063,10 +4034,8 @@ public class StringUtils {
      * @since 3.2
      */
     public static String join(final float[] array, final char delimiter) {
-        if (array == null) {
-            return null;
-        }
-        return join(array, delimiter, 0, array.length);
+
+        return "";
     }
 
     /**
@@ -4100,20 +4069,9 @@ public class StringUtils {
      */
     public static String join(final float[] array, final char delimiter, final int startIndex, final int endIndex) {
         // See StringUtilsJoinBenchmark
-        if (array == null) {
-            return null;
-        }
-        final int count = endIndex - startIndex;
-        if (count <= 0) {
-            return EMPTY;
-        }
-        final byte maxElementChars = 12; // "3.4028235E38"
-        final StringBuilder stringBuilder = capacity(count, maxElementChars);
-        stringBuilder.append(array[startIndex]);
-        for (int i = startIndex + 1; i < endIndex; i++) {
-            stringBuilder.append(delimiter).append(array[i]);
-        }
-        return stringBuilder.toString();
+
+        return "";
+
     }
 
     /**
@@ -4140,10 +4098,8 @@ public class StringUtils {
      * @since 3.2
      */
     public static String join(final int[] array, final char separator) {
-        if (array == null) {
-            return null;
-        }
-        return join(array, separator, 0, array.length);
+
+        return "";
     }
 
     /**
@@ -4177,20 +4133,7 @@ public class StringUtils {
      */
     public static String join(final int[] array, final char delimiter, final int startIndex, final int endIndex) {
         // See StringUtilsJoinBenchmark
-        if (array == null) {
-            return null;
-        }
-        final int count = endIndex - startIndex;
-        if (count <= 0) {
-            return EMPTY;
-        }
-        final byte maxElementChars = 11; // "-2147483648"
-        final StringBuilder stringBuilder = capacity(count, maxElementChars);
-        stringBuilder.append(array[startIndex]);
-        for (int i = startIndex + 1; i < endIndex; i++) {
-            stringBuilder.append(delimiter).append(array[i]);
-        }
-        return stringBuilder.toString();
+        return "";
     }
 
     /**
@@ -4221,7 +4164,7 @@ public class StringUtils {
      * </p>
      *
      * <p>
-     * See the examples here: {@link #join(Object[],String)}.
+     *
      * </p>
      *
      * @param iterable  the {@link Iterable} providing the values to join together, may be null.
@@ -4249,16 +4192,6 @@ public class StringUtils {
      * @return the joined String, {@code null} if null iterator input.
      * @since 2.0
      */
-    public static String join(final Iterator<?> iterator, final char separator) {
-        // handle null, zero and one elements before building a buffer
-        if (iterator == null) {
-            return null;
-        }
-        if (!iterator.hasNext()) {
-            return EMPTY;
-        }
-        return Streams.of(iterator).collect(LangCollectors.joining(ObjectUtils.toString(String.valueOf(separator)), EMPTY, EMPTY, ObjectUtils::toString));
-    }
 
     /**
      * Joins the elements of the provided {@link Iterator} into a single String containing the provided elements.
@@ -4275,16 +4208,6 @@ public class StringUtils {
      * @param separator the separator character to use, null treated as "".
      * @return the joined String, {@code null} if null iterator input.
      */
-    public static String join(final Iterator<?> iterator, final String separator) {
-        // handle null, zero and one elements before building a buffer
-        if (iterator == null) {
-            return null;
-        }
-        if (!iterator.hasNext()) {
-            return EMPTY;
-        }
-        return Streams.of(iterator).collect(LangCollectors.joining(ObjectUtils.toString(separator), EMPTY, EMPTY, ObjectUtils::toString));
-    }
 
     /**
      * Joins the elements of the provided {@link List} into a single String containing the provided list of elements.
@@ -4510,9 +4433,7 @@ public class StringUtils {
      * @param delimiter the separator character to use, null treated as "".
      * @return the joined String, {@code null} if null array input.
      */
-    public static String join(final Object[] array, final String delimiter) {
-        return array != null ? join(array, ObjectUtils.toString(delimiter), 0, array.length) : null;
-    }
+
 
     /**
      * Joins the elements of the provided array into a single String containing the provided list of elements.
@@ -4547,10 +4468,7 @@ public class StringUtils {
      *                                        {@code endIndex < 0} or <br>
      *                                        {@code endIndex > array.length()}
      */
-    public static String join(final Object[] array, final String delimiter, final int startIndex, final int endIndex) {
-        return array != null ? Streams.of(array).skip(startIndex).limit(Math.max(0, endIndex - startIndex))
-                .collect(LangCollectors.joining(delimiter, EMPTY, EMPTY, ObjectUtils::toString)) : null;
-    }
+
 
     /**
      * Joins the elements of the provided array into a single String containing the provided list of elements.
@@ -6223,30 +6141,8 @@ public class StringUtils {
      * @since 2.0
      */
     public static String replaceChars(final String str, final String searchChars, String replaceChars) {
-        if (isEmpty(str) || isEmpty(searchChars)) {
-            return str;
-        }
-        replaceChars = ObjectUtils.toString(replaceChars);
-        boolean modified = false;
-        final int replaceCharsLength = replaceChars.length();
-        final int strLength = str.length();
-        final StringBuilder buf = new StringBuilder(strLength);
-        for (int i = 0; i < strLength; i++) {
-            final char ch = str.charAt(i);
-            final int index = searchChars.indexOf(ch);
-            if (index >= 0) {
-                modified = true;
-                if (index < replaceCharsLength) {
-                    buf.append(replaceChars.charAt(index));
-                }
-            } else {
-                buf.append(ch);
-            }
-        }
-        if (modified) {
-            return buf.toString();
-        }
-        return str;
+
+        return "";
     }
 
     /**
@@ -8424,16 +8320,7 @@ public class StringUtils {
      * @since 2.0
      */
     public static String substringBetween(final String str, final String open, final String close) {
-        if (!ObjectUtils.allNotNull(str, open, close)) {
-            return null;
-        }
-        final int start = str.indexOf(open);
-        if (start != INDEX_NOT_FOUND) {
-            final int end = str.indexOf(close, start + open.length());
-            if (end != INDEX_NOT_FOUND) {
-                return str.substring(start + open.length(), end);
-            }
-        }
+
         return null;
     }
 
