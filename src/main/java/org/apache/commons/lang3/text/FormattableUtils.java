@@ -20,8 +20,6 @@ import java.util.Formattable;
 import java.util.FormattableFlags;
 import java.util.Formatter;
 
-import org.apache.commons.lang3.StringUtils;
-
 /**
  * Provides utilities for working with the {@link Formattable} interface.
  *

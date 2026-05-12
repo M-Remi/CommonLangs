@@ -20,7 +20,6 @@ package org.apache.commons.lang3.time;
 import java.time.ZoneId;
 import java.util.TimeZone;
 
-import org.apache.commons.lang3.SystemProperties;
 import org.apache.commons.lang3.SystemUtils;
 
 /**

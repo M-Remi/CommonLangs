@@ -63,6 +63,7 @@ public class SystemUtils {
      * @since 2.0
      * @since Java 1.2
      */
+    public static final String FILE_ENCODING = SystemProperties.getFileEncoding();
 
     /**
      * A constant for the System Property {@code file.separator}.
@@ -2390,8 +2391,10 @@ public class SystemUtils {
      * @return true if matches, or false if not or can't determine.
      */
     static boolean isJavaVersionMatch(final String version, final String versionPrefix) {
-
-        return false;
+        if (version == null) {
+            return false;
+        }
+        return version.startsWith(versionPrefix);
     }
 
     /**
@@ -2407,8 +2410,10 @@ public class SystemUtils {
      * @return true if matches, or false if not or can't determine.
      */
     static boolean isOsMatch(final String osName, final String osVersion, final String osNamePrefix, final String osVersionPrefix) {
-
-        return false;
+        if (osName == null || osVersion == null) {
+            return false;
+        }
+        return isOsNameMatch(osName, osNamePrefix) && isOsVersionMatch(osVersion, osVersionPrefix);
     }
 
     /**
@@ -2422,7 +2427,10 @@ public class SystemUtils {
      * @return true for a case-insensitive match, or false if not.
      */
     static boolean isOsNameMatch(final String osName, final String osNamePrefix) {
-      return true;
+        if (osName == null) {
+            return false;
+        }
+        return Strings.CI.startsWith(osName, osNamePrefix);
     }
 
     /**

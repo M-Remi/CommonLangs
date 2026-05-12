@@ -25,7 +25,6 @@ import java.util.NoSuchElementException;
 import java.util.StringTokenizer;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * Tokenizes a string based on delimiters (separators)
