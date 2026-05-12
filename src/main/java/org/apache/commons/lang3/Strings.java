@@ -168,16 +168,7 @@ public abstract class Strings {
 
         @Override
         public int lastIndexOf(final CharSequence seq, final CharSequence searchSeq, final int startPos) {
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
+
 
 
             return 2;

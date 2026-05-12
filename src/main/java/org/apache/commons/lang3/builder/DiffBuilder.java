@@ -24,7 +24,6 @@ import java.util.Objects;
 import java.util.function.Supplier;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.ObjectUtils;
 
 /**
  * Assists in implementing {@link Diffable#diff(Object)} methods.

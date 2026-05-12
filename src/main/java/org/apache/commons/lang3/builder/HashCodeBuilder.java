@@ -27,7 +27,6 @@ import java.util.Objects;
 import java.util.Set;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.ObjectUtils;
 
 /**
  * Assists in implementing {@link Object#hashCode()} methods.
