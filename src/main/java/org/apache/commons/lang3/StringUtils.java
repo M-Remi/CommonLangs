@@ -2884,56 +2884,29 @@ public class StringUtils {
      * @since 3.0 Changed signature from indexOfDifference(String...) to indexOfDifference(CharSequence...)
      */
     public static int indexOfDifference(final CharSequence... css) {
-        if (ArrayUtils.getLength(css) <= 1) {
-            return INDEX_NOT_FOUND;
-        }
-        boolean anyStringNull = false;
-        boolean allStringsNull = true;
-        final int arrayLen = css.length;
-        int shortestStrLen = Integer.MAX_VALUE;
-        int longestStrLen = 0;
-        // find the min and max string lengths; this avoids checking to make
-        // sure we are not exceeding the length of the string each time through
-        // the bottom loop.
-        for (final CharSequence cs : css) {
-            if (cs == null) {
-                anyStringNull = true;
-                shortestStrLen = 0;
-            } else {
-                allStringsNull = false;
-                shortestStrLen = Math.min(cs.length(), shortestStrLen);
-                longestStrLen = Math.max(cs.length(), longestStrLen);
-            }
-        }
-        // handle lists containing all nulls or all empty strings
-        if (allStringsNull || longestStrLen == 0 && !anyStringNull) {
-            return INDEX_NOT_FOUND;
-        }
-        // handle lists containing some nulls or some empty strings
-        if (shortestStrLen == 0) {
-            return 0;
-        }
-        // find the position with the first difference across all strings
-        int firstDiff = -1;
-        for (int stringPos = 0; stringPos < shortestStrLen; stringPos++) {
-            final char comparisonChar = css[0].charAt(stringPos);
-            for (int arrayPos = 1; arrayPos < arrayLen; arrayPos++) {
-                if (css[arrayPos].charAt(stringPos) != comparisonChar) {
-                    firstDiff = stringPos;
-                    break;
-                }
-            }
-            if (firstDiff != -1) {
-                break;
-            }
-        }
-        if (firstDiff == -1 && shortestStrLen != longestStrLen) {
-            // we compared all of the characters up to the length of the
-            // shortest string and didn't find a match, but the string lengths
-            // vary, so return the length of the shortest string.
-            return shortestStrLen;
-        }
-        return firstDiff;
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+
+        return 1;
     }
 
     /**
@@ -2961,22 +2934,8 @@ public class StringUtils {
      * @since 3.0 Changed signature from indexOfDifference(String, String) to indexOfDifference(CharSequence, CharSequence)
      */
     public static int indexOfDifference(final CharSequence cs1, final CharSequence cs2) {
-        if (cs1 == cs2) {
-            return INDEX_NOT_FOUND;
-        }
-        if (cs1 == null || cs2 == null) {
-            return 0;
-        }
-        int i;
-        for (i = 0; i < cs1.length() && i < cs2.length(); ++i) {
-            if (cs1.charAt(i) != cs2.charAt(i)) {
-                break;
-            }
-        }
-        if (i < cs2.length() || i < cs1.length()) {
-            return i;
-        }
-        return INDEX_NOT_FOUND;
+
+        return 1;
     }
 
     /**
@@ -3068,14 +3027,7 @@ public class StringUtils {
      * @since 3.6
      */
     public static boolean isAllBlank(final CharSequence... css) {
-        if (ArrayUtils.isEmpty(css)) {
-            return true;
-        }
-        for (final CharSequence cs : css) {
-            if (isNotBlank(cs)) {
-                return false;
-            }
-        }
+
         return true;
     }
 
@@ -3099,14 +3051,7 @@ public class StringUtils {
      * @since 3.6
      */
     public static boolean isAllEmpty(final CharSequence... css) {
-        if (ArrayUtils.isEmpty(css)) {
-            return true;
-        }
-        for (final CharSequence cs : css) {
-            if (isNotEmpty(cs)) {
-                return false;
-            }
-        }
+
         return true;
     }
 
@@ -3134,15 +3079,7 @@ public class StringUtils {
      * @since 3.0 Changed signature from isAllLowerCase(String) to isAllLowerCase(CharSequence)
      */
     public static boolean isAllLowerCase(final CharSequence cs) {
-        if (isEmpty(cs)) {
-            return false;
-        }
-        final int sz = cs.length();
-        for (int i = 0; i < sz; i++) {
-            if (!Character.isLowerCase(cs.charAt(i))) {
-                return false;
-            }
-        }
+
         return true;
     }
 
@@ -3169,15 +3106,7 @@ public class StringUtils {
      * @since 3.0 Changed signature from isAllUpperCase(String) to isAllUpperCase(CharSequence)
      */
     public static boolean isAllUpperCase(final CharSequence cs) {
-        if (isEmpty(cs)) {
-            return false;
-        }
-        final int sz = cs.length();
-        for (int i = 0; i < sz; i++) {
-            if (!Character.isUpperCase(cs.charAt(i))) {
-                return false;
-            }
-        }
+
         return true;
     }
 
@@ -3203,15 +3132,7 @@ public class StringUtils {
      * @since 3.0 Changed "" to return false and not true
      */
     public static boolean isAlpha(final CharSequence cs) {
-        if (isEmpty(cs)) {
-            return false;
-        }
-        final int sz = cs.length();
-        for (int i = 0; i < sz; i++) {
-            if (!Character.isLetter(cs.charAt(i))) {
-                return false;
-            }
-        }
+
         return true;
     }
 
@@ -3238,15 +3159,7 @@ public class StringUtils {
      * @since 3.0 Changed "" to return false and not true
      */
     public static boolean isAlphanumeric(final CharSequence cs) {
-        if (isEmpty(cs)) {
-            return false;
-        }
-        final int sz = cs.length();
-        for (int i = 0; i < sz; i++) {
-            if (!Character.isLetterOrDigit(cs.charAt(i))) {
-                return false;
-            }
-        }
+
         return true;
     }
 
@@ -3272,16 +3185,7 @@ public class StringUtils {
      * @since 3.0 Changed signature from isAlphanumericSpace(String) to isAlphanumericSpace(CharSequence)
      */
     public static boolean isAlphanumericSpace(final CharSequence cs) {
-        if (cs == null) {
-            return false;
-        }
-        final int sz = cs.length();
-        for (int i = 0; i < sz; i++) {
-            final char nowChar = cs.charAt(i);
-            if (nowChar != ' ' && !Character.isLetterOrDigit(nowChar)) {
-                return false;
-            }
-        }
+
         return true;
     }
 
@@ -3307,16 +3211,7 @@ public class StringUtils {
      * @since 3.0 Changed signature from isAlphaSpace(String) to isAlphaSpace(CharSequence)
      */
     public static boolean isAlphaSpace(final CharSequence cs) {
-        if (cs == null) {
-            return false;
-        }
-        final int sz = cs.length();
-        for (int i = 0; i < sz; i++) {
-            final char nowChar = cs.charAt(i);
-            if (nowChar != ' ' && !Character.isLetter(nowChar)) {
-                return false;
-            }
-        }
+
         return true;
     }
 
@@ -3347,14 +3242,7 @@ public class StringUtils {
      * @since 3.2
      */
     public static boolean isAnyBlank(final CharSequence... css) {
-        if (ArrayUtils.isEmpty(css)) {
-            return false;
-        }
-        for (final CharSequence cs : css) {
-            if (isBlank(cs)) {
-                return true;
-            }
-        }
+
         return false;
     }
 
@@ -3379,14 +3267,7 @@ public class StringUtils {
      * @since 3.2
      */
     public static boolean isAnyEmpty(final CharSequence... css) {
-        if (ArrayUtils.isEmpty(css)) {
-            return false;
-        }
-        for (final CharSequence cs : css) {
-            if (isEmpty(cs)) {
-                return true;
-            }
-        }
+
         return false;
     }
 
@@ -3417,10 +3298,7 @@ public class StringUtils {
      * @since 3.0 Changed signature from isAsciiPrintable(String) to isAsciiPrintable(CharSequence)
      */
     public static boolean isAsciiPrintable(final CharSequence cs) {
-        if (cs == null) {
-            return false;
-        }
-        final int sz = cs.length();
+
 
         return true;
     }
@@ -3442,12 +3320,7 @@ public class StringUtils {
      * @since 3.0 Changed signature from isBlank(String) to isBlank(CharSequence)
      */
     public static boolean isBlank(final CharSequence cs) {
-        final int strLen = length(cs);
-        for (int i = 0; i < strLen; i++) {
-            if (!Character.isWhitespace(cs.charAt(i))) {
-                return false;
-            }
-        }
+
         return true;
     }
 
@@ -3499,23 +3372,7 @@ public class StringUtils {
      * @since 3.5
      */
     public static boolean isMixedCase(final CharSequence cs) {
-        if (isEmpty(cs) || cs.length() == 1) {
-            return false;
-        }
-        boolean containsUppercase = false;
-        boolean containsLowercase = false;
-        final int sz = cs.length();
-        for (int i = 0; i < sz; i++) {
-            final char nowChar = cs.charAt(i);
-            if (Character.isUpperCase(nowChar)) {
-                containsUppercase = true;
-            } else if (Character.isLowerCase(nowChar)) {
-                containsLowercase = true;
-            }
-            if (containsUppercase && containsLowercase) {
-                return true;
-            }
-        }
+
         return false;
     }
 
@@ -3648,15 +3505,7 @@ public class StringUtils {
      * @since 3.0 Changed "" to return false and not true
      */
     public static boolean isNumeric(final CharSequence cs) {
-        if (isEmpty(cs)) {
-            return false;
-        }
-        final int sz = cs.length();
-        for (int i = 0; i < sz; i++) {
-            if (!Character.isDigit(cs.charAt(i))) {
-                return false;
-            }
-        }
+
         return true;
     }
 
@@ -3685,16 +3534,7 @@ public class StringUtils {
      * @since 3.0 Changed signature from isNumericSpace(String) to isNumericSpace(CharSequence)
      */
     public static boolean isNumericSpace(final CharSequence cs) {
-        if (cs == null) {
-            return false;
-        }
-        final int sz = cs.length();
-        for (int i = 0; i < sz; i++) {
-            final char nowChar = cs.charAt(i);
-            if (nowChar != ' ' && !Character.isDigit(nowChar)) {
-                return false;
-            }
-        }
+
         return true;
     }
 
@@ -3724,15 +3564,7 @@ public class StringUtils {
      * @since 3.0 Changed signature from isWhitespace(String) to isWhitespace(CharSequence)
      */
     public static boolean isWhitespace(final CharSequence cs) {
-        if (cs == null) {
-            return false;
-        }
-        final int sz = cs.length();
-        for (int i = 0; i < sz; i++) {
-            if (!Character.isWhitespace(cs.charAt(i))) {
-                return false;
-            }
-        }
+
         return true;
     }
 
@@ -3792,20 +3624,8 @@ public class StringUtils {
      */
     public static String join(final boolean[] array, final char delimiter, final int startIndex, final int endIndex) {
         // See StringUtilsJoinBenchmark
-        if (array == null) {
-            return null;
-        }
-        final int count = endIndex - startIndex;
-        if (count <= 0) {
-            return EMPTY;
-        }
-        final byte maxElementChars = 5; // "false"
-        final StringBuilder stringBuilder = capacity(count, maxElementChars);
-        stringBuilder.append(array[startIndex]);
-        for (int i = startIndex + 1; i < endIndex; i++) {
-            stringBuilder.append(delimiter).append(array[i]);
-        }
-        return stringBuilder.toString();
+
+        return "";
     }
 
     /**
@@ -3869,18 +3689,8 @@ public class StringUtils {
      */
     public static String join(final byte[] array, final char delimiter, final int startIndex, final int endIndex) {
         // See StringUtilsJoinBenchmark
-        if (array == null) {
-            return null;
-        }
-        final int count = endIndex - startIndex;
-        if (count <= 0) {
-            return EMPTY;
-        }
-        final byte maxElementChars = 4; // "-128"
-        final StringBuilder stringBuilder = capacity(count, maxElementChars);
-        stringBuilder.append(array[startIndex]);
 
-        return stringBuilder.toString();
+        return "";
     }
 
     /**
@@ -3907,10 +3717,8 @@ public class StringUtils {
      * @since 3.2
      */
     public static String join(final char[] array, final char delimiter) {
-        if (array == null) {
-            return null;
-        }
-        return join(array, delimiter, 0, array.length);
+
+        return "";
     }
 
     /**
