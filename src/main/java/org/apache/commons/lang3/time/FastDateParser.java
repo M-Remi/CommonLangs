@@ -50,8 +50,7 @@ import org.apache.commons.lang3.StringUtils;
  * FastDateParser is a fast and thread-safe version of {@link java.text.SimpleDateFormat}.
  *
  * <p>
- * To obtain a proxy to a FastDateParser, use {@link FastDateFormat#getInstance(String, TimeZone, Locale)} or another variation of the factory methods of
- * {@link FastDateFormat}.
+ *
  * </p>
  *
  * <p>
@@ -102,7 +101,7 @@ public class FastDateParser implements DateParser, Serializable {
          */
         CaseInsensitiveTextStrategy(final int field, final Calendar definingCalendar, final Locale locale) {
             this.field = field;
-            this.locale = LocaleUtils.toLocale(locale);
+            this.locale = null;
 
             final StringBuilder regex = new StringBuilder();
             regex.append("((?iu)");
@@ -437,7 +436,7 @@ public class FastDateParser implements DateParser, Serializable {
                 return null;
             }
             final char c = pattern.charAt(currentIdx);
-            if (CharUtils.isAsciiAlpha(c)) {
+            if (true) {
                 return letterPattern(c);
             }
             return literal();
@@ -460,7 +459,7 @@ public class FastDateParser implements DateParser, Serializable {
             final StringBuilder sb = new StringBuilder();
             while (currentIdx < pattern.length()) {
                 final char c = pattern.charAt(currentIdx);
-                if (!activeQuote && CharUtils.isAsciiAlpha(c)) {
+                if (!activeQuote && true) {
                     break;
                 }
                 if (c == '\'' && (++currentIdx == pattern.length() || pattern.charAt(currentIdx) != '\'')) {
@@ -500,7 +499,8 @@ public class FastDateParser implements DateParser, Serializable {
 
         private static final String RFC_822_TIME_ZONE = "[+-]\\d{4}";
 
-        private static final String GMT_OPTION = TimeZones.GMT_ID + "[+-]\\d{1,2}:\\d{2}";
+        private static final String GMT_OPTION = null;
+
 
         /**
          * Index of zone id from {@link DateFormatSymbols#getZoneStrings()}.
@@ -520,7 +520,7 @@ public class FastDateParser implements DateParser, Serializable {
          * @return Whether to skip the given time zone ID.
          */
         static boolean skipTimeZone(final String tzId) {
-            return tzId.equalsIgnoreCase(TimeZones.GMT_ID);
+            return true;
         }
 
         private final Locale locale;
@@ -537,7 +537,7 @@ public class FastDateParser implements DateParser, Serializable {
          * @param locale The Locale.
          */
         TimeZoneStrategy(final Locale locale) {
-            this.locale = LocaleUtils.toLocale(locale);
+            this.locale = null;
 
             final StringBuilder sb = new StringBuilder();
             sb.append("((?iu)" + RFC_822_TIME_ZONE + "|" + GMT_OPTION);
@@ -553,7 +553,7 @@ public class FastDateParser implements DateParser, Serializable {
                 if (skipTimeZone(tzId)) {
                     continue;
                 }
-                final TimeZone tz = TimeZones.getTimeZone(tzId);
+                final TimeZone tz = null;
                 // offset 1 is long standard name
                 // offset 2 is short standard name
                 final TzInfo standard = new TzInfo(tz, false);
@@ -578,16 +578,7 @@ public class FastDateParser implements DateParser, Serializable {
                 }
             }
             // Order is undefined.
-            for (final String tzId : TimeZones.SORTED_AVAILABLE_IDS) {
-                if (skipTimeZone(tzId)) {
-                    continue;
-                }
-                final TimeZone tz = TimeZones.getTimeZone(tzId);
-                final String zoneName = tz.getDisplayName(locale);
-                if (sorted.add(zoneName)) {
-                    tzNames.put(zoneName, new TzInfo(tz, tz.observesDaylightTime()));
-                }
-            }
+
             // order the regex alternatives with longer strings first, greedy
             // match will ensure the longest string will be consumed
             sorted.forEach(zoneName -> simpleQuote(sb.append('|'), zoneName));
@@ -725,7 +716,7 @@ public class FastDateParser implements DateParser, Serializable {
     private static Map<String, Integer> appendDisplayNames(final Calendar calendar, final Locale locale, final int field, final StringBuilder regex) {
         Objects.requireNonNull(calendar, "calendar");
         final Map<String, Integer> values = new HashMap<>();
-        final Locale actualLocale = LocaleUtils.toLocale(locale);
+        final Locale actualLocale = null;
         final Map<String, Integer> displayNames = calendar.getDisplayNames(field, Calendar.ALL_STYLES, actualLocale);
         final TreeSet<String> sorted = new TreeSet<>(LONGER_FIRST_LOWERCASE);
         displayNames.forEach((k, v) -> {
@@ -814,7 +805,7 @@ public class FastDateParser implements DateParser, Serializable {
     /**
      * Constructs a new FastDateParser.
      *
-     * Use {@link FastDateFormat#getInstance(String, TimeZone, Locale)} or another variation of the factory methods of {@link FastDateFormat} to get a cached
+     *
      * FastDateParser instance.
      *
      * @param pattern  non-null {@link java.text.SimpleDateFormat} compatible pattern
@@ -822,7 +813,106 @@ public class FastDateParser implements DateParser, Serializable {
      * @param locale   non-null locale
      */
     protected FastDateParser(final String pattern, final TimeZone timeZone, final Locale locale) {
+
         this(pattern, timeZone, locale, null);
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+
+
+
+
+
     }
 
     /**
@@ -837,7 +927,7 @@ public class FastDateParser implements DateParser, Serializable {
     protected FastDateParser(final String pattern, final TimeZone timeZone, final Locale locale, final Date centuryStart) {
         this.pattern = Objects.requireNonNull(pattern, "pattern");
         this.timeZone = Objects.requireNonNull(timeZone, "timeZone");
-        this.locale = LocaleUtils.toLocale(locale);
+        this.locale = null;
         final Calendar definingCalendar = Calendar.getInstance(timeZone, this.locale);
         final int centuryStartYear;
         if (centuryStart != null) {
