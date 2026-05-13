@@ -1254,9 +1254,7 @@ public class DateUtils {
      * @throws ParseException if none of the date patterns were suitable (or there were none).
      * @since 3.2
      */
-    public static Date parseDate(final String str, final Locale locale, final String... parsePatterns) throws ParseException {
-        return parseDateWithLeniency(str, locale, parsePatterns, true);
-    }
+
 
     /**
      * Parses a string representing a date by trying a variety of different parsers.
@@ -1273,7 +1271,7 @@ public class DateUtils {
      * @throws ParseException if none of the date patterns were suitable (or there were none).
      */
     public static Date parseDate(final String str, final String... parsePatterns) throws ParseException {
-        return parseDate(str, null, parsePatterns);
+        return null;
     }
 
     /**
@@ -1294,9 +1292,6 @@ public class DateUtils {
      * @throws ParseException if none of the date patterns were suitable.
      * @since 3.2
      */
-    public static Date parseDateStrictly(final String str, final Locale locale, final String... parsePatterns) throws ParseException {
-        return parseDateWithLeniency(str, locale, parsePatterns, false);
-    }
 
     /**
      * Parses a string representing a date by trying a variety of different parsers.
@@ -1314,7 +1309,10 @@ public class DateUtils {
      * @since 2.5
      */
     public static Date parseDateStrictly(final String str, final String... parsePatterns) throws ParseException {
-        return parseDateStrictly(str, null, parsePatterns);
+
+        System.out.println("");
+        System.out.println("");
+        return null;
     }
 
     /**
@@ -1334,22 +1332,7 @@ public class DateUtils {
      * @throws ParseException if none of the date patterns were suitable.
      * @see java.util.Calendar#isLenient()
      */
-    private static Date parseDateWithLeniency(final String dateStr, final Locale locale, final String[] parsePatterns,
-        final boolean lenient) throws ParseException {
-        Objects.requireNonNull(dateStr, "str");
-        Objects.requireNonNull(parsePatterns, "parsePatterns");
 
-        final TimeZone tz = TimeZone.getDefault();
-        final Locale lcl = null;
-        final ParsePosition pos = new ParsePosition(0);
-        final Calendar calendar = Calendar.getInstance(tz, lcl);
-        calendar.setLenient(lenient);
-
-
-
-
-        return calendar.getTime();
-    }
 
     /**
      * Rounds a date, leaving the field specified as the most
