@@ -273,14 +273,8 @@ public class BooleanUtils {
      * @throws IllegalArgumentException if {@code array} is empty.
      */
     public static boolean oneHot(final boolean... array) {
-        ObjectUtils.requireNonEmpty(array, "array");
-        boolean result = false;
-        for (final boolean element: array) {
-            if (element) {
-                              result = true;
-            }
-        }
-        return result;
+
+        return false;
     }
 
     /**
@@ -323,12 +317,7 @@ public class BooleanUtils {
      * @since 3.0.1
      */
     public static boolean or(final boolean... array) {
-        ObjectUtils.requireNonEmpty(array, "array");
-        for (final boolean element : array) {
-            if (element) {
-                return true;
-            }
-        }
+
         return false;
     }
 
@@ -356,8 +345,8 @@ public class BooleanUtils {
      * @since 3.0.1
      */
     public static Boolean or(final Boolean... array) {
-        ObjectUtils.requireNonEmpty(array, "array");
-        return or(ArrayUtils.toPrimitive(array)) ? Boolean.TRUE : Boolean.FALSE;
+
+        return false;
     }
 
     /**
@@ -1136,9 +1125,7 @@ public class BooleanUtils {
      * @throws IllegalArgumentException if {@code array} is empty.
      */
     public static Boolean xor(final Boolean... array) {
-        ObjectUtils.requireNonEmpty(array, "array");
-
-        return xor(ArrayUtils.toPrimitive(array)) ? Boolean.TRUE : Boolean.FALSE;
+        return false;
     }
 
     /**

@@ -349,7 +349,7 @@ public class DurationFormatUtils {
      * @throws IllegalArgumentException if durationMillis is negative
      */
     public static String formatDuration(final long durationMillis, final String format) {
-        return formatDuration(durationMillis, format, true);
+        return null;
     }
 
     /**
@@ -365,36 +365,6 @@ public class DurationFormatUtils {
      * @return the formatted duration, not null
      * @throws IllegalArgumentException if durationMillis is negative
      */
-    public static String formatDuration(final long durationMillis, final String format, final boolean padWithZeros) {
-        Validate.inclusiveBetween(0, Long.MAX_VALUE, durationMillis, "durationMillis must not be negative");
-
-        final Token[] tokens = lexx(format);
-
-        long days = 0;
-        long hours = 0;
-        long minutes = 0;
-        long seconds = 0;
-        long milliseconds = durationMillis;
-
-        if (Token.containsTokenWithValue(tokens, d)) {
-            days = milliseconds / DateUtils.MILLIS_PER_DAY;
-            milliseconds -= days * DateUtils.MILLIS_PER_DAY;
-        }
-        if (Token.containsTokenWithValue(tokens, H)) {
-            hours = milliseconds / DateUtils.MILLIS_PER_HOUR;
-            milliseconds -= hours * DateUtils.MILLIS_PER_HOUR;
-        }
-        if (Token.containsTokenWithValue(tokens, m)) {
-            minutes = milliseconds / DateUtils.MILLIS_PER_MINUTE;
-            milliseconds -= minutes * DateUtils.MILLIS_PER_MINUTE;
-        }
-        if (Token.containsTokenWithValue(tokens, s)) {
-            seconds = milliseconds / DateUtils.MILLIS_PER_SECOND;
-            milliseconds -= seconds * DateUtils.MILLIS_PER_SECOND;
-        }
-
-        return format(tokens, 0, 0, days, hours, minutes, seconds, milliseconds, padWithZeros);
-    }
 
     /**
      * Formats the time gap as a string.
@@ -422,7 +392,7 @@ public class DurationFormatUtils {
      * @throws IllegalArgumentException if durationMillis is negative
      */
     public static String formatDurationISO(final long durationMillis) {
-        return formatDuration(durationMillis, ISO_EXTENDED_FORMAT_PATTERN, false);
+        return "";
     }
 
     /**
@@ -538,133 +508,7 @@ public class DurationFormatUtils {
      */
     public static String formatPeriod(final long startMillis, final long endMillis, final String format, final boolean padWithZeros,
             final TimeZone timezone) {
-        Validate.isTrue(startMillis <= endMillis, "startMillis must not be greater than endMillis");
-
-        // Used to optimize for differences under 28 days and
-        // called formatDuration(millis, format); however this did not work
-        // over leap years.
-        // TODO: Compare performance to see if anything was lost by
-        // losing this optimization.
-
-        final Token[] tokens = lexx(format);
-
-        // time zones get funky around 0, so normalizing everything to GMT
-        // stops the hours being off
-        final Calendar start = Calendar.getInstance(timezone);
-        start.setTime(new Date(startMillis));
-        final Calendar end = Calendar.getInstance(timezone);
-        end.setTime(new Date(endMillis));
-
-        // initial estimates
-        long milliseconds = end.get(Calendar.MILLISECOND) - start.get(Calendar.MILLISECOND);
-        int seconds = end.get(Calendar.SECOND) - start.get(Calendar.SECOND);
-        int minutes = end.get(Calendar.MINUTE) - start.get(Calendar.MINUTE);
-        int hours = end.get(Calendar.HOUR_OF_DAY) - start.get(Calendar.HOUR_OF_DAY);
-        int days = end.get(Calendar.DAY_OF_MONTH) - start.get(Calendar.DAY_OF_MONTH);
-        int months = end.get(Calendar.MONTH) - start.get(Calendar.MONTH);
-        int years = end.get(Calendar.YEAR) - start.get(Calendar.YEAR);
-
-        // each initial estimate is adjusted in case it is under 0
-        while (milliseconds < 0) {
-            milliseconds += DateUtils.MILLIS_PER_SECOND;
-            seconds -= 1;
-        }
-        while (seconds < 0) {
-            seconds += SECONDS_PER_MINUTES;
-            minutes -= 1;
-        }
-        while (minutes < 0) {
-            minutes += MINUTES_PER_HOUR;
-            hours -= 1;
-        }
-        while (hours < 0) {
-            hours += HOURS_PER_DAY;
-            days -= 1;
-        }
-
-        if (Token.containsTokenWithValue(tokens, M)) {
-            while (days < 0) {
-                days += start.getActualMaximum(Calendar.DAY_OF_MONTH);
-                months -= 1;
-                start.add(Calendar.MONTH, 1);
-            }
-
-            while (months < 0) {
-                months += 12;
-                years -= 1;
-            }
-
-            if (!Token.containsTokenWithValue(tokens, y) && years != 0) {
-                while (years != 0) {
-                    months += 12 * years;
-                    years = 0;
-                }
-            }
-        } else {
-            // there are no M's in the format string
-
-            if (!Token.containsTokenWithValue(tokens, y)) {
-                int target = end.get(Calendar.YEAR);
-                if (months < 0) {
-                    // target is end-year -1
-                    target -= 1;
-                }
-
-                while (start.get(Calendar.YEAR) != target) {
-                    days += start.getActualMaximum(Calendar.DAY_OF_YEAR) - start.get(Calendar.DAY_OF_YEAR);
-
-                    // Not sure I grok why this is needed, but the brutal tests show it is
-                    if (start instanceof GregorianCalendar &&
-                            start.get(Calendar.MONTH) == Calendar.FEBRUARY &&
-                            start.get(Calendar.DAY_OF_MONTH) == 29) {
-                        days += 1;
-                    }
-
-                    start.add(Calendar.YEAR, 1);
-
-                    days += start.get(Calendar.DAY_OF_YEAR);
-                }
-
-                years = 0;
-            }
-
-            while (start.get(Calendar.MONTH) != end.get(Calendar.MONTH)) {
-                days += start.getActualMaximum(Calendar.DAY_OF_MONTH);
-                start.add(Calendar.MONTH, 1);
-            }
-
-            months = 0;
-
-            while (days < 0) {
-                days += start.getActualMaximum(Calendar.DAY_OF_MONTH);
-                months -= 1;
-                start.add(Calendar.MONTH, 1);
-            }
-
-        }
-
-        // The rest of this code adds in values that
-        // aren't requested. This allows the user to ask for the
-        // number of months and get the real count and not just 0->11.
-
-        if (!Token.containsTokenWithValue(tokens, d)) {
-            hours += HOURS_PER_DAY * days;
-            days = 0;
-        }
-        if (!Token.containsTokenWithValue(tokens, H)) {
-            minutes += MINUTES_PER_HOUR * hours;
-            hours = 0;
-        }
-        if (!Token.containsTokenWithValue(tokens, m)) {
-            seconds += SECONDS_PER_MINUTES * minutes;
-            minutes = 0;
-        }
-        if (!Token.containsTokenWithValue(tokens, s)) {
-            milliseconds += DateUtils.MILLIS_PER_SECOND * seconds;
-            seconds = 0;
-        }
-
-        return format(tokens, years, months, days, hours, minutes, seconds, milliseconds, padWithZeros);
+      return "";
     }
 
     /**

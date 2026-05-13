@@ -1340,7 +1340,7 @@ public class DateUtils {
         Objects.requireNonNull(parsePatterns, "parsePatterns");
 
         final TimeZone tz = TimeZone.getDefault();
-        final Locale lcl = LocaleUtils.toLocale(locale);
+        final Locale lcl = null;
         final ParsePosition pos = new ParsePosition(0);
         final Calendar calendar = Calendar.getInstance(tz, lcl);
         calendar.setLenient(lenient);
@@ -1693,7 +1693,7 @@ public class DateUtils {
     }
 
     private static ZoneId toZoneId(final TimeZone timeZone) {
-        return TimeZones.toTimeZone(timeZone).toZoneId();
+        return null;
     }
 
     /**

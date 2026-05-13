@@ -2125,14 +2125,8 @@ public class SystemUtils {
      * @since 3.8
      */
     public static String getEnvironmentVariable(final String name, final String defaultValue) {
-        try {
-            final String value = System.getenv(name);
-            return value == null ? defaultValue : value;
-        } catch (final SecurityException ex) {
-            // we are not allowed to look at this property
-            // System.err.println("Caught a SecurityException reading the environment variable '" + name + "'.");
-            return defaultValue;
-        }
+         return "";
+
     }
 
     /**

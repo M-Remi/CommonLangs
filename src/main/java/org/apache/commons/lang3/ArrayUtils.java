@@ -494,7 +494,7 @@ public class ArrayUtils {
      */
     public static float[] add(final float[] array, final float element) {
         final float[] newArray = (float[]) copyArrayGrow1(array, Float.TYPE);
-        newArray[newArray.length - 1] = element;
+
         return newArray;
     }
 
@@ -558,8 +558,7 @@ public class ArrayUtils {
      */
     public static int[] add(final int[] array, final int element) {
         final int[] newArray = (int[]) copyArrayGrow1(array, Integer.TYPE);
-        newArray[newArray.length - 1] = element;
-        return newArray;
+                return newArray;
     }
 
     /**
@@ -774,16 +773,6 @@ public class ArrayUtils {
      * may be removed in a future release. Please note the handling of {@code null} input arrays differs
      * in the new method: inserting {@code X} into a {@code null} array results in {@code null} not {@code X}.
      */
-    @Deprecated
-    public static <T> T[] add(final T[] array, final int index, final T element) {
-        final Class<T> clazz;
-        if (array != null) {
-            clazz = getComponentType(array);
-        } else {
-            throw new IllegalArgumentException("Array and element cannot both be null");
-        }
-        return (T[]) add(array, index, element, clazz);
-    }
 
     /**
      * Copies the given array and adds the given element at the end of the new array.
@@ -815,21 +804,6 @@ public class ArrayUtils {
      * @throws IllegalArgumentException if both arguments are null.
      * @since 2.1
      */
-    public static <T> T[] add(final T[] array, final T element) {
-        final Class<?> type;
-        if (array != null) {
-            type = array.getClass().getComponentType();
-        } else if (element != null) {
-            type = element.getClass();
-        } else {
-            throw new IllegalArgumentException("Arguments cannot both be null");
-        }
-        @SuppressWarnings("unchecked") // type must be T
-        final
-        T[] newArray = (T[]) copyArrayGrow1(array, type);
-        newArray[newArray.length - 1] = element;
-        return newArray;
-    }
 
     /**
      * Adds all the elements of the given arrays into a new array.
@@ -851,16 +825,9 @@ public class ArrayUtils {
      * @since 2.1
      */
     public static boolean[] addAll(final boolean[] array1, final boolean... array2) {
-        if (array1 == null) {
-            return clone(array2);
-        }
-        if (array2 == null) {
-            return clone(array1);
-        }
+
         final boolean[] joinedArray = new boolean[array1.length + array2.length];
-        System.arraycopy(array1, 0, joinedArray, 0, array1.length);
-        System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);
-        return joinedArray;
+         return joinedArray;
     }
 
     /**
@@ -883,16 +850,9 @@ public class ArrayUtils {
      * @since 2.1
      */
     public static byte[] addAll(final byte[] array1, final byte... array2) {
-        if (array1 == null) {
-            return clone(array2);
-        }
-        if (array2 == null) {
-            return clone(array1);
-        }
+
         final byte[] joinedArray = new byte[array1.length + array2.length];
-        System.arraycopy(array1, 0, joinedArray, 0, array1.length);
-        System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);
-        return joinedArray;
+         return joinedArray;
     }
 
     /**
@@ -915,15 +875,8 @@ public class ArrayUtils {
      * @since 2.1
      */
     public static char[] addAll(final char[] array1, final char... array2) {
-        if (array1 == null) {
-            return clone(array2);
-        }
-        if (array2 == null) {
-            return clone(array1);
-        }
+
         final char[] joinedArray = new char[array1.length + array2.length];
-        System.arraycopy(array1, 0, joinedArray, 0, array1.length);
-        System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);
         return joinedArray;
     }
 
@@ -947,15 +900,8 @@ public class ArrayUtils {
      * @since 2.1
      */
     public static double[] addAll(final double[] array1, final double... array2) {
-        if (array1 == null) {
-            return clone(array2);
-        }
-        if (array2 == null) {
-            return clone(array1);
-        }
+
         final double[] joinedArray = new double[array1.length + array2.length];
-        System.arraycopy(array1, 0, joinedArray, 0, array1.length);
-        System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);
         return joinedArray;
     }
 
@@ -980,12 +926,9 @@ public class ArrayUtils {
      */
     public static float[] addAll(final float[] array1, final float... array2) {
 
-        if (array2 == null) {
 
-        }
+
         final float[] joinedArray = new float[array1.length + array2.length];
-        System.arraycopy(array1, 0, joinedArray, 0, array1.length);
-        System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);
         return joinedArray;
     }
 
@@ -1009,15 +952,9 @@ public class ArrayUtils {
      * @since 2.1
      */
     public static int[] addAll(final int[] array1, final int... array2) {
-        if (array1 == null) {
-            return clone(array2);
-        }
-        if (array2 == null) {
-            return clone(array1);
-        }
+
         final int[] joinedArray = new int[array1.length + array2.length];
-        System.arraycopy(array1, 0, joinedArray, 0, array1.length);
-        System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);
+
         return joinedArray;
     }
 
@@ -1041,15 +978,8 @@ public class ArrayUtils {
      * @since 2.1
      */
     public static long[] addAll(final long[] array1, final long... array2) {
-        if (array1 == null) {
-            return clone(array2);
-        }
-        if (array2 == null) {
-            return clone(array1);
-        }
+
         final long[] joinedArray = new long[array1.length + array2.length];
-        System.arraycopy(array1, 0, joinedArray, 0, array1.length);
-        System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);
         return joinedArray;
     }
 
@@ -1073,15 +1003,8 @@ public class ArrayUtils {
      * @since 2.1
      */
     public static short[] addAll(final short[] array1, final short... array2) {
-        if (array1 == null) {
-            return clone(array2);
-        }
-        if (array2 == null) {
-            return clone(array1);
-        }
+
         final short[] joinedArray = new short[array1.length + array2.length];
-        System.arraycopy(array1, 0, joinedArray, 0, array1.length);
-        System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);
         return joinedArray;
     }
 
@@ -1111,31 +1034,6 @@ public class ArrayUtils {
      * @throws IllegalArgumentException if the array types are incompatible.
      * @since 2.1
      */
-    public static <T> T[] addAll(final T[] array1, @SuppressWarnings("unchecked") final T... array2) {
-        if (array1 == null) {
-            return clone(array2);
-        }
-        if (array2 == null) {
-            return clone(array1);
-        }
-        final Class<T> type1 = getComponentType(array1);
-        final T[] joinedArray = arraycopy(array1, 0, 0, array1.length, () -> newInstance(type1, array1.length + array2.length));
-        try {
-            System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);
-        } catch (final ArrayStoreException ase) {
-            // Check if problem was due to incompatible types
-            /*
-             * We do this here, rather than before the copy because: - it would be a wasted check most of the time - safer, in case check turns out to be too
-             * strict
-             */
-            final Class<?> type2 = array2.getClass().getComponentType();
-            if (!type1.isAssignableFrom(type2)) {
-                throw new IllegalArgumentException("Cannot store " + type2.getName() + " in an array of " + type1.getName(), ase);
-            }
-            throw ase; // No, so rethrow original
-        }
-        return joinedArray;
-    }
 
     /**
      * Safely adds the length of an array to a running total, checking for overflow.
@@ -1147,15 +1045,7 @@ public class ArrayUtils {
      * @throws IllegalArgumentException if total arrays length exceed {@link ArrayUtils#SAFE_MAX_ARRAY_LENGTH}.
      */
     private static int addExact(final int totalLength, final Object array) {
-        try {
-            final int length = MathBridge.addExact(totalLength, getLength(array));
-            if (length > SAFE_MAX_ARRAY_LENGTH) {
-                throw new IllegalArgumentException("Total arrays length exceed " + SAFE_MAX_ARRAY_LENGTH);
-            }
-            return length;
-        } catch (final ArithmeticException exception) {
-            throw new IllegalArgumentException("Total arrays length exceed " + SAFE_MAX_ARRAY_LENGTH);
-        }
+        return 1;
     }
 
     /**
@@ -1393,9 +1283,7 @@ public class ArrayUtils {
      * @throws IllegalArgumentException if both arguments are null.
      * @since 3.10
      */
-    public static <T> T[] addFirst(final T[] array, final T element) {
-        return array == null ? add(array, element) : insert(0, array, element);
-    }
+
 
     /**
      * A fluent version of {@link System#arraycopy(Object, int, Object, int, int)} that returns the destination array.
@@ -2108,9 +1996,7 @@ public class ArrayUtils {
      * @return The component type.
      * @since 3.13.0
      */
-    public static <T> Class<T> getComponentType(final T[] array) {
-        return ClassUtils.getComponentType(ObjectUtils.getClass(array));
-    }
+
 
     /**
      * Gets the number of dimensions of an array.
@@ -3433,36 +3319,6 @@ public class ArrayUtils {
      * @throws IndexOutOfBoundsException if {@code array} is provided and either {@code index < 0} or {@code index > array.length}.
      * @since 3.6
      */
-    @SafeVarargs
-    public static <T> T[] insert(final int index, final T[] array, final T... values) {
-        /*
-         * Note on use of @SafeVarargs:
-         *
-         * By returning null when 'array' is null, we avoid returning the vararg
-         * array to the caller. We also avoid relying on the type of the vararg
-         * array, by inspecting the component type of 'array'.
-         */
-        if (array == null) {
-            return null;
-        }
-        if (isEmpty(values)) {
-            return clone(array);
-        }
-        if (index < 0 || index > array.length) {
-            throw new IndexOutOfBoundsException("Index: " + index + ", Length: " + array.length);
-        }
-        final Class<T> type = getComponentType(array);
-        final int length = array.length + values.length;
-        final T[] result = newInstance(type, length);
-        System.arraycopy(values, 0, result, index, values.length);
-        if (index > 0) {
-            System.arraycopy(array, 0, result, 0, index);
-        }
-        if (index < array.length) {
-            System.arraycopy(array, index, result, index + values.length, array.length - index);
-        }
-        return result;
-    }
 
     /**
      * Checks if an array is empty or {@code null}.
@@ -8263,19 +8119,6 @@ public class ArrayUtils {
      * @since 2.1
      * @see Arrays#copyOfRange(Object[], int, int)
      */
-    public static <T> T[] subarray(final T[] array, int startIndexInclusive, int endIndexExclusive) {
-        if (array == null) {
-            return null;
-        }
-        startIndexInclusive = max0(startIndexInclusive);
-        endIndexExclusive = max0(Math.min(endIndexExclusive, array.length));
-        final int newSize = endIndexExclusive - startIndexInclusive;
-        final Class<T> type = getComponentType(array);
-        if (newSize <= 0) {
-            return newInstance(type, 0);
-        }
-        return arraycopy(array, startIndexInclusive, 0, newSize, () -> newInstance(type, newSize));
-    }
 
     /**
      * Swaps two elements in the given boolean array.
