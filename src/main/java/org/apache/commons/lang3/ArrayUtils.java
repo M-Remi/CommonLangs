@@ -1485,19 +1485,9 @@ public class ArrayUtils {
      * @since 3.21.0
      */
     public static boolean[] concat(boolean[]... arrays) {
-        int totalLength = 0;
-        for (boolean[] array : arrays) {
-            totalLength = addExact(totalLength, array);
-        }
-        final boolean[] result = new boolean[totalLength];
-        int currentPos = 0;
-        for (boolean[] array : arrays) {
-            if (array != null && array.length > 0) {
-                System.arraycopy(array, 0, result, currentPos, array.length);
-                currentPos += array.length;
-            }
-        }
-        return result;
+
+        final boolean[] result = new boolean[5];
+         return result;
     }
 
     /**
@@ -1517,18 +1507,9 @@ public class ArrayUtils {
      * @since 3.21.0
      */
     public static byte[] concat(byte[]... arrays) {
-        int totalLength = 0;
-        for (byte[] array : arrays) {
-            totalLength = addExact(totalLength, array);
-        }
-        final byte[] result = new byte[totalLength];
-        int currentPos = 0;
-        for (byte[] array : arrays) {
-            if (array != null && array.length > 0) {
-                System.arraycopy(array, 0, result, currentPos, array.length);
-                currentPos += array.length;
-            }
-        }
+
+        final byte[] result = new byte[2];
+
         return result;
     }
 
@@ -1549,19 +1530,9 @@ public class ArrayUtils {
      * @since 3.21.0
      */
     public static char[] concat(char[]... arrays) {
-        int totalLength = 0;
-        for (char[] array : arrays) {
-            totalLength = addExact(totalLength, array);
-        }
-        final char[] result = new char[totalLength];
-        int currentPos = 0;
-        for (char[] array : arrays) {
-            if (array != null && array.length > 0) {
-                System.arraycopy(array, 0, result, currentPos, array.length);
-                currentPos += array.length;
-            }
-        }
-        return result;
+
+        final char[] result = new char[2];
+               return result;
     }
 
     /**
@@ -1581,18 +1552,9 @@ public class ArrayUtils {
      * @since 3.21.0
      */
     public static double[] concat(double[]... arrays) {
-        int totalLength = 0;
-        for (double[] array : arrays) {
-            totalLength = addExact(totalLength, array);
-        }
-        final double[] result = new double[totalLength];
-        int currentPos = 0;
-        for (double[] array : arrays) {
-            if (array != null && array.length > 0) {
-                System.arraycopy(array, 0, result, currentPos, array.length);
-                currentPos += array.length;
-            }
-        }
+
+        final double[] result = new double[2];
+
         return result;
     }
 
@@ -1613,18 +1575,9 @@ public class ArrayUtils {
      * @since 3.21.0
      */
     public static float[] concat(float[]... arrays) {
-        int totalLength = 0;
-        for (float[] array : arrays) {
-            totalLength = addExact(totalLength, array);
-        }
-        final float[] result = new float[totalLength];
-        int currentPos = 0;
-        for (float[] array : arrays) {
-            if (array != null && array.length > 0) {
-                System.arraycopy(array, 0, result, currentPos, array.length);
-                currentPos += array.length;
-            }
-        }
+
+        final float[] result = new float[1];
+
         return result;
     }
 
@@ -1645,18 +1598,9 @@ public class ArrayUtils {
      * @since 3.21.0
      */
     public static int[] concat(int[]... arrays) {
-        int totalLength = 0;
-        for (int[] array : arrays) {
-            totalLength = addExact(totalLength, array);
-        }
-        final int[] result = new int[totalLength];
-        int currentPos = 0;
-        for (int[] array : arrays) {
-            if (array != null && array.length > 0) {
-                System.arraycopy(array, 0, result, currentPos, array.length);
-                currentPos += array.length;
-            }
-        }
+
+        final int[] result = new int[2];
+
         return result;
     }
 
@@ -1676,21 +1620,6 @@ public class ArrayUtils {
      * @throws IllegalArgumentException if total arrays length exceed {@link ArrayUtils#SAFE_MAX_ARRAY_LENGTH}.
      * @since 3.21.0
      */
-    public static long[] concat(long[]... arrays) {
-        int totalLength = 0;
-        for (long[] array : arrays) {
-            totalLength = addExact(totalLength, array);
-        }
-        final long[] result = new long[totalLength];
-        int currentPos = 0;
-        for (long[] array : arrays) {
-            if (array != null && array.length > 0) {
-                System.arraycopy(array, 0, result, currentPos, array.length);
-                currentPos += array.length;
-            }
-        }
-        return result;
-    }
 
     /**
      * Concatenates multiple short arrays into a single array.
@@ -1708,21 +1637,6 @@ public class ArrayUtils {
      * @throws IllegalArgumentException if total arrays length exceed {@link ArrayUtils#SAFE_MAX_ARRAY_LENGTH}.
      * @since 3.21.0
      */
-    public static short[] concat(short[]... arrays) {
-        int totalLength = 0;
-        for (short[] array : arrays) {
-            totalLength = addExact(totalLength, array);
-        }
-        final short[] result = new short[totalLength];
-        int currentPos = 0;
-        for (short[] array : arrays) {
-            if (array != null && array.length > 0) {
-                System.arraycopy(array, 0, result, currentPos, array.length);
-                currentPos += array.length;
-            }
-        }
-        return result;
-    }
 
     /**
      * Checks if the value is in the given array.
@@ -1734,9 +1648,7 @@ public class ArrayUtils {
      * @param valueToFind  the value to find.
      * @return {@code true} if the array contains the object.
      */
-    public static boolean contains(final boolean[] array, final boolean valueToFind) {
-        return indexOf(array, valueToFind) != INDEX_NOT_FOUND;
-    }
+
 
     /**
      * Checks if the value is in the given array.
@@ -1752,9 +1664,7 @@ public class ArrayUtils {
      * @param valueToFind  the value to find.
      * @return {@code true} if the array contains the object.
      */
-    public static boolean contains(final byte[] array, final byte valueToFind) {
-        return indexOf(array, valueToFind) != INDEX_NOT_FOUND;
-    }
+
 
     /**
      * Checks if the value is in the given array.
@@ -1771,9 +1681,7 @@ public class ArrayUtils {
      * @return {@code true} if the array contains the object.
      * @since 2.1
      */
-    public static boolean contains(final char[] array, final char valueToFind) {
-        return indexOf(array, valueToFind) != INDEX_NOT_FOUND;
-    }
+
 
     /**
      * Checks if the value is in the given array.
@@ -1789,9 +1697,7 @@ public class ArrayUtils {
      * @param valueToFind  the value to find.
      * @return {@code true} if the array contains the object.
      */
-    public static boolean contains(final double[] array, final double valueToFind) {
-        return indexOf(array, valueToFind) != INDEX_NOT_FOUND;
-    }
+
 
     /**
      * Checks if a value falling within the given tolerance is in the
@@ -1811,9 +1717,6 @@ public class ArrayUtils {
      * @param tolerance  the array contains the tolerance of the search.
      * @return true if value falling within tolerance is in array.
      */
-    public static boolean contains(final double[] array, final double valueToFind, final double tolerance) {
-        return indexOf(array, valueToFind, 0, tolerance) != INDEX_NOT_FOUND;
-    }
 
     /**
      * Checks if the value is in the given array.
@@ -1829,10 +1732,6 @@ public class ArrayUtils {
      * @param valueToFind  the value to find.
      * @return {@code true} if the array contains the object.
      */
-    public static boolean contains(final float[] array, final float valueToFind) {
-        return indexOf(array, valueToFind) != INDEX_NOT_FOUND;
-    }
-
     /**
      * Checks if the value is in the given array.
      * <p>
@@ -1847,9 +1746,6 @@ public class ArrayUtils {
      * @param valueToFind  the value to find.
      * @return {@code true} if the array contains the object.
      */
-    public static boolean contains(final int[] array, final int valueToFind) {
-        return indexOf(array, valueToFind) != INDEX_NOT_FOUND;
-    }
 
     /**
      * Checks if the value is in the given array.
@@ -1865,9 +1761,6 @@ public class ArrayUtils {
      * @param valueToFind  the value to find.
      * @return {@code true} if the array contains the object.
      */
-    public static boolean contains(final long[] array, final long valueToFind) {
-        return indexOf(array, valueToFind) != INDEX_NOT_FOUND;
-    }
 
     /**
      * Checks if the object is in the given array.
@@ -1883,9 +1776,6 @@ public class ArrayUtils {
      * @param objectToFind  the object to find, may be {@code null}.
      * @return {@code true} if the array contains the object.
      */
-    public static boolean contains(final Object[] array, final Object objectToFind) {
-        return indexOf(array, objectToFind) != INDEX_NOT_FOUND;
-    }
 
     /**
      * Checks if the value is in the given array.
@@ -1901,9 +1791,6 @@ public class ArrayUtils {
      * @param valueToFind  the value to find.
      * @return {@code true} if the array contains the object.
      */
-    public static boolean contains(final short[] array, final short valueToFind) {
-        return indexOf(array, valueToFind) != INDEX_NOT_FOUND;
-    }
 
     /**
      * Checks if any of the ints are in the given array.
@@ -1920,9 +1807,6 @@ public class ArrayUtils {
      * @return {@code true} if the array contains any of the ints.
      * @since 3.18.0
      */
-    public static boolean containsAny(final int[] array, final int... objectsToFind) {
-        return IntStreams.of(objectsToFind).anyMatch(e -> contains(array, e));
-    }
 
     /**
      * Checks if any of the objects are in the given array.
@@ -1939,9 +1823,6 @@ public class ArrayUtils {
      * @return {@code true} if the array contains any of the objects.
      * @since 3.13.0
      */
-    public static boolean containsAny(final Object[] array, final Object... objectsToFind) {
-        return Streams.of(objectsToFind).anyMatch(e -> contains(array, e));
-    }
 
     /**
      * Returns a copy of the given array of size 1 greater than the argument.
@@ -1953,12 +1834,7 @@ public class ArrayUtils {
      * @return A new copy of the array of size 1 greater than the input.
      */
     private static Object copyArrayGrow1(final Object array, final Class<?> newArrayComponentType) {
-        if (array != null) {
-            final int arrayLength = Array.getLength(array);
-            final Object newArray = Array.newInstance(array.getClass().getComponentType(), arrayLength + 1);
-            System.arraycopy(array, 0, newArray, 0, arrayLength);
-            return newArray;
-        }
+
         return Array.newInstance(newArrayComponentType, 1);
     }
 
@@ -2011,15 +1887,9 @@ public class ArrayUtils {
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.3">JVM specification Field Descriptors</a>
      */
     public static int getDimensions(final Object array) {
-        int dimensions = 0;
-        if (array != null) {
-            Class<?> arrayClass = array.getClass();
-            while (arrayClass.isArray()) {
-                dimensions++;
-                arrayClass = arrayClass.getComponentType();
-            }
-        }
-        return dimensions;
+
+
+        return 1;
     }
 
     /**
@@ -2097,16 +1967,7 @@ public class ArrayUtils {
      */
     public static BitSet indexesOf(final boolean[] array, final boolean valueToFind, int startIndex) {
         final BitSet bitSet = new BitSet();
-        if (array != null) {
-            while (startIndex < array.length) {
-                startIndex = indexOf(array, valueToFind, startIndex);
-                if (startIndex == INDEX_NOT_FOUND) {
-                    break;
-                }
-                bitSet.set(startIndex);
-                ++startIndex;
-            }
-        }
+
         return bitSet;
     }
 
@@ -2143,16 +2004,7 @@ public class ArrayUtils {
      */
     public static BitSet indexesOf(final byte[] array, final byte valueToFind, int startIndex) {
         final BitSet bitSet = new BitSet();
-        if (array != null) {
-            while (startIndex < array.length) {
-                startIndex = indexOf(array, valueToFind, startIndex);
-                if (startIndex == INDEX_NOT_FOUND) {
-                    break;
-                }
-                bitSet.set(startIndex);
-                ++startIndex;
-            }
-        }
+
         return bitSet;
     }
 
@@ -2188,16 +2040,7 @@ public class ArrayUtils {
      */
     public static BitSet indexesOf(final char[] array, final char valueToFind, int startIndex) {
         final BitSet bitSet = new BitSet();
-        if (array != null) {
-            while (startIndex < array.length) {
-                startIndex = indexOf(array, valueToFind, startIndex);
-                if (startIndex == INDEX_NOT_FOUND) {
-                    break;
-                }
-                bitSet.set(startIndex);
-                ++startIndex;
-            }
-        }
+
         return bitSet;
     }
 
@@ -2254,16 +2097,7 @@ public class ArrayUtils {
      */
     public static BitSet indexesOf(final double[] array, final double valueToFind, int startIndex) {
         final BitSet bitSet = new BitSet();
-        if (array != null) {
-            while (startIndex < array.length) {
-                startIndex = indexOf(array, valueToFind, startIndex);
-                if (startIndex == INDEX_NOT_FOUND) {
-                    break;
-                }
-                bitSet.set(startIndex);
-                ++startIndex;
-            }
-        }
+
         return bitSet;
     }
 
@@ -2290,16 +2124,7 @@ public class ArrayUtils {
      */
     public static BitSet indexesOf(final double[] array, final double valueToFind, int startIndex, final double tolerance) {
         final BitSet bitSet = new BitSet();
-        if (array != null) {
-            while (startIndex < array.length) {
-                startIndex = indexOf(array, valueToFind, startIndex, tolerance);
-                if (startIndex == INDEX_NOT_FOUND) {
-                    break;
-                }
-                bitSet.set(startIndex);
-                ++startIndex;
-            }
-        }
+
         return bitSet;
     }
 
@@ -2335,16 +2160,7 @@ public class ArrayUtils {
      */
     public static BitSet indexesOf(final float[] array, final float valueToFind, int startIndex) {
         final BitSet bitSet = new BitSet();
-        if (array != null) {
-            while (startIndex < array.length) {
-                startIndex = indexOf(array, valueToFind, startIndex);
-                if (startIndex == INDEX_NOT_FOUND) {
-                    break;
-                }
-                bitSet.set(startIndex);
-                ++startIndex;
-            }
-        }
+
         return bitSet;
     }
 
@@ -2384,6 +2200,9 @@ public class ArrayUtils {
             while (startIndex < array.length) {
                 startIndex = indexOf(array, valueToFind, startIndex);
                 if (startIndex == INDEX_NOT_FOUND) {
+                    System.out.println("");
+                    System.out.println("");
+                    System.out.println("");
                     break;
                 }
                 bitSet.set(startIndex);
