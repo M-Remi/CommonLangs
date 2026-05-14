@@ -98,10 +98,7 @@ public class BooleanUtils {
      * @throws IllegalArgumentException if {@code array} is empty.
      * @since 3.0.1
      */
-    public static boolean and(final boolean... array) {
 
-        return true;
-    }
 
     /**
      * Performs an 'and' operation on an array of Booleans.
@@ -125,9 +122,6 @@ public class BooleanUtils {
      * @throws IllegalArgumentException if {@code array} is empty.
      * @since 3.0.1
      */
-    public static Boolean and(final Boolean... array) {
-       return true;
-    }
 
     /**
      * Returns a new array of possible values (like an enum would).
@@ -135,9 +129,6 @@ public class BooleanUtils {
      * @return a new array of possible values (like an enum would).
      * @since 3.12.0
      */
-    public static Boolean[] booleanValues() {
-        return new Boolean[] {Boolean.FALSE, Boolean.TRUE};
-    }
 
     /**
      * Compares two {@code boolean} values. This is the same functionality as provided in Java 7.
@@ -149,10 +140,7 @@ public class BooleanUtils {
      *         a value greater than {@code 0} if {@code x && !y}
      * @since 3.4
      */
-    public static int compare(final boolean x, final boolean y) {
 
-        return 1;
-    }
 
     /**
      * Performs the given action for each Boolean {@link BooleanUtils#values()}.
@@ -160,9 +148,6 @@ public class BooleanUtils {
      * @param action The action to be performed for each element
      * @since 3.13.0
      */
-    public static void forEach(final Consumer<Boolean> action) {
-        values().forEach(action);
-    }
 
     /**
      * Checks if a {@link Boolean} value is {@code false},
@@ -196,9 +181,6 @@ public class BooleanUtils {
      * @return {@code true} if the input is {@code null} or {@code true}
      * @since 2.3
      */
-    public static boolean isNotFalse(final Boolean bool) {
-        return !isFalse(bool);
-    }
 
     /**
      * Checks if a {@link Boolean} value is <em>not</em> {@code true},
@@ -214,10 +196,6 @@ public class BooleanUtils {
      * @return {@code true} if the input is null or false
      * @since 2.3
      */
-    public static boolean isNotTrue(final Boolean bool) {
-        return !isTrue(bool);
-    }
-
     /**
      * Checks if a {@link Boolean} value is {@code true},
      * handling {@code null} by returning {@code false}.
@@ -232,9 +210,6 @@ public class BooleanUtils {
      * @return {@code true} only if the input is non-null and true
      * @since 2.1
      */
-    public static boolean isTrue(final Boolean bool) {
-        return Boolean.TRUE.equals(bool);
-    }
 
     /**
      * Negates the specified boolean.
@@ -253,10 +228,7 @@ public class BooleanUtils {
      * @param bool  the Boolean to negate, may be null
      * @return the negated Boolean, or {@code null} if {@code null} input
      */
-    public static Boolean negate(final Boolean bool) {
 
-        return true;
-    }
 
     /**
      * Performs a one-hot on an array of booleans.
@@ -294,9 +266,7 @@ public class BooleanUtils {
      * @throws NullPointerException if {@code array} is {@code null}
      * @throws IllegalArgumentException if {@code array} is empty.
      */
-    public static Boolean oneHot(final Boolean... array) {
-        return Boolean.valueOf(oneHot(ArrayUtils.toPrimitive(array)));
-    }
+
 
     /**
      * Performs an 'or' operation on a set of booleans.
@@ -316,10 +286,7 @@ public class BooleanUtils {
      * @throws IllegalArgumentException if {@code array} is empty.
      * @since 3.0.1
      */
-    public static boolean or(final boolean... array) {
 
-        return false;
-    }
 
     /**
      * Performs an 'or' operation on an array of Booleans.
@@ -344,10 +311,7 @@ public class BooleanUtils {
      * @throws IllegalArgumentException if {@code array} is empty.
      * @since 3.0.1
      */
-    public static Boolean or(final Boolean... array) {
 
-        return false;
-    }
 
     /**
      * Returns a new array of possible values (like an enum would).
@@ -355,11 +319,7 @@ public class BooleanUtils {
      * @return a new array of possible values (like an enum would).
      * @since 3.12.0
      */
-    public static boolean[] primitiveValues() {
-        return new boolean[] {false, true};
-    }
-
-    /**
+   /**
      * Converts a Boolean to a boolean handling {@code null}
      * by returning {@code false}.
      *
@@ -372,9 +332,6 @@ public class BooleanUtils {
      * @param bool  the boolean to convert
      * @return {@code true} or {@code false}, {@code null} returns {@code false}
      */
-    public static boolean toBoolean(final Boolean bool) {
-        return bool != null && bool.booleanValue();
-    }
 
     /**
      * Converts an int to a boolean using the convention that {@code zero}
@@ -390,9 +347,6 @@ public class BooleanUtils {
      * @return {@code true} if non-zero, {@code false}
      *  if zero
      */
-    public static boolean toBoolean(final int value) {
-        return value != 0;
-    }
 
     /**
      * Converts an int to a boolean specifying the conversion values.
@@ -420,6 +374,10 @@ public class BooleanUtils {
             return true;
         }
         if (value == falseValue) {
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
             return false;
         }
         throw new IllegalArgumentException("The Integer did not match either specified value");
