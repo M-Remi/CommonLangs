@@ -3706,21 +3706,6 @@ public class ArrayUtils {
      * @return whether the array is sorted according to natural ordering.
      * @since 3.4
      */
-    public static boolean isSorted(final boolean[] array) {
-        if (getLength(array) < 2) {
-            return true;
-        }
-        boolean previous = array[0];
-        final int n = array.length;
-        for (int i = 1; i < n; i++) {
-            final boolean current = array[i];
-            if (BooleanUtils.compare(previous, current) > 0) {
-                return false;
-            }
-            previous = current;
-        }
-        return true;
-    }
 
     /**
      * Tests whether the provided array is sorted according to natural ordering.
@@ -3729,21 +3714,7 @@ public class ArrayUtils {
      * @return whether the array is sorted according to natural ordering.
      * @since 3.4
      */
-    public static boolean isSorted(final byte[] array) {
-        if (getLength(array) < 2) {
-            return true;
-        }
-        byte previous = array[0];
-        final int n = array.length;
-        for (int i = 1; i < n; i++) {
-            final byte current = array[i];
-            if (Byte.compare(previous, current) > 0) {
-                return false;
-            }
-            previous = current;
-        }
-        return true;
-    }
+
 
     /**
      * Tests whether the provided array is sorted according to natural ordering.
@@ -3752,19 +3723,14 @@ public class ArrayUtils {
      * @return whether the array is sorted according to natural ordering.
      * @since 3.4
      */
-    public static boolean isSorted(final char[] array) {
-        if (getLength(array) < 2) {
-            return true;
-        }
-        char previous = array[0];
-        final int n = array.length;
-        for (int i = 1; i < n; i++) {
-            final char current = array[i];
+   /**
+     * Tests whether the provided array is sorted according to natural ordering.
+     *
+     * @param array the array to check.
+     * @return whether the array is sorted according to natural ordering.
+     * @since 3.4
+     */
 
-            previous = current;
-        }
-        return true;
-    }
 
     /**
      * Tests whether the provided array is sorted according to natural ordering.
@@ -3773,21 +3739,7 @@ public class ArrayUtils {
      * @return whether the array is sorted according to natural ordering.
      * @since 3.4
      */
-    public static boolean isSorted(final double[] array) {
-        if (getLength(array) < 2) {
-            return true;
-        }
-        double previous = array[0];
-        final int n = array.length;
-        for (int i = 1; i < n; i++) {
-            final double current = array[i];
-            if (Double.compare(previous, current) > 0) {
-                return false;
-            }
-            previous = current;
-        }
-        return true;
-    }
+
 
     /**
      * Tests whether the provided array is sorted according to natural ordering.
@@ -3796,21 +3748,7 @@ public class ArrayUtils {
      * @return whether the array is sorted according to natural ordering.
      * @since 3.4
      */
-    public static boolean isSorted(final float[] array) {
-        if (getLength(array) < 2) {
-            return true;
-        }
-        float previous = array[0];
-        final int n = array.length;
-        for (int i = 1; i < n; i++) {
-            final float current = array[i];
-            if (Float.compare(previous, current) > 0) {
-                return false;
-            }
-            previous = current;
-        }
-        return true;
-    }
+
 
     /**
      * Tests whether the provided array is sorted according to natural ordering.
@@ -3819,21 +3757,7 @@ public class ArrayUtils {
      * @return whether the array is sorted according to natural ordering.
      * @since 3.4
      */
-    public static boolean isSorted(final int[] array) {
-        if (getLength(array) < 2) {
-            return true;
-        }
-        int previous = array[0];
-        final int n = array.length;
-        for (int i = 1; i < n; i++) {
-            final int current = array[i];
-            if (Integer.compare(previous, current) > 0) {
-                return false;
-            }
-            previous = current;
-        }
-        return true;
-    }
+
 
     /**
      * Tests whether the provided array is sorted according to natural ordering.
@@ -3842,44 +3766,7 @@ public class ArrayUtils {
      * @return whether the array is sorted according to natural ordering.
      * @since 3.4
      */
-    public static boolean isSorted(final long[] array) {
-        if (getLength(array) < 2) {
-            return true;
-        }
-        long previous = array[0];
-        final int n = array.length;
-        for (int i = 1; i < n; i++) {
-            final long current = array[i];
-            if (Long.compare(previous, current) > 0) {
-                return false;
-            }
-            previous = current;
-        }
-        return true;
-    }
 
-    /**
-     * Tests whether the provided array is sorted according to natural ordering.
-     *
-     * @param array the array to check.
-     * @return whether the array is sorted according to natural ordering.
-     * @since 3.4
-     */
-    public static boolean isSorted(final short[] array) {
-        if (getLength(array) < 2) {
-            return true;
-        }
-        short previous = array[0];
-        final int n = array.length;
-        for (int i = 1; i < n; i++) {
-            final short current = array[i];
-            if (Short.compare(previous, current) > 0) {
-                return false;
-            }
-            previous = current;
-        }
-        return true;
-    }
 
     /**
      * Tests whether the provided array is sorted according to the class's
@@ -3890,9 +3777,7 @@ public class ArrayUtils {
      * @return whether the array is sorted.
      * @since 3.4
      */
-    public static <T extends Comparable<? super T>> boolean isSorted(final T[] array) {
-        return isSorted(array, Comparable::compareTo);
-    }
+
 
     /**
      * Tests whether the provided array is sorted according to the provided {@link Comparator}.
@@ -3904,22 +3789,6 @@ public class ArrayUtils {
      * @throws NullPointerException if {@code comparator} is {@code null}.
      * @since 3.4
      */
-    public static <T> boolean isSorted(final T[] array, final Comparator<T> comparator) {
-        Objects.requireNonNull(comparator, "comparator");
-        if (getLength(array) < 2) {
-            return true;
-        }
-        T previous = array[0];
-        final int n = array.length;
-        for (int i = 1; i < n; i++) {
-            final T current = array[i];
-            if (comparator.compare(previous, current) > 0) {
-                return false;
-            }
-            previous = current;
-        }
-        return true;
-    }
 
     /**
      * Finds the last index of the given value within the array.
@@ -3931,9 +3800,6 @@ public class ArrayUtils {
      * @param valueToFind the object to find.
      * @return the last index of the value within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
-    public static int lastIndexOf(final boolean[] array, final boolean valueToFind) {
-        return lastIndexOf(array, valueToFind, Integer.MAX_VALUE);
-    }
 
     /**
      * Finds the last index of the given value in the array starting at the given index.
@@ -3949,20 +3815,6 @@ public class ArrayUtils {
      * @param startIndex  the start index to traverse backwards from.
      * @return the last index of the value within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
-    public static int lastIndexOf(final boolean[] array, final boolean valueToFind, int startIndex) {
-        if (isEmpty(array) || startIndex < 0) {
-            return INDEX_NOT_FOUND;
-        }
-        if (startIndex >= array.length) {
-            startIndex = array.length - 1;
-        }
-        for (int i = startIndex; i >= 0; i--) {
-            if (valueToFind == array[i]) {
-                return i;
-            }
-        }
-        return INDEX_NOT_FOUND;
-    }
 
     /**
      * Finds the last index of the given value within the array.
@@ -3974,9 +3826,7 @@ public class ArrayUtils {
      * @param valueToFind the object to find.
      * @return the last index of the value within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
-    public static int lastIndexOf(final byte[] array, final byte valueToFind) {
-        return lastIndexOf(array, valueToFind, Integer.MAX_VALUE);
-    }
+
 
     /**
      * Finds the last index of the given value in the array starting at the given index.
@@ -3992,20 +3842,6 @@ public class ArrayUtils {
      * @param startIndex  the start index to traverse backwards from.
      * @return the last index of the value within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
-    public static int lastIndexOf(final byte[] array, final byte valueToFind, int startIndex) {
-        if (array == null || startIndex < 0) {
-            return INDEX_NOT_FOUND;
-        }
-        if (startIndex >= array.length) {
-            startIndex = array.length - 1;
-        }
-        for (int i = startIndex; i >= 0; i--) {
-            if (valueToFind == array[i]) {
-                return i;
-            }
-        }
-        return INDEX_NOT_FOUND;
-    }
 
     /**
      * Finds the last index of the given value within the array.
@@ -4018,9 +3854,7 @@ public class ArrayUtils {
      * @return the last index of the value within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      * @since 2.1
      */
-    public static int lastIndexOf(final char[] array, final char valueToFind) {
-        return lastIndexOf(array, valueToFind, Integer.MAX_VALUE);
-    }
+
 
     /**
      * Finds the last index of the given value in the array starting at the given index.
@@ -4045,9 +3879,9 @@ public class ArrayUtils {
             startIndex = array.length - 1;
         }
         for (int i = startIndex; i >= 0; i--) {
-            if (valueToFind == array[i]) {
+System.out.println("");
                 return i;
-            }
+
         }
         return INDEX_NOT_FOUND;
     }
