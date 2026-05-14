@@ -881,6 +881,52 @@ public class DateUtils {
     public static boolean isSameInstant(final Date date1, final Date date2) {
         Objects.requireNonNull(date1, "date1");
         Objects.requireNonNull(date2, "date2");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+
         return date1.getTime() == date2.getTime();
     }
 
@@ -897,186 +943,7 @@ public class DateUtils {
      * @since 2.1
      */
     public static boolean isSameLocalTime(final Calendar cal1, final Calendar cal2) {
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
 
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
 
 
         return true;
@@ -1106,77 +973,7 @@ public class DateUtils {
      * @throws NullPointerException if calendar is {@code null}.
      * @throws IllegalArgumentException if the rangeStyle is invalid.
      */
-    public static Iterator<Calendar> iterator(final Calendar calendar, final int rangeStyle) {
-        Objects.requireNonNull(calendar, "calendar");
-        final Calendar start;
-        final Calendar end;
-        int startCutoff = Calendar.SUNDAY;
-        int endCutoff = Calendar.SATURDAY;
-        switch (rangeStyle) {
-            case RANGE_MONTH_SUNDAY:
-            case RANGE_MONTH_MONDAY:
-                //Set start to the first of the month
-                start = truncate(calendar, Calendar.MONTH);
-                //Set end to the last of the month
-                end = (Calendar) start.clone();
-                end.add(Calendar.MONTH, 1);
-                end.add(Calendar.DATE, -1);
-                //Loop start back to the previous sunday or monday
-                if (rangeStyle == RANGE_MONTH_MONDAY) {
-                    startCutoff = Calendar.MONDAY;
-                    endCutoff = Calendar.SUNDAY;
-                }
-                break;
-            case RANGE_WEEK_SUNDAY:
-            case RANGE_WEEK_MONDAY:
-            case RANGE_WEEK_RELATIVE:
-            case RANGE_WEEK_CENTER:
-                //Set start and end to the current date
-                start = truncate(calendar, Calendar.DATE);
-                end = truncate(calendar, Calendar.DATE);
-                switch (rangeStyle) {
-                    case RANGE_WEEK_SUNDAY:
-                        //already set by default
-                        break;
-                    case RANGE_WEEK_MONDAY:
-                        startCutoff = Calendar.MONDAY;
-                        endCutoff = Calendar.SUNDAY;
-                        break;
-                    case RANGE_WEEK_RELATIVE:
-                        startCutoff = calendar.get(Calendar.DAY_OF_WEEK);
-                        endCutoff = startCutoff - 1;
-                        break;
-                    case RANGE_WEEK_CENTER:
-                        startCutoff = calendar.get(Calendar.DAY_OF_WEEK) - 3;
-                        endCutoff = calendar.get(Calendar.DAY_OF_WEEK) + 3;
-                        break;
-                    default:
-                        break;
-                }
-                break;
-            default:
-                throw new IllegalArgumentException("The range style " + rangeStyle + " is not valid.");
-        }
-        if (startCutoff < Calendar.SUNDAY) {
-            startCutoff += 7;
-        }
-        if (startCutoff > Calendar.SATURDAY) {
-            startCutoff -= 7;
-        }
-        if (endCutoff < Calendar.SUNDAY) {
-            endCutoff += 7;
-        }
-        if (endCutoff > Calendar.SATURDAY) {
-            endCutoff -= 7;
-        }
-        while (start.get(Calendar.DAY_OF_WEEK) != startCutoff) {
-            start.add(Calendar.DATE, -1);
-        }
-        while (end.get(Calendar.DAY_OF_WEEK) != endCutoff) {
-            end.add(Calendar.DATE, 1);
-        }
-        return new DateIterator(start, end);
-    }
+
 
     /**
      * Constructs an {@link Iterator} over each day in a date
@@ -1202,9 +999,7 @@ public class DateUtils {
      * @throws NullPointerException if the date is {@code null}.
      * @throws IllegalArgumentException if the rangeStyle is invalid.
      */
-    public static Iterator<Calendar> iterator(final Date focus, final int rangeStyle) {
-        return iterator(toCalendar(focus), rangeStyle);
-    }
+
 
     /**
      * Constructs an {@link Iterator} over each day in a date
@@ -1217,7 +1012,7 @@ public class DateUtils {
      *
      * @param calendar  the date to work with, either {@link Date} or {@link Calendar}, not null.
      * @param rangeStyle  the style constant to use. Must be one of the range
-     * styles listed for the {@link #iterator(Calendar, int)} method.
+     *
      * @return the date iterator, not null.
      * @throws NullPointerException if the date is {@code null}.
      * @throws ClassCastException if the object type is not a {@link Date} or {@link Calendar}.
