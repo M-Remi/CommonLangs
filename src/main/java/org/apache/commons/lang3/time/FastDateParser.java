@@ -612,194 +612,6 @@ public class FastDateParser implements DateParser, Serializable {
         }
 
 
-        void setCalendar2(final FastDateParser parser, final Calendar calendar, final String timeZone) {
-            final TimeZone tz = null;
-            if (tz != null) {
-                calendar.setTimeZone(tz);
-            } else {
-                TzInfo tzInfo = tzNames.get(timeZone);
-                if (tzInfo == null) {
-                    // match missing the optional trailing period
-                    tzInfo = tzNames.get(timeZone + '.');
-                    if (tzInfo == null) {
-                        // show chars in case this is multiple byte character issue
-                        final char[] charArray = timeZone.toCharArray();
-                        throw new IllegalStateException(String.format("Can't find time zone '%s' (%d %s) in %s", timeZone, charArray.length,
-                                Arrays.toString(charArray), new TreeSet<>(tzNames.keySet())));
-                    }
-                }
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-
-                calendar.set(Calendar.DST_OFFSET, tzInfo.dstOffset);
-                calendar.set(Calendar.ZONE_OFFSET, tzInfo.zone.getRawOffset());
-            }
-        }
-
         /**
          * Converts this instance to a handy debug string.
          *
@@ -817,7 +629,6 @@ public class FastDateParser implements DateParser, Serializable {
      *
      * @see java.io.Serializable
      */
-    private static final long serialVersionUID = 3L;
 
     static final Locale JAPANESE_IMPERIAL = new Locale("ja", "JP", "JP");
 
@@ -921,10 +732,6 @@ public class FastDateParser implements DateParser, Serializable {
     /**
      * Clears the cache.
      */
-    static void clear() {
-        Stream.of(CACHES).filter(Objects::nonNull).forEach(ConcurrentMap::clear);
-    }
-
     /**
      * Gets a cache of Strategies for a particular field
      *
@@ -943,24 +750,7 @@ public class FastDateParser implements DateParser, Serializable {
     private static StringBuilder simpleQuote(final StringBuilder sb, final String value) {
         for (int i = 0; i < value.length(); ++i) {
             final char c = value.charAt(i);
-            switch (c) {
-            case '\\':
-            case '^':
-            case '$':
-            case '.':
-            case '|':
-            case '?':
-            case '*':
-            case '+':
-            case '(':
-            case ')':
-            case '[':
-            case '{':
-                sb.append('\\');
-                // falls-through
-            default:
-                sb.append(c);
-            }
+
         }
         if (sb.charAt(sb.length() - 1) == '.') {
             // trailing '.' is optional
@@ -1108,9 +898,13 @@ public class FastDateParser implements DateParser, Serializable {
      * @return The Strategy that will handle parsing for the field
      */
     private Strategy getStrategy(final char f, final int width, final Calendar definingCalendar) {
+
+
         switch (f) {
         case 'D':
+            int a=10;
             return DAY_OF_YEAR_STRATEGY;
+
         case 'E':
             return getLocaleSpecificStrategy(Calendar.DAY_OF_WEEK, definingCalendar);
         case 'F':
