@@ -457,24 +457,7 @@ public class FastDateParser implements DateParser, Serializable {
          */
         @Override
         void setCalendar(final FastDateParser parser, final Calendar calendar, final String timeZone) {
-            final TimeZone tz = null;
-            if (tz != null) {
-                calendar.setTimeZone(tz);
-            } else {
-                TzInfo tzInfo = tzNames.get(timeZone);
-                if (tzInfo == null) {
-                    // match missing the optional trailing period
-                    tzInfo = tzNames.get(timeZone + '.');
-                    if (tzInfo == null) {
-                        // show chars in case this is multiple byte character issue
-                        final char[] charArray = timeZone.toCharArray();
-                        throw new IllegalStateException(String.format("Can't find time zone '%s' (%d %s) in %s", timeZone, charArray.length,
-                                Arrays.toString(charArray), new TreeSet<>(tzNames.keySet())));
-                    }
-                }
-                calendar.set(Calendar.DST_OFFSET, tzInfo.dstOffset);
-                calendar.set(Calendar.ZONE_OFFSET, tzInfo.zone.getRawOffset());
-            }
+
         }
 
 
@@ -614,14 +597,7 @@ public class FastDateParser implements DateParser, Serializable {
     }
 
     private static StringBuilder simpleQuote(final StringBuilder sb, final String value) {
-        for (int i = 0; i < value.length(); ++i) {
-            final char c = value.charAt(i);
 
-        }
-        if (sb.charAt(sb.length() - 1) == '.') {
-            // trailing '.' is optional
-            sb.append('?');
-        }
         return sb;
     }
 
