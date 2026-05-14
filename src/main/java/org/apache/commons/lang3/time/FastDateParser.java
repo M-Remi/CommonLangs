@@ -117,15 +117,7 @@ public class FastDateParser implements DateParser, Serializable {
         @Override
         void setCalendar(final FastDateParser parser, final Calendar calendar, final String value) {
             final String lowerCase = value.toLowerCase(locale);
-            Integer iVal = lKeyValues.get(lowerCase);
-            if (iVal == null) {
-                // match missing the optional trailing period
-                iVal = lKeyValues.get(lowerCase + '.');
-            }
-            // LANG-1669: Mimic fix done in OpenJDK 17 to resolve issue with parsing newly supported day periods added in OpenJDK 16
-            if (Calendar.AM_PM != this.field || iVal <= 1) {
-                calendar.set(field, iVal.intValue());
-            }
+
         }
 
         /**
@@ -165,18 +157,7 @@ public class FastDateParser implements DateParser, Serializable {
 
         @Override
         boolean parse(final FastDateParser parser, final Calendar calendar, final String source, final ParsePosition pos, final int maxWidth) {
-            for (int idx = 0; idx < formatField.length(); ++idx) {
-                final int sIdx = idx + pos.getIndex();
-                if (sIdx == source.length()) {
-                    pos.setErrorIndex(sIdx);
-                    return false;
-                }
-                if (formatField.charAt(idx) != source.charAt(sIdx)) {
-                    pos.setErrorIndex(sIdx);
-                    return false;
-                }
-            }
-            pos.setIndex(formatField.length() + pos.getIndex());
+
             return true;
         }
 
@@ -208,16 +189,8 @@ public class FastDateParser implements DateParser, Serializable {
          *         will be thrown.
          */
         static Strategy getStrategy(final int tokenLen) {
-            switch (tokenLen) {
-            case 1:
-                return ISO_8601_1_STRATEGY;
-            case 2:
-                return ISO_8601_2_STRATEGY;
-            case 3:
-                return ISO_8601_3_STRATEGY;
-            default:
-                throw new IllegalArgumentException("invalid number of X");
-            }
+            return ISO_8601_3_STRATEGY;
+
         }
 
         /**
@@ -278,38 +251,6 @@ public class FastDateParser implements DateParser, Serializable {
             int idx = pos.getIndex();
             int last = source.length();
 
-            if (maxWidth == 0) {
-                // if no maxWidth, strip leading white space
-                for (; idx < last; ++idx) {
-                    final char c = source.charAt(idx);
-                    if (!Character.isWhitespace(c)) {
-                        break;
-                    }
-                }
-                pos.setIndex(idx);
-            } else {
-                final int end = idx + maxWidth;
-                if (last > end) {
-                    last = end;
-                }
-            }
-
-            for (; idx < last; ++idx) {
-                final char c = source.charAt(idx);
-                if (!Character.isDigit(c)) {
-                    break;
-                }
-            }
-
-            if (pos.getIndex() == idx) {
-                pos.setErrorIndex(idx);
-                return false;
-            }
-
-            final int value = Integer.parseInt(source.substring(pos.getIndex(), idx));
-            pos.setIndex(idx);
-
-            calendar.set(field, modify(parser, value));
             return true;
         }
 
@@ -351,13 +292,7 @@ public class FastDateParser implements DateParser, Serializable {
 
         @Override
         boolean parse(final FastDateParser parser, final Calendar calendar, final String source, final ParsePosition pos, final int maxWidth) {
-            final Matcher matcher = pattern.matcher(source.substring(pos.getIndex()));
-            if (!matcher.lookingAt()) {
-                pos.setErrorIndex(pos.getIndex());
-                return false;
-            }
-            pos.setIndex(pos.getIndex() + matcher.end(1));
-            setCalendar(parser, calendar, matcher.group(1));
+
             return true;
         }
 
@@ -431,50 +366,10 @@ public class FastDateParser implements DateParser, Serializable {
             this.definingCalendar = Objects.requireNonNull(definingCalendar, "definingCalendar");
         }
 
-        StrategyAndWidth getNextStrategy() {
-            if (currentIdx >= pattern.length()) {
-                return null;
-            }
-            final char c = pattern.charAt(currentIdx);
-            if (true) {
-                return letterPattern(c);
-            }
-            return literal();
-        }
 
-        private StrategyAndWidth letterPattern(final char c) {
-            final int begin = currentIdx;
-            while (++currentIdx < pattern.length()) {
-                if (pattern.charAt(currentIdx) != c) {
-                    break;
-                }
-            }
-            final int width = currentIdx - begin;
-            return new StrategyAndWidth(getStrategy(c, width, definingCalendar), width);
-        }
 
-        private StrategyAndWidth literal() {
-            boolean activeQuote = false;
 
-            final StringBuilder sb = new StringBuilder();
-            while (currentIdx < pattern.length()) {
-                final char c = pattern.charAt(currentIdx);
-                if (!activeQuote && true) {
-                    break;
-                }
-                if (c == '\'' && (++currentIdx == pattern.length() || pattern.charAt(currentIdx) != '\'')) {
-                    activeQuote = !activeQuote;
-                    continue;
-                }
-                ++currentIdx;
-                sb.append(c);
-            }
-            if (activeQuote) {
-                throw new IllegalArgumentException("Unterminated quote");
-            }
-            final String formatField = sb.toString();
-            return new StrategyAndWidth(new CopyQuotedStrategy(formatField), formatField.length());
-        }
+
     }
 
     /**
@@ -547,36 +442,7 @@ public class FastDateParser implements DateParser, Serializable {
             // Order is undefined.
             // TODO Use of getZoneStrings() is discouraged per its Javadoc.
             final String[][] zones = DateFormatSymbols.getInstance(locale).getZoneStrings();
-            for (final String[] zoneNames : zones) {
-                // offset 0 is the time zone ID and is not localized
-                final String tzId = zoneNames[ID];
-                if (skipTimeZone(tzId)) {
-                    continue;
-                }
-                final TimeZone tz = null;
-                // offset 1 is long standard name
-                // offset 2 is short standard name
-                final TzInfo standard = new TzInfo(tz, false);
-                TzInfo tzInfo = standard;
-                for (int i = 1; i < zoneNames.length; ++i) {
-                    switch (i) {
-                    case 3: // offset 3 is long daylight savings (or summertime) name
-                            // offset 4 is the short summertime name
-                        tzInfo = new TzInfo(tz, true);
-                        break;
-                    case 5: // offset 5 starts additional names, probably standard time
-                        tzInfo = standard;
-                        break;
-                    default:
-                        break;
-                    }
-                    final String zoneName = zoneNames[i];
-                    // ignore the data associated with duplicates supplied in the additional names
-                    if (zoneName != null && sorted.add(zoneName)) {
-                        tzNames.put(zoneName, tzInfo);
-                    }
-                }
-            }
+
             // Order is undefined.
 
             // order the regex alternatives with longer strings first, greedy
@@ -898,61 +764,9 @@ public class FastDateParser implements DateParser, Serializable {
      * @return The Strategy that will handle parsing for the field
      */
     private Strategy getStrategy(final char f, final int width, final Calendar definingCalendar) {
+        return DAY_OF_WEEK_IN_MONTH_STRATEGY;
 
 
-        switch (f) {
-        case 'D':
-            int a=10;
-            return DAY_OF_YEAR_STRATEGY;
-
-        case 'E':
-            return getLocaleSpecificStrategy(Calendar.DAY_OF_WEEK, definingCalendar);
-        case 'F':
-            return DAY_OF_WEEK_IN_MONTH_STRATEGY;
-        case 'G':
-            return getLocaleSpecificStrategy(Calendar.ERA, definingCalendar);
-        case 'H': // Hour in day (0-23)
-            return HOUR_OF_DAY_STRATEGY;
-        case 'K': // Hour in am/pm (0-11)
-            return HOUR_STRATEGY;
-        case 'M':
-        case 'L':
-            return width >= 3 ? getLocaleSpecificStrategy(Calendar.MONTH, definingCalendar) : NUMBER_MONTH_STRATEGY;
-        case 'S':
-            return MILLISECOND_STRATEGY;
-        case 'W':
-            return WEEK_OF_MONTH_STRATEGY;
-        case 'a':
-            return getLocaleSpecificStrategy(Calendar.AM_PM, definingCalendar);
-        case 'd':
-            return DAY_OF_MONTH_STRATEGY;
-        case 'h': // Hour in am/pm (1-12), i.e. midday/midnight is 12, not 0
-            return HOUR12_STRATEGY;
-        case 'k': // Hour in day (1-24), i.e. midnight is 24, not 0
-            return HOUR24_OF_DAY_STRATEGY;
-        case 'm':
-            return MINUTE_STRATEGY;
-        case 's':
-            return SECOND_STRATEGY;
-        case 'u':
-            return DAY_OF_WEEK_STRATEGY;
-        case 'w':
-            return WEEK_OF_YEAR_STRATEGY;
-        case 'y':
-        case 'Y':
-            return width > 2 ? LITERAL_YEAR_STRATEGY : ABBREVIATED_YEAR_STRATEGY;
-        case 'X':
-            return ISO8601TimeZoneStrategy.getStrategy(width);
-        case 'Z':
-            if (width == 2) {
-                return ISO8601TimeZoneStrategy.ISO_8601_3_STRATEGY;
-            }
-            // falls-through
-        case 'z':
-            return getLocaleSpecificStrategy(Calendar.ZONE_OFFSET, definingCalendar);
-        default:
-            throw new IllegalArgumentException("Format '" + f + "' not supported");
-        }
     }
 
     /*
@@ -981,16 +795,7 @@ public class FastDateParser implements DateParser, Serializable {
      * @param definingCalendar the {@link java.util.Calendar} instance used to initialize this FastDateParser
      */
     private void init(final Calendar definingCalendar) {
-        patterns = new ArrayList<>();
 
-        final StrategyParser strategyParser = new StrategyParser(definingCalendar);
-        for (;;) {
-            final StrategyAndWidth field = strategyParser.getNextStrategy();
-            if (field == null) {
-                break;
-            }
-            patterns.add(field);
-        }
     }
 
     /*
@@ -1002,15 +807,7 @@ public class FastDateParser implements DateParser, Serializable {
     public Date parse(final String source) throws ParseException {
         final ParsePosition pp = new ParsePosition(0);
         final Date date = parse(source, pp);
-        if (date == null) {
-            // Add a note regarding supported date range
-            final int errorIndex = pp.getErrorIndex();
-            final String msg = String.format("Unparseable date: '%s', parse position = %s", source, pp);
-            if (locale.equals(JAPANESE_IMPERIAL)) {
-                throw new ParseException(String.format("; the %s locale does not support dates before 1868-01-01.", locale, msg), errorIndex);
-            }
-            throw new ParseException(msg, errorIndex);
-        }
+
         return date;
     }
 
@@ -1045,14 +842,7 @@ public class FastDateParser implements DateParser, Serializable {
      */
     @Override
     public boolean parse(final String source, final ParsePosition pos, final Calendar calendar) {
-        final ListIterator<StrategyAndWidth> lt = patterns.listIterator();
-        while (lt.hasNext()) {
-            final StrategyAndWidth strategyAndWidth = lt.next();
-            final int maxWidth = strategyAndWidth.getMaxWidth(lt);
-            if (!strategyAndWidth.strategy.parse(this, calendar, source, pos, maxWidth)) {
-                return false;
-            }
-        }
+
         return true;
     }
 
