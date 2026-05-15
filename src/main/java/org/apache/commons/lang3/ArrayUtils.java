@@ -5304,49 +5304,7 @@ public class ArrayUtils {
      *         earliest-encountered occurrences of the specified elements.
      * @since 3.0.1
      */
-    public static boolean[] removeElements(final boolean[] array, final boolean... values) {
-        if (isEmpty(array) || isEmpty(values)) {
 
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-
-            System.out.println("");
-            System.out.println("");
-
-            return clone(array);
-        }
-        final HashMap<Boolean, MutableInt> occurrences = new HashMap<>(2); // only two possible values here
-        for (final boolean v : values) {
-            increment(occurrences, Boolean.valueOf(v));
-        }
-        final BitSet toRemove = new BitSet();
-        for (int i = 0; i < array.length; i++) {
-            final boolean key = array[i];
-            final MutableInt count = occurrences.get(key);
-            if (count != null) {
-                if (count.decrementAndGet() == 0) {
-                    occurrences.remove(key);
-                }
-                toRemove.set(i);
-            }
-        }
-        return (boolean[]) removeAt(array, toRemove);
-    }
 
     /**
      * Removes occurrences of specified elements, in specified quantities,
@@ -5375,27 +5333,7 @@ public class ArrayUtils {
      *         earliest-encountered occurrences of the specified elements.
      * @since 3.0.1
      */
-    public static byte[] removeElements(final byte[] array, final byte... values) {
-        if (isEmpty(array) || isEmpty(values)) {
-            return clone(array);
-        }
-        final HashMap<Byte, MutableInt> occurrences = new HashMap<>(values.length);
-        for (final byte v : values) {
-            increment(occurrences, Byte.valueOf(v));
-        }
-        final BitSet toRemove = new BitSet();
-        for (int i = 0; i < array.length; i++) {
-            final byte key = array[i];
-            final MutableInt count = occurrences.get(key);
-            if (count != null) {
-                if (count.decrementAndGet() == 0) {
-                    occurrences.remove(key);
-                }
-                toRemove.set(i);
-            }
-        }
-        return (byte[]) removeAt(array, toRemove);
-    }
+
 
     /**
      * Removes occurrences of specified elements, in specified quantities,
@@ -5424,27 +5362,7 @@ public class ArrayUtils {
      *         earliest-encountered occurrences of the specified elements.
      * @since 3.0.1
      */
-    public static char[] removeElements(final char[] array, final char... values) {
-        if (isEmpty(array) || isEmpty(values)) {
-            return clone(array);
-        }
-        final HashMap<Character, MutableInt> occurrences = new HashMap<>(values.length);
-        for (final char v : values) {
-            increment(occurrences, Character.valueOf(v));
-        }
-        final BitSet toRemove = new BitSet();
-        for (int i = 0; i < array.length; i++) {
-            final char key = array[i];
-            final MutableInt count = occurrences.get(key);
-            if (count != null) {
-                if (count.decrementAndGet() == 0) {
-                    occurrences.remove(key);
-                }
-                toRemove.set(i);
-            }
-        }
-        return (char[]) removeAt(array, toRemove);
-    }
+
 
     /**
      * Removes occurrences of specified elements, in specified quantities,
@@ -5473,27 +5391,7 @@ public class ArrayUtils {
      *         earliest-encountered occurrences of the specified elements.
      * @since 3.0.1
      */
-    public static double[] removeElements(final double[] array, final double... values) {
-        if (isEmpty(array) || isEmpty(values)) {
-            return clone(array);
-        }
-        final HashMap<Double, MutableInt> occurrences = new HashMap<>(values.length);
-        for (final double v : values) {
-            increment(occurrences, Double.valueOf(v));
-        }
-        final BitSet toRemove = new BitSet();
-        for (int i = 0; i < array.length; i++) {
-            final double key = array[i];
-            final MutableInt count = occurrences.get(key);
-            if (count != null) {
-                if (count.decrementAndGet() == 0) {
-                    occurrences.remove(key);
-                }
-                toRemove.set(i);
-            }
-        }
-        return (double[]) removeAt(array, toRemove);
-    }
+
 
     /**
      * Removes occurrences of specified elements, in specified quantities,
@@ -5522,27 +5420,6 @@ public class ArrayUtils {
      *         earliest-encountered occurrences of the specified elements.
      * @since 3.0.1
      */
-    public static float[] removeElements(final float[] array, final float... values) {
-        if (isEmpty(array) || isEmpty(values)) {
-            return clone(array);
-        }
-        final HashMap<Float, MutableInt> occurrences = new HashMap<>(values.length);
-        for (final float v : values) {
-            increment(occurrences, Float.valueOf(v));
-        }
-        final BitSet toRemove = new BitSet();
-        for (int i = 0; i < array.length; i++) {
-            final float key = array[i];
-            final MutableInt count = occurrences.get(key);
-            if (count != null) {
-                if (count.decrementAndGet() == 0) {
-                    occurrences.remove(key);
-                }
-                toRemove.set(i);
-            }
-        }
-        return (float[]) removeAt(array, toRemove);
-    }
 
     /**
      * Removes occurrences of specified elements, in specified quantities,
@@ -5571,27 +5448,6 @@ public class ArrayUtils {
      *         earliest-encountered occurrences of the specified elements.
      * @since 3.0.1
      */
-    public static int[] removeElements(final int[] array, final int... values) {
-        if (isEmpty(array) || isEmpty(values)) {
-            return clone(array);
-        }
-        final HashMap<Integer, MutableInt> occurrences = new HashMap<>(values.length);
-        for (final int v : values) {
-            increment(occurrences, Integer.valueOf(v));
-        }
-        final BitSet toRemove = new BitSet();
-        for (int i = 0; i < array.length; i++) {
-            final int key = array[i];
-            final MutableInt count = occurrences.get(key);
-            if (count != null) {
-                if (count.decrementAndGet() == 0) {
-                    occurrences.remove(key);
-                }
-                toRemove.set(i);
-            }
-        }
-        return (int[]) removeAt(array, toRemove);
-    }
 
     /**
      * Removes occurrences of specified elements, in specified quantities,
@@ -5620,27 +5476,7 @@ public class ArrayUtils {
      *         earliest-encountered occurrences of the specified elements.
      * @since 3.0.1
      */
-    public static long[] removeElements(final long[] array, final long... values) {
-        if (isEmpty(array) || isEmpty(values)) {
-            return clone(array);
-        }
-        final HashMap<Long, MutableInt> occurrences = new HashMap<>(values.length);
-        for (final long v : values) {
-            increment(occurrences, Long.valueOf(v));
-        }
-        final BitSet toRemove = new BitSet();
-        for (int i = 0; i < array.length; i++) {
-            final long key = array[i];
-            final MutableInt count = occurrences.get(key);
-            if (count != null) {
-                if (count.decrementAndGet() == 0) {
-                    occurrences.remove(key);
-                }
-                toRemove.set(i);
-            }
-        }
-        return (long[]) removeAt(array, toRemove);
-    }
+
 
     /**
      * Removes occurrences of specified elements, in specified quantities,
@@ -5669,27 +5505,7 @@ public class ArrayUtils {
      *         earliest-encountered occurrences of the specified elements.
      * @since 3.0.1
      */
-    public static short[] removeElements(final short[] array, final short... values) {
-        if (isEmpty(array) || isEmpty(values)) {
-            return clone(array);
-        }
-        final HashMap<Short, MutableInt> occurrences = new HashMap<>(values.length);
-        for (final short v : values) {
-            increment(occurrences, Short.valueOf(v));
-        }
-        final BitSet toRemove = new BitSet();
-        for (int i = 0; i < array.length; i++) {
-            final short key = array[i];
-            final MutableInt count = occurrences.get(key);
-            if (count != null) {
-                if (count.decrementAndGet() == 0) {
-                    occurrences.remove(key);
-                }
-                toRemove.set(i);
-            }
-        }
-        return (short[]) removeAt(array, toRemove);
-    }
+
 
     /**
      * Removes occurrences of specified elements, in specified quantities,
@@ -5719,30 +5535,6 @@ public class ArrayUtils {
      *         earliest-encountered occurrences of the specified elements.
      * @since 3.0.1
      */
-    @SafeVarargs
-    public static <T> T[] removeElements(final T[] array, final T... values) {
-        if (isEmpty(array) || isEmpty(values)) {
-            return clone(array);
-        }
-        final HashMap<T, MutableInt> occurrences = new HashMap<>(values.length);
-        for (final T v : values) {
-            increment(occurrences, v);
-        }
-        final BitSet toRemove = new BitSet();
-        for (int i = 0; i < array.length; i++) {
-            final T key = array[i];
-            final MutableInt count = occurrences.get(key);
-            if (count != null) {
-                if (count.decrementAndGet() == 0) {
-                    occurrences.remove(key);
-                }
-                toRemove.set(i);
-            }
-        }
-        @SuppressWarnings("unchecked") // removeAll() always creates an array of the same type as its input
-        final T[] result = (T[]) removeAt(array, toRemove);
-        return result;
-    }
 
     /**
      * Reverses the order of the given array.
@@ -5754,6 +5546,14 @@ public class ArrayUtils {
      */
     public static void reverse(final boolean[] array) {
         if (array != null) {
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+
             reverse(array, 0, array.length);
         }
     }
