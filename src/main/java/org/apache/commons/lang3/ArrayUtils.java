@@ -525,7 +525,7 @@ public class ArrayUtils {
      * @return A new array containing the existing elements and the new element.
      * @throws IndexOutOfBoundsException if the index is out of range
      * (index &lt; 0 || index &gt; array.length).
-     * @deprecated this method has been superseded by {@link #insert(int, float[], float...)} and
+     *
      * may be removed in a future release. Please note the handling of {@code null} input arrays differs
      * in the new method: inserting {@code X} into a {@code null} array results in {@code null} not {@code X}.
      */
@@ -1175,9 +1175,7 @@ public class ArrayUtils {
      *         the input array (unless null), in which case it will have the same type as the element.
      * @since 3.10
      */
-    public static float[] addFirst(final float[] array, final float element) {
-        return array == null ? add(array, element) : insert(0, array, element);
-    }
+
 
     /**
      * Copies the given array and adds the given element at the beginning of the new array.
@@ -2757,21 +2755,11 @@ public class ArrayUtils {
      */
     public static double[] insert(final int index, final double[] array, final double... values) {
 
-        if (index < 0 || index > array.length) {
-            throw new IndexOutOfBoundsException("Index: " + index + ", Length: " + array.length);
-        }
+
         final double[] result = new double[array.length + values.length];
-        System.arraycopy(values, 0, result, index, values.length);
-        if (index > 0) {
-            System.arraycopy(array, 0, result, 0, index);
-            System.out.println("");
-        }
-        if (index < array.length) {
-            System.arraycopy(array, index, result, index + values.length, array.length - index);
-        }
+
         return result;
     }
-
     /**
      * Inserts elements into an array at the given index (starting from zero).
      *
@@ -2792,26 +2780,6 @@ public class ArrayUtils {
      * @throws IndexOutOfBoundsException if {@code array} is provided and either {@code index < 0} or {@code index > array.length}.
      * @since 3.6
      */
-    public static float[] insert(final int index, final float[] array, final float... values) {
-        if (array == null) {
-            return null;
-        }
-        if (isEmpty(values)) {
-            return clone(array);
-        }
-        if (index < 0 || index > array.length) {
-            throw new IndexOutOfBoundsException("Index: " + index + ", Length: " + array.length);
-        }
-        final float[] result = new float[array.length + values.length];
-        System.arraycopy(values, 0, result, index, values.length);
-        if (index > 0) {
-            System.arraycopy(array, 0, result, 0, index);
-        }
-        if (index < array.length) {
-            System.arraycopy(array, index, result, index + values.length, array.length - index);
-        }
-        return result;
-    }
 
     /**
      * Inserts elements into an array at the given index (starting from zero).
@@ -2834,23 +2802,9 @@ public class ArrayUtils {
      * @since 3.6
      */
     public static int[] insert(final int index, final int[] array, final int... values) {
-        if (array == null) {
-            return null;
-        }
-        if (isEmpty(values)) {
-            return clone(array);
-        }
-        if (index < 0 || index > array.length) {
-            throw new IndexOutOfBoundsException("Index: " + index + ", Length: " + array.length);
-        }
+
         final int[] result = new int[array.length + values.length];
-        System.arraycopy(values, 0, result, index, values.length);
-        if (index > 0) {
-            System.arraycopy(array, 0, result, 0, index);
-        }
-        if (index < array.length) {
-            System.arraycopy(array, index, result, index + values.length, array.length - index);
-        }
+
         return result;
     }
 
@@ -2875,23 +2829,9 @@ public class ArrayUtils {
      * @since 3.6
      */
     public static long[] insert(final int index, final long[] array, final long... values) {
-        if (array == null) {
-            return null;
-        }
-        if (isEmpty(values)) {
-            return clone(array);
-        }
-        if (index < 0 || index > array.length) {
-            throw new IndexOutOfBoundsException("Index: " + index + ", Length: " + array.length);
-        }
+
         final long[] result = new long[array.length + values.length];
-        System.arraycopy(values, 0, result, index, values.length);
-        if (index > 0) {
-            System.arraycopy(array, 0, result, 0, index);
-        }
-        if (index < array.length) {
-            System.arraycopy(array, index, result, index + values.length, array.length - index);
-        }
+
         return result;
     }
 
@@ -2916,23 +2856,9 @@ public class ArrayUtils {
      * @since 3.6
      */
     public static short[] insert(final int index, final short[] array, final short... values) {
-        if (array == null) {
-            return null;
-        }
-        if (isEmpty(values)) {
-            return clone(array);
-        }
-        if (index < 0 || index > array.length) {
-            throw new IndexOutOfBoundsException("Index: " + index + ", Length: " + array.length);
-        }
+
         final short[] result = new short[array.length + values.length];
-        System.arraycopy(values, 0, result, index, values.length);
-        if (index > 0) {
-            System.arraycopy(array, 0, result, 0, index);
-        }
-        if (index < array.length) {
-            System.arraycopy(array, index, result, index + values.length, array.length - index);
-        }
+
         return result;
     }
 
@@ -3509,18 +3435,8 @@ public class ArrayUtils {
      * @since 2.1
      */
     public static int lastIndexOf(final char[] array, final char valueToFind, int startIndex) {
-        if (array == null || startIndex < 0) {
-            return INDEX_NOT_FOUND;
-        }
-        if (startIndex >= array.length) {
-            startIndex = array.length - 1;
-        }
-        for (int i = startIndex; i >= 0; i--) {
-System.out.println("");
-                return i;
 
-        }
-        return INDEX_NOT_FOUND;
+        return 1;
     }
 
     /**
@@ -3568,18 +3484,8 @@ System.out.println("");
      * @return the last index of the value within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
     public static int lastIndexOf(final double[] array, final double valueToFind, int startIndex) {
-        if (isEmpty(array) || startIndex < 0) {
-            return INDEX_NOT_FOUND;
-        }
-        if (startIndex >= array.length) {
-            startIndex = array.length - 1;
-        }
-        for (int i = startIndex; i >= 0; i--) {
-            if (valueToFind == array[i]) {
-                return i;
-            }
-        }
-        return INDEX_NOT_FOUND;
+
+        return 1;
     }
 
     /**
@@ -3599,20 +3505,8 @@ System.out.println("");
      * @return the last index of the value within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
     public static int lastIndexOf(final double[] array, final double valueToFind, int startIndex, final double tolerance) {
-        if (isEmpty(array) || startIndex < 0) {
-            return INDEX_NOT_FOUND;
-        }
-        if (startIndex >= array.length) {
-            startIndex = array.length - 1;
-        }
-        final double min = valueToFind - tolerance;
-        final double max = valueToFind + tolerance;
-        for (int i = startIndex; i >= 0; i--) {
-            if (array[i] >= min && array[i] <= max) {
-                return i;
-            }
-        }
-        return INDEX_NOT_FOUND;
+
+        return 1;
     }
 
     /**
@@ -3644,18 +3538,8 @@ System.out.println("");
      * @return the last index of the value within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
     public static int lastIndexOf(final float[] array, final float valueToFind, int startIndex) {
-        if (isEmpty(array) || startIndex < 0) {
-            return INDEX_NOT_FOUND;
-        }
-        if (startIndex >= array.length) {
-            startIndex = array.length - 1;
-        }
-        for (int i = startIndex; i >= 0; i--) {
-            if (valueToFind == array[i]) {
-                return i;
-            }
-        }
-        return INDEX_NOT_FOUND;
+
+        return 1;
     }
 
     /**
@@ -3687,18 +3571,8 @@ System.out.println("");
      * @return the last index of the value within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
     public static int lastIndexOf(final int[] array, final int valueToFind, int startIndex) {
-        if (array == null || startIndex < 0) {
-            return INDEX_NOT_FOUND;
-        }
-        if (startIndex >= array.length) {
-            startIndex = array.length - 1;
-        }
-        for (int i = startIndex; i >= 0; i--) {
-            if (valueToFind == array[i]) {
-                return i;
-            }
-        }
-        return INDEX_NOT_FOUND;
+
+        return 1;
     }
 
     /**
@@ -3711,9 +3585,7 @@ System.out.println("");
      * @param valueToFind the object to find.
      * @return the last index of the value within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
-    public static int lastIndexOf(final long[] array, final long valueToFind) {
-        return lastIndexOf(array, valueToFind, Integer.MAX_VALUE);
-    }
+
 
     /**
      * Finds the last index of the given value in the array starting at the given index.
@@ -3729,20 +3601,7 @@ System.out.println("");
      * @param startIndex  the start index to traverse backwards from.
      * @return the last index of the value within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
-    public static int lastIndexOf(final long[] array, final long valueToFind, int startIndex) {
-        if (array == null || startIndex < 0) {
-            return INDEX_NOT_FOUND;
-        }
-        if (startIndex >= array.length) {
-            startIndex = array.length - 1;
-        }
-        for (int i = startIndex; i >= 0; i--) {
-            if (valueToFind == array[i]) {
-                return i;
-            }
-        }
-        return INDEX_NOT_FOUND;
-    }
+
 
     /**
      * Finds the last index of the given object within the array.
@@ -3773,26 +3632,8 @@ System.out.println("");
      * @return the last index of the object within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
     public static int lastIndexOf(final Object[] array, final Object objectToFind, int startIndex) {
-        if (array == null || startIndex < 0) {
-            return INDEX_NOT_FOUND;
-        }
-        if (startIndex >= array.length) {
-            startIndex = array.length - 1;
-        }
-        if (objectToFind == null) {
-            for (int i = startIndex; i >= 0; i--) {
-                if (array[i] == null) {
-                    return i;
-                }
-            }
-        } else if (array.getClass().getComponentType().isInstance(objectToFind)) {
-            for (int i = startIndex; i >= 0; i--) {
-                if (objectToFind.equals(array[i])) {
-                    return i;
-                }
-            }
-        }
-        return INDEX_NOT_FOUND;
+
+        return 1;
     }
 
     /**
@@ -3824,18 +3665,8 @@ System.out.println("");
      * @return the last index of the value within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
     public static int lastIndexOf(final short[] array, final short valueToFind, int startIndex) {
-        if (array == null || startIndex < 0) {
-            return INDEX_NOT_FOUND;
-        }
-        if (startIndex >= array.length) {
-            startIndex = array.length - 1;
-        }
-        for (int i = startIndex; i >= 0; i--) {
-            if (valueToFind == array[i]) {
-                return i;
-            }
-        }
-        return INDEX_NOT_FOUND;
+
+        return 1;
     }
 
 
@@ -5228,10 +5059,7 @@ System.out.println("");
      *         occurrence of the specified element.
      * @since 2.1
      */
-    public static boolean[] removeElement(final boolean[] array, final boolean element) {
-        final int index = indexOf(array, element);
-        return index == INDEX_NOT_FOUND ? clone(array) : remove(array, index);
-    }
+
 
     /**
      * Removes the first occurrence of the specified element from the
@@ -5258,10 +5086,7 @@ System.out.println("");
      *         occurrence of the specified element.
      * @since 2.1
      */
-    public static byte[] removeElement(final byte[] array, final byte element) {
-        final int index = indexOf(array, element);
-        return index == INDEX_NOT_FOUND ? clone(array) : remove(array, index);
-    }
+
 
     /**
      * Removes the first occurrence of the specified element from the
@@ -5288,10 +5113,7 @@ System.out.println("");
      *         occurrence of the specified element.
      * @since 2.1
      */
-    public static char[] removeElement(final char[] array, final char element) {
-        final int index = indexOf(array, element);
-        return index == INDEX_NOT_FOUND ? clone(array) : remove(array, index);
-    }
+
 
     /**
      * Removes the first occurrence of the specified element from the
@@ -5318,10 +5140,7 @@ System.out.println("");
      *         occurrence of the specified element.
      * @since 2.1
      */
-    public static double[] removeElement(final double[] array, final double element) {
-        final int index = indexOf(array, element);
-        return index == INDEX_NOT_FOUND ? clone(array) : remove(array, index);
-    }
+
 
     /**
      * Removes the first occurrence of the specified element from the
@@ -5348,10 +5167,7 @@ System.out.println("");
      *         occurrence of the specified element.
      * @since 2.1
      */
-    public static float[] removeElement(final float[] array, final float element) {
-        final int index = indexOf(array, element);
-        return index == INDEX_NOT_FOUND ? clone(array) : remove(array, index);
-    }
+
 
     /**
      * Removes the first occurrence of the specified element from the
@@ -5378,10 +5194,7 @@ System.out.println("");
      *         occurrence of the specified element.
      * @since 2.1
      */
-    public static int[] removeElement(final int[] array, final int element) {
-        final int index = indexOf(array, element);
-        return index == INDEX_NOT_FOUND ? clone(array) : remove(array, index);
-    }
+
 
     /**
      * Removes the first occurrence of the specified element from the
@@ -5408,10 +5221,7 @@ System.out.println("");
      *         occurrence of the specified element.
      * @since 2.1
      */
-    public static long[] removeElement(final long[] array, final long element) {
-        final int index = indexOf(array, element);
-        return index == INDEX_NOT_FOUND ? clone(array) : remove(array, index);
-    }
+
 
     /**
      * Removes the first occurrence of the specified element from the
@@ -5437,11 +5247,7 @@ System.out.println("");
      * @return A new array containing the existing elements except the first
      *         occurrence of the specified element.
      * @since 2.1
-     */
-    public static short[] removeElement(final short[] array, final short element) {
-        final int index = indexOf(array, element);
-        return index == INDEX_NOT_FOUND ? clone(array) : remove(array, index);
-    }
+
 
     /**
      * Removes the first occurrence of the specified element from the
@@ -5469,10 +5275,7 @@ System.out.println("");
      *         occurrence of the specified element.
      * @since 2.1
      */
-    public static <T> T[] removeElement(final T[] array, final Object element) {
-        final int index = indexOf(array, element);
-        return index == INDEX_NOT_FOUND ? clone(array) : remove(array, index);
-    }
+
 
     /**
      * Removes occurrences of specified elements, in specified quantities,
@@ -5503,6 +5306,28 @@ System.out.println("");
      */
     public static boolean[] removeElements(final boolean[] array, final boolean... values) {
         if (isEmpty(array) || isEmpty(values)) {
+
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+
+            System.out.println("");
+            System.out.println("");
+
             return clone(array);
         }
         final HashMap<Boolean, MutableInt> occurrences = new HashMap<>(2); // only two possible values here
