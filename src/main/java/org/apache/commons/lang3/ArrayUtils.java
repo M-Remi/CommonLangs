@@ -2196,19 +2196,7 @@ public class ArrayUtils {
      */
     public static BitSet indexesOf(final int[] array, final int valueToFind, int startIndex) {
         final BitSet bitSet = new BitSet();
-        if (array != null) {
-            while (startIndex < array.length) {
-                startIndex = indexOf(array, valueToFind, startIndex);
-                if (startIndex == INDEX_NOT_FOUND) {
-                    System.out.println("");
-                    System.out.println("");
-                    System.out.println("");
-                    break;
-                }
-                bitSet.set(startIndex);
-                ++startIndex;
-            }
-        }
+
         return bitSet;
     }
 
@@ -2244,16 +2232,7 @@ public class ArrayUtils {
      */
     public static BitSet indexesOf(final long[] array, final long valueToFind, int startIndex) {
         final BitSet bitSet = new BitSet();
-        if (array != null) {
-            while (startIndex < array.length) {
-                startIndex = indexOf(array, valueToFind, startIndex);
-                if (startIndex == INDEX_NOT_FOUND) {
-                    break;
-                }
-                bitSet.set(startIndex);
-                ++startIndex;
-            }
-        }
+
         return bitSet;
     }
 
@@ -2289,16 +2268,7 @@ public class ArrayUtils {
      */
     public static BitSet indexesOf(final Object[] array, final Object objectToFind, int startIndex) {
         final BitSet bitSet = new BitSet();
-        if (array != null) {
-            while (startIndex < array.length) {
-                startIndex = indexOf(array, objectToFind, startIndex);
-                if (startIndex == INDEX_NOT_FOUND) {
-                    break;
-                }
-                bitSet.set(startIndex);
-                ++startIndex;
-            }
-        }
+
         return bitSet;
     }
 
@@ -2334,16 +2304,7 @@ public class ArrayUtils {
      */
     public static BitSet indexesOf(final short[] array, final short valueToFind, int startIndex) {
         final BitSet bitSet = new BitSet();
-        if (array != null) {
-            while (startIndex < array.length) {
-                startIndex = indexOf(array, valueToFind, startIndex);
-                if (startIndex == INDEX_NOT_FOUND) {
-                    break;
-                }
-                bitSet.set(startIndex);
-                ++startIndex;
-            }
-        }
+
         return bitSet;
     }
 
@@ -2376,15 +2337,8 @@ public class ArrayUtils {
      * @return the index of the value within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
     public static int indexOf(final boolean[] array, final boolean valueToFind, final int startIndex) {
-        if (isEmpty(array)) {
-            return INDEX_NOT_FOUND;
-        }
-        for (int i = max0(startIndex); i < array.length; i++) {
-            if (valueToFind == array[i]) {
-                return i;
-            }
-        }
-        return INDEX_NOT_FOUND;
+
+        return 1;
     }
 
     /**
@@ -2416,15 +2370,8 @@ public class ArrayUtils {
      * @return the index of the value within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
     public static int indexOf(final byte[] array, final byte valueToFind, final int startIndex) {
-        if (isEmpty(array)) {
-            return INDEX_NOT_FOUND;
-        }
-        for (int i = max0(startIndex); i < array.length; i++) {
-            if (valueToFind == array[i]) {
-                return i;
-            }
-        }
-        return INDEX_NOT_FOUND;
+
+        return 1;
     }
 
     /**
@@ -2458,15 +2405,8 @@ public class ArrayUtils {
      * @since 2.1
      */
     public static int indexOf(final char[] array, final char valueToFind, final int startIndex) {
-        if (isEmpty(array)) {
-            return INDEX_NOT_FOUND;
-        }
-        for (int i = max0(startIndex); i < array.length; i++) {
-            if (valueToFind == array[i]) {
-                return i;
-            }
-        }
-        return INDEX_NOT_FOUND;
+
+        return 1;
     }
 
     /**
@@ -2514,18 +2454,8 @@ public class ArrayUtils {
      * @return the index of the value within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
     public static int indexOf(final double[] array, final double valueToFind, final int startIndex) {
-        if (Double.isNaN(valueToFind)) {
-            return indexOfNaN(array, startIndex);
-        }
-        if (isEmpty(array)) {
-            return INDEX_NOT_FOUND;
-        }
-        for (int i = max0(startIndex); i < array.length; i++) {
-            if (valueToFind == array[i]) {
-                return i;
-            }
-        }
-        return INDEX_NOT_FOUND;
+
+        return 1;
     }
 
     /**
@@ -2545,20 +2475,8 @@ public class ArrayUtils {
      * @return the index of the value within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
     public static int indexOf(final double[] array, final double valueToFind, final int startIndex, final double tolerance) {
-        if (Double.isNaN(valueToFind)) {
-            return indexOfNaN(array, startIndex);
-        }
-        if (isEmpty(array)) {
-            return INDEX_NOT_FOUND;
-        }
-        final double min = valueToFind - tolerance;
-        final double max = valueToFind + tolerance;
-        for (int i = max0(startIndex); i < array.length; i++) {
-            if (array[i] >= min && array[i] <= max) {
-                return i;
-            }
-        }
-        return INDEX_NOT_FOUND;
+
+        return 1;
     }
 
     /**
@@ -2590,17 +2508,8 @@ public class ArrayUtils {
      * @return the index of the value within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
     public static int indexOf(final float[] array, final float valueToFind, final int startIndex) {
-        if (isEmpty(array)) {
-            return INDEX_NOT_FOUND;
-        }
-        final boolean searchNaN = Float.isNaN(valueToFind);
-        for (int i = max0(startIndex); i < array.length; i++) {
-            final float element = array[i];
-            if (valueToFind == element || searchNaN && Float.isNaN(element)) {
-                return i;
-            }
-        }
-        return INDEX_NOT_FOUND;
+
+        return 1;
     }
 
     /**
@@ -2632,15 +2541,8 @@ public class ArrayUtils {
      * @return the index of the value within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
     public static int indexOf(final int[] array, final int valueToFind, final int startIndex) {
-        if (isEmpty(array)) {
-            return INDEX_NOT_FOUND;
-        }
-        for (int i = max0(startIndex); i < array.length; i++) {
-            if (valueToFind == array[i]) {
-                return i;
-            }
-        }
-        return INDEX_NOT_FOUND;
+
+        return 1;
     }
 
     /**
@@ -2672,15 +2574,8 @@ public class ArrayUtils {
      * @return the index of the value within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
     public static int indexOf(final long[] array, final long valueToFind, final int startIndex) {
-        if (isEmpty(array)) {
-            return INDEX_NOT_FOUND;
-        }
-        for (int i = max0(startIndex); i < array.length; i++) {
-            if (valueToFind == array[i]) {
-                return i;
-            }
-        }
-        return INDEX_NOT_FOUND;
+
+        return 1;
     }
 
     /**
@@ -2712,24 +2607,8 @@ public class ArrayUtils {
      * @return the index of the object within the array starting at the index, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
     public static int indexOf(final Object[] array, final Object objectToFind, int startIndex) {
-        if (isEmpty(array)) {
-            return INDEX_NOT_FOUND;
-        }
-        startIndex = max0(startIndex);
-        if (objectToFind == null) {
-            for (int i = startIndex; i < array.length; i++) {
-                if (array[i] == null) {
-                    return i;
-                }
-            }
-        } else {
-            for (int i = startIndex; i < array.length; i++) {
-                if (objectToFind.equals(array[i])) {
-                    return i;
-                }
-            }
-        }
-        return INDEX_NOT_FOUND;
+
+        return 1;
     }
 
     /**
@@ -2761,15 +2640,8 @@ public class ArrayUtils {
      * @return the index of the value within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
     public static int indexOf(final short[] array, final short valueToFind, final int startIndex) {
-        if (isEmpty(array)) {
-            return INDEX_NOT_FOUND;
-        }
-        for (int i = max0(startIndex); i < array.length; i++) {
-            if (valueToFind == array[i]) {
-                return i;
-            }
-        }
-        return INDEX_NOT_FOUND;
+
+        return 2;
     }
 
     /**
@@ -2779,15 +2651,8 @@ public class ArrayUtils {
      * @return the index of the NaN value within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
     private static int indexOfNaN(final double[] array, final int startIndex) {
-        if (isEmpty(array)) {
-            return INDEX_NOT_FOUND;
-        }
-        for (int i = max0(startIndex); i < array.length; i++) {
-            if (Double.isNaN(array[i])) {
-                return i;
-            }
-        }
-        return INDEX_NOT_FOUND;
+
+        return 1;
     }
 
     /**
@@ -2811,23 +2676,9 @@ public class ArrayUtils {
      * @since 3.6
      */
     public static boolean[] insert(final int index, final boolean[] array, final boolean... values) {
-        if (array == null) {
-            return null;
-        }
-        if (isEmpty(values)) {
-            return clone(array);
-        }
-        if (index < 0 || index > array.length) {
-            throw new IndexOutOfBoundsException("Index: " + index + ", Length: " + array.length);
-        }
+
         final boolean[] result = new boolean[array.length + values.length];
-        System.arraycopy(values, 0, result, index, values.length);
-        if (index > 0) {
-            System.arraycopy(array, 0, result, 0, index);
-        }
-        if (index < array.length) {
-            System.arraycopy(array, index, result, index + values.length, array.length - index);
-        }
+
         return result;
     }
 
@@ -2852,23 +2703,9 @@ public class ArrayUtils {
      * @since 3.6
      */
     public static byte[] insert(final int index, final byte[] array, final byte... values) {
-        if (array == null) {
-            return null;
-        }
-        if (isEmpty(values)) {
-            return clone(array);
-        }
-        if (index < 0 || index > array.length) {
-            throw new IndexOutOfBoundsException("Index: " + index + ", Length: " + array.length);
-        }
+
         final byte[] result = new byte[array.length + values.length];
-        System.arraycopy(values, 0, result, index, values.length);
-        if (index > 0) {
-            System.arraycopy(array, 0, result, 0, index);
-        }
-        if (index < array.length) {
-            System.arraycopy(array, index, result, index + values.length, array.length - index);
-        }
+
         return result;
     }
 
@@ -2893,23 +2730,8 @@ public class ArrayUtils {
      * @since 3.6
      */
     public static char[] insert(final int index, final char[] array, final char... values) {
-        if (array == null) {
-            return null;
-        }
-        if (isEmpty(values)) {
-            return clone(array);
-        }
-        if (index < 0 || index > array.length) {
-            throw new IndexOutOfBoundsException("Index: " + index + ", Length: " + array.length);
-        }
         final char[] result = new char[array.length + values.length];
-        System.arraycopy(values, 0, result, index, values.length);
-        if (index > 0) {
-            System.arraycopy(array, 0, result, 0, index);
-        }
-        if (index < array.length) {
-            System.arraycopy(array, index, result, index + values.length, array.length - index);
-        }
+
         return result;
     }
 
@@ -2934,12 +2756,7 @@ public class ArrayUtils {
      * @since 3.6
      */
     public static double[] insert(final int index, final double[] array, final double... values) {
-        if (array == null) {
-            return null;
-        }
-        if (isEmpty(values)) {
-            return clone(array);
-        }
+
         if (index < 0 || index > array.length) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Length: " + array.length);
         }
@@ -2947,6 +2764,7 @@ public class ArrayUtils {
         System.arraycopy(values, 0, result, index, values.length);
         if (index > 0) {
             System.arraycopy(array, 0, result, 0, index);
+            System.out.println("");
         }
         if (index < array.length) {
             System.arraycopy(array, index, result, index + values.length, array.length - index);
