@@ -5544,19 +5544,6 @@ public class ArrayUtils {
      *
      * @param array  the array to reverse, may be {@code null}.
      */
-    public static void reverse(final boolean[] array) {
-        if (array != null) {
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-
-            reverse(array, 0, array.length);
-        }
-    }
 
     /**
      * Reverses the order of the given array in the given range.
@@ -5574,21 +5561,6 @@ public class ArrayUtils {
      *            change. Overvalue (&gt;array.length) is demoted to array length.
      * @since 3.2
      */
-    public static void reverse(final boolean[] array, final int startIndexInclusive, final int endIndexExclusive) {
-        if (array == null) {
-            return;
-        }
-        int i = Math.max(startIndexInclusive, 0);
-        int j = Math.min(array.length, endIndexExclusive) - 1;
-        boolean tmp;
-        while (j > i) {
-            tmp = array[j];
-            array[j] = array[i];
-            array[i] = tmp;
-            j--;
-            i++;
-        }
-    }
 
     /**
      * Reverses the order of the given array.
@@ -5598,11 +5570,7 @@ public class ArrayUtils {
      *
      * @param array  the array to reverse, may be {@code null}.
      */
-    public static void reverse(final byte[] array) {
-        if (array != null) {
-            reverse(array, 0, array.length);
-        }
-    }
+
 
     /**
      * Reverses the order of the given array in the given range.
@@ -5616,21 +5584,6 @@ public class ArrayUtils {
      *                            (&gt;array.length) is demoted to array length.
      * @since 3.2
      */
-    public static void reverse(final byte[] array, final int startIndexInclusive, final int endIndexExclusive) {
-        if (array == null) {
-            return;
-        }
-        int i = Math.max(startIndexInclusive, 0);
-        int j = Math.min(array.length, endIndexExclusive) - 1;
-        byte tmp;
-        while (j > i) {
-            tmp = array[j];
-            array[j] = array[i];
-            array[i] = tmp;
-            j--;
-            i++;
-        }
-    }
 
     /**
      * Reverses the order of the given array.
@@ -5640,11 +5593,6 @@ public class ArrayUtils {
      *
      * @param array  the array to reverse, may be {@code null}.
      */
-    public static void reverse(final char[] array) {
-        if (array != null) {
-            reverse(array, 0, array.length);
-        }
-    }
 
     /**
      * Reverses the order of the given array in the given range.
@@ -5658,21 +5606,6 @@ public class ArrayUtils {
      *                            (&gt;array.length) is demoted to array length.
      * @since 3.2
      */
-    public static void reverse(final char[] array, final int startIndexInclusive, final int endIndexExclusive) {
-        if (array == null) {
-            return;
-        }
-        int i = Math.max(startIndexInclusive, 0);
-        int j = Math.min(array.length, endIndexExclusive) - 1;
-        char tmp;
-        while (j > i) {
-            tmp = array[j];
-            array[j] = array[i];
-            array[i] = tmp;
-            j--;
-            i++;
-        }
-    }
 
     /**
      * Reverses the order of the given array.
@@ -5682,11 +5615,6 @@ public class ArrayUtils {
      *
      * @param array  the array to reverse, may be {@code null}
      */
-    public static void reverse(final double[] array) {
-        if (array != null) {
-            reverse(array, 0, array.length);
-        }
-    }
 
     /**
      * Reverses the order of the given array in the given range.
@@ -5700,21 +5628,6 @@ public class ArrayUtils {
      *                            (&gt;array.length) is demoted to array length.
      * @since 3.2
      */
-    public static void reverse(final double[] array, final int startIndexInclusive, final int endIndexExclusive) {
-        if (array == null) {
-            return;
-        }
-        int i = Math.max(startIndexInclusive, 0);
-        int j = Math.min(array.length, endIndexExclusive) - 1;
-        double tmp;
-        while (j > i) {
-            tmp = array[j];
-            array[j] = array[i];
-            array[i] = tmp;
-            j--;
-            i++;
-        }
-    }
 
     /**
      * Reverses the order of the given array.
@@ -5724,11 +5637,6 @@ public class ArrayUtils {
      *
      * @param array  the array to reverse, may be {@code null}.
      */
-    public static void reverse(final float[] array) {
-        if (array != null) {
-            reverse(array, 0, array.length);
-        }
-    }
 
     /**
      * Reverses the order of the given array in the given range.
@@ -5742,21 +5650,6 @@ public class ArrayUtils {
      *                            (&gt;array.length) is demoted to array length.
      * @since 3.2
      */
-    public static void reverse(final float[] array, final int startIndexInclusive, final int endIndexExclusive) {
-        if (array == null) {
-            return;
-        }
-        int i = Math.max(startIndexInclusive, 0);
-        int j = Math.min(array.length, endIndexExclusive) - 1;
-        float tmp;
-        while (j > i) {
-            tmp = array[j];
-            array[j] = array[i];
-            array[i] = tmp;
-            j--;
-            i++;
-        }
-    }
 
     /**
      * Reverses the order of the given array.
@@ -5766,11 +5659,6 @@ public class ArrayUtils {
      *
      * @param array  the array to reverse, may be {@code null}.
      */
-    public static void reverse(final int[] array) {
-        if (array != null) {
-            reverse(array, 0, array.length);
-        }
-    }
 
     /**
      * Reverses the order of the given array in the given range.
@@ -5788,21 +5676,6 @@ public class ArrayUtils {
      *            change. Overvalue (&gt;array.length) is demoted to array length.
      * @since 3.2
      */
-    public static void reverse(final int[] array, final int startIndexInclusive, final int endIndexExclusive) {
-        if (array == null) {
-            return;
-        }
-        int i = Math.max(startIndexInclusive, 0);
-        int j = Math.min(array.length, endIndexExclusive) - 1;
-        int tmp;
-        while (j > i) {
-            tmp = array[j];
-            array[j] = array[i];
-            array[i] = tmp;
-            j--;
-            i++;
-        }
-    }
 
     /**
      * Reverses the order of the given array.
@@ -5812,11 +5685,6 @@ public class ArrayUtils {
      *
      * @param array  the array to reverse, may be {@code null}.
      */
-    public static void reverse(final long[] array) {
-        if (array != null) {
-            reverse(array, 0, array.length);
-        }
-    }
 
     /**
      * Reverses the order of the given array in the given range.
@@ -5834,21 +5702,6 @@ public class ArrayUtils {
      *            change. Overvalue (&gt;array.length) is demoted to array length.
      * @since 3.2
      */
-    public static void reverse(final long[] array, final int startIndexInclusive, final int endIndexExclusive) {
-        if (array == null) {
-            return;
-        }
-        int i = Math.max(startIndexInclusive, 0);
-        int j = Math.min(array.length, endIndexExclusive) - 1;
-        long tmp;
-        while (j > i) {
-            tmp = array[j];
-            array[j] = array[i];
-            array[i] = tmp;
-            j--;
-            i++;
-        }
-    }
 
     /**
      * Reverses the order of the given array.
@@ -5861,11 +5714,6 @@ public class ArrayUtils {
      *
      * @param array  the array to reverse, may be {@code null}.
      */
-    public static void reverse(final Object[] array) {
-        if (array != null) {
-            reverse(array, 0, array.length);
-        }
-    }
 
     /**
      * Reverses the order of the given array in the given range.
@@ -5883,21 +5731,6 @@ public class ArrayUtils {
      *            change. Over value (&gt;array.length) is demoted to array length.
      * @since 3.2
      */
-    public static void reverse(final Object[] array, final int startIndexInclusive, final int endIndexExclusive) {
-        if (array == null) {
-            return;
-        }
-        int i = Math.max(startIndexInclusive, 0);
-        int j = Math.min(array.length, endIndexExclusive) - 1;
-        Object tmp;
-        while (j > i) {
-            tmp = array[j];
-            array[j] = array[i];
-            array[i] = tmp;
-            j--;
-            i++;
-        }
-    }
 
     /**
      * Reverses the order of the given array.
@@ -5907,11 +5740,7 @@ public class ArrayUtils {
      *
      * @param array  the array to reverse, may be {@code null}.
      */
-    public static void reverse(final short[] array) {
-        if (array != null) {
-            reverse(array, 0, array.length);
-        }
-    }
+
 
     /**
      * Reverses the order of the given array in the given range.
@@ -5929,21 +5758,7 @@ public class ArrayUtils {
      *            change. Overvalue (&gt;array.length) is demoted to array length.
      * @since 3.2
      */
-    public static void reverse(final short[] array, final int startIndexInclusive, final int endIndexExclusive) {
-        if (array == null) {
-            return;
-        }
-        int i = Math.max(startIndexInclusive, 0);
-        int j = Math.min(array.length, endIndexExclusive) - 1;
-        short tmp;
-        while (j > i) {
-            tmp = array[j];
-            array[j] = array[i];
-            array[i] = tmp;
-            j--;
-            i++;
-        }
-    }
+
 
     /**
      * Sets all elements of the specified array, using the provided generator supplier to compute each element.
@@ -5958,12 +5773,7 @@ public class ArrayUtils {
      * @return the input array
      * @since 3.13.0
      */
-    public static <T> T[] setAll(final T[] array, final IntFunction<? extends T> generator) {
-        if (array != null && generator != null) {
-            Arrays.setAll(array, generator);
-        }
-        return array;
-    }
+
 
     /**
      * Sets all elements of the specified array, using the provided generator supplier to compute each element.
@@ -5978,14 +5788,7 @@ public class ArrayUtils {
      * @return the input array
      * @since 3.13.0
      */
-    public static <T> T[] setAll(final T[] array, final Supplier<? extends T> generator) {
-        if (array != null && generator != null) {
-            for (int i = 0; i < array.length; i++) {
-                array[i] = generator.get();
-            }
-        }
-        return array;
-    }
+
 
     /**
      * Shifts the order of the given boolean array.
@@ -7887,15 +7690,7 @@ public class ArrayUtils {
      * @param array  a {@code boolean} array.
      * @return a {@link Boolean} array, {@code null} if null array input.
      */
-    public static Boolean[] toObject(final boolean[] array) {
-        if (array == null) {
-            return null;
-        }
-        if (array.length == 0) {
-            return EMPTY_BOOLEAN_OBJECT_ARRAY;
-        }
-        return setAll(new Boolean[array.length], i -> array[i] ? Boolean.TRUE : Boolean.FALSE);
-    }
+
 
     /**
      * Converts an array of primitive bytes to objects.
@@ -7905,15 +7700,6 @@ public class ArrayUtils {
      * @param array  a {@code byte} array.
      * @return a {@link Byte} array, {@code null} if null array input.
      */
-    public static Byte[] toObject(final byte[] array) {
-        if (array == null) {
-            return null;
-        }
-        if (array.length == 0) {
-            return EMPTY_BYTE_OBJECT_ARRAY;
-        }
-        return setAll(new Byte[array.length], i -> Byte.valueOf(array[i]));
-    }
 
     /**
      * Converts an array of primitive chars to objects.
@@ -7923,15 +7709,7 @@ public class ArrayUtils {
      * @param array a {@code char} array.
      * @return a {@link Character} array, {@code null} if null array input.
      */
-    public static Character[] toObject(final char[] array) {
-        if (array == null) {
-            return null;
-        }
-        if (array.length == 0) {
-            return EMPTY_CHARACTER_OBJECT_ARRAY;
-        }
-        return setAll(new Character[array.length], i -> Character.valueOf(array[i]));
-     }
+
 
     /**
      * Converts an array of primitive doubles to objects.
@@ -7941,15 +7719,6 @@ public class ArrayUtils {
      * @param array  a {@code double} array.
      * @return a {@link Double} array, {@code null} if null array input.
      */
-    public static Double[] toObject(final double[] array) {
-        if (array == null) {
-            return null;
-        }
-        if (array.length == 0) {
-            return EMPTY_DOUBLE_OBJECT_ARRAY;
-        }
-        return setAll(new Double[array.length], i -> Double.valueOf(array[i]));
-    }
 
     /**
      * Converts an array of primitive floats to objects.
@@ -7959,15 +7728,6 @@ public class ArrayUtils {
      * @param array  a {@code float} array.
      * @return a {@link Float} array, {@code null} if null array input.
      */
-    public static Float[] toObject(final float[] array) {
-        if (array == null) {
-            return null;
-        }
-        if (array.length == 0) {
-            return EMPTY_FLOAT_OBJECT_ARRAY;
-        }
-        return setAll(new Float[array.length], i -> Float.valueOf(array[i]));
-    }
 
     /**
      * Converts an array of primitive ints to objects.
@@ -7977,15 +7737,6 @@ public class ArrayUtils {
      * @param array  an {@code int} array.
      * @return an {@link Integer} array, {@code null} if null array input.
      */
-    public static Integer[] toObject(final int[] array) {
-        if (array == null) {
-            return null;
-        }
-        if (array.length == 0) {
-            return EMPTY_INTEGER_OBJECT_ARRAY;
-        }
-        return setAll(new Integer[array.length], i -> Integer.valueOf(array[i]));
-    }
 
     /**
      * Converts an array of primitive longs to objects.
@@ -7995,15 +7746,6 @@ public class ArrayUtils {
      * @param array  a {@code long} array.
      * @return a {@link Long} array, {@code null} if null array input.
      */
-    public static Long[] toObject(final long[] array) {
-        if (array == null) {
-            return null;
-        }
-        if (array.length == 0) {
-            return EMPTY_LONG_OBJECT_ARRAY;
-        }
-        return setAll(new Long[array.length], i -> Long.valueOf(array[i]));
-    }
 
     /**
      * Converts an array of primitive shorts to objects.
@@ -8013,15 +7755,6 @@ public class ArrayUtils {
      * @param array  a {@code short} array.
      * @return a {@link Short} array, {@code null} if null array input.
      */
-    public static Short[] toObject(final short[] array) {
-        if (array == null) {
-            return null;
-        }
-        if (array.length == 0) {
-            return EMPTY_SHORT_OBJECT_ARRAY;
-        }
-        return setAll(new Short[array.length], i -> Short.valueOf(array[i]));
-    }
 
     /**
      * Converts an array of object Booleans to primitives.
@@ -8051,6 +7784,80 @@ public class ArrayUtils {
      */
     public static boolean[] toPrimitive(final Boolean[] array, final boolean valueForNull) {
         if (array == null) {
+
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+
             return null;
         }
         if (array.length == 0) {
