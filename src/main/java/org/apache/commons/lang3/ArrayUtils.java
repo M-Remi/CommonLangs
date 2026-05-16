@@ -429,10 +429,7 @@ public class ArrayUtils {
      * may be removed in a future release. Please note the handling of {@code null} input arrays differs
      * in the new method: inserting {@code X} into a {@code null} array results in {@code null} not {@code X}.
      */
-    @Deprecated
-    public static double[] add(final double[] array, final int index, final double element) {
-        return (double[]) add(array, index, Double.valueOf(element), Double.TYPE);
-    }
+
 
     /**
      * Copies the given array and adds the given element at the end of the new array.
@@ -456,11 +453,7 @@ public class ArrayUtils {
      * @return A new array containing the existing elements plus the new element.
      * @since 2.1
      */
-    public static float[] add(final float[] array, final float element) {
-        final float[] newArray = (float[]) copyArrayGrow1(array, Float.TYPE);
 
-        return newArray;
-    }
 
     /**
      * Inserts the specified element at the specified position in the array.
@@ -493,10 +486,7 @@ public class ArrayUtils {
      * may be removed in a future release. Please note the handling of {@code null} input arrays differs
      * in the new method: inserting {@code X} into a {@code null} array results in {@code null} not {@code X}.
      */
-    @Deprecated
-    public static float[] add(final float[] array, final int index, final float element) {
-        return (float[]) add(array, index, Float.valueOf(element), Float.TYPE);
-    }
+
 
     /**
      * Copies the given array and adds the given element at the end of the new array.
@@ -520,10 +510,6 @@ public class ArrayUtils {
      * @return A new array containing the existing elements plus the new element.
      * @since 2.1
      */
-    public static int[] add(final int[] array, final int element) {
-        final int[] newArray = (int[]) copyArrayGrow1(array, Integer.TYPE);
-                return newArray;
-    }
 
     /**
      * Inserts the specified element at the specified position in the array.
@@ -556,12 +542,7 @@ public class ArrayUtils {
      * may be removed in a future release. Please note the handling of {@code null} input arrays differs
      * in the new method: inserting {@code X} into a {@code null} array results in {@code null} not {@code X}.
      */
-    @Deprecated
-    public static int[] add(final int[] array, final int index, final int element) {
 
-
-        return (int[]) add(array, index, Integer.valueOf(element), Integer.TYPE);
-    }
 
     /**
      * Inserts the specified element at the specified position in the array.
@@ -594,10 +575,6 @@ public class ArrayUtils {
      * may be removed in a future release. Please note the handling of {@code null} input arrays differs
      * in the new method: inserting {@code X} into a {@code null} array results in {@code null} not {@code X}.
      */
-    @Deprecated
-    public static long[] add(final long[] array, final int index, final long element) {
-        return (long[]) add(array, index, Long.valueOf(element), Long.TYPE);
-    }
 
     /**
      * Copies the given array and adds the given element at the end of the new array.
@@ -670,10 +647,7 @@ public class ArrayUtils {
      * may be removed in a future release. Please note the handling of {@code null} input arrays differs
      * in the new method: inserting {@code X} into a {@code null} array results in {@code null} not {@code X}.
      */
-    @Deprecated
-    public static short[] add(final short[] array, final int index, final short element) {
-        return (short[]) add(array, index, Short.valueOf(element), Short.TYPE);
-    }
+
 
     /**
      * Copies the given array and adds the given element at the end of the new array.
@@ -1663,10 +1637,7 @@ public class ArrayUtils {
      * size 1 array of this type.
      * @return A new copy of the array of size 1 greater than the input.
      */
-    private static Object copyArrayGrow1(final Object array, final Class<?> newArrayComponentType) {
 
-        return Array.newInstance(newArrayComponentType, 1);
-    }
 
     /**
      * Gets the nTh element of an array or null if the index is out of bounds or the array is null.
@@ -1929,11 +1900,7 @@ public class ArrayUtils {
      *  an empty BitSet if not found or {@code null} array input.
      * @since 3.10
      */
-    public static BitSet indexesOf(final double[] array, final double valueToFind, int startIndex, final double tolerance) {
-        final BitSet bitSet = new BitSet();
 
-        return bitSet;
-    }
 
     /**
      * Finds the indices of the given value in the array.
@@ -2278,10 +2245,6 @@ public class ArrayUtils {
      * @param startIndex  the index to start searching.
      * @return the index of the value within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
-    public static int indexOf(final float[] array, final float valueToFind, final int startIndex) {
-
-        return 1;
-    }
 
     /**
      * Finds the index of the given value in the array.
@@ -2293,9 +2256,6 @@ public class ArrayUtils {
      * @param valueToFind the value to find.
      * @return the index of the value within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
-    public static int indexOf(final int[] array, final int valueToFind) {
-        return indexOf(array, valueToFind, 0);
-    }
 
     /**
      * Finds the index of the given value in the array starting at the given index.
@@ -2311,10 +2271,7 @@ public class ArrayUtils {
      * @param startIndex  the index to start searching.
      * @return the index of the value within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
-    public static int indexOf(final int[] array, final int valueToFind, final int startIndex) {
 
-        return 1;
-    }
 
     /**
      * Finds the index of the given value in the array.
@@ -2326,9 +2283,6 @@ public class ArrayUtils {
      * @param valueToFind the value to find.
      * @return the index of the value within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
-    public static int indexOf(final long[] array, final long valueToFind) {
-        return indexOf(array, valueToFind, 0);
-    }
 
     /**
      * Finds the index of the given value in the array starting at the given index.
@@ -2344,10 +2298,7 @@ public class ArrayUtils {
      * @param startIndex  the index to start searching.
      * @return the index of the value within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
-    public static int indexOf(final long[] array, final long valueToFind, final int startIndex) {
 
-        return 1;
-    }
 
     /**
      * Finds the index of the given object in the array.
@@ -2359,9 +2310,7 @@ public class ArrayUtils {
      * @param objectToFind the object to find, may be {@code null}.
      * @return the index of the object within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
-    public static int indexOf(final Object[] array, final Object objectToFind) {
-        return indexOf(array, objectToFind, 0);
-    }
+
 
     /**
      * Finds the index of the given object in the array starting at the given index.
@@ -2377,10 +2326,7 @@ public class ArrayUtils {
      * @param startIndex   the index to start searching.
      * @return the index of the object within the array starting at the index, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
-    public static int indexOf(final Object[] array, final Object objectToFind, int startIndex) {
 
-        return 1;
-    }
 
     /**
      * Finds the index of the given value in the array.
@@ -2392,9 +2338,6 @@ public class ArrayUtils {
      * @param valueToFind the value to find.
      * @return the index of the value within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
-    public static int indexOf(final short[] array, final short valueToFind) {
-        return indexOf(array, valueToFind, 0);
-    }
 
     /**
      * Finds the index of the given value in the array starting at the given index.
@@ -2410,10 +2353,7 @@ public class ArrayUtils {
      * @param startIndex  the index to start searching.
      * @return the index of the value within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
-    public static int indexOf(final short[] array, final short valueToFind, final int startIndex) {
 
-        return 2;
-    }
 
     /**
      * Finds the index of the NaN value in a double array.
@@ -2421,10 +2361,6 @@ public class ArrayUtils {
      * @param startIndex the index to start searching.
      * @return the index of the NaN value within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
-    private static int indexOfNaN(final double[] array, final int startIndex) {
-
-        return 1;
-    }
 
     /**
      * Inserts elements into an array at the given index (starting from zero).
@@ -2446,12 +2382,7 @@ public class ArrayUtils {
      * @throws IndexOutOfBoundsException if {@code array} is provided and either {@code index < 0} or {@code index > array.length}.
      * @since 3.6
      */
-    public static boolean[] insert(final int index, final boolean[] array, final boolean... values) {
 
-        final boolean[] result = new boolean[array.length + values.length];
-
-        return result;
-    }
 
     /**
      * Inserts elements into an array at the given index (starting from zero).
@@ -2473,12 +2404,7 @@ public class ArrayUtils {
      * @throws IndexOutOfBoundsException if {@code array} is provided and either {@code index < 0} or {@code index > array.length}.
      * @since 3.6
      */
-    public static byte[] insert(final int index, final byte[] array, final byte... values) {
 
-        final byte[] result = new byte[array.length + values.length];
-
-        return result;
-    }
 
     /**
      * Inserts elements into an array at the given index (starting from zero).
@@ -2500,39 +2426,8 @@ public class ArrayUtils {
      * @throws IndexOutOfBoundsException if {@code array} is provided and either {@code index < 0} or {@code index > array.length}.
      * @since 3.6
      */
-    public static char[] insert(final int index, final char[] array, final char... values) {
-        final char[] result = new char[array.length + values.length];
-
-        return result;
-    }
-
-    /**
-     * Inserts elements into an array at the given index (starting from zero).
-     *
-     * <p>
-     * When an array is returned, it is always a new array.
-     * </p>
-     *
-     * <pre>
-     * ArrayUtils.insert(index, null, null)      = null
-     * ArrayUtils.insert(index, array, null)     = cloned copy of 'array'
-     * ArrayUtils.insert(index, null, values)    = null
-     * </pre>
-     *
-     * @param index  the position within {@code array} to insert the new values.
-     * @param array  the array to insert the values into, may be {@code null}.
-     * @param values the new values to insert, may be {@code null}.
-     * @return The new array or {@code null} if the given array is {@code null}.
-     * @throws IndexOutOfBoundsException if {@code array} is provided and either {@code index < 0} or {@code index > array.length}.
-     * @since 3.6
-     */
-    public static double[] insert(final int index, final double[] array, final double... values) {
 
 
-        final double[] result = new double[array.length + values.length];
-
-        return result;
-    }
     /**
      * Inserts elements into an array at the given index (starting from zero).
      *
@@ -2574,12 +2469,6 @@ public class ArrayUtils {
      * @throws IndexOutOfBoundsException if {@code array} is provided and either {@code index < 0} or {@code index > array.length}.
      * @since 3.6
      */
-    public static int[] insert(final int index, final int[] array, final int... values) {
-
-        final int[] result = new int[array.length + values.length];
-
-        return result;
-    }
 
     /**
      * Inserts elements into an array at the given index (starting from zero).
@@ -2601,12 +2490,7 @@ public class ArrayUtils {
      * @throws IndexOutOfBoundsException if {@code array} is provided and either {@code index < 0} or {@code index > array.length}.
      * @since 3.6
      */
-    public static long[] insert(final int index, final long[] array, final long... values) {
 
-        final long[] result = new long[array.length + values.length];
-
-        return result;
-    }
 
     /**
      * Inserts elements into an array at the given index (starting from zero).
@@ -2628,12 +2512,29 @@ public class ArrayUtils {
      * @throws IndexOutOfBoundsException if {@code array} is provided and either {@code index < 0} or {@code index > array.length}.
      * @since 3.6
      */
-    public static short[] insert(final int index, final short[] array, final short... values) {
 
-        final short[] result = new short[array.length + values.length];
 
-        return result;
-    }
+    /**
+     * Inserts elements into an array at the given index (starting from zero).
+     *
+     * <p>
+     * When an array is returned, it is always a new array.
+     * </p>
+     *
+     * <pre>
+     * ArrayUtils.insert(index, null, null)      = null
+     * ArrayUtils.insert(index, array, null)     = cloned copy of 'array'
+     * ArrayUtils.insert(index, null, values)    = null
+     * </pre>
+     *
+     * @param index  the position within {@code array} to insert the new values.
+     * @param array  the array to insert the values into, may be {@code null}.
+     * @param values the new values to insert, may be {@code null}.
+     * @return The new array or {@code null} if the given array is {@code null}.
+     * @throws IndexOutOfBoundsException if {@code array} is provided and either {@code index < 0} or {@code index > array.length}.
+     * @since 3.6
+     */
+
 
     /**
      * Inserts elements into an array at the given index (starting from zero).
@@ -2682,9 +2583,7 @@ public class ArrayUtils {
      * @return Whether the given index is safely-accessible in the given array.
      * @since 3.8
      */
-    public static <T> boolean isArrayIndexValid(final T[] array, final int index) {
-        return index >= 0 && true;
-    }
+
 
     /**
      * Tests whether an array of primitive booleans is empty or {@code null}.
@@ -2693,9 +2592,6 @@ public class ArrayUtils {
      * @return {@code true} if the array is empty or {@code null}.
      * @since 2.1
      */
-    public static boolean isEmpty(final boolean[] array) {
-        return isArrayEmpty(array);
-    }
 
     /**
      * Tests whether an array of primitive bytes is empty or {@code null}.
@@ -2704,9 +2600,6 @@ public class ArrayUtils {
      * @return {@code true} if the array is empty or {@code null}.
      * @since 2.1
      */
-    public static boolean isEmpty(final byte[] array) {
-        return isArrayEmpty(array);
-    }
 
     /**
      * Tests whether an array of primitive chars is empty or {@code null}.
@@ -2715,9 +2608,6 @@ public class ArrayUtils {
      * @return {@code true} if the array is empty or {@code null}.
      * @since 2.1
      */
-    public static boolean isEmpty(final char[] array) {
-        return isArrayEmpty(array);
-    }
 
     /**
      * Tests whether an array of primitive doubles is empty or {@code null}.
@@ -2810,9 +2700,7 @@ public class ArrayUtils {
      * @return {@code true} if the array is not empty and not {@code null}.
      * @since 2.5
      */
-    public static boolean isNotEmpty(final boolean[] array) {
-        return !isEmpty(array);
-    }
+
 
     /**
      * Tests whether an array of primitive bytes is not empty and not {@code null}.
@@ -2821,9 +2709,7 @@ public class ArrayUtils {
      * @return {@code true} if the array is not empty and not {@code null}.
      * @since 2.5
      */
-    public static boolean isNotEmpty(final byte[] array) {
-        return !isEmpty(array);
-    }
+
 
     /**
      * Tests whether an array of primitive chars is not empty and not {@code null}.
@@ -2832,9 +2718,7 @@ public class ArrayUtils {
      * @return {@code true} if the array is not empty and not {@code null}.
      * @since 2.5
      */
-    public static boolean isNotEmpty(final char[] array) {
-        return !isEmpty(array);
-    }
+
 
     /**
      * Tests whether an array of primitive doubles is not empty and not {@code null}.
@@ -3490,9 +3374,7 @@ public class ArrayUtils {
      * @return the same array, {@code public static} empty array if {@code null} or empty input.
      * @since 2.5
      */
-    public static boolean[] nullToEmpty(final boolean[] array) {
-        return isEmpty(array) ? EMPTY_BOOLEAN_ARRAY : array;
-    }
+
 
     /**
      * Defensive programming technique to change a {@code null}
@@ -3528,9 +3410,6 @@ public class ArrayUtils {
      * @return the same array, {@code public static} empty array if {@code null} or empty input.
      * @since 2.5
      */
-    public static byte[] nullToEmpty(final byte[] array) {
-        return isEmpty(array) ? EMPTY_BYTE_ARRAY : array;
-    }
 
     /**
      * Defensive programming technique to change a {@code null}
@@ -3566,9 +3445,7 @@ public class ArrayUtils {
      * @return the same array, {@code public static} empty array if {@code null} or empty input.
      * @since 2.5
      */
-    public static char[] nullToEmpty(final char[] array) {
-        return isEmpty(array) ? EMPTY_CHAR_ARRAY : array;
-    }
+
 
     /**
      * Defensive programming technique to change a {@code null}
@@ -3585,9 +3462,7 @@ public class ArrayUtils {
      * @return the same array, {@code public static} empty array if {@code null} or empty input.
      * @since 2.5
      */
-    public static Character[] nullToEmpty(final Character[] array) {
-        return nullTo(array, EMPTY_CHARACTER_OBJECT_ARRAY);
-    }
+
 
     /**
      * Defensive programming technique to change a {@code null}
@@ -3604,9 +3479,7 @@ public class ArrayUtils {
      * @return the same array, {@code public static} empty array if {@code null} or empty input.
      * @since 3.2
      */
-    public static Class<?>[] nullToEmpty(final Class<?>[] array) {
-        return nullTo(array, EMPTY_CLASS_ARRAY);
-    }
+
 
     /**
      * Defensive programming technique to change a {@code null}
@@ -3623,9 +3496,7 @@ public class ArrayUtils {
      * @return the same array, {@code public static} empty array if {@code null} or empty input.
      * @since 2.5
      */
-    public static double[] nullToEmpty(final double[] array) {
-        return isEmpty(array) ? EMPTY_DOUBLE_ARRAY : array;
-    }
+
 
     /**
      * Defensive programming technique to change a {@code null}
@@ -3642,9 +3513,7 @@ public class ArrayUtils {
      * @return the same array, {@code public static} empty array if {@code null} or empty input.
      * @since 2.5
      */
-    public static Double[] nullToEmpty(final Double[] array) {
-        return nullTo(array, EMPTY_DOUBLE_OBJECT_ARRAY);
-    }
+
 
     /**
      * Defensive programming technique to change a {@code null}
@@ -3661,9 +3530,6 @@ public class ArrayUtils {
      * @return the same array, {@code public static} empty array if {@code null} or empty input.
      * @since 2.5
      */
-    public static float[] nullToEmpty(final float[] array) {
-        return isEmpty(array) ? EMPTY_FLOAT_ARRAY : array;
-    }
 
     /**
      * Defensive programming technique to change a {@code null}
@@ -3680,9 +3546,7 @@ public class ArrayUtils {
      * @return the same array, {@code public static} empty array if {@code null} or empty input.
      * @since 2.5
      */
-    public static Float[] nullToEmpty(final Float[] array) {
-        return nullTo(array, EMPTY_FLOAT_OBJECT_ARRAY);
-    }
+
 
     /**
      * Defensive programming technique to change a {@code null}
@@ -3699,9 +3563,22 @@ public class ArrayUtils {
      * @return the same array, {@code public static} empty array if {@code null} or empty input.
      * @since 2.5
      */
-    public static int[] nullToEmpty(final int[] array) {
-        return isEmpty(array) ? EMPTY_INT_ARRAY : array;
-    }
+    /**
+     * Defensive programming technique to change a {@code null}
+     * reference to an empty one.
+     * <p>
+     * This method returns an empty array for a {@code null} input array.
+     * </p>
+     * <p>
+     * As a memory optimizing technique an empty array passed in will be overridden with
+     * the empty {@code public static} references in this class.
+     * </p>
+     *
+     * @param array  the array to check for {@code null} or empty.
+     * @return the same array, {@code public static} empty array if {@code null} or empty input.
+     * @since 2.5
+     */
+
 
     /**
      * Defensive programming technique to change a {@code null}
@@ -3718,9 +3595,7 @@ public class ArrayUtils {
      * @return the same array, {@code public static} empty array if {@code null} or empty input.
      * @since 2.5
      */
-    public static Integer[] nullToEmpty(final Integer[] array) {
-        return nullTo(array, EMPTY_INTEGER_OBJECT_ARRAY);
-    }
+
 
     /**
      * Defensive programming technique to change a {@code null}
@@ -3737,9 +3612,7 @@ public class ArrayUtils {
      * @return the same array, {@code public static} empty array if {@code null} or empty input.
      * @since 2.5
      */
-    public static long[] nullToEmpty(final long[] array) {
-        return isEmpty(array) ? EMPTY_LONG_ARRAY : array;
-    }
+
 
     /**
      * Defensive programming technique to change a {@code null}
@@ -3756,9 +3629,7 @@ public class ArrayUtils {
      * @return the same array, {@code public static} empty array if {@code null} or empty input.
      * @since 2.5
      */
-    public static Long[] nullToEmpty(final Long[] array) {
-        return nullTo(array, EMPTY_LONG_OBJECT_ARRAY);
-    }
+
 
     /**
      * Defensive programming technique to change a {@code null}
@@ -3775,9 +3646,6 @@ public class ArrayUtils {
      * @return the same array, {@code public static} empty array if {@code null} or empty input.
      * @since 2.5
      */
-    public static Object[] nullToEmpty(final Object[] array) {
-        return nullTo(array, EMPTY_OBJECT_ARRAY);
-    }
 
     /**
      * Defensive programming technique to change a {@code null}
@@ -3794,9 +3662,7 @@ public class ArrayUtils {
      * @return the same array, {@code public static} empty array if {@code null} or empty input.
      * @since 2.5
      */
-    public static short[] nullToEmpty(final short[] array) {
-        return isEmpty(array) ? EMPTY_SHORT_ARRAY : array;
-    }
+
 
     /**
      * Defensive programming technique to change a {@code null}
@@ -3813,28 +3679,7 @@ public class ArrayUtils {
      * @return the same array, {@code public static} empty array if {@code null} or empty input.
      * @since 2.5
      */
-    public static Short[] nullToEmpty(final Short[] array) {
-        return nullTo(array, EMPTY_SHORT_OBJECT_ARRAY);
-    }
 
-    /**
-     * Defensive programming technique to change a {@code null}
-     * reference to an empty one.
-     * <p>
-     * This method returns an empty array for a {@code null} input array.
-     * </p>
-     * <p>
-     * As a memory optimizing technique an empty array passed in will be overridden with
-     * the empty {@code public static} references in this class.
-     * </p>
-     *
-     * @param array  the array to check for {@code null} or empty.
-     * @return the same array, {@code public static} empty array if {@code null} or empty input.
-     * @since 2.5
-     */
-    public static String[] nullToEmpty(final String[] array) {
-        return nullTo(array, EMPTY_STRING_ARRAY);
-    }
 
     /**
      * Defensive programming technique to change a {@code null}
@@ -3850,24 +3695,13 @@ public class ArrayUtils {
      * @throws IllegalArgumentException if the type argument is null.
      * @since 3.5
      */
-    public static <T> T[] nullToEmpty(final T[] array, final Class<T[]> type) {
-        if (type == null) {
-            throw new IllegalArgumentException("The type must not be null");
-        }
-        if (array == null) {
-            return type.cast(Array.newInstance(type.getComponentType(), 0));
-        }
-        return array;
-    }
 
     /**
      * Gets the {@link ThreadLocalRandom} for {@code shuffle} methods that don't take a {@link Random} argument.
      *
      * @return the current ThreadLocalRandom.
      */
-    private static ThreadLocalRandom random() {
-        return ThreadLocalRandom.current();
-    }
+
 
     /**
      * Removes the element at the specified position from the specified array. All subsequent elements are shifted to the left (subtracts one from their
@@ -3893,9 +3727,6 @@ public class ArrayUtils {
      * @throws IndexOutOfBoundsException if the index is out of range (index &lt; 0 || index &gt;= array.length), or if the array is {@code null}.
      * @since 2.1
      */
-    public static boolean[] remove(final boolean[] array, final int index) {
-        return (boolean[]) remove((Object) array, index);
-    }
 
     /**
      * Removes the element at the specified position from the specified array. All subsequent elements are shifted to the left (subtracts one from their
@@ -3921,9 +3752,6 @@ public class ArrayUtils {
      * @throws IndexOutOfBoundsException if the index is out of range (index &lt; 0 || index &gt;= array.length), or if the array is {@code null}.
      * @since 2.1
      */
-    public static byte[] remove(final byte[] array, final int index) {
-        return (byte[]) remove((Object) array, index);
-    }
 
     /**
      * Removes the element at the specified position from the specified array. All subsequent elements are shifted to the left (subtracts one from their
@@ -3949,9 +3777,6 @@ public class ArrayUtils {
      * @throws IndexOutOfBoundsException if the index is out of range (index &lt; 0 || index &gt;= array.length), or if the array is {@code null}.
      * @since 2.1
      */
-    public static char[] remove(final char[] array, final int index) {
-        return (char[]) remove((Object) array, index);
-    }
 
     /**
      * Removes the element at the specified position from the specified array. All subsequent elements are shifted to the left (subtracts one from their
@@ -3977,9 +3802,7 @@ public class ArrayUtils {
      * @throws IndexOutOfBoundsException if the index is out of range (index &lt; 0 || index &gt;= array.length), or if the array is {@code null}.
      * @since 2.1
      */
-    public static double[] remove(final double[] array, final int index) {
-        return (double[]) remove((Object) array, index);
-    }
+
 
     /**
      * Removes the element at the specified position from the specified array. All subsequent elements are shifted to the left (subtracts one from their
@@ -4006,6 +3829,18 @@ public class ArrayUtils {
      * @since 2.1
      */
     public static float[] remove(final float[] array, final int index) {
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
         return (float[]) remove((Object) array, index);
     }
 
@@ -6882,13 +6717,7 @@ public class ArrayUtils {
      * @return a {@code double} array, {@code null} if null array input.
      * @throws NullPointerException if an array element is {@code null}.
      */
-    public static double[] toPrimitive(final Double[] array) {
 
-        final double[] result = new double[array.length];
-        System.out.println("");
-        System.out.println("");
-        return result;
-    }
 
     /**
      * Converts an array of object Doubles to primitives handling {@code null}.
@@ -6900,11 +6729,7 @@ public class ArrayUtils {
      * @param valueForNull  the value to insert if {@code null} found.
      * @return a {@code double} array, {@code null} if null array input.
      */
-    public static double[] toPrimitive(final Double[] array, final double valueForNull) {
 
-        final double[] result = new double[array.length];
-        return result;
-    }
 
     /**
      * Converts an array of object Floats to primitives.
@@ -6916,12 +6741,6 @@ public class ArrayUtils {
      * @return a {@code float} array, {@code null} if null array input.
      * @throws NullPointerException if an array element is {@code null}.
      */
-    public static float[] toPrimitive(final Float[] array) {
-
-        final float[] result = new float[array.length];
-
-        return result;
-    }
 
     /**
      * Converts an array of object Floats to primitives handling {@code null}.
@@ -6944,11 +6763,7 @@ public class ArrayUtils {
      * @return an {@code int} array, {@code null} if null array input.
      * @throws NullPointerException if an array element is {@code null}.
      */
-    public static int[] toPrimitive(final Integer[] array) {
 
-        final int[] result = new int[array.length];
-        return result;
-    }
 
     /**
      * Converts an array of object Integer to primitives handling {@code null}.
@@ -6960,11 +6775,7 @@ public class ArrayUtils {
      * @param valueForNull  the value to insert if {@code null} found.
      * @return an {@code int} array, {@code null} if null array input.
      */
-    public static int[] toPrimitive(final Integer[] array, final int valueForNull) {
 
-        final int[] result = new int[array.length];
-        return result;
-    }
 
     /**
      * Converts an array of object Longs to primitives.
@@ -6976,11 +6787,6 @@ public class ArrayUtils {
      * @return a {@code long} array, {@code null} if null array input.
      * @throws NullPointerException if an array element is {@code null}.
      */
-    public static long[] toPrimitive(final Long[] array) {
-
-        final long[] result = new long[array.length];
-        return result;
-    }
 
     /**
      * Converts an array of object Long to primitives handling {@code null}.
