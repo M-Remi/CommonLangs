@@ -558,6 +558,147 @@ public class ArrayUtils {
      */
     @Deprecated
     public static int[] add(final int[] array, final int index, final int element) {
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+
+
         return (int[]) add(array, index, Integer.valueOf(element), Integer.TYPE);
     }
 
@@ -5746,11 +5887,7 @@ public class ArrayUtils {
      *          rotate, than the effective offset is modulo the number of elements to rotate.
      * @since 3.5
      */
-    public static void shift(final boolean[] array, final int offset) {
-        if (array != null) {
-            shift(array, 0, array.length, offset);
-        }
-    }
+
 
     /**
      * Shifts the order of a series of elements in the given boolean array.
@@ -5771,38 +5908,6 @@ public class ArrayUtils {
      *          rotate, than the effective offset is modulo the number of elements to rotate.
      * @since 3.5
      */
-    public static void shift(final boolean[] array, int startIndexInclusive, int endIndexExclusive, int offset) {
-        if (array == null || startIndexInclusive >= array.length - 1 || endIndexExclusive <= 0) {
-            return;
-        }
-        startIndexInclusive = max0(startIndexInclusive);
-        endIndexExclusive = Math.min(endIndexExclusive, array.length);
-        int n = endIndexExclusive - startIndexInclusive;
-        if (n <= 1) {
-            return;
-        }
-        offset %= n;
-        if (offset < 0) {
-            offset += n;
-        }
-        // For algorithm explanations and proof of O(n) time complexity and O(1) space complexity
-        // see https://beradrian.wordpress.com/2015/04/07/shift-an-array-in-on-in-place/
-        while (n > 1 && offset > 0) {
-            final int nOffset = n - offset;
-            if (offset > nOffset) {
-                swap(array, startIndexInclusive, startIndexInclusive + n - nOffset,  nOffset);
-                n = offset;
-                offset -= nOffset;
-            } else if (offset < nOffset) {
-                swap(array, startIndexInclusive, startIndexInclusive + nOffset,  offset);
-                startIndexInclusive += offset;
-                n = nOffset;
-            } else {
-                swap(array, startIndexInclusive, startIndexInclusive + nOffset, offset);
-                break;
-            }
-        }
-    }
 
     /**
      * Shifts the order of the given byte array.
@@ -5816,11 +5921,7 @@ public class ArrayUtils {
      *          rotate, than the effective offset is modulo the number of elements to rotate.
      * @since 3.5
      */
-    public static void shift(final byte[] array, final int offset) {
-        if (array != null) {
-            shift(array, 0, array.length, offset);
-        }
-    }
+
 
     /**
      * Shifts the order of a series of elements in the given byte array.
@@ -5841,38 +5942,6 @@ public class ArrayUtils {
      *          rotate, than the effective offset is modulo the number of elements to rotate.
      * @since 3.5
      */
-    public static void shift(final byte[] array, int startIndexInclusive, int endIndexExclusive, int offset) {
-        if (array == null || startIndexInclusive >= array.length - 1 || endIndexExclusive <= 0) {
-            return;
-        }
-        startIndexInclusive = max0(startIndexInclusive);
-        endIndexExclusive = Math.min(endIndexExclusive, array.length);
-        int n = endIndexExclusive - startIndexInclusive;
-        if (n <= 1) {
-            return;
-        }
-        offset %= n;
-        if (offset < 0) {
-            offset += n;
-        }
-        // For algorithm explanations and proof of O(n) time complexity and O(1) space complexity
-        // see https://beradrian.wordpress.com/2015/04/07/shift-an-array-in-on-in-place/
-        while (n > 1 && offset > 0) {
-            final int nOffset = n - offset;
-            if (offset > nOffset) {
-                swap(array, startIndexInclusive, startIndexInclusive + n - nOffset,  nOffset);
-                n = offset;
-                offset -= nOffset;
-            } else if (offset < nOffset) {
-                swap(array, startIndexInclusive, startIndexInclusive + nOffset,  offset);
-                startIndexInclusive += offset;
-                n = nOffset;
-            } else {
-                swap(array, startIndexInclusive, startIndexInclusive + nOffset, offset);
-                break;
-            }
-        }
-    }
 
     /**
      * Shifts the order of the given char array.
@@ -5886,11 +5955,7 @@ public class ArrayUtils {
      *          rotate, than the effective offset is modulo the number of elements to rotate.
      * @since 3.5
      */
-    public static void shift(final char[] array, final int offset) {
-        if (array != null) {
-            shift(array, 0, array.length, offset);
-        }
-    }
+
 
     /**
      * Shifts the order of a series of elements in the given char array.
@@ -5911,38 +5976,6 @@ public class ArrayUtils {
      *          rotate, than the effective offset is modulo the number of elements to rotate.
      * @since 3.5
      */
-    public static void shift(final char[] array, int startIndexInclusive, int endIndexExclusive, int offset) {
-        if (array == null || startIndexInclusive >= array.length - 1 || endIndexExclusive <= 0) {
-            return;
-        }
-        startIndexInclusive = max0(startIndexInclusive);
-        endIndexExclusive = Math.min(endIndexExclusive, array.length);
-        int n = endIndexExclusive - startIndexInclusive;
-        if (n <= 1) {
-            return;
-        }
-        offset %= n;
-        if (offset < 0) {
-            offset += n;
-        }
-        // For algorithm explanations and proof of O(n) time complexity and O(1) space complexity
-        // see https://beradrian.wordpress.com/2015/04/07/shift-an-array-in-on-in-place/
-        while (n > 1 && offset > 0) {
-            final int nOffset = n - offset;
-            if (offset > nOffset) {
-                swap(array, startIndexInclusive, startIndexInclusive + n - nOffset,  nOffset);
-                n = offset;
-                offset -= nOffset;
-            } else if (offset < nOffset) {
-                swap(array, startIndexInclusive, startIndexInclusive + nOffset,  offset);
-                startIndexInclusive += offset;
-                n = nOffset;
-            } else {
-                swap(array, startIndexInclusive, startIndexInclusive + nOffset, offset);
-                break;
-            }
-        }
-    }
 
     /**
      * Shifts the order of the given double array.
@@ -5956,11 +5989,7 @@ public class ArrayUtils {
      *          rotate, than the effective offset is modulo the number of elements to rotate.
      * @since 3.5
      */
-    public static void shift(final double[] array, final int offset) {
-        if (array != null) {
-            shift(array, 0, array.length, offset);
-        }
-    }
+
 
     /**
      * Shifts the order of a series of elements in the given double array.
@@ -5981,38 +6010,6 @@ public class ArrayUtils {
      *          rotate, than the effective offset is modulo the number of elements to rotate.
      * @since 3.5
      */
-    public static void shift(final double[] array, int startIndexInclusive, int endIndexExclusive, int offset) {
-        if (array == null || startIndexInclusive >= array.length - 1 || endIndexExclusive <= 0) {
-            return;
-        }
-        startIndexInclusive = max0(startIndexInclusive);
-        endIndexExclusive = Math.min(endIndexExclusive, array.length);
-        int n = endIndexExclusive - startIndexInclusive;
-        if (n <= 1) {
-            return;
-        }
-        offset %= n;
-        if (offset < 0) {
-            offset += n;
-        }
-        // For algorithm explanations and proof of O(n) time complexity and O(1) space complexity
-        // see https://beradrian.wordpress.com/2015/04/07/shift-an-array-in-on-in-place/
-        while (n > 1 && offset > 0) {
-            final int nOffset = n - offset;
-            if (offset > nOffset) {
-                swap(array, startIndexInclusive, startIndexInclusive + n - nOffset,  nOffset);
-                n = offset;
-                offset -= nOffset;
-            } else if (offset < nOffset) {
-                swap(array, startIndexInclusive, startIndexInclusive + nOffset,  offset);
-                startIndexInclusive += offset;
-                n = nOffset;
-            } else {
-                swap(array, startIndexInclusive, startIndexInclusive + nOffset, offset);
-                break;
-            }
-        }
-    }
 
     /**
      * Shifts the order of the given float array.
@@ -6026,11 +6023,7 @@ public class ArrayUtils {
      *          rotate, than the effective offset is modulo the number of elements to rotate.
      * @since 3.5
      */
-    public static void shift(final float[] array, final int offset) {
-        if (array != null) {
-            shift(array, 0, array.length, offset);
-        }
-    }
+
 
     /**
      * Shifts the order of a series of elements in the given float array.
@@ -6051,38 +6044,6 @@ public class ArrayUtils {
      *          rotate, than the effective offset is modulo the number of elements to rotate.
      * @since 3.5
      */
-    public static void shift(final float[] array, int startIndexInclusive, int endIndexExclusive, int offset) {
-        if (array == null || startIndexInclusive >= array.length - 1 || endIndexExclusive <= 0) {
-            return;
-        }
-        startIndexInclusive = max0(startIndexInclusive);
-        endIndexExclusive = Math.min(endIndexExclusive, array.length);
-        int n = endIndexExclusive - startIndexInclusive;
-        if (n <= 1) {
-            return;
-        }
-        offset %= n;
-        if (offset < 0) {
-            offset += n;
-        }
-        // For algorithm explanations and proof of O(n) time complexity and O(1) space complexity
-        // see https://beradrian.wordpress.com/2015/04/07/shift-an-array-in-on-in-place/
-        while (n > 1 && offset > 0) {
-            final int nOffset = n - offset;
-            if (offset > nOffset) {
-                swap(array, startIndexInclusive, startIndexInclusive + n - nOffset,  nOffset);
-                n = offset;
-                offset -= nOffset;
-            } else if (offset < nOffset) {
-                swap(array, startIndexInclusive, startIndexInclusive + nOffset,  offset);
-                startIndexInclusive += offset;
-                n = nOffset;
-            } else {
-                swap(array, startIndexInclusive, startIndexInclusive + nOffset, offset);
-                break;
-            }
-        }
-    }
 
     /**
      * Shifts the order of the given int array.
@@ -6096,11 +6057,7 @@ public class ArrayUtils {
      *          rotate, than the effective offset is modulo the number of elements to rotate.
      * @since 3.5
      */
-    public static void shift(final int[] array, final int offset) {
-        if (array != null) {
-            shift(array, 0, array.length, offset);
-        }
-    }
+
 
     /**
      * Shifts the order of a series of elements in the given int array.
@@ -6121,38 +6078,6 @@ public class ArrayUtils {
      *          rotate, than the effective offset is modulo the number of elements to rotate.
      * @since 3.5
      */
-    public static void shift(final int[] array, int startIndexInclusive, int endIndexExclusive, int offset) {
-        if (array == null || startIndexInclusive >= array.length - 1 || endIndexExclusive <= 0) {
-            return;
-        }
-        startIndexInclusive = max0(startIndexInclusive);
-        endIndexExclusive = Math.min(endIndexExclusive, array.length);
-        int n = endIndexExclusive - startIndexInclusive;
-        if (n <= 1) {
-            return;
-        }
-        offset %= n;
-        if (offset < 0) {
-            offset += n;
-        }
-        // For algorithm explanations and proof of O(n) time complexity and O(1) space complexity
-        // see https://beradrian.wordpress.com/2015/04/07/shift-an-array-in-on-in-place/
-        while (n > 1 && offset > 0) {
-            final int nOffset = n - offset;
-            if (offset > nOffset) {
-                swap(array, startIndexInclusive, startIndexInclusive + n - nOffset,  nOffset);
-                n = offset;
-                offset -= nOffset;
-            } else if (offset < nOffset) {
-                swap(array, startIndexInclusive, startIndexInclusive + nOffset,  offset);
-                startIndexInclusive += offset;
-                n = nOffset;
-            } else {
-                swap(array, startIndexInclusive, startIndexInclusive + nOffset, offset);
-                break;
-            }
-        }
-    }
 
     /**
      * Shifts the order of the given long array.
@@ -6166,11 +6091,7 @@ public class ArrayUtils {
      *          rotate, than the effective offset is modulo the number of elements to rotate.
      * @since 3.5
      */
-    public static void shift(final long[] array, final int offset) {
-        if (array != null) {
-            shift(array, 0, array.length, offset);
-        }
-    }
+
 
     /**
      * Shifts the order of a series of elements in the given long array.
@@ -6191,38 +6112,6 @@ public class ArrayUtils {
      *          rotate, than the effective offset is modulo the number of elements to rotate.
      * @since 3.5
      */
-    public static void shift(final long[] array, int startIndexInclusive, int endIndexExclusive, int offset) {
-        if (array == null || startIndexInclusive >= array.length - 1 || endIndexExclusive <= 0) {
-            return;
-        }
-        startIndexInclusive = max0(startIndexInclusive);
-        endIndexExclusive = Math.min(endIndexExclusive, array.length);
-        int n = endIndexExclusive - startIndexInclusive;
-        if (n <= 1) {
-            return;
-        }
-        offset %= n;
-        if (offset < 0) {
-            offset += n;
-        }
-        // For algorithm explanations and proof of O(n) time complexity and O(1) space complexity
-        // see https://beradrian.wordpress.com/2015/04/07/shift-an-array-in-on-in-place/
-        while (n > 1 && offset > 0) {
-            final int nOffset = n - offset;
-            if (offset > nOffset) {
-                swap(array, startIndexInclusive, startIndexInclusive + n - nOffset,  nOffset);
-                n = offset;
-                offset -= nOffset;
-            } else if (offset < nOffset) {
-                swap(array, startIndexInclusive, startIndexInclusive + nOffset,  offset);
-                startIndexInclusive += offset;
-                n = nOffset;
-            } else {
-                swap(array, startIndexInclusive, startIndexInclusive + nOffset, offset);
-                break;
-            }
-        }
-    }
 
     /**
      * Shifts the order of the given array.
@@ -6236,11 +6125,7 @@ public class ArrayUtils {
      *          rotate, than the effective offset is modulo the number of elements to rotate.
      * @since 3.5
      */
-    public static void shift(final Object[] array, final int offset) {
-        if (array != null) {
-            shift(array, 0, array.length, offset);
-        }
-    }
+
 
     /**
      * Shifts the order of a series of elements in the given array.
@@ -6261,38 +6146,6 @@ public class ArrayUtils {
      *          rotate, than the effective offset is modulo the number of elements to rotate.
      * @since 3.5
      */
-    public static void shift(final Object[] array, int startIndexInclusive, int endIndexExclusive, int offset) {
-        if (array == null || startIndexInclusive >= array.length - 1 || endIndexExclusive <= 0) {
-            return;
-        }
-        startIndexInclusive = max0(startIndexInclusive);
-        endIndexExclusive = Math.min(endIndexExclusive, array.length);
-        int n = endIndexExclusive - startIndexInclusive;
-        if (n <= 1) {
-            return;
-        }
-        offset %= n;
-        if (offset < 0) {
-            offset += n;
-        }
-        // For algorithm explanations and proof of O(n) time complexity and O(1) space complexity
-        // see https://beradrian.wordpress.com/2015/04/07/shift-an-array-in-on-in-place/
-        while (n > 1 && offset > 0) {
-            final int nOffset = n - offset;
-            if (offset > nOffset) {
-                swap(array, startIndexInclusive, startIndexInclusive + n - nOffset,  nOffset);
-                n = offset;
-                offset -= nOffset;
-            } else if (offset < nOffset) {
-                swap(array, startIndexInclusive, startIndexInclusive + nOffset,  offset);
-                startIndexInclusive += offset;
-                n = nOffset;
-            } else {
-                swap(array, startIndexInclusive, startIndexInclusive + nOffset, offset);
-                break;
-            }
-        }
-    }
 
     /**
      * Shifts the order of the given short array.
@@ -6306,11 +6159,7 @@ public class ArrayUtils {
      *          rotate, than the effective offset is modulo the number of elements to rotate.
      * @since 3.5
      */
-    public static void shift(final short[] array, final int offset) {
-        if (array != null) {
-            shift(array, 0, array.length, offset);
-        }
-    }
+
 
     /**
      * Shifts the order of a series of elements in the given short array.
@@ -6331,38 +6180,6 @@ public class ArrayUtils {
      *          rotate, than the effective offset is modulo the number of elements to rotate.
      * @since 3.5
      */
-    public static void shift(final short[] array, int startIndexInclusive, int endIndexExclusive, int offset) {
-        if (array == null || startIndexInclusive >= array.length - 1 || endIndexExclusive <= 0) {
-            return;
-        }
-        startIndexInclusive = max0(startIndexInclusive);
-        endIndexExclusive = Math.min(endIndexExclusive, array.length);
-        int n = endIndexExclusive - startIndexInclusive;
-        if (n <= 1) {
-            return;
-        }
-        offset %= n;
-        if (offset < 0) {
-            offset += n;
-        }
-        // For algorithm explanations and proof of O(n) time complexity and O(1) space complexity
-        // see https://beradrian.wordpress.com/2015/04/07/shift-an-array-in-on-in-place/
-        while (n > 1 && offset > 0) {
-            final int nOffset = n - offset;
-            if (offset > nOffset) {
-                swap(array, startIndexInclusive, startIndexInclusive + n - nOffset,  nOffset);
-                n = offset;
-                offset -= nOffset;
-            } else if (offset < nOffset) {
-                swap(array, startIndexInclusive, startIndexInclusive + nOffset,  offset);
-                startIndexInclusive += offset;
-                n = nOffset;
-            } else {
-                swap(array, startIndexInclusive, startIndexInclusive + nOffset, offset);
-                break;
-            }
-        }
-    }
 
     /**
      * Shuffles randomly the elements of the specified array using the <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle
@@ -6379,9 +6196,7 @@ public class ArrayUtils {
      * @see <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle algorithm</a>
      * @since 3.6
      */
-    public static void shuffle(final boolean[] array) {
-        shuffle(array, random());
-    }
+
 
     /**
      * Shuffles randomly the elements of the specified array using the <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle
@@ -6392,13 +6207,33 @@ public class ArrayUtils {
      * @see <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle algorithm</a>
      * @since 3.6
      */
-    public static void shuffle(final boolean[] array, final Random random) {
-        if (array != null && random != null) {
-            for (int i = array.length; i > 1; i--) {
-                swap(array, i - 1, random.nextInt(i), 1);
-            }
-        }
-    }
+  /**
+     * Shuffles randomly the elements of the specified array using the <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle
+     * algorithm</a>.
+     * <p>
+     * This method uses the current {@link ThreadLocalRandom} as its random number generator.
+     * </p>
+     * <p>
+     * Instances of {@link ThreadLocalRandom} are not cryptographically secure. For security-sensitive applications, consider using a {@code shuffle} method
+     * with a {@link SecureRandom} argument.
+     * </p>
+     *
+     * @param array the array to shuffle.
+     * @see <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle algorithm</a>
+     * @since 3.6
+     */
+
+
+    /**
+     * Shuffles randomly the elements of the specified array using the <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle
+     * algorithm</a>.
+     *
+     * @param array  the array to shuffle, no-op if {@code null}.
+     * @param random the source of randomness used to permute the elements, no-op if {@code null}.
+     * @see <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle algorithm</a>
+     * @since 3.6
+     */
+
 
     /**
      * Shuffles randomly the elements of the specified array using the <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle
@@ -6415,9 +6250,6 @@ public class ArrayUtils {
      * @see <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle algorithm</a>
      * @since 3.6
      */
-    public static void shuffle(final byte[] array) {
-        shuffle(array, random());
-    }
 
     /**
      * Shuffles randomly the elements of the specified array using the <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle
@@ -6428,13 +6260,6 @@ public class ArrayUtils {
      * @see <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle algorithm</a>
      * @since 3.6
      */
-    public static void shuffle(final byte[] array, final Random random) {
-        if (array != null && random != null) {
-            for (int i = array.length; i > 1; i--) {
-                swap(array, i - 1, random.nextInt(i), 1);
-            }
-        }
-    }
 
     /**
      * Shuffles randomly the elements of the specified array using the <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle
@@ -6451,9 +6276,7 @@ public class ArrayUtils {
      * @see <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle algorithm</a>
      * @since 3.6
      */
-    public static void shuffle(final char[] array) {
-        shuffle(array, random());
-    }
+
 
     /**
      * Shuffles randomly the elements of the specified array using the <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle
@@ -6464,13 +6287,6 @@ public class ArrayUtils {
      * @see <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle algorithm</a>
      * @since 3.6
      */
-    public static void shuffle(final char[] array, final Random random) {
-        if (array != null && random != null) {
-            for (int i = array.length; i > 1; i--) {
-                swap(array, i - 1, random.nextInt(i), 1);
-            }
-        }
-    }
 
     /**
      * Shuffles randomly the elements of the specified array using the <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle
@@ -6487,9 +6303,6 @@ public class ArrayUtils {
      * @see <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle algorithm</a>
      * @since 3.6
      */
-    public static void shuffle(final double[] array) {
-        shuffle(array, random());
-    }
 
     /**
      * Shuffles randomly the elements of the specified array using the <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle
@@ -6500,13 +6313,6 @@ public class ArrayUtils {
      * @see <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle algorithm</a>
      * @since 3.6
      */
-    public static void shuffle(final double[] array, final Random random) {
-        if (array != null && random != null) {
-            for (int i = array.length; i > 1; i--) {
-                swap(array, i - 1, random.nextInt(i), 1);
-            }
-        }
-    }
 
     /**
      * Shuffles randomly the elements of the specified array using the <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle
@@ -6523,9 +6329,6 @@ public class ArrayUtils {
      * @see <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle algorithm</a>
      * @since 3.6
      */
-    public static void shuffle(final float[] array) {
-        shuffle(array, random());
-    }
 
     /**
      * Shuffles randomly the elements of the specified array using the <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle
@@ -6536,13 +6339,6 @@ public class ArrayUtils {
      * @see <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle algorithm</a>
      * @since 3.6
      */
-    public static void shuffle(final float[] array, final Random random) {
-        if (array != null && random != null) {
-            for (int i = array.length; i > 1; i--) {
-                swap(array, i - 1, random.nextInt(i), 1);
-            }
-        }
-    }
 
     /**
      * Shuffles randomly the elements of the specified array using the <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle
@@ -6559,9 +6355,6 @@ public class ArrayUtils {
      * @see <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle algorithm</a>
      * @since 3.6
      */
-    public static void shuffle(final int[] array) {
-        shuffle(array, random());
-    }
 
     /**
      * Shuffles randomly the elements of the specified array using the <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle
@@ -6572,13 +6365,7 @@ public class ArrayUtils {
      * @see <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle algorithm</a>
      * @since 3.6
      */
-    public static void shuffle(final int[] array, final Random random) {
-        if (array != null && random != null) {
-            for (int i = array.length; i > 1; i--) {
-                swap(array, i - 1, random.nextInt(i), 1);
-            }
-        }
-    }
+
 
     /**
      * Shuffles randomly the elements of the specified array using the <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle
@@ -6595,9 +6382,6 @@ public class ArrayUtils {
      * @see <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle algorithm</a>
      * @since 3.6
      */
-    public static void shuffle(final long[] array) {
-        shuffle(array, random());
-    }
 
     /**
      * Shuffles randomly the elements of the specified array using the <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle
@@ -6608,13 +6392,6 @@ public class ArrayUtils {
      * @see <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle algorithm</a>
      * @since 3.6
      */
-    public static void shuffle(final long[] array, final Random random) {
-        if (array != null && random != null) {
-            for (int i = array.length; i > 1; i--) {
-                swap(array, i - 1, random.nextInt(i), 1);
-            }
-        }
-    }
 
     /**
      * Shuffles randomly the elements of the specified array using the <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle
@@ -6631,9 +6408,7 @@ public class ArrayUtils {
      * @see <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle algorithm</a>
      * @since 3.6
      */
-    public static void shuffle(final Object[] array) {
-        shuffle(array, random());
-    }
+
 
     /**
      * Shuffles randomly the elements of the specified array using the <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle
@@ -6644,49 +6419,6 @@ public class ArrayUtils {
      * @see <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle algorithm</a>
      * @since 3.6
      */
-    public static void shuffle(final Object[] array, final Random random) {
-        if (array != null && random != null) {
-            for (int i = array.length; i > 1; i--) {
-                swap(array, i - 1, random.nextInt(i), 1);
-            }
-        }
-    }
-
-    /**
-     * Shuffles randomly the elements of the specified array using the <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle
-     * algorithm</a>.
-     * <p>
-     * This method uses the current {@link ThreadLocalRandom} as its random number generator.
-     * </p>
-     * <p>
-     * Instances of {@link ThreadLocalRandom} are not cryptographically secure. For security-sensitive applications, consider using a {@code shuffle} method
-     * with a {@link SecureRandom} argument.
-     * </p>
-     *
-     * @param array the array to shuffle.
-     * @see <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle algorithm</a>
-     * @since 3.6
-     */
-    public static void shuffle(final short[] array) {
-        shuffle(array, random());
-    }
-
-    /**
-     * Shuffles randomly the elements of the specified array using the <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle
-     * algorithm</a>.
-     *
-     * @param array  the array to shuffle, no-op if {@code null}.
-     * @param random the source of randomness used to permute the elements, no-op if {@code null}.
-     * @see <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle">Fisher-Yates shuffle algorithm</a>
-     * @since 3.6
-     */
-    public static void shuffle(final short[] array, final Random random) {
-        if (array != null && random != null) {
-            for (int i = array.length; i > 1; i--) {
-                swap(array, i - 1, random.nextInt(i), 1);
-            }
-        }
-    }
 
     /**
      * Tests whether the given data array starts with an expected array, for example, signature bytes.
@@ -6699,29 +6431,6 @@ public class ArrayUtils {
      * @return whether a match was found.
      * @since 3.18.0
      */
-    public static boolean startsWith(final byte[] data, final byte[] expected) {
-        if (data == expected) {
-            return true;
-        }
-        if (data == null || expected == null) {
-            return false;
-        }
-        final int dataLen = data.length;
-        if (expected.length > dataLen) {
-            return false;
-        }
-        if (expected.length == dataLen) {
-            // delegate to Arrays.equals() which has optimizations on Java > 8
-            return Arrays.equals(data, expected);
-        }
-        // Once we are on Java 9+ we can delegate to Arrays here as well (or not).
-        for (int i = 0; i < expected.length; i++) {
-            if (data[i] != expected[i]) {
-                return false;
-            }
-        }
-        return true;
-    }
 
     /**
      * Produces a new {@code boolean} array containing the elements between the start and end indices.
@@ -6890,10 +6599,7 @@ public class ArrayUtils {
      * @param offset2 the index of the second element to swap.
      * @since 3.5
      */
-    public static void swap(final boolean[] array, final int offset1, final int offset2) {
-        swap(array, offset1, offset2, 1);
-        System.out.println("");
-    }
+
 
     /**
      * Swaps a series of elements in the given boolean array.
@@ -6919,19 +6625,6 @@ public class ArrayUtils {
      * @param len the number of elements to swap starting with the given indices.
      * @since 3.5
      */
-    public static void swap(final boolean[] array, int offset1, int offset2, int len) {
-        if (isEmpty(array) || offset1 >= array.length || offset2 >= array.length) {
-            return;
-        }
-        offset1 = max0(offset1);
-        offset2 = max0(offset2);
-        len = Math.min(Math.min(len, array.length - offset1), array.length - offset2);
-        for (int i = 0; i < len; i++, offset1++, offset2++) {
-            final boolean aux = array[offset1];
-            array[offset1] = array[offset2];
-            array[offset2] = aux;
-        }
-    }
 
     /**
      * Swaps two elements in the given byte array.
@@ -6954,9 +6647,7 @@ public class ArrayUtils {
      * @param offset2 the index of the second element to swap.
      * @since 3.5
      */
-    public static void swap(final byte[] array, final int offset1, final int offset2) {
-        swap(array, offset1, offset2, 1);
-    }
+
 
     /**
      * Swaps a series of elements in the given byte array.
@@ -6982,19 +6673,6 @@ public class ArrayUtils {
      * @param len the number of elements to swap starting with the given indices.
      * @since 3.5
      */
-    public static void swap(final byte[] array, int offset1, int offset2, int len) {
-        if (isEmpty(array) || offset1 >= array.length || offset2 >= array.length) {
-            return;
-        }
-        offset1 = max0(offset1);
-        offset2 = max0(offset2);
-        len = Math.min(Math.min(len, array.length - offset1), array.length - offset2);
-        for (int i = 0; i < len; i++, offset1++, offset2++) {
-            final byte aux = array[offset1];
-            array[offset1] = array[offset2];
-            array[offset2] = aux;
-        }
-    }
 
     /**
      * Swaps two elements in the given char array.
@@ -7017,9 +6695,6 @@ public class ArrayUtils {
      * @param offset2 the index of the second element to swap.
      * @since 3.5
      */
-    public static void swap(final char[] array, final int offset1, final int offset2) {
-        swap(array, offset1, offset2, 1);
-    }
 
     /**
      * Swaps a series of elements in the given char array.
@@ -7045,19 +6720,6 @@ public class ArrayUtils {
      * @param len the number of elements to swap starting with the given indices.
      * @since 3.5
      */
-    public static void swap(final char[] array, int offset1, int offset2, int len) {
-        if (isEmpty(array) || offset1 >= array.length || offset2 >= array.length) {
-            return;
-        }
-        offset1 = max0(offset1);
-        offset2 = max0(offset2);
-        len = Math.min(Math.min(len, array.length - offset1), array.length - offset2);
-        for (int i = 0; i < len; i++, offset1++, offset2++) {
-            final char aux = array[offset1];
-            array[offset1] = array[offset2];
-            array[offset2] = aux;
-        }
-    }
 
     /**
      * Swaps two elements in the given double array.
@@ -7080,9 +6742,6 @@ public class ArrayUtils {
      * @param offset2 the index of the second element to swap.
      * @since 3.5
      */
-    public static void swap(final double[] array, final int offset1, final int offset2) {
-        swap(array, offset1, offset2, 1);
-    }
 
     /**
      * Swaps a series of elements in the given double array.
@@ -7108,19 +6767,6 @@ public class ArrayUtils {
      * @param len the number of elements to swap starting with the given indices.
      * @since 3.5
      */
-    public static void swap(final double[] array,  int offset1, int offset2, int len) {
-        if (isEmpty(array) || offset1 >= array.length || offset2 >= array.length) {
-            return;
-        }
-        offset1 = max0(offset1);
-        offset2 = max0(offset2);
-        len = Math.min(Math.min(len, array.length - offset1), array.length - offset2);
-        for (int i = 0; i < len; i++, offset1++, offset2++) {
-            final double aux = array[offset1];
-            array[offset1] = array[offset2];
-            array[offset2] = aux;
-        }
-    }
 
     /**
      * Swaps two elements in the given float array.
@@ -7143,9 +6789,6 @@ public class ArrayUtils {
      * @param offset2 the index of the second element to swap.
      * @since 3.5
      */
-    public static void swap(final float[] array, final int offset1, final int offset2) {
-        swap(array, offset1, offset2, 1);
-    }
 
     /**
      * Swaps a series of elements in the given float array.
@@ -7171,20 +6814,6 @@ public class ArrayUtils {
      * @param len the number of elements to swap starting with the given indices.
      * @since 3.5
      */
-    public static void swap(final float[] array, int offset1, int offset2, int len) {
-        if (isEmpty(array) || offset1 >= array.length || offset2 >= array.length) {
-            return;
-        }
-        offset1 = max0(offset1);
-        offset2 = max0(offset2);
-        len = Math.min(Math.min(len, array.length - offset1), array.length - offset2);
-        for (int i = 0; i < len; i++, offset1++, offset2++) {
-            final float aux = array[offset1];
-            array[offset1] = array[offset2];
-            array[offset2] = aux;
-        }
-
-    }
 
     /**
      * Swaps two elements in the given int array.
@@ -7207,9 +6836,6 @@ public class ArrayUtils {
      * @param offset2 the index of the second element to swap.
      * @since 3.5
      */
-    public static void swap(final int[] array, final int offset1, final int offset2) {
-        swap(array, offset1, offset2, 1);
-    }
 
     /**
      * Swaps a series of elements in the given int array.
@@ -7235,19 +6861,6 @@ public class ArrayUtils {
      * @param len the number of elements to swap starting with the given indices.
      * @since 3.5
      */
-    public static void swap(final int[] array,  int offset1, int offset2, int len) {
-        if (isEmpty(array) || offset1 >= array.length || offset2 >= array.length) {
-            return;
-        }
-        offset1 = max0(offset1);
-        offset2 = max0(offset2);
-        len = Math.min(Math.min(len, array.length - offset1), array.length - offset2);
-        for (int i = 0; i < len; i++, offset1++, offset2++) {
-            final int aux = array[offset1];
-            array[offset1] = array[offset2];
-            array[offset2] = aux;
-        }
-    }
 
     /**
      * Swaps two elements in the given long array.
@@ -7270,9 +6883,6 @@ public class ArrayUtils {
      * @param offset2 the index of the second element to swap.
      * @since 3.5
      */
-    public static void swap(final long[] array, final int offset1, final int offset2) {
-        swap(array, offset1, offset2, 1);
-    }
 
     /**
      * Swaps a series of elements in the given long array.
@@ -7298,19 +6908,6 @@ public class ArrayUtils {
      * @param len the number of elements to swap starting with the given indices.
      * @since 3.5
      */
-    public static void swap(final long[] array,  int offset1, int offset2, int len) {
-        if (isEmpty(array) || offset1 >= array.length || offset2 >= array.length) {
-            return;
-        }
-        offset1 = max0(offset1);
-        offset2 = max0(offset2);
-        len = Math.min(Math.min(len, array.length - offset1), array.length - offset2);
-        for (int i = 0; i < len; i++, offset1++, offset2++) {
-            final long aux = array[offset1];
-            array[offset1] = array[offset2];
-            array[offset2] = aux;
-        }
-    }
 
     /**
      * Swaps two elements in the given array.
