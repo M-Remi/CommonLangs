@@ -63,11 +63,7 @@ public class ArrayUtils {
     /**
      * Bridge class to {@link Math} methods for testing purposes.
      */
-    static class MathBridge {
-        static int addExact(final int a, final int b) {
-            return Math.addExact(a, b);
-        }
-    }
+
 
     /**
      * An empty immutable {@code boolean} array.
@@ -205,8 +201,6 @@ public class ArrayUtils {
      * @since 3.19.0
      * @deprecated This variable will be final in 4.0; to guarantee immutability now, use {@link #SAFE_MAX_ARRAY_LENGTH}.
      */
-    @Deprecated
-    public static int SOFT_MAX_ARRAY_LENGTH = Integer.MAX_VALUE - 8;
 
     /**
      * The {@code MAX_ARRAY_LENGTH} constant from Java's internal ArraySupport class.
@@ -237,10 +231,6 @@ public class ArrayUtils {
      * @return A new array containing the existing elements plus the new element.
      * @since 2.1
      */
-    public static boolean[] add(final boolean[] array, final boolean element) {
-
-                return null;
-    }
 
     /**
      * Inserts the specified element at the specified position in the array.
@@ -272,10 +262,6 @@ public class ArrayUtils {
      * may be removed in a future release. Please note the handling of {@code null} input arrays differs
      * in the new method: inserting {@code X} into a {@code null} array results in {@code null} not {@code X}.
      */
-    @Deprecated
-    public static boolean[] add(final boolean[] array, final int index, final boolean element) {
-        return null;
-    }
 
     /**
      * Copies the given array and adds the given element at the end of the new array.
@@ -299,10 +285,6 @@ public class ArrayUtils {
      * @return A new array containing the existing elements plus the new element.
      * @since 2.1
      */
-    public static byte[] add(final byte[] array, final byte element) {
-
-        return null;
-    }
 
     /**
      * Inserts the specified element at the specified position in the array.
@@ -335,10 +317,6 @@ public class ArrayUtils {
      * may be removed in a future release. Please note the handling of {@code null} input arrays differs
      * in the new method: inserting {@code X} into a {@code null} array results in {@code null} not {@code X}.
      */
-    @Deprecated
-    public static byte[] add(final byte[] array, final int index, final byte element) {
-        return (byte[]) add(array, index, Byte.valueOf(element), Byte.TYPE);
-    }
 
     /**
      * Copies the given array and adds the given element at the end of the new array.
@@ -362,11 +340,6 @@ public class ArrayUtils {
      * @return A new array containing the existing elements plus the new element.
      * @since 2.1
      */
-    public static char[] add(final char[] array, final char element) {
-        final char[] newArray = (char[]) copyArrayGrow1(array, Character.TYPE);
-        newArray[newArray.length - 1] = element;
-        return newArray;
-    }
 
     /**
      * Inserts the specified element at the specified position in the array.
@@ -400,10 +373,6 @@ public class ArrayUtils {
      * may be removed in a future release. Please note the handling of {@code null} input arrays differs
      * in the new method: inserting {@code X} into a {@code null} array results in {@code null} not {@code X}.
      */
-    @Deprecated
-    public static char[] add(final char[] array, final int index, final char element) {
-        return (char[]) add(array, index, Character.valueOf(element), Character.TYPE);
-    }
 
     /**
      * Copies the given array and adds the given element at the end of the new array.
@@ -428,11 +397,6 @@ public class ArrayUtils {
      * @return A new array containing the existing elements plus the new element.
      * @since 2.1
      */
-    public static double[] add(final double[] array, final double element) {
-        final double[] newArray = (double[]) copyArrayGrow1(array, Double.TYPE);
-        newArray[newArray.length - 1] = element;
-        return newArray;
-    }
 
     /**
      * Inserts the specified element at the specified position in the array.
@@ -1071,9 +1035,7 @@ public class ArrayUtils {
      *         the input array (unless null), in which case it will have the same type as the element.
      * @since 3.10
      */
-    public static boolean[] addFirst(final boolean[] array, final boolean element) {
-        return array == null ? add(array, element) : insert(0, array, element);
-    }
+
 
     /**
      * Copies the given array and adds the given element at the beginning of the new array.
@@ -1097,9 +1059,7 @@ public class ArrayUtils {
      *         the input array (unless null), in which case it will have the same type as the element.
      * @since 3.10
      */
-    public static byte[] addFirst(final byte[] array, final byte element) {
-        return array == null ? add(array, element) : insert(0, array, element);
-    }
+
 
     /**
      * Copies the given array and adds the given element at the beginning of the new array.
@@ -1123,58 +1083,6 @@ public class ArrayUtils {
      *         the input array (unless null), in which case it will have the same type as the element.
      * @since 3.10
      */
-    public static char[] addFirst(final char[] array, final char element) {
-        return array == null ? add(array, element) : insert(0, array, element);
-    }
-
-    /**
-     * Copies the given array and adds the given element at the beginning of the new array.
-     * <p>
-     * The new array contains the same elements of the input array plus the given element in the first position. The
-     * component type of the new array is the same as that of the input array.
-     * </p>
-     * <p>
-     * If the input array is {@code null}, a new one element array is returned whose component type is the same as the
-     * element.
-     * </p>
-     * <pre>
-     * ArrayUtils.addFirst(null, 1)   = [1]
-     * ArrayUtils.addFirst([1], 0)    = [0, 1]
-     * ArrayUtils.addFirst([1, 0], 1) = [1, 1, 0]
-     * </pre>
-     *
-     * @param array the array to "add" the element to, may be {@code null}.
-     * @param element the object to add.
-     * @return A new array containing the existing elements plus the new element The returned array type will be that of
-     *         the input array (unless null), in which case it will have the same type as the element.
-     * @since 3.10
-     */
-    public static double[] addFirst(final double[] array, final double element) {
-        return array == null ? add(array, element) : insert(0, array, element);
-    }
-
-    /**
-     * Copies the given array and adds the given element at the beginning of the new array.
-     * <p>
-     * The new array contains the same elements of the input array plus the given element in the first position. The
-     * component type of the new array is the same as that of the input array.
-     * </p>
-     * <p>
-     * If the input array is {@code null}, a new one element array is returned whose component type is the same as the
-     * element.
-     * </p>
-     * <pre>
-     * ArrayUtils.addFirst(null, 1)   = [1]
-     * ArrayUtils.addFirst([1], 0)    = [0, 1]
-     * ArrayUtils.addFirst([1, 0], 1) = [1, 1, 0]
-     * </pre>
-     *
-     * @param array the array to "add" the element to, may be {@code null}.
-     * @param element the object to add.
-     * @return A new array containing the existing elements plus the new element The returned array type will be that of
-     *         the input array (unless null), in which case it will have the same type as the element.
-     * @since 3.10
-     */
 
 
     /**
@@ -1199,9 +1107,6 @@ public class ArrayUtils {
      *         the input array (unless null), in which case it will have the same type as the element.
      * @since 3.10
      */
-    public static int[] addFirst(final int[] array, final int element) {
-        return array == null ? add(array, element) : insert(0, array, element);
-    }
 
     /**
      * Copies the given array and adds the given element at the beginning of the new array.
@@ -1225,9 +1130,7 @@ public class ArrayUtils {
      *         the input array (unless null), in which case it will have the same type as the element.
      * @since 3.10
      */
-    public static long[] addFirst(final long[] array, final long element) {
-        return array == null ? add(array, element) : insert(0, array, element);
-    }
+
 
     /**
      * Copies the given array and adds the given element at the beginning of the new array.
@@ -1251,9 +1154,53 @@ public class ArrayUtils {
      *         the input array (unless null), in which case it will have the same type as the element.
      * @since 3.10
      */
-    public static short[] addFirst(final short[] array, final short element) {
-        return array == null ? add(array, element) : insert(0, array, element);
-    }
+
+
+    /**
+     * Copies the given array and adds the given element at the beginning of the new array.
+     * <p>
+     * The new array contains the same elements of the input array plus the given element in the first position. The
+     * component type of the new array is the same as that of the input array.
+     * </p>
+     * <p>
+     * If the input array is {@code null}, a new one element array is returned whose component type is the same as the
+     * element.
+     * </p>
+     * <pre>
+     * ArrayUtils.addFirst(null, 1)   = [1]
+     * ArrayUtils.addFirst([1], 0)    = [0, 1]
+     * ArrayUtils.addFirst([1, 0], 1) = [1, 1, 0]
+     * </pre>
+     *
+     * @param array the array to "add" the element to, may be {@code null}.
+     * @param element the object to add.
+     * @return A new array containing the existing elements plus the new element The returned array type will be that of
+     *         the input array (unless null), in which case it will have the same type as the element.
+     * @since 3.10
+     */
+
+    /**
+     * Copies the given array and adds the given element at the beginning of the new array.
+     * <p>
+     * The new array contains the same elements of the input array plus the given element in the first position. The
+     * component type of the new array is the same as that of the input array.
+     * </p>
+     * <p>
+     * If the input array is {@code null}, a new one element array is returned whose component type is the same as the
+     * element.
+     * </p>
+     * <pre>
+     * ArrayUtils.addFirst(null, 1)   = [1]
+     * ArrayUtils.addFirst([1], 0)    = [0, 1]
+     * ArrayUtils.addFirst([1, 0], 1) = [1, 1, 0]
+     * </pre>
+     *
+     * @param array the array to "add" the element to, may be {@code null}.
+     * @param element the object to add.
+     * @return A new array containing the existing elements plus the new element The returned array type will be that of
+     *         the input array (unless null), in which case it will have the same type as the element.
+     * @since 3.10
+     */
 
     /**
      * Copies the given array and adds the given element at the beginning of the new array.
@@ -1300,9 +1247,6 @@ public class ArrayUtils {
      * @throws NullPointerException      if either {@code src} or {@code dest} is {@code null}.
      * @since 3.15.0
      */
-    public static <T> T arraycopy(final T source, final int sourcePos, final int destPos, final int length, final Function<Integer, T> allocator) {
-        return arraycopy(source, sourcePos, allocator.apply(length), destPos, length);
-    }
 
     /**
      * A fluent version of {@link System#arraycopy(Object, int, Object, int, int)} that returns the destination array.
@@ -6793,18 +6737,6 @@ public class ArrayUtils {
      * @since 2.1
      * @see Arrays#copyOfRange(boolean[], int, int)
      */
-    public static boolean[] subarray(final boolean[] array, int startIndexInclusive, int endIndexExclusive) {
-        if (array == null) {
-            return null;
-        }
-        startIndexInclusive = max0(startIndexInclusive);
-        endIndexExclusive = max0(Math.min(endIndexExclusive, array.length));
-        final int newSize = endIndexExclusive - startIndexInclusive;
-        if (newSize <= 0) {
-            return EMPTY_BOOLEAN_ARRAY;
-        }
-        return arraycopy(array, startIndexInclusive, 0, newSize, boolean[]::new);
-    }
 
     /**
      * Produces a new {@code byte} array containing the elements between the start and end indices.
@@ -6820,18 +6752,6 @@ public class ArrayUtils {
      * @since 2.1
      * @see Arrays#copyOfRange(byte[], int, int)
      */
-    public static byte[] subarray(final byte[] array, int startIndexInclusive, int endIndexExclusive) {
-        if (array == null) {
-            return null;
-        }
-        startIndexInclusive = max0(startIndexInclusive);
-        endIndexExclusive = max0(Math.min(endIndexExclusive, array.length));
-        final int newSize = endIndexExclusive - startIndexInclusive;
-        if (newSize <= 0) {
-            return EMPTY_BYTE_ARRAY;
-        }
-        return arraycopy(array, startIndexInclusive, 0, newSize, byte[]::new);
-    }
 
     /**
      * Produces a new {@code char} array containing the elements between the start and end indices.
@@ -6847,18 +6767,7 @@ public class ArrayUtils {
      * @since 2.1
      * @see Arrays#copyOfRange(char[], int, int)
      */
-    public static char[] subarray(final char[] array, int startIndexInclusive, int endIndexExclusive) {
-        if (array == null) {
-            return null;
-        }
-        startIndexInclusive = max0(startIndexInclusive);
-        endIndexExclusive = max0(Math.min(endIndexExclusive, array.length));
-        final int newSize = endIndexExclusive - startIndexInclusive;
-        if (newSize <= 0) {
-            return EMPTY_CHAR_ARRAY;
-        }
-        return arraycopy(array, startIndexInclusive, 0, newSize, char[]::new);
-    }
+
 
     /**
      * Produces a new {@code double} array containing the elements between the start and end indices.
@@ -6874,18 +6783,6 @@ public class ArrayUtils {
      * @since 2.1
      * @see Arrays#copyOfRange(double[], int, int)
      */
-    public static double[] subarray(final double[] array, int startIndexInclusive, int endIndexExclusive) {
-        if (array == null) {
-            return null;
-        }
-        startIndexInclusive = max0(startIndexInclusive);
-        endIndexExclusive = max0(Math.min(endIndexExclusive, array.length));
-        final int newSize = endIndexExclusive - startIndexInclusive;
-        if (newSize <= 0) {
-            return EMPTY_DOUBLE_ARRAY;
-        }
-        return arraycopy(array, startIndexInclusive, 0, newSize, double[]::new);
-    }
 
     /**
      * Produces a new {@code float} array containing the elements between the start and end indices.
@@ -6901,18 +6798,6 @@ public class ArrayUtils {
      * @since 2.1
      * @see Arrays#copyOfRange(float[], int, int)
      */
-    public static float[] subarray(final float[] array, int startIndexInclusive, int endIndexExclusive) {
-        if (array == null) {
-            return null;
-        }
-        startIndexInclusive = max0(startIndexInclusive);
-        endIndexExclusive = max0(Math.min(endIndexExclusive, array.length));
-        final int newSize = endIndexExclusive - startIndexInclusive;
-        if (newSize <= 0) {
-            return EMPTY_FLOAT_ARRAY;
-        }
-        return arraycopy(array, startIndexInclusive, 0, newSize, float[]::new);
-    }
 
     /**
      * Produces a new {@code int} array containing the elements between the start and end indices.
@@ -6928,18 +6813,6 @@ public class ArrayUtils {
      * @since 2.1
      * @see Arrays#copyOfRange(int[], int, int)
      */
-    public static int[] subarray(final int[] array, int startIndexInclusive, int endIndexExclusive) {
-        if (array == null) {
-            return null;
-        }
-        startIndexInclusive = max0(startIndexInclusive);
-        endIndexExclusive = max0(Math.min(endIndexExclusive, array.length));
-        final int newSize = endIndexExclusive - startIndexInclusive;
-        if (newSize <= 0) {
-            return EMPTY_INT_ARRAY;
-        }
-        return arraycopy(array, startIndexInclusive, 0, newSize, int[]::new);
-    }
 
     /**
      * Produces a new {@code long} array containing the elements between the start and end indices.
@@ -6955,18 +6828,6 @@ public class ArrayUtils {
      * @since 2.1
      * @see Arrays#copyOfRange(long[], int, int)
      */
-    public static long[] subarray(final long[] array, int startIndexInclusive, int endIndexExclusive) {
-        if (array == null) {
-            return null;
-        }
-        startIndexInclusive = max0(startIndexInclusive);
-        endIndexExclusive = max0(Math.min(endIndexExclusive, array.length));
-        final int newSize = endIndexExclusive - startIndexInclusive;
-        if (newSize <= 0) {
-            return EMPTY_LONG_ARRAY;
-        }
-        return arraycopy(array, startIndexInclusive, 0, newSize, long[]::new);
-    }
 
     /**
      * Produces a new {@code short} array containing the elements between the start and end indices.
@@ -6982,18 +6843,6 @@ public class ArrayUtils {
      * @since 2.1
      * @see Arrays#copyOfRange(short[], int, int)
      */
-    public static short[] subarray(final short[] array, int startIndexInclusive, int endIndexExclusive) {
-        if (array == null) {
-            return null;
-        }
-        startIndexInclusive = max0(startIndexInclusive);
-        endIndexExclusive = max0(Math.min(endIndexExclusive, array.length));
-        final int newSize = endIndexExclusive - startIndexInclusive;
-        if (newSize <= 0) {
-            return EMPTY_SHORT_ARRAY;
-        }
-        return arraycopy(array, startIndexInclusive, 0, newSize, short[]::new);
-    }
 
     /**
      * Produces a new array containing the elements between the start and end indices.
@@ -7043,6 +6892,7 @@ public class ArrayUtils {
      */
     public static void swap(final boolean[] array, final int offset1, final int offset2) {
         swap(array, offset1, offset2, 1);
+        System.out.println("");
     }
 
     /**
@@ -7985,56 +7835,6 @@ public class ArrayUtils {
      * @since 3.5
      */
     public static Object toPrimitive(final Object array) {
-    System.out.println("");
-    System.out.println("");
-    System.out.println("");
-    System.out.println("");
-    System.out.println("");
-    System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
         return array;
     }
 
