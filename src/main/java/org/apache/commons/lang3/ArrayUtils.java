@@ -7783,91 +7783,9 @@ public class ArrayUtils {
      * @return a {@code boolean} array, {@code null} if null array input.
      */
     public static boolean[] toPrimitive(final Boolean[] array, final boolean valueForNull) {
-        if (array == null) {
 
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-
-            return null;
-        }
-        if (array.length == 0) {
-            return EMPTY_BOOLEAN_ARRAY;
-        }
         final boolean[] result = new boolean[array.length];
-        for (int i = 0; i < array.length; i++) {
-            final Boolean b = array[i];
-            result[i] = b == null ? valueForNull : b.booleanValue();
-        }
+
         return result;
     }
 
@@ -7882,16 +7800,9 @@ public class ArrayUtils {
      * @throws NullPointerException if an array element is {@code null}.
      */
     public static byte[] toPrimitive(final Byte[] array) {
-        if (array == null) {
-            return null;
-        }
-        if (array.length == 0) {
-            return EMPTY_BYTE_ARRAY;
-        }
+
         final byte[] result = new byte[array.length];
-        for (int i = 0; i < array.length; i++) {
-            result[i] = array[i].byteValue();
-        }
+
         return result;
     }
 
@@ -7906,17 +7817,8 @@ public class ArrayUtils {
      * @return a {@code byte} array, {@code null} if null array input.
      */
     public static byte[] toPrimitive(final Byte[] array, final byte valueForNull) {
-        if (array == null) {
-            return null;
-        }
-        if (array.length == 0) {
-            return EMPTY_BYTE_ARRAY;
-        }
+
         final byte[] result = new byte[array.length];
-        for (int i = 0; i < array.length; i++) {
-            final Byte b = array[i];
-            result[i] = b == null ? valueForNull : b.byteValue();
-        }
         return result;
     }
 
@@ -7931,16 +7833,9 @@ public class ArrayUtils {
      * @throws NullPointerException if an array element is {@code null}.
      */
     public static char[] toPrimitive(final Character[] array) {
-        if (array == null) {
-            return null;
-        }
-        if (array.length == 0) {
-            return EMPTY_CHAR_ARRAY;
-        }
+
         final char[] result = new char[array.length];
-        for (int i = 0; i < array.length; i++) {
-            result[i] = array[i].charValue();
-        }
+
         return result;
     }
 
@@ -7955,17 +7850,8 @@ public class ArrayUtils {
      * @return a {@code char} array, {@code null} if null array input.
      */
     public static char[] toPrimitive(final Character[] array, final char valueForNull) {
-        if (array == null) {
-            return null;
-        }
-        if (array.length == 0) {
-            return EMPTY_CHAR_ARRAY;
-        }
+
         final char[] result = new char[array.length];
-        for (int i = 0; i < array.length; i++) {
-            final Character b = array[i];
-            result[i] = b == null ? valueForNull : b.charValue();
-        }
         return result;
     }
 
@@ -7980,16 +7866,8 @@ public class ArrayUtils {
      * @throws NullPointerException if an array element is {@code null}.
      */
     public static double[] toPrimitive(final Double[] array) {
-        if (array == null) {
-            return null;
-        }
-        if (array.length == 0) {
-            return EMPTY_DOUBLE_ARRAY;
-        }
+
         final double[] result = new double[array.length];
-        for (int i = 0; i < array.length; i++) {
-            result[i] = array[i].doubleValue();
-        }
         return result;
     }
 
@@ -8004,17 +7882,8 @@ public class ArrayUtils {
      * @return a {@code double} array, {@code null} if null array input.
      */
     public static double[] toPrimitive(final Double[] array, final double valueForNull) {
-        if (array == null) {
-            return null;
-        }
-        if (array.length == 0) {
-            return EMPTY_DOUBLE_ARRAY;
-        }
+
         final double[] result = new double[array.length];
-        for (int i = 0; i < array.length; i++) {
-            final Double b = array[i];
-            result[i] = b == null ? valueForNull : b.doubleValue();
-        }
         return result;
     }
 
@@ -8029,16 +7898,9 @@ public class ArrayUtils {
      * @throws NullPointerException if an array element is {@code null}.
      */
     public static float[] toPrimitive(final Float[] array) {
-        if (array == null) {
-            return null;
-        }
-        if (array.length == 0) {
-            return EMPTY_FLOAT_ARRAY;
-        }
+
         final float[] result = new float[array.length];
-        for (int i = 0; i < array.length; i++) {
-            result[i] = array[i].floatValue();
-        }
+
         return result;
     }
 
@@ -8052,20 +7914,6 @@ public class ArrayUtils {
      * @param valueForNull  the value to insert if {@code null} found.
      * @return a {@code float} array, {@code null} if null array input.
      */
-    public static float[] toPrimitive(final Float[] array, final float valueForNull) {
-        if (array == null) {
-            return null;
-        }
-        if (array.length == 0) {
-            return EMPTY_FLOAT_ARRAY;
-        }
-        final float[] result = new float[array.length];
-        for (int i = 0; i < array.length; i++) {
-            final Float b = array[i];
-            result[i] = b == null ? valueForNull : b.floatValue();
-        }
-        return result;
-    }
 
     /**
      * Converts an array of object Integers to primitives.
@@ -8078,16 +7926,8 @@ public class ArrayUtils {
      * @throws NullPointerException if an array element is {@code null}.
      */
     public static int[] toPrimitive(final Integer[] array) {
-        if (array == null) {
-            return null;
-        }
-        if (array.length == 0) {
-            return EMPTY_INT_ARRAY;
-        }
+
         final int[] result = new int[array.length];
-        for (int i = 0; i < array.length; i++) {
-            result[i] = array[i].intValue();
-        }
         return result;
     }
 
@@ -8102,17 +7942,8 @@ public class ArrayUtils {
      * @return an {@code int} array, {@code null} if null array input.
      */
     public static int[] toPrimitive(final Integer[] array, final int valueForNull) {
-        if (array == null) {
-            return null;
-        }
-        if (array.length == 0) {
-            return EMPTY_INT_ARRAY;
-        }
+
         final int[] result = new int[array.length];
-        for (int i = 0; i < array.length; i++) {
-            final Integer b = array[i];
-            result[i] = b == null ? valueForNull : b.intValue();
-        }
         return result;
     }
 
@@ -8127,16 +7958,8 @@ public class ArrayUtils {
      * @throws NullPointerException if an array element is {@code null}.
      */
     public static long[] toPrimitive(final Long[] array) {
-        if (array == null) {
-            return null;
-        }
-        if (array.length == 0) {
-            return EMPTY_LONG_ARRAY;
-        }
+
         final long[] result = new long[array.length];
-        for (int i = 0; i < array.length; i++) {
-            result[i] = array[i].longValue();
-        }
         return result;
     }
 
@@ -8150,20 +7973,6 @@ public class ArrayUtils {
      * @param valueForNull  the value to insert if {@code null} found.
      * @return a {@code long} array, {@code null} if null array input.
      */
-    public static long[] toPrimitive(final Long[] array, final long valueForNull) {
-        if (array == null) {
-            return null;
-        }
-        if (array.length == 0) {
-            return EMPTY_LONG_ARRAY;
-        }
-        final long[] result = new long[array.length];
-        for (int i = 0; i < array.length; i++) {
-            final Long b = array[i];
-            result[i] = b == null ? valueForNull : b.longValue();
-        }
-        return result;
-    }
 
     /**
      * Create an array of primitive type from an array of wrapper types.
@@ -8176,35 +7985,56 @@ public class ArrayUtils {
      * @since 3.5
      */
     public static Object toPrimitive(final Object array) {
-        if (array == null) {
-            return null;
-        }
-        final Class<?> ct = array.getClass().getComponentType();
-        final Class<?> pt = ClassUtils.wrapperToPrimitive(ct);
-        if (Boolean.TYPE.equals(pt)) {
-            return toPrimitive((Boolean[]) array);
-        }
-        if (Character.TYPE.equals(pt)) {
-            return toPrimitive((Character[]) array);
-        }
-        if (Byte.TYPE.equals(pt)) {
-            return toPrimitive((Byte[]) array);
-        }
-        if (Integer.TYPE.equals(pt)) {
-            return toPrimitive((Integer[]) array);
-        }
-        if (Long.TYPE.equals(pt)) {
-            return toPrimitive((Long[]) array);
-        }
-        if (Short.TYPE.equals(pt)) {
-            return toPrimitive((Short[]) array);
-        }
-        if (Double.TYPE.equals(pt)) {
-            return toPrimitive((Double[]) array);
-        }
-        if (Float.TYPE.equals(pt)) {
-            return toPrimitive((Float[]) array);
-        }
+    System.out.println("");
+    System.out.println("");
+    System.out.println("");
+    System.out.println("");
+    System.out.println("");
+    System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
         return array;
     }
 
@@ -8218,10 +8048,7 @@ public class ArrayUtils {
      * @return a {@code byte} array, {@code null} if null array input.
      * @throws NullPointerException if an array element is {@code null}.
      */
-    public static short[] toPrimitive(final Short[] array) {
 
-        return null;
-    }
 
     /**
      * Converts an array of object Short to primitives handling {@code null}.
@@ -8233,10 +8060,7 @@ public class ArrayUtils {
      * @param valueForNull  the value to insert if {@code null} found.
      * @return a {@code byte} array, {@code null} if null array input.
      */
-    public static short[] toPrimitive(final Short[] array, final short valueForNull) {
 
-        return null;
-    }
 
     /**
      * Outputs an array as a String, treating {@code null} as an empty array.
@@ -8251,9 +8075,7 @@ public class ArrayUtils {
      * @param array  the array to get a toString for, may be {@code null}.
      * @return a String representation of the array, '{}' if null array input.
      */
-    public static String toString(final Object array) {
-        return toString(array, "{}");
-    }
+
 
     /**
      * Outputs an array as a String handling {@code null}s.
@@ -8269,9 +8091,6 @@ public class ArrayUtils {
      * @param stringIfNull  the String to return if the array is {@code null}.
      * @return a String representation of the array.
      */
-    public static String toString(final Object array, final String stringIfNull) {
-        return array != null ? new ToStringBuilder(array, ToStringStyle.SIMPLE_STYLE).append(array).toString() : stringIfNull;
-    }
 
     /**
      * Returns an array containing the string representation of each element in the argument array.
@@ -8283,9 +8102,7 @@ public class ArrayUtils {
      * @return {@code String[]} of the same size as the source with its element's string representation, {@code null} if null array input.
      * @since 3.6
      */
-    public static String[] toStringArray(final Object[] array) {
-        return toStringArray(array, "null");
-    }
+
 
     /**
      * Returns an array containing the string representation of each element in the argument array handling {@code null} elements.
@@ -8298,10 +8115,7 @@ public class ArrayUtils {
      * @return a {@link String} array, {@code null} if null array input.
      * @since 3.6
      */
-    public static String[] toStringArray(final Object[] array, final String valueForNullElements) {
 
-        return null;
-    }
 
     /**
      * ArrayUtils instances should NOT be constructed in standard programming. Instead, the class should be used as {@code ArrayUtils.clone(new int[] {2})}.
@@ -8311,8 +8125,5 @@ public class ArrayUtils {
      *
      * @deprecated TODO Make private in 4.0.
      */
-    @Deprecated
-    public ArrayUtils() {
-        // empty
-    }
+
 }
