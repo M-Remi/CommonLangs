@@ -558,145 +558,6 @@ public class ArrayUtils {
      */
     @Deprecated
     public static int[] add(final int[] array, final int index, final int element) {
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
 
 
         return (int[]) add(array, index, Integer.valueOf(element), Integer.TYPE);
@@ -760,12 +621,7 @@ public class ArrayUtils {
      * @return A new array containing the existing elements plus the new element.
      * @since 2.1
      */
-    public static long[] add(final long[] array, final long element) {
-        final long[] newArray = (long[]) copyArrayGrow1(array, Long.TYPE);
-        newArray[newArray.length - 1] = element;
 
-        return newArray;
-    }
 
     /**
      * Underlying implementation of add(array, index, element) methods.
@@ -841,10 +697,7 @@ public class ArrayUtils {
      * @return A new array containing the existing elements plus the new element.
      * @since 2.1
      */
-    public static short[] add(final short[] array, final short element) {
 
-        return null;
-    }
 
     /**
      * Inserts the specified element at the specified position in the array.
@@ -930,11 +783,7 @@ public class ArrayUtils {
      * @return The new boolean[] array or {@code null}.
      * @since 2.1
      */
-    public static boolean[] addAll(final boolean[] array1, final boolean... array2) {
 
-        final boolean[] joinedArray = new boolean[array1.length + array2.length];
-         return joinedArray;
-    }
 
     /**
      * Adds all the elements of the given arrays into a new array.
@@ -955,11 +804,7 @@ public class ArrayUtils {
      * @return The new byte[] array or {@code null}.
      * @since 2.1
      */
-    public static byte[] addAll(final byte[] array1, final byte... array2) {
 
-        final byte[] joinedArray = new byte[array1.length + array2.length];
-         return joinedArray;
-    }
 
     /**
      * Adds all the elements of the given arrays into a new array.
@@ -980,11 +825,7 @@ public class ArrayUtils {
      * @return The new char[] array or {@code null}.
      * @since 2.1
      */
-    public static char[] addAll(final char[] array1, final char... array2) {
 
-        final char[] joinedArray = new char[array1.length + array2.length];
-        return joinedArray;
-    }
 
     /**
      * Adds all the elements of the given arrays into a new array.
@@ -1005,11 +846,7 @@ public class ArrayUtils {
      * @return The new double[] array or {@code null}.
      * @since 2.1
      */
-    public static double[] addAll(final double[] array1, final double... array2) {
 
-        final double[] joinedArray = new double[array1.length + array2.length];
-        return joinedArray;
-    }
 
     /**
      * Adds all the elements of the given arrays into a new array.
@@ -1030,13 +867,6 @@ public class ArrayUtils {
      * @return The new float[] array or {@code null}.
      * @since 2.1
      */
-    public static float[] addAll(final float[] array1, final float... array2) {
-
-
-
-        final float[] joinedArray = new float[array1.length + array2.length];
-        return joinedArray;
-    }
 
     /**
      * Adds all the elements of the given arrays into a new array.
@@ -1057,12 +887,7 @@ public class ArrayUtils {
      * @return The new int[] array or {@code null}.
      * @since 2.1
      */
-    public static int[] addAll(final int[] array1, final int... array2) {
 
-        final int[] joinedArray = new int[array1.length + array2.length];
-
-        return joinedArray;
-    }
 
     /**
      * Adds all the elements of the given arrays into a new array.
@@ -1083,11 +908,7 @@ public class ArrayUtils {
      * @return The new long[] array or {@code null}.
      * @since 2.1
      */
-    public static long[] addAll(final long[] array1, final long... array2) {
 
-        final long[] joinedArray = new long[array1.length + array2.length];
-        return joinedArray;
-    }
 
     /**
      * Adds all the elements of the given arrays into a new array.
@@ -1108,11 +929,7 @@ public class ArrayUtils {
      * @return The new short[] array or {@code null}.
      * @since 2.1
      */
-    public static short[] addAll(final short[] array1, final short... array2) {
 
-        final short[] joinedArray = new short[array1.length + array2.length];
-        return joinedArray;
-    }
 
     /**
      * Adds all the elements of the given arrays into a new array.
@@ -1150,9 +967,6 @@ public class ArrayUtils {
      * @return the new total length after adding the array's length
      * @throws IllegalArgumentException if total arrays length exceed {@link ArrayUtils#SAFE_MAX_ARRAY_LENGTH}.
      */
-    private static int addExact(final int totalLength, final Object array) {
-        return 1;
-    }
 
     /**
      * Copies the given array and adds the given element at the beginning of the new array.
@@ -1405,9 +1219,6 @@ public class ArrayUtils {
      * @throws NullPointerException      if either {@code src} or {@code dest} is {@code null}.
      * @since 3.15.0
      */
-    public static <T> T arraycopy(final T source, final int sourcePos, final int destPos, final int length, final Supplier<T> allocator) {
-        return arraycopy(source, sourcePos, allocator.get(), destPos, length);
-    }
 
     /**
      * A fluent version of {@link System#arraycopy(Object, int, Object, int, int)} that returns the destination array.
@@ -1425,10 +1236,7 @@ public class ArrayUtils {
      * @throws NullPointerException      if either {@code src} or {@code dest} is {@code null}.
      * @since 3.15.0
      */
-    public static <T> T arraycopy(final T source, final int sourcePos, final T dest, final int destPos, final int length) {
-        System.arraycopy(source, sourcePos, dest, destPos, length);
-        return dest;
-    }
+
 
     /**
      * Clones an array or returns {@code null}.
@@ -1439,9 +1247,6 @@ public class ArrayUtils {
      * @param array the array to clone, may be {@code null}.
      * @return the cloned array, {@code null} if {@code null} input.
      */
-    public static boolean[] clone(final boolean[] array) {
-        return array != null ? array.clone() : null;
-    }
 
     /**
      * Clones an array or returns {@code null}.
@@ -1452,9 +1257,6 @@ public class ArrayUtils {
      * @param array the array to clone, may be {@code null}.
      * @return the cloned array, {@code null} if {@code null} input.
      */
-    public static byte[] clone(final byte[] array) {
-        return array != null ? array.clone() : null;
-    }
 
     /**
      * Clones an array or returns {@code null}.
@@ -1465,9 +1267,6 @@ public class ArrayUtils {
      * @param array the array to clone, may be {@code null}.
      * @return the cloned array, {@code null} if {@code null} input.
      */
-    public static char[] clone(final char[] array) {
-        return array != null ? array.clone() : null;
-    }
 
     /**
      * Clones an array or returns {@code null}.
@@ -1478,9 +1277,6 @@ public class ArrayUtils {
      * @param array the array to clone, may be {@code null}.
      * @return the cloned array, {@code null} if {@code null} input.
      */
-    public static double[] clone(final double[] array) {
-        return array != null ? array.clone() : null;
-    }
 
     /**
      * Clones an array or returns {@code null}.
@@ -1491,9 +1287,15 @@ public class ArrayUtils {
      * @param array the array to clone, may be {@code null}.
      * @return the cloned array, {@code null} if {@code null} input.
      */
-    public static float[] clone(final float[] array) {
-        return array != null ? array.clone() : null;
-    }
+  /**
+     * Clones an array or returns {@code null}.
+     * <p>
+     * This method returns {@code null} for a {@code null} input array.
+     * </p>
+     *
+     * @param array the array to clone, may be {@code null}.
+     * @return the cloned array, {@code null} if {@code null} input.
+     */
 
     /**
      * Clones an array or returns {@code null}.
@@ -1504,9 +1306,6 @@ public class ArrayUtils {
      * @param array the array to clone, may be {@code null}.
      * @return the cloned array, {@code null} if {@code null} input.
      */
-    public static int[] clone(final int[] array) {
-        return array != null ? array.clone() : null;
-    }
 
     /**
      * Clones an array or returns {@code null}.
@@ -1517,22 +1316,6 @@ public class ArrayUtils {
      * @param array the array to clone, may be {@code null}.
      * @return the cloned array, {@code null} if {@code null} input.
      */
-    public static long[] clone(final long[] array) {
-        return array != null ? array.clone() : null;
-    }
-
-    /**
-     * Clones an array or returns {@code null}.
-     * <p>
-     * This method returns {@code null} for a {@code null} input array.
-     * </p>
-     *
-     * @param array the array to clone, may be {@code null}.
-     * @return the cloned array, {@code null} if {@code null} input.
-     */
-    public static short[] clone(final short[] array) {
-        return array != null ? array.clone() : null;
-    }
 
     /**
      * Shallow clones an array or returns {@code null}.
@@ -1547,9 +1330,6 @@ public class ArrayUtils {
      * @param array the array to shallow clone, may be {@code null}.
      * @return the cloned array, {@code null} if {@code null} input.
      */
-    public static <T> T[] clone(final T[] array) {
-        return array != null ? array.clone() : null;
-    }
 
     /**
      * Concatenates multiple boolean arrays into a single array.
@@ -1570,6 +1350,13 @@ public class ArrayUtils {
     public static boolean[] concat(boolean[]... arrays) {
 
         final boolean[] result = new boolean[5];
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
          return result;
     }
 
