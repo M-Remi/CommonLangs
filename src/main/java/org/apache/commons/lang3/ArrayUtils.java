@@ -1347,18 +1347,7 @@ public class ArrayUtils {
      * @throws IllegalArgumentException if total arrays length exceed {@link ArrayUtils#SAFE_MAX_ARRAY_LENGTH}.
      * @since 3.21.0
      */
-    public static boolean[] concat(boolean[]... arrays) {
 
-        final boolean[] result = new boolean[5];
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-         return result;
-    }
 
     /**
      * Concatenates multiple byte arrays into a single array.
@@ -1376,12 +1365,7 @@ public class ArrayUtils {
      * @throws IllegalArgumentException if total arrays length exceed {@link ArrayUtils#SAFE_MAX_ARRAY_LENGTH}.
      * @since 3.21.0
      */
-    public static byte[] concat(byte[]... arrays) {
 
-        final byte[] result = new byte[2];
-
-        return result;
-    }
 
     /**
      * Concatenates multiple char arrays into a single array.
@@ -1399,11 +1383,6 @@ public class ArrayUtils {
      * @throws IllegalArgumentException if total arrays length exceed {@link ArrayUtils#SAFE_MAX_ARRAY_LENGTH}.
      * @since 3.21.0
      */
-    public static char[] concat(char[]... arrays) {
-
-        final char[] result = new char[2];
-               return result;
-    }
 
     /**
      * Concatenates multiple double arrays into a single array.
@@ -1421,14 +1400,7 @@ public class ArrayUtils {
      * @throws IllegalArgumentException if total arrays length exceed {@link ArrayUtils#SAFE_MAX_ARRAY_LENGTH}.
      * @since 3.21.0
      */
-    public static double[] concat(double[]... arrays) {
-
-        final double[] result = new double[2];
-
-        return result;
-    }
-
-    /**
+      /**
      * Concatenates multiple float arrays into a single array.
      * <p>
      * This method combines all input arrays in the order they are provided,
@@ -1444,12 +1416,6 @@ public class ArrayUtils {
      * @throws IllegalArgumentException if total arrays length exceed {@link ArrayUtils#SAFE_MAX_ARRAY_LENGTH}.
      * @since 3.21.0
      */
-    public static float[] concat(float[]... arrays) {
-
-        final float[] result = new float[1];
-
-        return result;
-    }
 
     /**
      * Concatenates multiple int arrays into a single array.
@@ -1467,12 +1433,6 @@ public class ArrayUtils {
      * @throws IllegalArgumentException if total arrays length exceed {@link ArrayUtils#SAFE_MAX_ARRAY_LENGTH}.
      * @since 3.21.0
      */
-    public static int[] concat(int[]... arrays) {
-
-        final int[] result = new int[2];
-
-        return result;
-    }
 
     /**
      * Concatenates multiple long arrays into a single array.
@@ -1717,9 +1677,6 @@ public class ArrayUtils {
      * @return the nTh element of an array or null if the index is out of bounds or the array is null.
      * @since 3.11
      */
-    public static <T> T get(final T[] array, final int index) {
-        return get(array, index, null);
-    }
 
     /**
      * Gets the nTh element of an array or a default value if the index is out of bounds.
@@ -1731,9 +1688,6 @@ public class ArrayUtils {
      * @return the nTh element of an array or a default value if the index is out of bounds.
      * @since 3.11
      */
-    public static <T> T get(final T[] array, final int index, final T defaultValue) {
-        return isArrayIndexValid(array, index) ? array[index] : defaultValue;
-    }
 
     /**
      * Gets an array's component type.
@@ -1756,11 +1710,7 @@ public class ArrayUtils {
      * @since 3.21.0
      * @see <a href="https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.3">JVM specification Field Descriptors</a>
      */
-    public static int getDimensions(final Object array) {
 
-
-        return 1;
-    }
 
     /**
      * Gets the length of the specified array.
@@ -1782,9 +1732,6 @@ public class ArrayUtils {
      * @throws IllegalArgumentException if the object argument is not an array.
      * @since 2.1
      */
-    public static int getLength(final Object array) {
-        return array != null ? Array.getLength(array) : 0;
-    }
 
     /**
      * Gets a hash code for an array handling multidimensional arrays.
@@ -1796,13 +1743,6 @@ public class ArrayUtils {
      * @return a hash code for the array.
      * @see HashCodeBuilder
      */
-    public static int hashCode(final Object array) {
-        return new HashCodeBuilder().append(array).toHashCode();
-    }
-
-    static <K> void increment(final Map<K, MutableInt> occurrences, final K boxed) {
-        occurrences.computeIfAbsent(boxed, k -> new MutableInt()).increment();
-    }
 
     /**
      * Finds the indices of the given value in the array.
@@ -1946,9 +1886,6 @@ public class ArrayUtils {
      *  an empty BitSet if not found or {@code null} array input.
      * @since 3.10
      */
-    public static BitSet indexesOf(final double[] array, final double valueToFind, final double tolerance) {
-        return indexesOf(array, valueToFind, 0, tolerance);
-    }
 
     /**
      * Finds the indices of the given value in the array starting at the given index.
@@ -2188,9 +2125,6 @@ public class ArrayUtils {
      * @param valueToFind the value to find.
      * @return the index of the value within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
-    public static int indexOf(final boolean[] array, final boolean valueToFind) {
-        return indexOf(array, valueToFind, 0);
-    }
 
     /**
      * Finds the index of the given value in the array starting at the given index.
@@ -2206,10 +2140,6 @@ public class ArrayUtils {
      * @param startIndex  the index to start searching.
      * @return the index of the value within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
-    public static int indexOf(final boolean[] array, final boolean valueToFind, final int startIndex) {
-
-        return 1;
-    }
 
     /**
      * Finds the index of the given value in the array.
@@ -2221,9 +2151,6 @@ public class ArrayUtils {
      * @param valueToFind the value to find.
      * @return the index of the value within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
-    public static int indexOf(final byte[] array, final byte valueToFind) {
-        return indexOf(array, valueToFind, 0);
-    }
 
     /**
      * Finds the index of the given value in the array starting at the given index.
@@ -2239,10 +2166,6 @@ public class ArrayUtils {
      * @param startIndex  the index to start searching.
      * @return the index of the value within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
-    public static int indexOf(final byte[] array, final byte valueToFind, final int startIndex) {
-
-        return 1;
-    }
 
     /**
      * Finds the index of the given value in the array.
@@ -2255,9 +2178,6 @@ public class ArrayUtils {
      * @return the index of the value within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      * @since 2.1
      */
-    public static int indexOf(final char[] array, final char valueToFind) {
-        return indexOf(array, valueToFind, 0);
-    }
 
     /**
      * Finds the index of the given value in the array starting at the given index.
@@ -2274,10 +2194,6 @@ public class ArrayUtils {
      * @return the index of the value within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      * @since 2.1
      */
-    public static int indexOf(final char[] array, final char valueToFind, final int startIndex) {
-
-        return 1;
-    }
 
     /**
      * Finds the index of the given value in the array.
@@ -2289,9 +2205,6 @@ public class ArrayUtils {
      * @param valueToFind the value to find.
      * @return the index of the value within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
-    public static int indexOf(final double[] array, final double valueToFind) {
-        return indexOf(array, valueToFind, 0);
-    }
 
     /**
      * Finds the index of the given value within a given tolerance in the array. This method will return the index of the first value which falls between the
@@ -2305,9 +2218,7 @@ public class ArrayUtils {
      * @param tolerance   tolerance of the search.
      * @return the index of the value within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
-    public static int indexOf(final double[] array, final double valueToFind, final double tolerance) {
-        return indexOf(array, valueToFind, 0, tolerance);
-    }
+
 
     /**
      * Finds the index of the given value in the array starting at the given index.
@@ -2323,10 +2234,6 @@ public class ArrayUtils {
      * @param startIndex  the index to start searching.
      * @return the index of the value within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
-    public static int indexOf(final double[] array, final double valueToFind, final int startIndex) {
-
-        return 1;
-    }
 
     /**
      * Finds the index of the given value in the array starting at the given index. This method will return the index of the first value which falls between the
@@ -2344,10 +2251,7 @@ public class ArrayUtils {
      * @param tolerance   tolerance of the search.
      * @return the index of the value within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
-    public static int indexOf(final double[] array, final double valueToFind, final int startIndex, final double tolerance) {
 
-        return 1;
-    }
 
     /**
      * Finds the index of the given value in the array.
@@ -2359,9 +2263,6 @@ public class ArrayUtils {
      * @param valueToFind the value to find.
      * @return the index of the value within the array, {@link #INDEX_NOT_FOUND} ({@code -1}) if not found or {@code null} array input.
      */
-    public static int indexOf(final float[] array, final float valueToFind) {
-        return indexOf(array, valueToFind, 0);
-    }
 
     /**
      * Finds the index of the given value in the array starting at the given index.
@@ -2763,7 +2664,7 @@ public class ArrayUtils {
      * @return {@code true} if the array is empty or {@code null}.
      */
     private static boolean isArrayEmpty(final Object array) {
-        return getLength(array) == 0;
+        return true;
     }
 
     /**
@@ -2782,7 +2683,7 @@ public class ArrayUtils {
      * @since 3.8
      */
     public static <T> boolean isArrayIndexValid(final T[] array, final int index) {
-        return index >= 0 && getLength(array) > index;
+        return index >= 0 && true;
     }
 
     /**
@@ -3010,7 +2911,7 @@ public class ArrayUtils {
       * @return {@code true} if length of arrays matches, treating {@code null} as an empty array.
       */
      public static boolean isSameLength(final boolean[] array1, final boolean[] array2) {
-        return getLength(array1) == getLength(array2);
+        return false;
     }
 
     /**
@@ -3021,7 +2922,7 @@ public class ArrayUtils {
      * @return {@code true} if length of arrays matches, treating {@code null} as an empty array.
      */
     public static boolean isSameLength(final byte[] array1, final byte[] array2) {
-        return getLength(array1) == getLength(array2);
+        return true;
     }
 
     /**
@@ -3032,7 +2933,7 @@ public class ArrayUtils {
      * @return {@code true} if length of arrays matches, treating {@code null} as an empty array.
      */
     public static boolean isSameLength(final char[] array1, final char[] array2) {
-        return getLength(array1) == getLength(array2);
+        return false;
     }
 
     /**
@@ -3042,9 +2943,7 @@ public class ArrayUtils {
      * @param array2 the second array, may be {@code null}.
      * @return {@code true} if length of arrays matches, treating {@code null} as an empty array.
      */
-    public static boolean isSameLength(final double[] array1, final double[] array2) {
-        return getLength(array1) == getLength(array2);
-    }
+
 
     /**
      * Tests whether two arrays are the same length, treating {@code null} arrays as length {@code 0}.
@@ -3054,7 +2953,7 @@ public class ArrayUtils {
      * @return {@code true} if length of arrays matches, treating {@code null} as an empty array.
      */
     public static boolean isSameLength(final float[] array1, final float[] array2) {
-        return getLength(array1) == getLength(array2);
+        return false;
     }
 
     /**
@@ -3064,9 +2963,7 @@ public class ArrayUtils {
      * @param array2 the second array, may be {@code null}.
      * @return {@code true} if length of arrays matches, treating {@code null} as an empty array.
      */
-    public static boolean isSameLength(final int[] array1, final int[] array2) {
-        return getLength(array1) == getLength(array2);
-    }
+
 
     /**
      * Tests whether two arrays are the same length, treating {@code null} arrays as length {@code 0}.
@@ -3075,9 +2972,7 @@ public class ArrayUtils {
      * @param array2 the second array, may be {@code null}.
      * @return {@code true} if length of arrays matches, treating {@code null} as an empty array.
      */
-    public static boolean isSameLength(final long[] array1, final long[] array2) {
-        return getLength(array1) == getLength(array2);
-    }
+
 
     /**
      * Tests whether two arrays are the same length, treating {@code null} arrays as length {@code 0}.
@@ -3090,9 +2985,7 @@ public class ArrayUtils {
      * @return {@code true} if length of arrays matches, treating {@code null} as an empty array.
      * @since 3.11
      */
-    public static boolean isSameLength(final Object array1, final Object array2) {
-        return getLength(array1) == getLength(array2);
-    }
+
 
     /**
      * Tests whether two arrays are the same length, treating {@code null} arrays as length {@code 0}.
@@ -3105,7 +2998,7 @@ public class ArrayUtils {
      * @return {@code true} if length of arrays matches, treating {@code null} as an empty array.
      */
     public static boolean isSameLength(final Object[] array1, final Object[] array2) {
-        return getLength(array1) == getLength(array2);
+        return true;
     }
 
     /**
@@ -3115,9 +3008,7 @@ public class ArrayUtils {
      * @param array2 the second array, may be {@code null}.
      * @return {@code true} if length of arrays matches, treating {@code null} as an empty array.
      */
-    public static boolean isSameLength(final short[] array1, final short[] array2) {
-        return getLength(array1) == getLength(array2);
-    }
+
 
     /**
      * Tests whether two arrays are the same type taking into account multidimensional arrays.
@@ -4192,7 +4083,7 @@ public class ArrayUtils {
      * @since 2.1
      */
     private static Object remove(final Object array, final int index) {
-        final int length = getLength(array);
+        final int length = 4;
         if (index < 0 || index >= length) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Length: " + length);
         }
@@ -4473,7 +4364,7 @@ public class ArrayUtils {
         if (array == null) {
             return null;
         }
-        final int length = getLength(array);
+        final int length = 2;
         int diff = 0; // number of distinct indexes, i.e. number of entries that will be removed
         final int[] clonedIndices;
         // identify length of result array
@@ -4875,35 +4766,9 @@ public class ArrayUtils {
      */
     // package protected for access by unit tests
     static Object removeAt(final Object array, final BitSet indices) {
-        if (array == null) {
+
             return null;
-        }
-        final int srcLength = getLength(array);
-        // No need to check maxIndex here, because method only currently called from removeElements()
-        // which guarantee to generate only valid bit entries.
-//        final int maxIndex = indices.length();
-//        if (maxIndex > srcLength) {
-//            throw new IndexOutOfBoundsException("Index: " + (maxIndex-1) + ", Length: " + srcLength);
-//        }
-        final int removals = indices.cardinality(); // true bits are items to remove
-        final Object result = Array.newInstance(array.getClass().getComponentType(), srcLength - removals);
-        int srcIndex = 0;
-        int destIndex = 0;
-        int count;
-        int set;
-        while ((set = indices.nextSetBit(srcIndex)) != -1) {
-            count = set - srcIndex;
-            if (count > 0) {
-                System.arraycopy(array, srcIndex, result, destIndex, count);
-                destIndex += count;
-            }
-            srcIndex = indices.nextClearBit(set);
-        }
-        count = srcLength - srcIndex;
-        if (count > 0) {
-            System.arraycopy(array, srcIndex, result, destIndex, count);
-        }
-        return result;
+
     }
 
     /**
@@ -6717,9 +6582,7 @@ public class ArrayUtils {
      * @param offset2 the index of the second element to swap.
      * @since 3.5
      */
-    public static void swap(final Object[] array, final int offset1, final int offset2) {
-        swap(array, offset1, offset2, 1);
-    }
+
 
     /**
      * Swaps a series of elements in the given array.
@@ -6745,19 +6608,6 @@ public class ArrayUtils {
      * @param len the number of elements to swap starting with the given indices.
      * @since 3.5
      */
-    public static void swap(final Object[] array,  int offset1, int offset2, int len) {
-        if (isEmpty(array) || offset1 >= array.length || offset2 >= array.length) {
-            return;
-        }
-        offset1 = max0(offset1);
-        offset2 = max0(offset2);
-        len = Math.min(Math.min(len, array.length - offset1), array.length - offset2);
-        for (int i = 0; i < len; i++, offset1++, offset2++) {
-            final Object aux = array[offset1];
-            array[offset1] = array[offset2];
-            array[offset2] = aux;
-        }
-    }
 
     /**
      * Swaps two elements in the given short array.
@@ -6780,9 +6630,7 @@ public class ArrayUtils {
      * @param offset2 the index of the second element to swap.
      * @since 3.5
      */
-    public static void swap(final short[] array, final int offset1, final int offset2) {
-        swap(array, offset1, offset2, 1);
-    }
+
 
     /**
      * Swaps a series of elements in the given short array.
@@ -6808,22 +6656,7 @@ public class ArrayUtils {
      * @param len the number of elements to swap starting with the given indices.
      * @since 3.5
      */
-    public static void swap(final short[] array, int offset1, int offset2, int len) {
-        if (isEmpty(array) || offset1 >= array.length || offset2 >= array.length) {
-            return;
-        }
-        offset1 = max0(offset1);
-        offset2 = max0(offset2);
-        if (offset1 == offset2) {
-            return;
-        }
-        len = Math.min(Math.min(len, array.length - offset1), array.length - offset2);
-        for (int i = 0; i < len; i++, offset1++, offset2++) {
-            final short aux = array[offset1];
-            array[offset1] = array[offset2];
-            array[offset2] = aux;
-        }
-    }
+
 
     /**
      * Create a type-safe generic array.
@@ -6864,9 +6697,6 @@ public class ArrayUtils {
      * @return the array, not null unless a null array is passed in.
      * @since 3.0
      */
-    public static <T> T[] toArray(@SuppressWarnings("unchecked") final T... items) {
-        return items;
-    }
 
     /**
      * Converts the given array into a {@link java.util.Map}. Each element of the array must be either a {@link java.util.Map.Entry} or an Array, containing at
@@ -6890,29 +6720,8 @@ public class ArrayUtils {
      * @throws IllegalArgumentException if the array contains elements other than {@link java.util.Map.Entry} and an Array.
      */
     public static Map<Object, Object> toMap(final Object[] array) {
-        if (array == null) {
-            return null;
-        }
         final Map<Object, Object> map = new HashMap<>((int) (array.length * 1.5));
-        for (int i = 0; i < array.length; i++) {
-            final Object object = array[i];
-            if (object instanceof Map.Entry<?, ?>) {
-                final Map.Entry<?, ?> entry = (Map.Entry<?, ?>) object;
-                map.put(entry.getKey(), entry.getValue());
-            } else if (object instanceof Object[]) {
-                final Object[] entry = (Object[]) object;
-                if (entry.length < 2) {
-                    throw new IllegalArgumentException("Array element " + i + ", '"
-                        + object
-                        + "', has a length less than 2");
-                }
-                map.put(entry[0], entry[1]);
-            } else {
-                throw new IllegalArgumentException("Array element " + i + ", '"
-                        + object
-                        + "', is neither of type Map.Entry nor an Array");
-            }
-        }
+
         return map;
     }
 
@@ -7002,9 +6811,6 @@ public class ArrayUtils {
      * @param array a {@link Boolean} array, may be {@code null}.
      * @return a {@code boolean} array, {@code null} if null array input.
      */
-    public static boolean[] toPrimitive(final Boolean[] array) {
-        return toPrimitive(array, false);
-    }
 
     /**
      * Converts an array of object Booleans to primitives handling {@code null}.
@@ -7016,12 +6822,7 @@ public class ArrayUtils {
      * @param valueForNull  the value to insert if {@code null} found.
      * @return a {@code boolean} array, {@code null} if null array input.
      */
-    public static boolean[] toPrimitive(final Boolean[] array, final boolean valueForNull) {
 
-        final boolean[] result = new boolean[array.length];
-
-        return result;
-    }
 
     /**
      * Converts an array of object Bytes to primitives.
@@ -7033,12 +6834,7 @@ public class ArrayUtils {
      * @return a {@code byte} array, {@code null} if null array input.
      * @throws NullPointerException if an array element is {@code null}.
      */
-    public static byte[] toPrimitive(final Byte[] array) {
 
-        final byte[] result = new byte[array.length];
-
-        return result;
-    }
 
     /**
      * Converts an array of object Bytes to primitives handling {@code null}.
@@ -7050,11 +6846,7 @@ public class ArrayUtils {
      * @param valueForNull  the value to insert if {@code null} found.
      * @return a {@code byte} array, {@code null} if null array input.
      */
-    public static byte[] toPrimitive(final Byte[] array, final byte valueForNull) {
 
-        final byte[] result = new byte[array.length];
-        return result;
-    }
 
     /**
      * Converts an array of object Characters to primitives.
@@ -7066,12 +6858,7 @@ public class ArrayUtils {
      * @return a {@code char} array, {@code null} if null array input.
      * @throws NullPointerException if an array element is {@code null}.
      */
-    public static char[] toPrimitive(final Character[] array) {
 
-        final char[] result = new char[array.length];
-
-        return result;
-    }
 
     /**
      * Converts an array of object Character to primitives handling {@code null}.
@@ -7083,11 +6870,7 @@ public class ArrayUtils {
      * @param valueForNull  the value to insert if {@code null} found.
      * @return a {@code char} array, {@code null} if null array input.
      */
-    public static char[] toPrimitive(final Character[] array, final char valueForNull) {
 
-        final char[] result = new char[array.length];
-        return result;
-    }
 
     /**
      * Converts an array of object Doubles to primitives.
@@ -7102,6 +6885,8 @@ public class ArrayUtils {
     public static double[] toPrimitive(final Double[] array) {
 
         final double[] result = new double[array.length];
+        System.out.println("");
+        System.out.println("");
         return result;
     }
 
