@@ -23,8 +23,6 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.Objects;
 
-import org.apache.commons.lang3.ArrayUtils;
-
 /**
  * Assists in implementing {@link Comparable#compareTo(Object)} methods.
  *

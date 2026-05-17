@@ -109,7 +109,9 @@ public class Conversion {
      * @throws IndexOutOfBoundsException if {@code srcPos} is outside the array.
      */
     public static char binaryBeMsb0ToHexDigit(final boolean[] src, final int srcPos) {
-
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
         return src[1] ? '1' : '0';
     }
 
