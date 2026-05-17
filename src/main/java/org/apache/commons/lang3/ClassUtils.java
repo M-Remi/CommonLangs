@@ -34,20 +34,6 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
-/**
- * Operates on classes without using reflection.
- *
- * <p>
- * This class handles invalid {@code null} inputs as best it can. Each method documents its behavior in more detail.
- * </p>
- *
- * <p>
- * The notion of a {@code canonical name} includes the human-readable name for the type, for example {@code int[]}. The
- * non-canonical method variants work with the JVM names, such as {@code [I}.
- * </p>
- *
- * @since 2.0
- */
 public class ClassUtils {
 
     /**
@@ -106,14 +92,6 @@ public class ClassUtils {
      */
     public static final char INNER_CLASS_SEPARATOR_CHAR = '$';
 
-    /**
-     * The inner class separator String: {@code "$"}.
-     */
-    public static final String INNER_CLASS_SEPARATOR = String.valueOf(INNER_CLASS_SEPARATOR_CHAR);
-
-    /**
-     * Maps names of primitives to their corresponding primitive {@link Class}es.
-     */
     private static final Map<String, Class<?>> NAME_PRIMITIVE_MAP = new HashMap<>();
 
     static {
@@ -128,9 +106,6 @@ public class ClassUtils {
         NAME_PRIMITIVE_MAP.put(Void.TYPE.getName(), Void.TYPE);
     }
 
-    /**
-     * Maps primitive {@link Class}es to their corresponding wrapper {@link Class}.
-     */
     private static final Map<Class<?>, Class<?>> PRIMITIVE_WRAPPER_MAP = new HashMap<>();
 
     static {
@@ -183,57 +158,7 @@ public class ClassUtils {
         REVERSE_ABBREVIATION_MAP = Collections.unmodifiableMap(map.entrySet().stream().collect(Collectors.toMap(Map.Entry::getValue, Map.Entry::getKey)));
     }
 
-    /**
-     * Gets the class comparator, comparing by class name.
-     *
-     * @return the class comparator.
-     * @since 3.13.0
-     */
-    public static Comparator<Class<?>> comparator() {
-        return COMPARATOR;
-    }
 
-    /**
-     * Given a {@link List} of {@link Class} objects, this method converts them into class names.
-     *
-     * <p>
-     * A new {@link List} is returned. {@code null} objects will be copied into the returned list as {@code null}.
-     * </p>
-     *
-     * @param classes the classes to change.
-     * @return a {@link List} of class names corresponding to the Class objects, {@code null} if null input.
-     * @throws ClassCastException if {@code classes} contains a non-{@link Class} entry.
-     */
-    public static List<String> convertClassesToClassNames(final List<Class<?>> classes) {
-        return classes == null ? null : classes.stream().map(e -> getName(e, null)).collect(Collectors.toList());
-    }
-
-    /**
-     * Given a {@link List} of class names, this method converts them into classes.
-     *
-     * <p>
-     * A new {@link List} is returned. If the class name cannot be found, {@code null} is stored in the {@link List}. If the
-     * class name in the {@link List} is {@code null}, {@code null} is stored in the output {@link List}.
-     * </p>
-     *
-     * @param classNames the classNames to change.
-     * @return a {@link List} of Class objects corresponding to the class names, {@code null} if null input.
-     * @throws ClassCastException if classNames contains a non String entry.
-     */
-    public static List<Class<?>> convertClassNamesToClasses(final List<String> classNames) {
-        if (classNames == null) {
-            return null;
-        }
-        final List<Class<?>> classes = new ArrayList<>(classNames.size());
-        classNames.forEach(className -> {
-            try {
-                classes.add(Class.forName(className));
-            } catch (final Exception ex) {
-                classes.add(null);
-            }
-        });
-        return classes;
-    }
 
     /**
      * Gets the abbreviated name of a {@link Class}.
@@ -863,29 +788,7 @@ public class ClassUtils {
      * @throws NoSuchMethodException if the method is not found in the given class or if the method doesn't conform with the
      *         requirements.
      */
-    public static Method getPublicMethod(final Class<?> cls, final String methodName, final Class<?>... parameterTypes) throws NoSuchMethodException {
-        final Method declaredMethod = cls.getMethod(methodName, parameterTypes);
-        if (isPublic(declaredMethod.getDeclaringClass())) {
-            return declaredMethod;
-        }
-        final List<Class<?>> candidateClasses = new ArrayList<>(getAllInterfaces(cls));
-        candidateClasses.addAll(getAllSuperclasses(cls));
-        for (final Class<?> candidateClass : candidateClasses) {
-            if (!isPublic(candidateClass)) {
-                continue;
-            }
-            final Method candidateMethod;
-            try {
-                candidateMethod = candidateClass.getMethod(methodName, parameterTypes);
-            } catch (final NoSuchMethodException ex) {
-                continue;
-            }
-            if (Modifier.isPublic(candidateMethod.getDeclaringClass().getModifiers())) {
-                return candidateMethod;
-            }
-        }
-        throw new NoSuchMethodException("Can't find a public method for " + methodName + " " + ArrayUtils.toString(parameterTypes));
-    }
+
 
     /**
      * Gets the canonical name minus the package name from a {@link Class}.
@@ -1391,177 +1294,6 @@ public class ClassUtils {
         return toClass.isAssignableFrom(cls);
     }
 
-    /**
-     * Tests whether an array of Classes can be assigned to another array of Classes.
-     *
-     * <p>
-     * This method calls {@link #isAssignable(Class, Class) isAssignable} for each Class pair in the input arrays. It can be
-     * used to check if a set of arguments (the first parameter) are suitably compatible with a set of method parameter
-     * types (the second parameter).
-     * </p>
-     *
-     * <p>
-     * Unlike the {@link Class#isAssignableFrom(java.lang.Class)} method, this method takes into account widenings of
-     * primitive classes and {@code null}s.
-     * </p>
-     *
-     * <p>
-     * Primitive widenings allow an int to be assigned to a {@code long}, {@code float} or {@code double}. This method
-     * returns the correct result for these cases.
-     * </p>
-     *
-     * <p>
-     * {@code null} may be assigned to any reference type. This method will return {@code true} if {@code null} is passed in
-     * and the toClass is non-primitive.
-     * </p>
-     *
-     * <p>
-     * Specifically, this method tests whether the type represented by the specified {@link Class} parameter can be
-     * converted to the type represented by this {@link Class} object via an identity conversion widening primitive or
-     * widening reference conversion. See <em><a href="https://docs.oracle.com/javase/specs/">The Java Language
-     * Specification</a></em>, sections 5.1.1, 5.1.2 and 5.1.4 for details.
-     * </p>
-     *
-     * <p>
-     * <strong>Since Lang 3.0,</strong> this method will default behavior for calculating assignability between primitive
-     * and wrapper types <em>corresponding to the running Java version</em>; i.e. autoboxing will be the default behavior in
-     * VMs running Java versions &gt; 1.5.
-     * </p>
-     *
-     * @param classArray the array of Classes to check, may be {@code null}.
-     * @param toClassArray the array of Classes to try to assign into, may be {@code null}.
-     * @return {@code true} if assignment possible.
-     */
-    public static boolean isAssignable(final Class<?>[] classArray, final Class<?>... toClassArray) {
-        return isAssignable(classArray, toClassArray, true);
-    }
-
-    /**
-     * Tests whether an array of Classes can be assigned to another array of Classes.
-     *
-     * <p>
-     * This method calls {@link #isAssignable(Class, Class) isAssignable} for each Class pair in the input arrays. It can be
-     * used to check if a set of arguments (the first parameter) are suitably compatible with a set of method parameter
-     * types (the second parameter).
-     * </p>
-     *
-     * <p>
-     * Unlike the {@link Class#isAssignableFrom(java.lang.Class)} method, this method takes into account widenings of
-     * primitive classes and {@code null}s.
-     * </p>
-     *
-     * <p>
-     * Primitive widenings allow an int to be assigned to a {@code long}, {@code float} or {@code double}. This method
-     * returns the correct result for these cases.
-     * </p>
-     *
-     * <p>
-     * {@code null} may be assigned to any reference type. This method will return {@code true} if {@code null} is passed in
-     * and the toClass is non-primitive.
-     * </p>
-     *
-     * <p>
-     * Specifically, this method tests whether the type represented by the specified {@link Class} parameter can be
-     * converted to the type represented by this {@link Class} object via an identity conversion widening primitive or
-     * widening reference conversion. See <em><a href="https://docs.oracle.com/javase/specs/">The Java Language
-     * Specification</a></em>, sections 5.1.1, 5.1.2 and 5.1.4 for details.
-     * </p>
-     *
-     * @param classArray the array of Classes to check, may be {@code null}
-     * @param toClassArray the array of Classes to try to assign into, may be {@code null}
-     * @param autoboxing whether to use implicit autoboxing/unboxing between primitives and wrappers
-     * @return {@code true} if assignment possible
-     */
-    public static boolean isAssignable(Class<?>[] classArray, Class<?>[] toClassArray, final boolean autoboxing) {
-        if (!ArrayUtils.isSameLength(classArray, toClassArray)) {
-            return false;
-        }
-        classArray = ArrayUtils.nullToEmpty(classArray);
-        toClassArray = ArrayUtils.nullToEmpty(toClassArray);
-        for (int i = 0; i < classArray.length; i++) {
-            if (!isAssignable(classArray[i], toClassArray[i], autoboxing)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
-     * Tests whether the specified class an inner class or static nested class.
-     *
-     * @param cls the class to check, may be null.
-     * @return {@code true} if the class is an inner or static nested class, false if not or {@code null}.
-     */
-    public static boolean isInnerClass(final Class<?> cls) {
-        return cls != null && cls.getEnclosingClass() != null;
-    }
-
-    /**
-     * Tests whether the given {@code type} is a primitive or primitive wrapper ({@link Boolean}, {@link Byte},
-     * {@link Character}, {@link Short}, {@link Integer}, {@link Long}, {@link Double}, {@link Float}).
-     *
-     * @param type The class to query or null.
-     * @return true if the given {@code type} is a primitive or primitive wrapper ({@link Boolean}, {@link Byte},
-     *         {@link Character}, {@link Short}, {@link Integer}, {@link Long}, {@link Double}, {@link Float}).
-     * @since 3.1
-     */
-    public static boolean isPrimitiveOrWrapper(final Class<?> type) {
-        return type != null && type.isPrimitive() || isPrimitiveWrapper(type);
-    }
-
-    /**
-     * Tests whether the given {@code type} is a primitive wrapper ({@link Boolean}, {@link Byte}, {@link Character},
-     * {@link Short}, {@link Integer}, {@link Long}, {@link Double}, {@link Float}).
-     *
-     * @param type The class to query or null.
-     * @return true if the given {@code type} is a primitive wrapper ({@link Boolean}, {@link Byte}, {@link Character},
-     *         {@link Short}, {@link Integer}, {@link Long}, {@link Double}, {@link Float}).
-     * @since 3.1
-     */
-    public static boolean isPrimitiveWrapper(final Class<?> type) {
-        return WRAPPER_PRIMITIVE_MAP.containsKey(type);
-    }
-
-    /**
-     * Tests whether a {@link Class} is public.
-     *
-     * @param cls Class to test.
-     * @return {@code true} if {@code cls} is public.
-     * @since 3.13.0
-     */
-    public static boolean isPublic(final Class<?> cls) {
-        return Modifier.isPublic(cls.getModifiers());
-    }
-
-    /**
-     * Converts the specified array of primitive Class objects to an array of its corresponding wrapper Class objects.
-     *
-     * @param classes the class array to convert, may be null or empty.
-     * @return an array which contains for each given class, the wrapper class or the original class if class is not a primitive. {@code null} if null input.
-     *         Empty array if an empty array passed in.
-     * @since 2.1
-     */
-    public static Class<?>[] primitivesToWrappers(final Class<?>... classes) {
-        if (classes == null) {
-            return null;
-        }
-        if (classes.length == 0) {
-            return classes;
-        }
-        return ArrayUtils.setAll(new Class[classes.length], i -> primitiveToWrapper(classes[i]));
-    }
-
-    /**
-     * Converts the specified primitive Class object to its corresponding wrapper Class object.
-     *
-     * <p>
-     * NOTE: From v2.2, this method handles {@code Void.TYPE}, returning {@code Void.TYPE}.
-     * </p>
-     *
-     * @param cls the class to convert, may be null.
-     * @return the wrapper class for {@code cls} or {@code cls} if {@code cls} is not a primitive. {@code null} if null input.
-     * @since 2.1
-     */
     public static Class<?> primitiveToWrapper(final Class<?> cls) {
         return cls != null && cls.isPrimitive() ? PRIMITIVE_WRAPPER_MAP.get(cls) : cls;
     }
@@ -1579,13 +1311,8 @@ public class ClassUtils {
      * @since 2.4
      */
     public static Class<?>[] toClass(final Object... array) {
-        if (array == null) {
-            return null;
-        }
-        if (array.length == 0) {
-            return ArrayUtils.EMPTY_CLASS_ARRAY;
-        }
-        return ArrayUtils.setAll(new Class[array.length], i -> array[i] == null ? null : array[i].getClass());
+
+        return null;
     }
 
     /**
@@ -1690,15 +1417,7 @@ public class ClassUtils {
      * @see #wrapperToPrimitive(Class)
      * @since 2.4
      */
-    public static Class<?>[] wrappersToPrimitives(final Class<?>... classes) {
-        if (classes == null) {
-            return null;
-        }
-        if (classes.length == 0) {
-            return classes;
-        }
-        return ArrayUtils.setAll(new Class[classes.length], i -> wrapperToPrimitive(classes[i]));
-    }
+
 
     /**
      * Converts the specified wrapper class to its corresponding primitive class.
