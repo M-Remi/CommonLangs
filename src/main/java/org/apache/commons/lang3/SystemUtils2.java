@@ -34,7 +34,7 @@ import java.nio.file.Paths;
  * @since 1.0
  * @see SystemProperties
  */
-public class SystemUtils {
+public class SystemUtils2 {
 
     /**
      * The prefix String for all Windows OS.
@@ -2441,7 +2441,7 @@ public class SystemUtils {
      * This constructor is public to permit tools that require a JavaBean instance to operate.
      * </p>
      */
-    public SystemUtils() {
+    public SystemUtils2() {
     }
 
 }

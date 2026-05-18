@@ -24,8 +24,6 @@ import java.util.ListIterator;
 import java.util.NoSuchElementException;
 import java.util.StringTokenizer;
 
-import org.apache.commons.lang3.StringUtils;
-
 /**
  * Tokenizes a string based on delimiters (separators)
  * and supporting quoting and ignored character concepts.

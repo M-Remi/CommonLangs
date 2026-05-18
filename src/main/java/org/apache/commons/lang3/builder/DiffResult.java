@@ -21,8 +21,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-import org.apache.commons.lang3.StringUtils;
-
 /**
  * A {@link DiffResult} contains a collection of the differences between two
  * {@link Diffable} objects. Typically these differences are displayed using
