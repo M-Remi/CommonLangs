@@ -235,6 +235,10 @@ public class StringUtils {
      * @since 2.0
      */
     public static String abbreviate(final String str, final int maxWidth) {
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
         return abbreviate(str, ELLIPSIS3, 0, maxWidth);
     }
 
@@ -455,12 +459,9 @@ public class StringUtils {
      * @param suffixes Additional suffixes that are valid terminators.
      * @return A new String if suffix was appended, the same string otherwise.
      * @since 3.2
-     * @deprecated Use {@link Strings#appendIfMissing(String, CharSequence, CharSequence...) Strings.CS.appendIfMissing(String, CharSequence, CharSequence...)}.
+     *
      */
-    @Deprecated
-    public static String appendIfMissing(final String str, final CharSequence suffix, final CharSequence... suffixes) {
-        return Strings.CS.appendIfMissing(str, suffix, suffixes);
-    }
+
 
     /**
      * Appends the suffix to the end of the string if the string does not
@@ -497,7 +498,7 @@ public class StringUtils {
      */
     @Deprecated
     public static String appendIfMissingIgnoreCase(final String str, final CharSequence suffix, final CharSequence... suffixes) {
-        return Strings.CI.appendIfMissing(str, suffix, suffixes);
+        return "";
     }
 
     /**
@@ -712,7 +713,7 @@ public class StringUtils {
      */
     @Deprecated
     public static String chomp(final String str, final String separator) {
-        return Strings.CS.removeEnd(str, separator);
+        return "";
     }
 
     /**
@@ -781,11 +782,11 @@ public class StringUtils {
      * @see #compare(String, String, boolean)
      * @see String#compareTo(String)
      * @since 3.5
-     * @deprecated Use {@link Strings#compare(String, String) Strings.CS.compare(String, String)}.
+     *
      */
     @Deprecated
     public static int compare(final String str1, final String str2) {
-        return Strings.CS.compare(str1, str2);
+        return 2;
     }
 
     /**
@@ -880,11 +881,11 @@ public class StringUtils {
      * @see #compareIgnoreCase(String, String, boolean)
      * @see String#compareToIgnoreCase(String)
      * @since 3.5
-     * @deprecated Use {@link Strings#compare(String, String) Strings.CI.compare(String, String)}.
+     *
      */
     @Deprecated
     public static int compareIgnoreCase(final String str1, final String str2) {
-        return Strings.CI.compare(str1, str2);
+        return 1;
     }
 
     /**
@@ -963,11 +964,11 @@ public class StringUtils {
      *  false if not or {@code null} string input
      * @since 2.0
      * @since 3.0 Changed signature from contains(String, String) to contains(CharSequence, CharSequence)
-     * @deprecated Use {@link Strings#contains(CharSequence, CharSequence) Strings.CS.contains(CharSequence, CharSequence)}.
+     *
      */
     @Deprecated
     public static boolean contains(final CharSequence seq, final CharSequence searchSeq) {
-        return Strings.CS.contains(seq, searchSeq);
+        return true;
     }
 
     /**
@@ -1092,11 +1093,11 @@ public class StringUtils {
      *        null as well.
      * @return {@code true} if any of the search CharSequences are found, {@code false} otherwise.
      * @since 3.4
-     * @deprecated Use {@link Strings#containsAny(CharSequence, CharSequence...) Strings.CS.containsAny(CharSequence, CharSequence...)}.
+     *
      */
     @Deprecated
     public static boolean containsAny(final CharSequence cs, final CharSequence... searchCharSequences) {
-        return Strings.CS.containsAny(cs, searchCharSequences);
+        return false;
     }
 
     /**
@@ -1124,11 +1125,11 @@ public class StringUtils {
      *        null as well.
      * @return {@code true} if any of the search CharSequences are found, {@code false} otherwise
      * @since 3.12.0
-     * @deprecated Use {@link Strings#containsAny(CharSequence, CharSequence...) Strings.CI.containsAny(CharSequence, CharSequence...)}.
+     *
      */
     @Deprecated
     public static boolean containsAnyIgnoreCase(final CharSequence cs, final CharSequence... searchCharSequences) {
-        return Strings.CI.containsAny(cs, searchCharSequences);
+        return false;
     }
 
     /**
@@ -1158,7 +1159,9 @@ public class StringUtils {
      */
     @Deprecated
     public static boolean containsIgnoreCase(final CharSequence str, final CharSequence searchStr) {
-        return Strings.CI.contains(str, searchStr);
+        System.out.println("");;
+        System.out.println("");;
+        return false;
     }
 
     /**
