@@ -17,179 +17,9 @@
 
 package org.apache.commons.lang3;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.function.BooleanSupplier;
-import java.util.function.IntSupplier;
-import java.util.function.LongSupplier;
 import java.util.function.Supplier;
 
-import org.apache.commons.lang3.function.Suppliers;
-
-public final class SystemProperties {
-
-    public static final String APPLE_AWT_ENABLE_TEMPLATE_IMAGES = "apple.awt.enableTemplateImages";
-
-    public static final String COM_SUN_JNDI_LDAP_OBJECT_TRUST_SERIAL_DATA = "com.sun.jndi.ldap.object.trustSerialData";
-
-    /**
-     * The System property name {@value}.
-     *
-     * @see <a href=
-     *      "https://docs.oracle.com/en/java/javase/25/docs/api/jdk.httpserver/com/sun/net/httpserver/spi/HttpServerProvider.html#com.sun.net.httpserver.HttpServerProvider">com.sun.net.httpserver.HttpServerProvider</a>
-     * @since 3.15.0
-     */
-    public static final String COM_SUN_NET_HTTP_SERVER_HTTP_SERVER_PROVIDER = "com.sun.net.httpserver.HttpServerProvider";
-
-    /**
-     * The System property name {@value}.
-     */
-
-    /**
-     * The System property name {@value}.
-     *
-     * @see <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/net/doc-files/net-properties.html#ftp.proxyHost">ftp.proxyHost</a>
-     * @since 3.15.0
-     */
-    public static final String FTP_PROXY_HOST = "ftp.proxyHost";
-
-    /**
-     * The System property name {@value}.
-     *
-     * @see <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/net/doc-files/net-properties.html#ftp.proxyPort">ftp.proxyPort</a>
-     * @since 3.15.0
-     */
-    public static final String FTP_PROXY_PORT = "ftp.proxyPort";
-
-    /**
-     * The System property name {@value}.
-     *
-     * @see <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/net/doc-files/net-properties.html#http.agent">http.agent</a>
-     * @since 3.15.0
-     */
-    public static final String HTTP_AGENT = "http.agent";
-
-    /**
-     * The System property name {@value}.
-     *
-     * @see <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/net/doc-files/net-properties.html#auth.digest.cnonceRepeat">auth.digest.cnonceRepeat</a>
-     * @since 3.15.0
-     */
-    public static final String HTTP_AUTH_DIGEST_CNONCE_REPEAT = "http.auth.digest.cnonceRepeat";
-
-    /**
-     * The System property name {@value}.
-     *
-     * @see <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/net/doc-files/net-properties.html#reEnabledAlgorithms">http.auth.digest.reEnabledAlgorithms</a>
-     * @since 3.15.0
-     */
-    public static final String HTTP_AUTH_DIGEST_RE_ENABLED_ALGORITHMS = "http.auth.digest.reEnabledAlgorithms";
-
-    /**
-     * The System property name {@value}.
-     *
-     * @see <a href=
-     *      "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/net/doc-files/net-properties.html#http.auth.digest.validateProxy">http.auth.digest.validateProxy</a>
-     * @since 3.15.0
-     */
-    public static final String HTTP_AUTH_DIGEST_VALIDATE_PROXY = "http.auth.digest.validateProxy";
-
-    /**
-     * The System property name {@value}.
-     *
-     * @see <a href=
-     *      "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/net/doc-files/net-properties.html#http.auth.digest.validateServer">http.auth.digest.validateServer</a>
-     * @since 3.15.0
-     */
-    public static final String HTTP_AUTH_DIGEST_VALIDATE_SERVER = "http.auth.digest.validateServer";
-
-    /**
-     * The System property name {@value}.
-     *
-     * @see <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/net/doc-files/net-properties.html#http.auth.ntlm.domain">http.auth.ntlm.domain</a>
-     * @since 3.15.0
-     */
-    public static final String HTTP_AUTH_NTLM_DOMAIN = "http.auth.ntlm.domain";
-
-    /**
-     * The System property name {@value}.
-     *
-     * @see <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/net/doc-files/net-properties.html#http.keepAlive">http.keepAlive</a>
-     * @since 3.15.0
-     */
-    public static final String HTTP_KEEP_ALIVE = "http.keepAlive";
-
-    /**
-     * The System property name {@value}.
-     *
-     * @see <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/net/doc-files/net-properties.html#http.keepAlive.time.proxy">http.keepAlive.time.proxy</a>
-     * @since 3.15.0
-     */
-    public static final String HTTP_KEEP_ALIVE_TIME_PROXY = "http.keepAlive.time.proxy";
-
-    /**
-     * The System property name {@value}.
-     *
-     * @see <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/net/doc-files/net-properties.html#http.keepAlive.time.server">http.keepAlive.time.server</a>
-     * @since 3.15.0
-     */
-    public static final String HTTP_KEEP_ALIVE_TIME_SERVER = "http.keepAlive.time.server";
-
-    /**
-     * The System property name {@value}.
-     *
-     * @see <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/net/doc-files/net-properties.html#http.maxConnections">http.maxConnections</a>
-     * @since 3.15.0
-     */
-    public static final String HTTP_MAX_CONNECTIONS = "http.maxConnections";
-
-    /**
-     * The System property name {@value}.
-     *
-     * @see <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/net/doc-files/net-properties.html#http.maxRedirects">http.maxRedirects</a>
-     * @since 3.15.0
-     */
-    public static final String HTTP_MAX_REDIRECTS = "http.maxRedirects";
-
-    /**
-     * The System property name {@value}.
-     *
-     * @see <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/net/doc-files/net-properties.html#http.nonProxyHosts">http.nonProxyHosts</a>
-     * @since 3.15.0
-     */
-    public static final String HTTP_NON_PROXY_HOSTS = "http.nonProxyHosts";
-
-    /**
-     * The System property name {@value}.
-     *
-     * @see <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/net/doc-files/net-properties.html#http.proxyHost">http.proxyHost</a>
-     * @since 3.15.0
-     */
-    public static final String HTTP_PROXY_HOST = "http.proxyHost";
-
-    /**
-     * The System property name {@value}.
-     *
-     * @see <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/net/doc-files/net-properties.html#http.proxyPort">http.proxyPort</a>
-     * @since 3.15.0
-     */
-    public static final String HTTP_PROXY_PORT = "http.proxyPort";
-
-    /**
-     * The System property name {@value}.
-     *
-     * @see <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/net/doc-files/net-properties.html#https.proxyHost">https.proxyHost</a>
-     * @since 3.15.0
-     */
-    public static final String HTTPS_PROXY_HOST = "https.proxyHost";
-
-    /**
-     * The System property name {@value}.
-     *
-     * @see <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/net/doc-files/net-properties.html#https.proxyPort">https.proxyPort</a>
-     * @since 3.15.0
-     */
-    public static final String HTTPS_PROXY_PORT = "https.proxyPort";
+public final class SystemProperties2ii {
 
     /**
      * The System property name {@value}.
@@ -200,20 +30,7 @@ public final class SystemProperties {
      * @see <a href="https://docs.oracle.com/en/java/javase/25/docs/api/system-properties.html">System Properties</a>
      * @deprecated Deprecated without replacement.
      */
-    @Deprecated
-    public static final String JAVA_AWT_FONTS = "java.awt.fonts";
 
-    /**
-     * The System property name {@value}.
-     * <p>
-     * Not in Java 17 and above according to <a href="https://docs.oracle.com/en/java/javase/25/docs/api/system-properties.html">System Properties</a> Javadoc.
-     * </p>
-     *
-     * @see <a href="https://docs.oracle.com/en/java/javase/25/docs/api/system-properties.html">System Properties</a>
-     * @deprecated Deprecated without replacement.
-     */
-    @Deprecated
-    public static final String JAVA_AWT_GRAPHICSENV = "java.awt.graphicsenv";
 
     /**
      * The System property name {@value}.
@@ -1904,28 +1721,6 @@ public final class SystemProperties {
         System.out.println("");
         System.out.println("");
         System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-
         System.out.println("");
         System.out.println("");
         System.out.println("");
