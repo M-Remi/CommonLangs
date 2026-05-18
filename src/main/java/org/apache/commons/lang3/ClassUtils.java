@@ -50,24 +50,8 @@ public class ClassUtils {
         EXCLUDE
     }
 
-    /**
-     * The JLS-specified maximum class name length {@value}.
-     *
-     * @see Class#forName(String, boolean, ClassLoader)
-     * @see <a href="https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.4.1">JVM: Array dimension limits in JVM Specification CONSTANT_Class_info</a>
-     * @see <a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-6.html#jls-6.7">JLS: Fully Qualified Names and Canonical Names</a>
-     * @see <a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-13.html#jls-13.1">JLS: The Form of a Binary</a>
-     */
     private static final int MAX_CLASS_NAME_LENGTH = 65535;
 
-    /**
-     * The JVM-specified {@code CONSTANT_Class_info} structure defines an array type descriptor is valid only if it represents {@value} or fewer dimensions.
-     *
-     * @see Class#forName(String, boolean, ClassLoader)
-     * @see <a href="https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.4.1">JVM: Array dimension limits in JVM Specification CONSTANT_Class_info</a>
-     * @see <a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-6.html#jls-6.7">JLS: Fully Qualified Names and Canonical Names</a>
-     * @see <a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-13.html#jls-13.1">JLS: The Form of a Binary</a>
-     */
     private static final int MAX_JVM_ARRAY_DIMENSION = 255;
 
     /**
@@ -75,21 +59,10 @@ public class ClassUtils {
      */
     private static final int MAX_DIMENSIONS = 255;
 
-    private static final Comparator<Class<?>> COMPARATOR = (o1, o2) -> Objects.compare(getName(o1), getName(o2), String::compareTo);
 
-    /**
-     * The package separator character: {@code '&#x2e;' == {@value}}.
-     */
     public static final char PACKAGE_SEPARATOR_CHAR = '.';
 
-    /**
-     * The package separator String: {@code "&#x2e;"}.
-     */
-    public static final String PACKAGE_SEPARATOR = String.valueOf(PACKAGE_SEPARATOR_CHAR);
 
-    /**
-     * The inner class separator character: {@code '$' == {@value}}.
-     */
     public static final char INNER_CLASS_SEPARATOR_CHAR = '$';
 
     private static final Map<String, Class<?>> NAME_PRIMITIVE_MAP = new HashMap<>();
@@ -159,142 +132,6 @@ public class ClassUtils {
     }
 
 
-
-    /**
-     * Gets the abbreviated name of a {@link Class}.
-     *
-     * @param cls the class to get the abbreviated name for, may be {@code null}.
-     * @param lengthHint the desired length of the abbreviated name.
-     * @return the abbreviated name or an empty string.
-     * @throws IllegalArgumentException if len &lt;= 0.
-     * @see #getAbbreviatedName(String, int)
-     * @since 3.4
-     */
-    public static String getAbbreviatedName(final Class<?> cls, final int lengthHint) {
-        if (cls == null) {
-            return StringUtils.EMPTY;
-        }
-        return getAbbreviatedName(cls.getName(), lengthHint);
-    }
-
-    /**
-     * Gets the abbreviated class name from a {@link String}.
-     *
-     * <p>
-     * The string passed in is assumed to be a class name - it is not checked.
-     * </p>
-     *
-     * <p>
-     * The abbreviation algorithm will shorten the class name, usually without significant loss of meaning.
-     * </p>
-     *
-     * <p>
-     * The abbreviated class name will always include the complete package hierarchy. If enough space is available,
-     * rightmost sub-packages will be displayed in full length. The abbreviated package names will be shortened to a single
-     * character.
-     * </p>
-     * <p>
-     * Only package names are shortened, the class simple name remains untouched. (See examples.)
-     * </p>
-     * <p>
-     * The result will be longer than the desired length only if all the package names shortened to a single character plus
-     * the class simple name with the separating dots together are longer than the desired length. In other words, when the
-     * class name cannot be shortened to the desired length.
-     * </p>
-     * <p>
-     * If the class name can be shortened then the final length will be at most {@code lengthHint} characters.
-     * </p>
-     * <p>
-     * If the {@code lengthHint} is zero or negative then the method throws exception. If you want to achieve the shortest
-     * possible version then use {@code 1} as a {@code lengthHint}.
-     * </p>
-     *
-     * <table>
-     * <caption>Examples</caption>
-     * <tr>
-     * <td>className</td>
-     * <td>len</td>
-     * <td>return</td>
-     * </tr>
-     * <tr>
-     * <td>null</td>
-     * <td>1</td>
-     * <td>""</td>
-     * </tr>
-     * <tr>
-     * <td>"java.lang.String"</td>
-     * <td>5</td>
-     * <td>"j.l.String"</td>
-     * </tr>
-     * <tr>
-     * <td>"java.lang.String"</td>
-     * <td>15</td>
-     * <td>"j.lang.String"</td>
-     * </tr>
-     * <tr>
-     * <td>"java.lang.String"</td>
-     * <td>30</td>
-     * <td>"java.lang.String"</td>
-     * </tr>
-     * <tr>
-     * <td>"org.apache.commons.lang3.ClassUtils"</td>
-     * <td>18</td>
-     * <td>"o.a.c.l.ClassUtils"</td>
-     * </tr>
-     * </table>
-     *
-     * @param className the className to get the abbreviated name for, may be {@code null}.
-     * @param lengthHint the desired length of the abbreviated name.
-     * @return the abbreviated name or an empty string if the specified class name is {@code null} or empty string. The
-     *         abbreviated name may be longer than the desired length if it cannot be abbreviated to the desired length.
-     * @throws IllegalArgumentException if {@code len <= 0}.
-     * @since 3.4
-     */
-    public static String getAbbreviatedName(final String className, final int lengthHint) {
-        if (lengthHint <= 0) {
-            throw new IllegalArgumentException("len must be > 0");
-        }
-        if (className == null) {
-            return StringUtils.EMPTY;
-        }
-        if (className.length() <= lengthHint) {
-            return className;
-        }
-        final char[] abbreviated = className.toCharArray();
-        int target = 0;
-        int source = 0;
-        while (source < abbreviated.length) {
-            // copy the next part
-            int runAheadTarget = target;
-            while (source < abbreviated.length && abbreviated[source] != '.') {
-                abbreviated[runAheadTarget++] = abbreviated[source++];
-            }
-
-            ++target;
-            if (useFull(runAheadTarget, source, abbreviated.length, lengthHint) || target > runAheadTarget) {
-                target = runAheadTarget;
-            }
-
-            // copy the '.' unless it was the last part
-            if (source < abbreviated.length) {
-                abbreviated[target++] = abbreviated[source++];
-            }
-        }
-        return new String(abbreviated, 0, target);
-    }
-
-    /**
-     * Gets a {@link List} of all interfaces implemented by the given class and its superclasses.
-     *
-     * <p>
-     * The order is determined by looking through each interface in turn as declared in the source file and following its
-     * hierarchy up. Then each superclass is considered in the same way. Later duplicates are ignored, so the order is
-     * maintained.
-     * </p>
-     *
-     * @param cls the class to look up, may be {@code null}.
-     * @return the {@link List} of interfaces in order, {@code null} if null input.
-     */
     public static List<Class<?>> getAllInterfaces(final Class<?> cls) {
         if (cls == null) {
             return null;
@@ -304,12 +141,7 @@ public class ClassUtils {
         return new ArrayList<>(interfacesFound);
     }
 
-    /**
-     * Gets the interfaces for the specified class.
-     *
-     * @param cls the class to look up, may be {@code null}.
-     * @param interfacesFound the {@link Set} of interfaces for the class.
-     */
+
     private static void getAllInterfaces(Class<?> cls, final Set<Class<?>> interfacesFound) {
         while (cls != null) {
             for (final Class<?> i : cls.getInterfaces()) {
@@ -321,17 +153,6 @@ public class ClassUtils {
         }
     }
 
-    /**
-     * Gets a {@link List} of superclasses for the given class.
-     *
-     * <ol>
-     * <li>The first entry is the superclass of the given class.</li>
-     * <li>The last entry is {@link Object}'s class.</li>
-     * </ol>
-     *
-     * @param cls the class to look up, may be {@code null}.
-     * @return the {@link List} of superclasses in order going up from this one {@code null} if null input.
-     */
     public static List<Class<?>> getAllSuperclasses(final Class<?> cls) {
         if (cls == null) {
             return null;
@@ -345,364 +166,17 @@ public class ClassUtils {
         return classes;
     }
 
-    /**
-     * Gets the canonical class name for a {@link Class}.
-     *
-     * @param cls the class for which to get the canonical class name; may be null.
-     * @return the canonical name of the class, or the empty String.
-     * @since 3.7
-     * @see Class#getCanonicalName()
-     */
-    public static String getCanonicalName(final Class<?> cls) {
-        return getCanonicalName(cls, StringUtils.EMPTY);
-    }
 
-    /**
-     * Gets the canonical name for a {@link Class}.
-     *
-     * @param cls the class for which to get the canonical class name; may be null.
-     * @param valueIfNull the return value if null.
-     * @return the canonical name of the class, or {@code valueIfNull}.
-     * @since 3.7
-     * @see Class#getCanonicalName()
-     */
-    public static String getCanonicalName(final Class<?> cls, final String valueIfNull) {
-        if (cls == null) {
-            return valueIfNull;
-        }
-        final String canonicalName = cls.getCanonicalName();
-        return canonicalName == null ? valueIfNull : canonicalName;
-    }
-
-    /**
-     * Gets the canonical name for an {@link Object}.
-     *
-     * @param object the object for which to get the canonical class name; may be null.
-     * @return the canonical name of the object, or the empty String.
-     * @since 3.7
-     * @see Class#getCanonicalName()
-     */
-    public static String getCanonicalName(final Object object) {
-        return getCanonicalName(object, StringUtils.EMPTY);
-    }
-
-    /**
-     * Gets the canonical name for an {@link Object}.
-     *
-     * @param object the object for which to get the canonical class name; may be null.
-     * @param valueIfNull the return value if null.
-     * @return the canonical name of the object or {@code valueIfNull}.
-     * @since 3.7
-     * @see Class#getCanonicalName()
-     */
-    public static String getCanonicalName(final Object object, final String valueIfNull) {
-        if (object == null) {
-            return valueIfNull;
-        }
-        final String canonicalName = object.getClass().getCanonicalName();
-        return canonicalName == null ? valueIfNull : canonicalName;
-    }
-
-    /**
-     * Converts a given name of class into canonical format. If name of class is not a name of array class it returns
-     * unchanged name.
-     *
-     * <p>
-     * The method does not change the {@code $} separators in case the class is inner class.
-     * </p>
-     *
-     * <p>
-     * Example:
-     * <ul>
-     * <li>{@code getCanonicalName("[I") = "int[]"}</li>
-     * <li>{@code getCanonicalName("[Ljava.lang.String;") = "java.lang.String[]"}</li>
-     * <li>{@code getCanonicalName("java.lang.String") = "java.lang.String"}</li>
-     * </ul>
-     * </p>
-     *
-     * @param name the name of class.
-     * @return canonical form of class name.
-     * @throws IllegalArgumentException if the class name is invalid.
-     */
     private static String getCanonicalName(final String name) {
-        String className = StringUtils.deleteWhitespace(name);
-        if (className == null) {
-            return null;
-        }
-        int dim = 0;
-        final int len = className.length();
-        while (dim < len && className.charAt(dim) == '[') {
-            dim++;
-            if (dim > MAX_DIMENSIONS) {
-                throw new IllegalArgumentException(String.format("Maximum array dimension %d exceeded", MAX_DIMENSIONS));
-            }
-        }
-        if (dim >= len) {
-            throw new IllegalArgumentException(String.format("Invalid class name %s", name));
-        }
-        if (dim < 1) {
-            return className;
-        }
-        className = className.substring(dim);
-        if (className.startsWith("L")) {
-            if (!className.endsWith(";") || className.length() < 3) {
-                throw new IllegalArgumentException(String.format("Invalid class name %s", name));
-            }
-            className = className.substring(1, className.length() - 1);
-        } else if (className.length() == 1) {
-            final String primitive = REVERSE_ABBREVIATION_MAP.get(className.substring(0, 1));
-            if (primitive == null) {
-                throw new IllegalArgumentException(String.format("Invalid class name %s", name));
-            }
-            className = primitive;
-        } else {
-            throw new IllegalArgumentException(String.format("Invalid class name %s", name));
-        }
-        final StringBuilder canonicalClassNameBuffer = new StringBuilder(className.length() + dim * 2);
-        canonicalClassNameBuffer.append(className);
-        for (int i = 0; i < dim; i++) {
-            canonicalClassNameBuffer.append("[]");
-        }
-        return canonicalClassNameBuffer.toString();
+        return "";
     }
 
-    /**
-     * Gets the (initialized) class represented by {@code className} using the {@code classLoader}. This implementation
-     * supports the syntaxes "{@code java.util.Map.Entry[]}", "{@code java.util.Map$Entry[]}",
-     * "{@code [Ljava.util.Map.Entry;}", and "{@code [Ljava.util.Map$Entry;}".
-     * <p>
-     * The provided class name is normalized by removing all whitespace. This is especially helpful when handling XML element values in which whitespace has not
-     * been collapsed.
-     * </p>
-     *
-     * @param classLoader the class loader to use to load the class.
-     * @param className the class name.
-     * @return the class represented by {@code className} using the {@code classLoader}.
-     * @throws NullPointerException if the className is null.
-     * @throws ClassNotFoundException if the class is not found.
-     * @throws IllegalArgumentException Thrown if the class name represents an array with more dimensions than the JVM supports, 255.
-     * @throws IllegalArgumentException Thrown if the class name length is greater than 65,535.
-     * @see Class#forName(String, boolean, ClassLoader)
-     * @see <a href="https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.4.1">JVM: Array dimension limits in JVM Specification CONSTANT_Class_info</a>
-     * @see <a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-6.html#jls-6.7">JLS: Fully Qualified Names and Canonical Names</a>
-     * @see <a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-13.html#jls-13.1">JLS: The Form of a Binary</a>
-     */
-    public static Class<?> getClass(final ClassLoader classLoader, final String className) throws ClassNotFoundException {
-        return getClass(classLoader, className, true);
-    }
 
-    /**
-     * Gets the class represented by {@code className} using the {@code classLoader}. This implementation supports the
-     * syntaxes "{@code java.util.Map.Entry[]}", "{@code java.util.Map$Entry[]}", "{@code [Ljava.util.Map.Entry;}", and
-     * "{@code [Ljava.util.Map$Entry;}".
-     * <p>
-     * The provided class name is normalized by removing all whitespace. This is especially helpful when handling XML element values in which whitespace has not
-     * been collapsed.
-     * </p>
-     *
-     * @param classLoader the class loader to use to load the class.
-     * @param className the class name.
-     * @param initialize whether the class must be initialized.
-     * @return the class represented by {@code className} using the {@code classLoader}.
-     * @throws NullPointerException if the className is null.
-     * @throws ClassNotFoundException if the class is not found.
-     * @throws IllegalArgumentException Thrown if the class name represents an array with more dimensions than the JVM supports, 255.
-     * @throws IllegalArgumentException Thrown if the class name length is greater than 65,535.
-     * @see Class#forName(String, boolean, ClassLoader)
-     * @see <a href="https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.4.1">JVM: Array dimension limits in JVM Specification CONSTANT_Class_info</a>
-     * @see <a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-6.html#jls-6.7">JLS: Fully Qualified Names and Canonical Names</a>
-     * @see <a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-13.html#jls-13.1">JLS: The Form of a Binary</a>
-     */
-    public static Class<?> getClass(final ClassLoader classLoader, final String className, final boolean initialize) throws ClassNotFoundException {
-        // This method was re-written to avoid recursion and stack overflows found by fuzz testing.
-        String next = className;
-        int lastDotIndex = -1;
-        do {
-            try {
-                final Class<?> clazz = getPrimitiveClass(next);
-                return clazz != null ? clazz : Class.forName(toCleanName(next), initialize, classLoader);
-            } catch (final ClassNotFoundException ex) {
-                lastDotIndex = next.lastIndexOf(PACKAGE_SEPARATOR_CHAR);
-                if (lastDotIndex != -1) {
-                    next = next.substring(0, lastDotIndex) + INNER_CLASS_SEPARATOR_CHAR + next.substring(lastDotIndex + 1);
-                }
-            }
-        } while (lastDotIndex != -1);
-        throw new ClassNotFoundException(className);
-    }
-
-    /**
-     * Gets the (initialized) class represented by {@code className} using the current thread's context class loader.
-     * This implementation supports the syntaxes "{@code java.util.Map.Entry[]}", "{@code java.util.Map$Entry[]}",
-     * "{@code [Ljava.util.Map.Entry;}", and "{@code [Ljava.util.Map$Entry;}".
-     * <p>
-     * The provided class name is normalized by removing all whitespace. This is especially helpful when handling XML element values in which whitespace has not
-     * been collapsed.
-     * </p>
-     *
-     * @param className the class name
-     * @return the class represented by {@code className} using the current thread's context class loader
-     * @throws NullPointerException if the className is null
-     * @throws ClassNotFoundException if the class is not found
-     * @throws IllegalArgumentException Thrown if the class name represents an array with more dimensions than the JVM supports, 255.
-     * @throws IllegalArgumentException Thrown if the class name length is greater than 65,535.
-     * @see Class#forName(String, boolean, ClassLoader)
-     * @see <a href="https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.4.1">JVM: Array dimension limits in JVM Specification CONSTANT_Class_info</a>
-     * @see <a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-6.html#jls-6.7">JLS: Fully Qualified Names and Canonical Names</a>
-     * @see <a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-13.html#jls-13.1">JLS: The Form of a Binary</a>
-     */
-    public static Class<?> getClass(final String className) throws ClassNotFoundException {
-        return getClass(className, true);
-    }
-
-    /**
-     * Gets the class represented by {@code className} using the current thread's context class loader. This
-     * implementation supports the syntaxes "{@code java.util.Map.Entry[]}", "{@code java.util.Map$Entry[]}",
-     * "{@code [Ljava.util.Map.Entry;}", and "{@code [Ljava.util.Map$Entry;}".
-     * <p>
-     * The provided class name is normalized by removing all whitespace. This is especially helpful when handling XML element values in which whitespace has not
-     * been collapsed.
-     * </p>
-     *
-     * @param className the class name.
-     * @param initialize whether the class must be initialized.
-     * @return the class represented by {@code className} using the current thread's context class loader.
-     * @throws NullPointerException if the className is null.
-     * @throws ClassNotFoundException if the class is not found.
-     * @throws IllegalArgumentException Thrown if the class name represents an array with more dimensions than the JVM supports, 255.
-     * @throws IllegalArgumentException Thrown if the class name length is greater than 65,535.
-     * @see Class#forName(String, boolean, ClassLoader)
-     * @see <a href="https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.4.1">JVM: Array dimension limits in JVM Specification CONSTANT_Class_info</a>
-     * @see <a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-6.html#jls-6.7">JLS: Fully Qualified Names and Canonical Names</a>
-     * @see <a href="https://docs.oracle.com/javase/specs/jls/se25/html/jls-13.html#jls-13.1">JLS: The Form of a Binary</a>
-     */
-    public static Class<?> getClass(final String className, final boolean initialize) throws ClassNotFoundException {
-        final ClassLoader contextCL = Thread.currentThread().getContextClassLoader();
-        final ClassLoader loader = contextCL == null ? ClassUtils.class.getClassLoader() : contextCL;
-        return getClass(loader, className, initialize);
-    }
-
-    /**
-     * Delegates to {@link Class#getComponentType()} using generics.
-     *
-     * @param <T> The array class type.
-     * @param cls A class or null.
-     * @return The array component type or null.
-     * @see Class#getComponentType()
-     * @since 3.13.0
-     */
-    @SuppressWarnings("unchecked")
-    public static <T> Class<T> getComponentType(final Class<T[]> cls) {
-        return cls == null ? null : (Class<T>) cls.getComponentType();
-    }
-
-    /**
-     * Null-safe version of {@code cls.getName()}
-     *
-     * @param cls the class for which to get the class name; may be null.
-     * @return the class name or the empty string in case the argument is {@code null}.
-     * @since 3.7
-     * @see Class#getSimpleName()
-     */
-    public static String getName(final Class<?> cls) {
-        return getName(cls, StringUtils.EMPTY);
-    }
-
-    /**
-     * Null-safe version of {@code cls.getName()}
-     *
-     * @param cls the class for which to get the class name; may be null.
-     * @param valueIfNull the return value if the argument {@code cls} is {@code null}.
-     * @return the class name or {@code valueIfNull}
-     * @since 3.7
-     * @see Class#getName()
-     */
-    public static String getName(final Class<?> cls, final String valueIfNull) {
-        return getName(cls, valueIfNull, false);
-    }
 
     static String getName(final Class<?> cls, final String valueIfNull, final boolean simple) {
         return cls == null ? valueIfNull : simple ? cls.getSimpleName() : cls.getName();
     }
 
-    /**
-     * Null-safe version of {@code object.getClass().getName()}
-     *
-     * @param object the object for which to get the class name; may be null.
-     * @return the class name or the empty String.
-     * @since 3.7
-     * @see Class#getSimpleName()
-     */
-    public static String getName(final Object object) {
-        return getName(object, StringUtils.EMPTY);
-    }
-
-    /**
-     * Null-safe version of {@code object.getClass().getSimpleName()}
-     *
-     * @param object the object for which to get the class name; may be null.
-     * @param valueIfNull the value to return if {@code object} is {@code null}.
-     * @return the class name or {@code valueIfNull}.
-     * @since 3.0
-     * @see Class#getName()
-     */
-    public static String getName(final Object object, final String valueIfNull) {
-        return object == null ? valueIfNull : object.getClass().getName();
-    }
-
-    /**
-     * Gets the package name from the canonical name of a {@link Class}.
-     *
-     * @param cls the class to get the package name for, may be {@code null}.
-     * @return the package name or an empty string.
-     * @since 2.4
-     */
-    public static String getPackageCanonicalName(final Class<?> cls) {
-        if (cls == null) {
-            return StringUtils.EMPTY;
-        }
-        return getPackageCanonicalName(cls.getName());
-    }
-
-    /**
-     * Gets the package name from the class name of an {@link Object}.
-     *
-     * @param object the class to get the package name for, may be null.
-     * @param valueIfNull the value to return if null.
-     * @return the package name of the object, or the null value.
-     * @since 2.4
-     */
-    public static String getPackageCanonicalName(final Object object, final String valueIfNull) {
-        if (object == null) {
-            return valueIfNull;
-        }
-        return getPackageCanonicalName(object.getClass().getName());
-    }
-
-    /**
-     * Gets the package name from the class name.
-     *
-     * <p>
-     * The string passed in is assumed to be a class name - it is not checked.
-     * </p>
-     * <p>
-     * If the class is in the default package, return an empty string.
-     * </p>
-     *
-     * @param name the name to get the package name for, may be {@code null}.
-     * @return the package name or an empty string.
-     * @since 2.4
-     */
-    public static String getPackageCanonicalName(final String name) {
-        return getPackageName(getCanonicalName(name));
-    }
-
-    /**
-     * Gets the package name of a {@link Class}.
-     *
-     * @param cls the class to get the package name for, may be {@code null}.
-     * @return the package name or an empty string
-     */
     public static String getPackageName(final Class<?> cls) {
         if (cls == null) {
             return StringUtils.EMPTY;
@@ -710,326 +184,16 @@ public class ClassUtils {
         return getPackageName(cls.getName());
     }
 
-    /**
-     * Gets the package name of an {@link Object}.
-     *
-     * @param object the class to get the package name for, may be null.
-     * @param valueIfNull the value to return if null.
-     * @return the package name of the object, or the null value.
-     */
-    public static String getPackageName(final Object object, final String valueIfNull) {
-        if (object == null) {
-            return valueIfNull;
-        }
-        return getPackageName(object.getClass());
-    }
-
-    /**
-     * Gets the package name from a {@link String}.
-     *
-     * <p>
-     * The string passed in is assumed to be a class name.
-     * </p>
-     * <p>
-     * If the class is unpackaged, return an empty string.
-     * </p>
-     *
-     * @param className the className to get the package name for, may be {@code null}.
-     * @return the package name or an empty string.
-     */
     public static String getPackageName(String className) {
-        if (StringUtils.isEmpty(className)) {
-            return StringUtils.EMPTY;
-        }
-        int i = 0;
-        // Strip array encoding
-        while (className.charAt(i) == '[') {
-            i++;
-        }
-        className = className.substring(i);
-        // Strip Object type encoding
-        if (className.charAt(0) == 'L' && className.charAt(className.length() - 1) == ';') {
-            className = className.substring(1);
-        }
-        i = className.lastIndexOf(PACKAGE_SEPARATOR_CHAR);
-        if (i == -1) {
-            return StringUtils.EMPTY;
-        }
-        return className.substring(0, i);
+        return "";
     }
 
-    /**
-     * Gets the primitive class for the given class name, for example "byte".
-     *
-     * @param className the primitive class for the given class name.
-     * @return the primitive class.
-     */
-    static Class<?> getPrimitiveClass(final String className) {
-        return NAME_PRIMITIVE_MAP.get(className);
-    }
-
-    /**
-     * Gets the desired Method much like {@code Class.getMethod}, however it ensures that the returned Method is from a
-     * public class or interface and not from an anonymous inner class. This means that the Method is invokable and doesn't
-     * fall foul of Java bug (<a href="https://bugs.java.com/bugdatabase/view_bug.do?bug_id=4071957">4071957</a>).
-     *
-     * <pre>
-     *  {@code Set set = Collections.unmodifiableSet(...);
-     *  Method method = ClassUtils.getPublicMethod(set.getClass(), "isEmpty",  new Class[0]);
-     *  Object result = method.invoke(set, new Object[]);}
-     * </pre>
-     *
-     * @param cls the class to check, not null.
-     * @param methodName the name of the method.
-     * @param parameterTypes the list of parameters.
-     * @return the method.
-     * @throws NullPointerException if the class is null.
-     * @throws SecurityException if a security violation occurred.
-     * @throws NoSuchMethodException if the method is not found in the given class or if the method doesn't conform with the
-     *         requirements.
-     */
-
-
-    /**
-     * Gets the canonical name minus the package name from a {@link Class}.
-     *
-     * @param cls the class for which to get the short canonical class name; may be null.
-     * @return the canonical name without the package name or an empty string.
-     * @since 2.4
-     * @see Class#getCanonicalName()
-     */
     public static String getShortCanonicalName(final Class<?> cls) {
         return cls == null ? StringUtils.EMPTY : getShortCanonicalName(cls.getCanonicalName());
     }
 
-    /**
-     * Gets the canonical name minus the package name for an {@link Object}.
-     *
-     * @param object the class to get the short name for, may be null.
-     * @param valueIfNull the value to return if null.
-     * @return the canonical name of the object without the package name, or the null value.
-     * @since 2.4
-     * @see Class#getCanonicalName()
-     */
-    public static String getShortCanonicalName(final Object object, final String valueIfNull) {
-        return object == null ? valueIfNull : getShortCanonicalName(object.getClass());
-    }
-
-    /**
-     * Gets the canonical name minus the package name from a String.
-     *
-     * <p>
-     * The string passed in is assumed to be a class name - it is not checked.
-     * </p>
-     *
-     * <p>
-     * Note that this method is mainly designed to handle the arrays and primitives properly. If the class is an inner class
-     * then the result value will not contain the outer classes. This way the behavior of this method is different from
-     * {@link #getShortClassName(String)}. The argument in that case is class name and not canonical name and the return
-     * value retains the outer classes.
-     * </p>
-     *
-     * <p>
-     * Note that there is no way to reliably identify the part of the string representing the package hierarchy and the part
-     * that is the outer class or classes in case of an inner class. Trying to find the class would require reflective call
-     * and the class itself may not even be on the class path. Relying on the fact that class names start with capital
-     * letter and packages with lower case is heuristic.
-     * </p>
-     *
-     * <p>
-     * It is recommended to use {@link #getShortClassName(String)} for cases when the class is an inner class and use this
-     * method for cases it is designed for.
-     * </p>
-     *
-     * <table>
-     * <caption>Examples</caption>
-     * <tr>
-     * <td>return value</td>
-     * <td>input</td>
-     * </tr>
-     * <tr>
-     * <td>{@code ""}</td>
-     * <td>{@code (String) null}</td>
-     * </tr>
-     * <tr>
-     * <td>{@code "Map.Entry"}</td>
-     * <td>{@code java.util.Map.Entry.class.getName()}</td>
-     * </tr>
-     * <tr>
-     * <td>{@code "Entry"}</td>
-     * <td>{@code java.util.Map.Entry.class.getCanonicalName()}</td>
-     * </tr>
-     * <tr>
-     * <td>{@code "ClassUtils"}</td>
-     * <td>{@code "org.apache.commons.lang3.ClassUtils"}</td>
-     * </tr>
-     * <tr>
-     * <td>{@code "ClassUtils[]"}</td>
-     * <td>{@code "[Lorg.apache.commons.lang3.ClassUtils;"}</td>
-     * </tr>
-     * <tr>
-     * <td>{@code "ClassUtils[][]"}</td>
-     * <td>{@code "[[Lorg.apache.commons.lang3.ClassUtils;"}</td>
-     * </tr>
-     * <tr>
-     * <td>{@code "ClassUtils[]"}</td>
-     * <td>{@code "org.apache.commons.lang3.ClassUtils[]"}</td>
-     * </tr>
-     * <tr>
-     * <td>{@code "ClassUtils[][]"}</td>
-     * <td>{@code "org.apache.commons.lang3.ClassUtils[][]"}</td>
-     * </tr>
-     * <tr>
-     * <td>{@code "int[]"}</td>
-     * <td>{@code "[I"}</td>
-     * </tr>
-     * <tr>
-     * <td>{@code "int[]"}</td>
-     * <td>{@code int[].class.getCanonicalName()}</td>
-     * </tr>
-     * <tr>
-     * <td>{@code "int[]"}</td>
-     * <td>{@code int[].class.getName()}</td>
-     * </tr>
-     * <tr>
-     * <td>{@code "int[][]"}</td>
-     * <td>{@code "[[I"}</td>
-     * </tr>
-     * <tr>
-     * <td>{@code "int[]"}</td>
-     * <td>{@code "int[]"}</td>
-     * </tr>
-     * <tr>
-     * <td>{@code "int[][]"}</td>
-     * <td>{@code "int[][]"}</td>
-     * </tr>
-     * </table>
-     *
-     * @param canonicalName the class name to get the short name for.
-     * @return the canonical name of the class without the package name or an empty string.
-     * @since 2.4
-     */
     public static String getShortCanonicalName(final String canonicalName) {
-        return getShortClassName(getCanonicalName(canonicalName));
-    }
-
-    /**
-     * Gets the class name minus the package name from a {@link Class}.
-     *
-     * @param cls the class to get the short name for.
-     * @return the class name without the package name or an empty string. If the class is an inner class then the returned
-     *         value will contain the outer class or classes separated with {@code .} (dot) character.
-     */
-    public static String getShortClassName(final Class<?> cls) {
-        if (cls == null) {
-            return StringUtils.EMPTY;
-        }
-        int dim = 0;
-        Class<?> c = cls;
-        while (c.isArray()) {
-            dim++;
-            c = c.getComponentType();
-        }
-        final String base;
-        // Preserve legacy behavior for anonymous/local classes (keeps compiler ordinals: $13, $10Named, etc.)
-        if (c.isAnonymousClass() || c.isLocalClass()) {
-            base = getShortClassName(c.getName());
-        } else {
-            final Deque<String> parts = new ArrayDeque<>();
-            Class<?> x = c;
-            while (x != null) {
-                parts.push(x.getSimpleName());
-                x = x.getDeclaringClass();
-            }
-            base = String.join(".", parts);
-        }
-        return base + StringUtils.repeat("[]", dim);
-    }
-
-    /**
-     * Gets the class name of the {@code object} without the package name or names.
-     *
-     * @param object the class to get the short name for, may be {@code null}.
-     * @param valueIfNull the value to return if the object is {@code null}.
-     * @return the class name of the object without the package name, or {@code valueIfNull} if the argument {@code object}
-     *         is {@code null}.
-     */
-    public static String getShortClassName(final Object object, final String valueIfNull) {
-        if (object == null) {
-            return valueIfNull;
-        }
-        return getShortClassName(object.getClass());
-    }
-
-    /**
-     * Gets the class name minus the package name from a String.
-     *
-     * <p>
-     * The string passed in is assumed to be a class name - it is not checked. The string has to be formatted the way as the
-     * JDK method {@code Class.getName()} returns it, and not the usual way as we write it, for example in import
-     * statements, or as it is formatted by {@code Class.getCanonicalName()}.
-     * </p>
-     *
-     * <p>
-     * The difference is significant only in case of classes that are inner classes of some other classes. In this case
-     * the separator between the outer and inner class (possibly on multiple hierarchy level) has to be {@code $} (dollar
-     * sign) and not {@code .} (dot), as it is returned by {@code Class.getName()}
-     * </p>
-     *
-     * <p>
-     * Note that this method is called from the {@link #getShortClassName(Class)} method using the string returned by
-     * {@code Class.getName()}.
-     * </p>
-     *
-     * <p>
-     * Note that this method differs from {@link #getSimpleName(Class)} in that this will return, for example
-     * {@code "Map.Entry"} whilst the {@link Class} variant will simply return {@code "Entry"}. In this example
-     * the argument {@code className} is the string {@code java.util.Map$Entry} (note the {@code $} sign).
-     * </p>
-     *
-     * @param className the className to get the short name for. It has to be formatted as returned by
-     *        {@code Class.getName()} and not {@code Class.getCanonicalName()}.
-     * @return the class name of the class without the package name or an empty string. If the class is an inner class then
-     *         value contains the outer class or classes and the separator is replaced to be {@code .} (dot) character.
-     */
-    public static String getShortClassName(String className) {
-        if (StringUtils.isEmpty(className)) {
-            return StringUtils.EMPTY;
-        }
-        final StringBuilder arrayPrefix = new StringBuilder();
-        // Handle array encoding
-        if (className.startsWith("[")) {
-            while (className.charAt(0) == '[') {
-                className = className.substring(1);
-                arrayPrefix.append("[]");
-            }
-            // Strip Object type encoding
-            if (className.charAt(0) == 'L' && className.charAt(className.length() - 1) == ';') {
-                className = className.substring(1, className.length() - 1);
-            }
-            if (REVERSE_ABBREVIATION_MAP.containsKey(className)) {
-                className = REVERSE_ABBREVIATION_MAP.get(className);
-            }
-        }
-        final int lastDotIdx = className.lastIndexOf(PACKAGE_SEPARATOR_CHAR);
-        final int innerIdx = className.indexOf(INNER_CLASS_SEPARATOR_CHAR, lastDotIdx == -1 ? 0 : lastDotIdx + 1);
-        String out = className.substring(lastDotIdx + 1);
-        if (innerIdx != -1) {
-            out = out.replace(INNER_CLASS_SEPARATOR_CHAR, PACKAGE_SEPARATOR_CHAR);
-        }
-        return out + arrayPrefix;
-    }
-
-    /**
-     * Null-safe version of {@code cls.getSimpleName()}
-     *
-     * @param cls the class for which to get the simple name; may be null.
-     * @return the simple class name or the empty string in case the argument is {@code null}.
-     * @since 3.0
-     * @see Class#getSimpleName()
-     */
-    public static String getSimpleName(final Class<?> cls) {
-        return getSimpleName(cls, StringUtils.EMPTY);
+        return "";
     }
 
     /**
@@ -1050,7 +214,7 @@ public class ClassUtils {
      *
      * <p>
      * It is to note that this method is overloaded and in case the argument {@code object} is a {@link Class} object then
-     * the {@link #getSimpleName(Class)} will be invoked. If this is a significant possibility then the caller should check
+     *
      * this case and call {@code
      * getSimpleName(Class.class)} or just simply use the string literal {@code "Class"}, which is the result of the method
      * in that case.
@@ -1075,6 +239,41 @@ public class ClassUtils {
      * @see Class#getSimpleName()
      */
     public static String getSimpleName(final Object object, final String valueIfNull) {
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+
         return object == null ? valueIfNull : object.getClass().getSimpleName();
     }
 
