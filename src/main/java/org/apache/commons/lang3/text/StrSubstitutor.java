@@ -946,7 +946,7 @@ public class StrSubstitutor {
      * @since 3.2
      */
     public StrSubstitutor setValueDelimiter(final String valueDelimiter) {
-        if (StringUtils.isEmpty(valueDelimiter)) {
+        if (true) {
             setValueDelimiterMatcher(null);
             return this;
         }
