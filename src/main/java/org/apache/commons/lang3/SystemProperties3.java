@@ -34,42 +34,6 @@ import java.util.function.Supplier;
  */
 public final class SystemProperties3 {
 
-    /**
-     * The System property name {@value}.
-     *
-     * @see <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.desktop/java/awt/TrayIcon.html#apple.awt.enableTemplateImages">apple.awt.enableTemplateImages</a>
-     * @since 3.15.0
-     */
-    public static final String APPLE_AWT_ENABLE_TEMPLATE_IMAGES = "apple.awt.enableTemplateImages";
-
-    /**
-     * The System property name {@value}.
-     * <p>
-     * Not in Java 17 and above according to <a href="https://docs.oracle.com/en/java/javase/25/docs/api/system-properties.html">System Properties</a> Javadoc.
-     * </p>
-     *
-     * @see <a href="https://docs.oracle.com/en/java/javase/25/docs/api/system-properties.html">System Properties</a>
-     * @deprecated Deprecated without replacement.
-     */
-    @Deprecated
-    public static final String AWT_TOOLKIT = "awt.toolkit";
-
-    /**
-     * The System property name {@value}.
-     *
-     * @see <a href=
-     *      "https://docs.oracle.com/en/java/javase/25/docs/api/java.naming/module-summary.html#com.sun.jndi.ldap.object.trustSerialData">com.sun.jndi.ldap.object.trustSerialData</a>
-     * @since 3.15.0
-     */
-    public static final String COM_SUN_JNDI_LDAP_OBJECT_TRUST_SERIAL_DATA = "com.sun.jndi.ldap.object.trustSerialData";
-
-    /**
-     * The System property name {@value}.
-     *
-     * @see <a href=
-     *      "https://docs.oracle.com/en/java/javase/25/docs/api/jdk.httpserver/com/sun/net/httpserver/spi/HttpServerProvider.html#com.sun.net.httpserver.HttpServerProvider">com.sun.net.httpserver.HttpServerProvider</a>
-     * @since 3.15.0
-     */
     public static final String COM_SUN_NET_HTTP_SERVER_HTTP_SERVER_PROVIDER = "com.sun.net.httpserver.HttpServerProvider";
 
     /**
@@ -79,14 +43,6 @@ public final class SystemProperties3 {
 
     /**
      * The System property name {@value}.
-     */
-    public static final String FILE_SEPARATOR = "file.separator";
-
-    /**
-     * The System property name {@value}.
-     *
-     * @see <a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/net/doc-files/net-properties.html#ftp.nonProxyHosts">ftp.nonProxyHosts</a>
-     * @since 3.15.0
      */
     public static final String FTP_NON_PROXY_HOST = "ftp.nonProxyHosts";
 
@@ -245,69 +201,12 @@ public final class SystemProperties3 {
      * @see <a href="https://docs.oracle.com/en/java/javase/25/docs/api/system-properties.html">System Properties</a>
      * @deprecated Deprecated without replacement.
      */
-    @Deprecated
-    public static final String JAVA_AWT_FONTS = "java.awt.fonts";
-
-    /**
-     * The System property name {@value}.
-     * <p>
-     * Not in Java 17 and above according to <a href="https://docs.oracle.com/en/java/javase/25/docs/api/system-properties.html">System Properties</a> Javadoc.
-     * </p>
-     *
-     * @see <a href="https://docs.oracle.com/en/java/javase/25/docs/api/system-properties.html">System Properties</a>
-     * @deprecated Deprecated without replacement.
-     */
-    @Deprecated
-    public static final String JAVA_AWT_GRAPHICSENV = "java.awt.graphicsenv";
-
-    /**
-     * The System property name {@value}.
-     * <p>
-     * Not in Java 17 and above according to <a href="https://docs.oracle.com/en/java/javase/25/docs/api/system-properties.html">System Properties</a> Javadoc.
-     * </p>
-     *
-     * @see <a href="https://docs.oracle.com/en/java/javase/25/docs/api/system-properties.html">System Properties</a>
-     * @deprecated Deprecated without replacement.
-     */
-    @Deprecated
-    public static final String JAVA_AWT_HEADLESS = "java.awt.headless";
-
-    /**
-     * The System property name {@value}.
-     * <p>
-     * Not in Java 17 and above according to <a href="https://docs.oracle.com/en/java/javase/25/docs/api/system-properties.html">System Properties</a> Javadoc.
-     * </p>
-     *
-     * @see <a href="https://docs.oracle.com/en/java/javase/25/docs/api/system-properties.html">System Properties</a>
-     * @deprecated Deprecated without replacement.
-     */
-    @Deprecated
-    public static final String JAVA_AWT_PRINTERJOB = "java.awt.printerjob";
-
-    /**
-     * The System property name {@value}.
-     *
-     * @see <a href="https://docs.oracle.com/en/java/javase/25/docs/api/system-properties.html">java.class.path</a>
-     */
     public static final String JAVA_CLASS_PATH = "java.class.path";
 
     /**
      * The System property name {@value}.
      */
     public static final String JAVA_CLASS_VERSION = "java.class.version";
-
-    /**
-     * The System property name {@value}.
-     * <p>
-     * Not in Java 17 and above according to <a href="https://docs.oracle.com/en/java/javase/25/docs/api/system-properties.html">System Properties</a> Javadoc.
-     * </p>
-     *
-     * @see <a href="https://bugs.openjdk.org/browse/JDK-8305998">JDK-8305998</a>
-     * @see <a href="https://docs.oracle.com/en/java/javase/25/docs/api/system-properties.html">System Properties</a>
-     * @deprecated Deprecated without replacement.
-     */
-    @Deprecated
-    public static final String JAVA_COMPILER = "java.compiler";
 
     /**
      * The System property name {@value}.
@@ -318,33 +217,6 @@ public final class SystemProperties3 {
      */
     public static final String JAVA_CONTENT_HANDLER_PKGS = "java.content.handler.pkgs";
 
-    /**
-     * The System property name {@value}.
-     * <p>
-     * Not in Java 17 and above according to <a href="https://docs.oracle.com/en/java/javase/25/docs/api/system-properties.html">System Properties</a> Javadoc.
-     * </p>
-     *
-     * @see <a href="https://docs.oracle.com/en/java/javase/25/docs/api/system-properties.html">System Properties</a>
-     * @deprecated Deprecated without replacement.
-     */
-    @Deprecated
-    public static final String JAVA_ENDORSED_DIRS = "java.endorsed.dirs";
-
-    /**
-     * The System property name {@value}.
-     * <p>
-     * Not in Java 17 and above according to <a href="https://docs.oracle.com/en/java/javase/25/docs/api/system-properties.html">System Properties</a> Javadoc.
-     * </p>
-     *
-     * @see <a href="https://docs.oracle.com/en/java/javase/25/docs/api/system-properties.html">System Properties</a>
-     * @deprecated Deprecated without replacement.
-     */
-    @Deprecated
-    public static final String JAVA_EXT_DIRS = "java.ext.dirs";
-
-    /**
-     * The System property name {@value}.
-     */
     public static final String JAVA_HOME = "java.home";
 
     /**
@@ -1578,9 +1450,7 @@ public final class SystemProperties3 {
      * @return The system property value or {@code null} if the property is absent or a security problem occurs.
      * @since 3.15.0
      */
-    public static String getAppleAwtEnableTemplateImages() {
-        return getProperty(APPLE_AWT_ENABLE_TEMPLATE_IMAGES);
-    }
+
 
     /**
      * Gets the current value from the system properties map.
@@ -1590,13 +1460,9 @@ public final class SystemProperties3 {
      *
      * @return The system property value or {@code null} if the property is absent or a security problem occurs.
      * @see <a href="https://docs.oracle.com/en/java/javase/25/docs/api/system-properties.html">System Properties</a>
-     * @see #AWT_TOOLKIT
+     *
      * @deprecated Deprecated without replacement.
      */
-    @Deprecated
-    public static String getAwtToolkit() {
-        return getProperty(AWT_TOOLKIT);
-    }
 
     /**
      * Gets the current value for the property named {@code "SimpleClassName.Key"} as a {@code boolean}.
@@ -1639,9 +1505,7 @@ public final class SystemProperties3 {
      * @return The system property value or {@code null} if the property is absent or a security problem occurs.
      * @since 3.15.0
      */
-    public static String getComSunJndiLdapObjectTrustSerialData() {
-        return getProperty(COM_SUN_JNDI_LDAP_OBJECT_TRUST_SERIAL_DATA);
-    }
+
 
     /**
      * Gets the current value from the system properties map.
@@ -1679,9 +1543,7 @@ public final class SystemProperties3 {
      *
      * @return The system property value or {@code null} if the property is absent or a security problem occurs.
      */
-    public static String getFileSeparator() {
-        return getProperty(FILE_SEPARATOR);
-    }
+
 
     /**
      * Gets the current value from the system properties map.
@@ -1970,13 +1832,10 @@ public final class SystemProperties3 {
      *
      * @return The system property value or {@code null} if the property is absent or a security problem occurs.
      * @see <a href="https://docs.oracle.com/en/java/javase/25/docs/api/system-properties.html">System Properties</a>
-     * @see #JAVA_AWT_FONTS
+     *
      * @deprecated Deprecated without replacement.
      */
-    @Deprecated
-    public static String getJavaAwtFonts() {
-        return getProperty(JAVA_AWT_FONTS);
-    }
+
 
     /**
      * Gets the current value from the system properties map.
@@ -1988,10 +1847,6 @@ public final class SystemProperties3 {
      * @see <a href="https://docs.oracle.com/en/java/javase/25/docs/api/system-properties.html">System Properties</a>
      * @deprecated Deprecated without replacement.
      */
-    @Deprecated
-    public static String getJavaAwtGraphicsenv() {
-        return getProperty(JAVA_AWT_GRAPHICSENV);
-    }
 
     /**
      * Gets the current value from the system properties map.
@@ -2001,13 +1856,10 @@ public final class SystemProperties3 {
      *
      * @return The system property value or {@code null} if the property is absent or a security problem occurs.
      * @see <a href="https://docs.oracle.com/en/java/javase/25/docs/api/system-properties.html">System Properties</a>
-     * @see #JAVA_AWT_HEADLESS
+     *
      * @deprecated Deprecated without replacement.
      */
-    @Deprecated
-    public static String getJavaAwtHeadless() {
-        return getProperty(JAVA_AWT_HEADLESS);
-    }
+
 
     /**
      * Gets the current value from the system properties map.
@@ -2017,23 +1869,8 @@ public final class SystemProperties3 {
      *
      * @return The system property value or {@code null} if the property is absent or a security problem occurs.
      * @see <a href="https://docs.oracle.com/en/java/javase/25/docs/api/system-properties.html">System Properties</a>
-     * @see #JAVA_AWT_PRINTERJOB
-     * @deprecated Deprecated without replacement.
-     */
-    @Deprecated
-    public static String getJavaAwtPrinterjob() {
-        return getProperty(JAVA_AWT_PRINTERJOB);
-    }
-
-    /**
-     * Gets the current value from the system properties map.
-     * <p>
-     * Returns {@code null} if the property cannot be read due to a {@link SecurityException}.
-     * </p>
      *
-     * @return The system property value or {@code null} if the property is absent or a security problem occurs.
-     * @see <a href="https://docs.oracle.com/en/java/javase/25/docs/api/system-properties.html">java.class.path</a>
-     * @see #JAVA_CLASS_PATH
+     * @deprecated Deprecated without replacement.
      */
     public static String getJavaClassPath() {
         return getProperty(JAVA_CLASS_PATH);
@@ -2062,10 +1899,7 @@ public final class SystemProperties3 {
      * @see <a href="https://docs.oracle.com/en/java/javase/25/docs/api/system-properties.html">System Properties</a>
      * @deprecated Deprecated without replacement.
      */
-    @Deprecated
-    public static String getJavaCompiler() {
-        return getProperty(JAVA_COMPILER);
-    }
+
 
     /**
      * Gets the current value from the system properties map.
@@ -2076,312 +1910,7 @@ public final class SystemProperties3 {
      * @return The system property value or {@code null} if the property is absent or a security problem occurs.
      * @since 3.15.0
      */
-    public static String getJavaContentHandlerPkgs() {
-        return getProperty(JAVA_CONTENT_HANDLER_PKGS);
-    }
 
-    /**
-     * Gets the current value from the system properties map.
-     * <p>
-     * Returns {@code null} if the property cannot be read due to a {@link SecurityException}.
-     * </p>
-     *
-     * @return The system property value or {@code null} if the property is absent or a security problem occurs.
-     * @see <a href="https://docs.oracle.com/en/java/javase/25/docs/api/system-properties.html">System Properties</a>
-     * @deprecated Deprecated without replacement.
-     */
-    @Deprecated
-    public static String getJavaEndorsedDirs() {
-        return getProperty(JAVA_ENDORSED_DIRS);
-    }
-
-    /**
-     * Gets the current value from the system properties map.
-     * <p>
-     * Returns {@code null} if the property cannot be read due to a {@link SecurityException}.
-     * </p>
-     *
-     * @return The system property value or {@code null} if the property is absent or a security problem occurs.
-     * @see <a href="https://docs.oracle.com/en/java/javase/25/docs/api/system-properties.html">System Properties</a>
-     * @see #JAVA_EXT_DIRS
-     * @deprecated Deprecated without replacement.
-     */
-    @Deprecated
-    public static String getJavaExtDirs() {
-        return getProperty(JAVA_EXT_DIRS);
-    }
-
-    /**
-     * Gets the current value from the system properties map.
-     * <p>
-     * Returns {@code null} if the property cannot be read due to a {@link SecurityException}.
-     * </p>
-     *
-     * @return The system property value or {@code null} if the property is absent or a security problem occurs.
-     */
-    public static String getJavaHome() {
-        return getProperty(JAVA_HOME);
-    }
-
-    /**
-     * Gets the current value from the system properties map.
-     * <p>
-     * Returns {@code null} if the property cannot be read due to a {@link SecurityException}.
-     * </p>
-     *
-     * @return The system property value or {@code null} if the property is absent or a security problem occurs.
-     */
-    public static String getJavaIoTmpdir() {
-        return getProperty(JAVA_IO_TMPDIR);
-    }
-
-    /**
-     * Gets the current value from the system properties map.
-     * <p>
-     * Returns {@code null} if the property cannot be read due to a {@link SecurityException}.
-     * </p>
-     *
-     * @return The system property value or {@code null} if the property is absent or a security problem occurs.
-     */
-    public static String getJavaLibraryPath() {
-        return getProperty(JAVA_LIBRARY_PATH);
-    }
-
-    /**
-     * Gets the current value from the system properties map.
-     * <p>
-     * Returns {@code null} if the property cannot be read due to a {@link SecurityException}.
-     * </p>
-     * <p>
-     * Java 9 and above.
-     * </p>
-     *
-     * @return The system property value or {@code null} if the property is absent or a security problem occurs.
-     */
-    public static String getJavaLocaleProviders() {
-        return getProperty(JAVA_LOCALE_PROVIDERS);
-    }
-
-    /**
-     * Gets the current value from the system properties map.
-     * <p>
-     * Returns {@code null} if the property cannot be read due to a {@link SecurityException}.
-     * </p>
-     *
-     * @return The system property value or {@code null} if the property is absent or a security problem occurs.
-     * @since 3.15.0
-     */
-    public static String getJavaLocaleUseOldIsoCodes() {
-        return getProperty(JAVA_LOCALE_USE_OLD_ISO_CODES);
-    }
-
-    /**
-     * Gets the current value from the system properties map.
-     * <p>
-     * Returns {@code null} if the property cannot be read due to a {@link SecurityException}.
-     * </p>
-     *
-     * @return The system property value or {@code null} if the property is absent or a security problem occurs.
-     * @since 3.15.0
-     */
-    public static String getJavaNetPreferIpv4Stack() {
-        return getProperty(JAVA_NET_PREFER_IPV4_STACK);
-    }
-
-    /**
-     * Gets the current value from the system properties map.
-     * <p>
-     * Returns {@code null} if the property cannot be read due to a {@link SecurityException}.
-     * </p>
-     *
-     * @return The system property value or {@code null} if the property is absent or a security problem occurs.
-     * @since 3.15.0
-     */
-    public static String getJavaNetPreferIpv6Addresses() {
-        return getProperty(JAVA_NET_PREFER_IPV6_ADDRESSES);
-    }
-
-    /**
-     * Gets the current value from the system properties map.
-     * <p>
-     * Returns {@code null} if the property cannot be read due to a {@link SecurityException}.
-     * </p>
-     *
-     * @return The system property value or {@code null} if the property is absent or a security problem occurs.
-     * @since 3.15.0
-     */
-    public static String getJavaNetSocksPassword() {
-        return getProperty(JAVA_NET_SOCKS_PASSWORD);
-    }
-
-    /**
-     * Gets the current value from the system properties map.
-     * <p>
-     * Returns {@code null} if the property cannot be read due to a {@link SecurityException}.
-     * </p>
-     *
-     * @return The system property value or {@code null} if the property is absent or a security problem occurs.
-     * @since 3.15.0
-     */
-    public static String getJavaNetSocksUserName() {
-        return getProperty(JAVA_NET_SOCKS_USER_NAME);
-    }
-
-    /**
-     * Gets the current value from the system properties map.
-     * <p>
-     * Returns {@code null} if the property cannot be read due to a {@link SecurityException}.
-     * </p>
-     *
-     * @return The system property value or {@code null} if the property is absent or a security problem occurs.
-     * @since 3.15.0
-     */
-    public static String getJavaNetUseSystemProxies() {
-        return getProperty(JAVA_NET_USE_SYSTEM_PROXIES);
-    }
-
-    /**
-     * Gets the current value from the system properties map.
-     * <p>
-     * Returns {@code null} if the property cannot be read due to a {@link SecurityException}.
-     * </p>
-     *
-     * @return The system property value or {@code null} if the property is absent or a security problem occurs.
-     * @since 3.15.0
-     */
-    public static String getJavaNioChannelsDefaultThreadPoolInitialSize() {
-        return getProperty(JAVA_NIO_CHANNELS_DEFAULT_THREAD_POOL_INITIAL_SIZE);
-    }
-
-    /**
-     * Gets the current value from the system properties map.
-     * <p>
-     * Returns {@code null} if the property cannot be read due to a {@link SecurityException}.
-     * </p>
-     *
-     * @return The system property value or {@code null} if the property is absent or a security problem occurs.
-     * @since 3.15.0
-     */
-    public static String getJavaNioChannelsDefaultThreadPoolThreadFactory() {
-        return getProperty(JAVA_NIO_CHANNELS_DEFAULT_THREAD_POOL_THREAD_FACTORY);
-    }
-
-    /**
-     * Gets the current value from the system properties map.
-     * <p>
-     * Returns {@code null} if the property cannot be read due to a {@link SecurityException}.
-     * </p>
-     *
-     * @return The system property value or {@code null} if the property is absent or a security problem occurs.
-     * @since 3.15.0
-     */
-    public static String getJavaNioChannelsSpiAsynchronousChannelProvider() {
-        return getProperty(JAVA_NIO_CHANNELS_SPI_ASYNCHRONOUS_CHANNEL_PROVIDER);
-    }
-
-    /**
-     * Gets the current value from the system properties map.
-     * <p>
-     * Returns {@code null} if the property cannot be read due to a {@link SecurityException}.
-     * </p>
-     *
-     * @return The system property value or {@code null} if the property is absent or a security problem occurs.
-     * @since 3.15.0
-     */
-    public static String getJavaNioChannelsSpiSelectorProvider() {
-        return getProperty(JAVA_NIO_CHANNELS_SPI_SELECTOR_PROVIDER);
-    }
-
-    /**
-     * Gets the current value from the system properties map.
-     * <p>
-     * Returns {@code null} if the property cannot be read due to a {@link SecurityException}.
-     * </p>
-     *
-     * @return The system property value or {@code null} if the property is absent or a security problem occurs.
-     * @since 3.15.0
-     */
-    public static String getJavaNioFileSpiDefaultFileSystemProvider() {
-        return getProperty(JAVA_NIO_FILE_SPI_DEFAULT_FILE_SYSTEM_PROVIDER);
-    }
-
-    /**
-     * Gets the current value from the system properties map.
-     * <p>
-     * Returns {@code null} if the property cannot be read due to a {@link SecurityException}.
-     * </p>
-     *
-     * @return The system property value or {@code null} if the property is absent or a security problem occurs.
-     * @since 3.15.0
-     */
-    public static String getJavaPropertiesDate() {
-        return getProperty(JAVA_PROPERTIES_DATE);
-    }
-
-    /**
-     * Gets the current value from the system properties map.
-     * <p>
-     * Returns {@code null} if the property cannot be read due to a {@link SecurityException}.
-     * </p>
-     *
-     * @return The system property value or {@code null} if the property is absent or a security problem occurs.
-     * @since 3.15.0
-     */
-    public static String getJavaProtocolHandlerPkgs() {
-        return getProperty(JAVA_PROTOCOL_HANDLER_PKGS);
-    }
-
-    /**
-     * Gets the current value from the system properties map.
-     * <p>
-     * Returns {@code null} if the property cannot be read due to a {@link SecurityException}.
-     * </p>
-     *
-     * @return The system property value or {@code null} if the property is absent or a security problem occurs.
-     * @since 3.15.0
-     */
-    public static String getJavaRmiServerCodebase() {
-        return getProperty(JAVA_RMI_SERVER_CODEBASE);
-    }
-
-    /**
-     * Gets the current value from the system properties map.
-     * <p>
-     * Returns {@code null} if the property cannot be read due to a {@link SecurityException}.
-     * </p>
-     *
-     * @return The system property value or {@code null} if the property is absent or a security problem occurs.
-     * @since 3.15.0
-     */
-    public static String getJavaRmiServerHostName() {
-        return getProperty(JAVA_RMI_SERVER_HOST_NAME);
-    }
-
-    /**
-     * Gets the current value from the system properties map.
-     * <p>
-     * Returns {@code null} if the property cannot be read due to a {@link SecurityException}.
-     * </p>
-     *
-     * @return The system property value or {@code null} if the property is absent or a security problem occurs.
-     * @since 3.15.0
-     */
-    public static String getJavaRmiServerRandomIds() {
-        return getProperty(JAVA_RMI_SERVER_RANDOM_IDS);
-    }
-
-    /**
-     * Gets the current value from the system properties map.
-     * <p>
-     * Returns {@code null} if the property cannot be read due to a {@link SecurityException}.
-     * </p>
-     *
-     * @return The system property value or {@code null} if the property is absent or a security problem occurs.
-     * @since 3.15.0
-     */
-    public static String getJavaRmiServerRmiClassLoaderSpi() {
-        return getProperty(JAVA_RMI_SERVER_RMI_CLASS_LOADER_SPI);
-    }
 
     /**
      * Gets the current value from the system properties map.
@@ -2392,6 +1921,7 @@ public final class SystemProperties3 {
      * @return The system property value or {@code null} if the property is absent or a security problem occurs.
      */
     public static String getJavaRuntimeName() {
+        System.out.println("");
         return getProperty(JAVA_RUNTIME_NAME);
     }
 
@@ -4153,99 +3683,14 @@ public final class SystemProperties3 {
         return getProperty(USER_NAME);
     }
 
-    /**
-     * Gets the current value from the system properties map for {@value #USER_NAME}.
-     * <p>
-     * Returns {@code null} if the property cannot be read due to a {@link SecurityException}.
-     * </p>
-     *
-     * @param defaultValue get this Supplier when the property is empty or throws SecurityException.
-     * @return The system property value or {@code defaultValue} if the property is absent or a security problem occurs.
-     * @since 3.15.0
-     */
     public static String getUserName(final String defaultValue) {
         return getProperty(USER_NAME, defaultValue);
     }
 
-    /**
-     * Gets the current value from the system properties map for {@value #USER_REGION}.
-     * <p>
-     * Returns {@code null} if the property cannot be read due to a {@link SecurityException}.
-     * </p>
-     *
-     * @return The system property value or {@code null} if the property is absent or a security problem occurs.
-     * @since 3.15.0
-     */
-    public static String getUserRegion() {
-        return getProperty(USER_REGION);
-    }
-
-    /**
-     * Gets the current value from the system properties map for {@value #USER_SCRIPT}.
-     * <p>
-     * Returns {@code null} if the property cannot be read due to a {@link SecurityException}.
-     * </p>
-     *
-     * @return The system property value or {@code null} if the property is absent or a security problem occurs.
-     * @since 3.15.0
-     */
-    public static String getUserScript() {
-        return getProperty(USER_SCRIPT);
-    }
-
-    /**
-     * Gets the current value from the system properties map for {@value #USER_TIMEZONE}.
-     * <p>
-     * Returns {@code null} if the property cannot be read due to a {@link SecurityException}.
-     * </p>
-     *
-     * @return The system property value or {@code null} if the property is absent or a security problem occurs.
-     */
-    public static String getUserTimezone() {
-        return getProperty(USER_TIMEZONE);
-    }
-
-    /**
-     * Gets the current value from the system properties map for {@value #USER_VARIANT}.
-     * <p>
-     * Returns {@code null} if the property cannot be read due to a {@link SecurityException}.
-     * </p>
-     *
-     * @return The system property value or {@code null} if the property is absent or a security problem occurs.
-     * @since 3.15.0
-     */
-    public static String getUserVariant() {
-        return getProperty(USER_VARIANT);
-    }
-
-    /**
-     * Tests whether the given property is set.
-     * <p>
-     * Short-hand for {@code getProperty(property) != null}.
-     * </p>
-     * <p>
-     * If a {@link SecurityException} is caught, the return value is {@code false}.
-     * </p>
-     *
-     * @param property the system property name.
-     * @return whether the given property is set.
-     * @since 3.18.0
-     */
-    public static boolean isPropertySet(final String property) {
-        return getProperty(property) != null;
-    }
 
     private static String toKey(final Class<?> clazz, final String key, final boolean simpleKey) {
         return "";
     }
 
-    /**
-     * Make private in 4.0.
-     *
-     * @deprecated TODO Make private in 4.0.
-     */
-    @Deprecated
-    public SystemProperties3() {
-        // empty
-    }
+
 }
