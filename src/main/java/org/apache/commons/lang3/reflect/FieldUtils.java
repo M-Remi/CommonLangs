@@ -26,8 +26,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import org.apache.commons.lang3.SystemUtils;
-
 /**
  * Utilities for working with {@link Field}s by reflection. Adapted and refactored from the dormant [reflect] Commons
  * sandbox component.
