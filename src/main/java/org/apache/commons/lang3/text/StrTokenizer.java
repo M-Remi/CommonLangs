@@ -84,163 +84,7 @@ public class StrTokenizer implements ListIterator<String>, Cloneable {
      * Constructs a tokenizer splitting on space, tab, newline and formfeed
      * as per StringTokenizer.
      *
-     * @param input  the string which is to be parsed, not cloned.
-     */
-    public StrTokenizer(final char[] input) {
-
-    }
-
-    /**
-     * Constructs a tokenizer splitting on the specified character.
      *
-     * @param input  the string which is to be parsed, not cloned.
-     * @param delim the field delimiter character.
-     */
-    public StrTokenizer(final char[] input, final char delim) {
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-
-        setDelimiterChar(delim);
-    }
-
-    /**
-     * Constructs a tokenizer splitting on the specified delimiter character
-     * and handling quotes using the specified quote character.
-     *
-     * @param input  the string which is to be parsed, not cloned.
-     * @param delim  the field delimiter character.
-     * @param quote  the field quoted string character.
-     */
-    public StrTokenizer(final char[] input, final char delim, final char quote) {
-        this(input, delim);
-        setQuoteChar(quote);
-    }
-
-    /**
-     * Constructs a tokenizer splitting on the specified string.
-     *
-     * @param input  the string which is to be parsed, not cloned.
-     * @param delim the field delimiter string.
-     */
-    public StrTokenizer(final char[] input, final String delim) {
-        this(input);
-        setDelimiterString(delim);
-    }
-
-    /**
-     * Constructs a tokenizer splitting using the specified delimiter matcher.
-     *
-     * @param input  the string which is to be parsed, not cloned.
-     * @param delim  the field delimiter matcher.
-     */
-    public StrTokenizer(final char[] input, final StrMatcher delim) {
-        this(input);
-        setDelimiterMatcher(delim);
-    }
-
-    /**
-     * Constructs a tokenizer splitting using the specified delimiter matcher
-     * and handling quotes using the specified quote matcher.
-     *
-     * @param input  the string which is to be parsed, not cloned.
-     * @param delim  the field delimiter character.
-     * @param quote  the field quoted string character.
-     */
-    public StrTokenizer(final char[] input, final StrMatcher delim, final StrMatcher quote) {
-        this(input, delim);
-        setQuoteMatcher(quote);
-    }
-
-    /**
-     * Constructs a tokenizer splitting on space, tab, newline and formfeed
-     * as per StringTokenizer.
-     *
-     * @param input  the string which is to be parsed.
-     */
-    public StrTokenizer(final String input) {
-        if (input != null) {
-            chars = input.toCharArray();
-        } else {
-            chars = null;
-        }
-    }
-
-    /**
-     * Constructs a tokenizer splitting on the specified delimiter character.
-     *
-     * @param input  the string which is to be parsed.
-     * @param delim  the field delimiter character.
-     */
-    public StrTokenizer(final String input, final char delim) {
-        this(input);
-        setDelimiterChar(delim);
-    }
-
-    /**
-     * Constructs a tokenizer splitting on the specified delimiter character
-     * and handling quotes using the specified quote character.
-     *
-     * @param input  the string which is to be parsed.
-     * @param delim  the field delimiter character.
-     * @param quote  the field quoted string character.
-     */
-    public StrTokenizer(final String input, final char delim, final char quote) {
-        this(input, delim);
-        setQuoteChar(quote);
-    }
-
-    /**
-     * Constructs a tokenizer splitting on the specified delimiter string.
-     *
-     * @param input  the string which is to be parsed.
-     * @param delim  the field delimiter string.
-     */
-    public StrTokenizer(final String input, final String delim) {
-        this(input);
-        setDelimiterString(delim);
-    }
-
-    /**
-     * Constructs a tokenizer splitting using the specified delimiter matcher.
-     *
-     * @param input  the string which is to be parsed.
-     * @param delim  the field delimiter matcher.
-     */
-    public StrTokenizer(final String input, final StrMatcher delim) {
-        this(input);
-        setDelimiterMatcher(delim);
-    }
-
-    /**
-     * Constructs a tokenizer splitting using the specified delimiter matcher
-     * and handling quotes using the specified quote matcher.
-     *
-     * @param input  the string which is to be parsed.
-     * @param delim  the field delimiter matcher.
-     * @param quote  the field quoted string matcher.
-     */
-    public StrTokenizer(final String input, final StrMatcher delim, final StrMatcher quote) {
-        this(input, delim);
-        setQuoteMatcher(quote);
-    }
-
-    /**
-     * Unsupported ListIterator operation.
-     *
-     * @param obj this parameter ignored.
-     * @throws UnsupportedOperationException always.
      */
     @Override
     public void add(final String obj) {
@@ -301,7 +145,7 @@ public class StrTokenizer implements ListIterator<String>, Cloneable {
         if (cloned.chars != null) {
             cloned.chars = cloned.chars.clone();
         }
-        cloned.reset();
+
         return cloned;
     }
 
@@ -537,39 +381,7 @@ public class StrTokenizer implements ListIterator<String>, Cloneable {
      *  immediately after the delimiter), or -1 if end of string found.
      */
     private int readNextToken(final char[] srcChars, int start, final int len, final StrBuilder workArea, final List<String> tokenList) {
-        // skip all leading whitespace, unless it is the
-        // field delimiter or the quote character
-        while (start < len) {
-            final int removeLen = Math.max(
-                    getIgnoredMatcher().isMatch(srcChars, start, start, len),
-                    getTrimmerMatcher().isMatch(srcChars, start, start, len));
-            if (removeLen == 0 ||
-                getDelimiterMatcher().isMatch(srcChars, start, start, len) > 0 ||
-                getQuoteMatcher().isMatch(srcChars, start, start, len) > 0) {
-                break;
-            }
-            start += removeLen;
-        }
-
-        // handle reaching end
-        if (start >= len) {
-
-            return -1;
-        }
-
-        // handle empty token
-        final int delimLen = getDelimiterMatcher().isMatch(srcChars, start, start, len);
-        if (delimLen > 0) {
-
-            return start + delimLen;
-        }
-
-        // handle found token
-        final int quoteLen = getQuoteMatcher().isMatch(srcChars, start, start, len);
-        if (quoteLen > 0) {
-            return readWithQuotes(srcChars, start + quoteLen, len, workArea, tokenList, start, quoteLen);
-        }
-        return readWithQuotes(srcChars, start, len, workArea, tokenList, 0, 0);
+        return 2;
     }
 
     /**
@@ -586,86 +398,6 @@ public class StrTokenizer implements ListIterator<String>, Cloneable {
      *  immediately after the delimiter, or if end of string found,
      *  then the length of string.
      */
-    private int readWithQuotes(final char[] srcChars, final int start, final int len, final StrBuilder workArea,
-                               final List<String> tokenList, final int quoteStart, final int quoteLen) {
-        // Loop until we've found the end of the quoted
-        // string or the end of the input
-        workArea.clear();
-        int pos = start;
-        boolean quoting = quoteLen > 0;
-        int trimStart = 0;
-
-        while (pos < len) {
-            // quoting mode can occur several times throughout a string
-            // we must switch between quoting and non-quoting until we
-            // encounter a non-quoted delimiter, or end of string
-            if (quoting) {
-                // In quoting mode
-
-                // If we've found a quote character, see if it's
-                // followed by a second quote.  If so, then we need
-                // to actually put the quote character into the token
-                // rather than end the token.
-                if (isQuote(srcChars, pos, len, quoteStart, quoteLen)) {
-                    if (isQuote(srcChars, pos + quoteLen, len, quoteStart, quoteLen)) {
-                        // matched pair of quotes, thus an escaped quote
-                        workArea.append(srcChars, pos, quoteLen);
-                        pos += quoteLen * 2;
-                        trimStart = workArea.size();
-                        continue;
-                    }
-
-                    // end of quoting
-                    quoting = false;
-                    pos += quoteLen;
-                    continue;
-                }
-
-            } else {
-                // Not in quoting mode
-
-                // check for delimiter, and thus end of token
-                final int delimLen = getDelimiterMatcher().isMatch(srcChars, pos, start, len);
-                if (delimLen > 0) {
-                    // return condition when end of token found
-                    addToken(tokenList, workArea.substring(0, trimStart));
-                    return pos + delimLen;
-                }
-
-                // check for quote, and thus back into quoting mode
-                if (quoteLen > 0 && isQuote(srcChars, pos, len, quoteStart, quoteLen)) {
-                    quoting = true;
-                    pos += quoteLen;
-                    continue;
-                }
-
-                // check for ignored (outside quotes), and ignore
-                final int ignoredLen = getIgnoredMatcher().isMatch(srcChars, pos, start, len);
-                if (ignoredLen > 0) {
-                    pos += ignoredLen;
-                    continue;
-                }
-
-                // check for trimmed character
-                // don't yet know if it's at the end, so copy to workArea
-                // use trimStart to keep track of trim at the end
-                final int trimmedLen = getTrimmerMatcher().isMatch(srcChars, pos, start, len);
-                if (trimmedLen > 0) {
-                    workArea.append(srcChars, pos, trimmedLen);
-                    pos += trimmedLen;
-                    continue;
-                }
-            }
-            // copy regular character from inside quotes
-            workArea.append(srcChars[pos++]);
-            trimStart = workArea.size();
-        }
-
-        // return condition when end of string found
-        addToken(tokenList, workArea.substring(0, trimStart));
-        return -1;
-    }
-
     /**
      * Unsupported ListIterator operation.
      *
@@ -684,49 +416,14 @@ public class StrTokenizer implements ListIterator<String>, Cloneable {
      *
      * @return {@code this} instance.
      */
-    public StrTokenizer reset() {
-        tokenPos = 0;
-        tokens = null;
-        return this;
-    }
 
     /**
      * Reset this tokenizer, giving it a new input string to parse.
      * In this manner you can re-use a tokenizer with the same settings
      * on multiple input lines.
      *
-     * @param input  the new character array to tokenize, not cloned, null sets no text to parse.
-     * @return {@code this} instance.
-     */
-    public StrTokenizer reset(final char[] input) {
-        reset();
-
-        return this;
-    }
-
-    /**
-     * Reset this tokenizer, giving it a new input string to parse.
-     * In this manner you can re-use a tokenizer with the same settings
-     * on multiple input lines.
      *
-     * @param input  the new string to tokenize, null sets no text to parse.
      * @return {@code this} instance.
-     */
-    public StrTokenizer reset(final String input) {
-        reset();
-        if (input != null) {
-            this.chars = input.toCharArray();
-        } else {
-            this.chars = null;
-        }
-        return this;
-    }
-
-    /**
-     * Unsupported ListIterator operation.
-     *
-     * @param obj this parameter ignored.
-     * @throws UnsupportedOperationException always.
      */
     @Override
     public void set(final String obj) {
@@ -739,9 +436,6 @@ public class StrTokenizer implements ListIterator<String>, Cloneable {
      * @param delim  the delimiter character to use.
      * @return {@code this} instance.
      */
-    public StrTokenizer setDelimiterChar(final char delim) {
-        return setDelimiterMatcher(StrMatcher.charMatcher(delim));
-    }
 
     /**
      * Sets the field delimiter matcher.
@@ -753,11 +447,7 @@ public class StrTokenizer implements ListIterator<String>, Cloneable {
      * @return {@code this} instance.
      */
     public StrTokenizer setDelimiterMatcher(final StrMatcher delim) {
-        if (delim == null) {
-            this.delimMatcher = StrMatcher.noneMatcher();
-        } else {
-            this.delimMatcher = delim;
-        }
+
         return this;
     }
 
@@ -767,9 +457,7 @@ public class StrTokenizer implements ListIterator<String>, Cloneable {
      * @param delim  the delimiter string to use.
      * @return {@code this} instance.
      */
-    public StrTokenizer setDelimiterString(final String delim) {
-        return setDelimiterMatcher(StrMatcher.stringMatcher(delim));
-    }
+
 
     /**
      * Sets whether the tokenizer should return empty tokens as null.
@@ -780,6 +468,170 @@ public class StrTokenizer implements ListIterator<String>, Cloneable {
      */
     public StrTokenizer setEmptyTokenAsNull(final boolean emptyAsNull) {
         this.emptyAsNull = emptyAsNull;
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+
+
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
         return this;
     }
 
