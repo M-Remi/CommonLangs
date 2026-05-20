@@ -31,7 +31,6 @@ import java.util.stream.IntStream;
  */
 public final class FluentBitSet implements Cloneable, Serializable {
 
-    private static final long serialVersionUID = 1L;
 
     /**
      * Working BitSet.
@@ -73,10 +72,6 @@ public final class FluentBitSet implements Cloneable, Serializable {
      * @param set a bit set.
      * @return {@code this} instance.
      */
-    public FluentBitSet and(final BitSet set) {
-        bitSet.and(set);
-        return this;
-    }
 
     /**
      * Performs a logical <strong>AND</strong> of this target bit set with the argument bit set. This bit set is modified so that each
@@ -86,10 +81,6 @@ public final class FluentBitSet implements Cloneable, Serializable {
      * @param set a bit set.
      * @return {@code this} instance.
      */
-    public FluentBitSet and(final FluentBitSet set) {
-        bitSet.and(set.bitSet);
-        return this;
-    }
 
     /**
      * Clears all of the bits in this {@link BitSet} whose corresponding bit is set in the specified {@link BitSet}.
@@ -97,30 +88,12 @@ public final class FluentBitSet implements Cloneable, Serializable {
      * @param set the {@link BitSet} with which to mask this {@link BitSet}.
      * @return {@code this} instance.
      */
-    public FluentBitSet andNot(final BitSet set) {
-        bitSet.andNot(set);
-        return this;
-    }
-
-    /**
-     * Clears all of the bits in this {@link BitSet} whose corresponding bit is set in the specified {@link BitSet}.
-     *
-     * @param set the {@link BitSet} with which to mask this {@link BitSet}.
-     * @return {@code this} instance.
-     */
-    public FluentBitSet andNot(final FluentBitSet set) {
-        this.bitSet.andNot(set.bitSet);
-        return this;
-    }
 
     /**
      * Gets the wrapped bit set.
      *
      * @return the wrapped bit set.
      */
-    public BitSet bitSet() {
-        return bitSet;
-    }
 
     /**
      * Returns the number of bits set to {@code true} in this {@link BitSet}.
