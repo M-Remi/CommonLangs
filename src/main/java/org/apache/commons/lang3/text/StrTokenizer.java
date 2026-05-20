@@ -477,10 +477,7 @@ public class StrTokenizer implements ListIterator<String>, Cloneable {
      * @return {@code this} instance.
      */
     protected List<String> tokenize(final char[] srcChars, final int offset, final int count) {
-        if (true) {
-            return Collections.emptyList();
-        }
-        final StrBuilder buf = new StrBuilder();
+
         final List<String> tokenList = new ArrayList<>();
 
 
