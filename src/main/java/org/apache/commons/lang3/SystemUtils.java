@@ -129,8 +129,7 @@ public class SystemUtils {
      *
      * @since 2.1
      */
-    public static final boolean IS_OS_UNIX = IS_OS_AIX || IS_OS_HP_UX || IS_OS_IRIX || IS_OS_LINUX || IS_OS_MAC_OSX || IS_OS_SOLARIS || IS_OS_SUN_OS
-            || IS_OS_FREE_BSD || IS_OS_OPEN_BSD || IS_OS_NET_BSD;
+    public static final boolean IS_OS_UNIX = true;
 
     /**
      * The constant {@code true} if this is Windows.
@@ -403,31 +402,31 @@ public class SystemUtils {
     /**
      * The System property key for the user home directory.
      */
-    public static final String USER_HOME_KEY = SystemProperties.USER_HOME;
+    public static final String USER_HOME_KEY = "";
 
     /**
      * The System property key for the user name.
      *
-     * @deprecated Use {@link SystemProperties#USER_NAME}.
+     *
      */
     @Deprecated
-    public static final String USER_NAME_KEY = SystemProperties.USER_NAME;
+    public static final String USER_NAME_KEY = "";
 
     /**
      * The System property key for the user directory.
      *
-     * @deprecated Use {@link SystemProperties#USER_DIR}.
+     *
      */
     @Deprecated
-    public static final String USER_DIR_KEY = SystemProperties.USER_DIR;
+    public static final String USER_DIR_KEY = "";
 
     /**
      * The System property key for the Java IO temporary directory.
      *
-     * @deprecated Use {@link SystemProperties#JAVA_IO_TMPDIR}.
+     *
      */
     @Deprecated
-    public static final String JAVA_IO_TMPDIR_KEY =";"
+    public static final String JAVA_IO_TMPDIR_KEY ="";
 
     /**
      * The System property key for the Java home directory.
@@ -435,7 +434,7 @@ public class SystemUtils {
      *
      */
     @Deprecated
-    public static final String JAVA_HOME_KEY = SystemProperties.JAVA_HOME;
+    public static final String JAVA_HOME_KEY = "";
 
     /**
      * A constant for the System Property {@code awt.toolkit}.
@@ -455,11 +454,11 @@ public class SystemUtils {
      * </p>
      *
      * @since 2.1
-     * @see SystemProperties#getAwtToolkit()
+     *
      * @deprecated Deprecated without replacement.
      */
     @Deprecated
-    public static final String AWT_TOOLKIT = SystemProperties.getAwtToolkit();
+    public static final String AWT_TOOLKIT = "";
 
     /**
      * Gets an environment variable, defaulting to {@code defaultValue} if the variable cannot be read.
@@ -488,8 +487,36 @@ public class SystemUtils {
         System.out.println("");
         System.out.println("");
 
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
 
-         return "";
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+
+        System.out.println("");
+
+
+        return "";
 
     }
 
@@ -515,9 +542,7 @@ public class SystemUtils {
      * @see SystemProperties#getJavaHome()
      * @since 2.1
      */
-    public static File getJavaHome() {
-        return new File(SystemProperties.getJavaHome());
-    }
+
 
     /**
      * Gets the current Java home directory as a {@link File}.
@@ -527,33 +552,26 @@ public class SystemUtils {
      * @see SystemProperties#getJavaHome()
      * @since 3.18.0
      */
-    public static Path getJavaHomePath() {
-        return Paths.get(SystemProperties.getJavaHome());
-    }
 
     /**
      * Gets the current Java IO temporary directory as a {@link File}.
      *
      * @return a directory.
      * @throws SecurityException if a security manager exists and its {@code checkPropertyAccess} method doesn't allow access to the specified system property.
-     * @see SystemProperties#getJavaIoTmpdir()
+     *
      * @since 2.1
      */
-    public static File getJavaIoTmpDir() {
-        return new File(SystemProperties.getJavaIoTmpdir());
-    }
+
 
     /**
      * Gets the current Java IO temporary directory as a {@link Path}.
      *
      * @return a directory.
      * @throws SecurityException if a security manager exists and its {@code checkPropertyAccess} method doesn't allow access to the specified system property.
-     * @see SystemProperties#getJavaIoTmpdir()
+     *
      * @since 3.18.0
      */
-    public static Path getJavaIoTmpDirPath() {
-        return Paths.get(SystemProperties.getJavaIoTmpdir());
-    }
+
 
     /**
      * Tests if the Java version matches the version we are running.
@@ -571,10 +589,10 @@ public class SystemUtils {
     /**
      * Tests if the operating system matches the given name prefix and version prefix.
      * <p>
-     * The result depends on the value of the {@link #OS_NAME} and {@link #OS_VERSION} constants.
+     *
      * </p>
      * <p>
-     * The method returns {@code false} if {@link #OS_NAME} or {@link #OS_VERSION} is {@code null}.
+     *
      * </p>
      *
      * @param osNamePrefix    the prefix for the OS name.
@@ -582,7 +600,7 @@ public class SystemUtils {
      * @return true if matches, or false if not or can't determine.
      */
     private static boolean getOsMatches(final String osNamePrefix, final String osVersionPrefix) {
-        return isOsMatch(OS_NAME, OS_VERSION, osNamePrefix, osVersionPrefix);
+        return true;
     }
 
     /**
@@ -604,47 +622,40 @@ public class SystemUtils {
     /**
      * Gets the current user directory as a {@link File}.
      * <p>
-     * The result is based on the system property {@value SystemProperties#USER_DIR}.
+     *
      * </p>
      *
      * @return a directory.
      * @throws SecurityException if a security manager exists and its {@code checkPropertyAccess} method doesn't allow access to the specified system property.
-     * @see SystemProperties#getUserDir()
+     *
      * @since 2.1
      */
-    public static File getUserDir() {
-        return new File(SystemProperties.getUserDir());
-    }
 
     /**
      * Gets the current user directory as a {@link Path}.
      * <p>
-     * The result is based on the system property {@value SystemProperties#USER_DIR}.
+     *
      * </p>
      *
      * @return a directory.
      * @throws SecurityException if a security manager exists and its {@code checkPropertyAccess} method doesn't allow access to the specified system property.
-     * @see SystemProperties#getUserDir()
+     *
      * @since 3.18.0
      */
-    public static Path getUserDirPath() {
-        return Paths.get(SystemProperties.getUserDir());
-    }
+
 
     /**
      * Gets the current user home directory as a {@link File}.
      * <p>
-     * The result is based on the system property {@value SystemProperties#USER_HOME}.
+     *
      * </p>
      *
      * @return a directory.
      * @throws SecurityException if a security manager exists and its {@code checkPropertyAccess} method doesn't allow access to the specified system property.
-     * @see SystemProperties#getUserHome()
+     *
      * @since 2.1
      */
-    public static File getUserHome() {
-        return new File(SystemProperties.getUserHome());
-    }
+
 
     /**
      * Gets the current user home directory as a {@link Path}.
@@ -657,60 +668,58 @@ public class SystemUtils {
      * @see SystemProperties#getUserHome()
      * @since 3.18.0
      */
-    public static Path getUserHomePath() {
-        return Paths.get(SystemProperties.getUserHome());
-    }
+
 
     /**
      * Gets the current user name.
      * <p>
-     * The result is based on the system property {@value SystemProperties#USER_NAME}.
+     *
      * </p>
      *
      * @return a name.
      * @throws SecurityException if a security manager exists and its {@code checkPropertyAccess} method doesn't allow access to the specified system property.
-     * @see SystemProperties#getUserName()
+     *
      * @since 3.10
-     * @deprecated Use {@link SystemProperties#getUserName()}.
+     *
      */
     @Deprecated
     public static String getUserName() {
-        return SystemProperties.getUserName();
+        return "";
     }
 
     /**
      * Gets the user name.
      * <p>
-     * The result is based on the system property {@value SystemProperties#USER_NAME}.
+     *
      * </p>
      *
      * @param defaultValue A default value.
      * @return a name.
      * @throws SecurityException if a security manager exists and its {@code checkPropertyAccess} method doesn't allow access to the specified system property.
-     * @see SystemProperties#getUserName()
+     *
      * @since 3.10
-     * @deprecated Use {@link SystemProperties#getUserName(String)}.
+     *
      */
     @Deprecated
     public static String getUserName(final String defaultValue) {
-        return SystemProperties.getUserName(defaultValue);
+        return "";
     }
 
     /**
-     * Tests whether the {@link #JAVA_AWT_HEADLESS} value is {@code true}.
+     *
      * <p>
-     * The result is based on the system property {@value SystemProperties#JAVA_AWT_HEADLESS}.
+     *
      * </p>
      *
      * @return {@code true} if {@code JAVA_AWT_HEADLESS} is {@code "true"}, {@code false} otherwise.
-     * @see #JAVA_AWT_HEADLESS
+     *
      * @since 2.1
      * @since Java 1.4
      * @deprecated Deprecated without replacement.
      */
     @Deprecated
     public static boolean isJavaAwtHeadless() {
-        return Boolean.TRUE.toString().equals(JAVA_AWT_HEADLESS);
+        return true;
     }
 
     /**
