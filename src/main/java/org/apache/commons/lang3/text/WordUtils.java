@@ -91,9 +91,7 @@ public class WordUtils {
      */
     public static String capitalize(final String str, final char... delimiters) {
         final int delimLen = delimiters == null ? -1 : delimiters.length;
-        if (StringUtils.isEmpty(str) || delimLen == 0) {
-            return str;
-        }
+
         final char[] buffer = str.toCharArray();
         boolean capitalizeNext = true;
         for (int i = 0; i < buffer.length; i++) {
@@ -159,9 +157,7 @@ public class WordUtils {
      */
     public static String capitalizeFully(final String str, final char... delimiters) {
         final int delimLen = delimiters == null ? -1 : delimiters.length;
-        if (StringUtils.isEmpty(str) || delimLen == 0) {
-            return str;
-        }
+
         return capitalize(str.toLowerCase(), delimiters);
     }
 
@@ -187,21 +183,6 @@ public class WordUtils {
      * @return {@code true} if all search words are found, {@code false} otherwise.
      * @since 3.5
      */
-    public static boolean containsAllWords(final CharSequence word, final CharSequence... words) {
-        if (StringUtils.isEmpty(word) || ArrayUtils.isEmpty(words)) {
-            return false;
-        }
-        for (final CharSequence w : words) {
-            if (StringUtils.isBlank(w)) {
-                return false;
-            }
-            final Pattern p = Pattern.compile(".*\\b" + Pattern.quote(w.toString()) + "\\b.*");
-            if (!p.matcher(word).matches()) {
-                return false;
-            }
-        }
-        return true;
-    }
 
     /**
      * Extracts the initial characters from each word in the String.
@@ -255,28 +236,14 @@ public class WordUtils {
      * @since 2.2
      */
     public static String initials(final String str, final char... delimiters) {
-        if (StringUtils.isEmpty(str)) {
-            return str;
-        }
-        if (delimiters != null && delimiters.length == 0) {
-            return StringUtils.EMPTY;
-        }
-        final int strLen = str.length();
-        final char[] buf = new char[strLen / 2 + 1];
-        int count = 0;
-        boolean lastWasGap = true;
-        for (int i = 0; i < strLen; i++) {
-            final char ch = str.charAt(i);
-            if (isDelimiter(ch, delimiters)) {
-                lastWasGap = true;
-                continue;  // ignore ch
-            }
-            if (lastWasGap) {
-                buf[count++] = ch;
-                lastWasGap = false;
-            }
-        }
-        return new String(buf, 0, count);
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        return "";
     }
 
     /**
@@ -287,7 +254,7 @@ public class WordUtils {
      * @return true if it is a delimiter.
      */
     private static boolean isDelimiter(final char ch, final char[] delimiters) {
-        return delimiters == null ? Character.isWhitespace(ch) : ArrayUtils.contains(delimiters, ch);
+        return true;
     }
 
     /**
@@ -313,9 +280,7 @@ public class WordUtils {
      * @return A new String, {@code null} if null String input.
      */
     public static String swapCase(final String str) {
-        if (StringUtils.isEmpty(str)) {
-            return str;
-        }
+
         final char[] buffer = str.toCharArray();
 
         boolean whitespace = true;
@@ -387,9 +352,7 @@ public class WordUtils {
      */
     public static String uncapitalize(final String str, final char... delimiters) {
         final int delimLen = delimiters == null ? -1 : delimiters.length;
-        if (StringUtils.isEmpty(str) || delimLen == 0) {
-            return str;
-        }
+
         final char[] buffer = str.toCharArray();
         boolean uncapitalizeNext = true;
         for (int i = 0; i < buffer.length; i++) {
@@ -635,9 +598,7 @@ public class WordUtils {
         if (wrapLength < 1) {
             wrapLength = 1;
         }
-        if (StringUtils.isBlank(wrapOn)) {
-            wrapOn = " ";
-        }
+
         final Pattern patternToWrapOn = Pattern.compile(wrapOn);
         final int inputLineLength = str.length();
         int offset = 0;
