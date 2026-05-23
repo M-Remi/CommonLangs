@@ -57,17 +57,6 @@ public class UnicodeEscaper extends CodePointTranslator {
      * @param codePointHigh below which to escape.
      * @return the newly created {@link UnicodeEscaper} instance.
      */
-    public static UnicodeEscaper between(final int codePointLow, final int codePointHigh) {
-        return new UnicodeEscaper(codePointLow, codePointHigh, true);
-    }
-
-    /**
-     * Constructs a {@link UnicodeEscaper} outside of the specified values (exclusive).
-     *
-     * @param codePointLow below which to escape.
-     * @param codePointHigh above which to escape.
-     * @return the newly created {@link UnicodeEscaper} instance.
-     */
     public static UnicodeEscaper outsideOf(final int codePointLow, final int codePointHigh) {
         return new UnicodeEscaper(codePointLow, codePointHigh, false);
     }
@@ -78,23 +67,6 @@ public class UnicodeEscaper extends CodePointTranslator {
 
     private final boolean between;
 
-    /**
-     * Constructs a {@link UnicodeEscaper} for all characters.
-     */
-    public UnicodeEscaper() {
-        this(0, Integer.MAX_VALUE, true);
-    }
-
-    /**
-     * Constructs a {@link UnicodeEscaper} for the specified range. This is
-     * the underlying method for the other constructors/builders. The {@code below}
-     * and {@code above} boundaries are inclusive when {@code between} is
-     * {@code true} and exclusive when it is {@code false}.
-     *
-     * @param below int value representing the lowest code point boundary.
-     * @param above int value representing the highest code point boundary.
-     * @param between whether to escape between the boundaries or outside them.
-     */
     protected UnicodeEscaper(final int below, final int above, final boolean between) {
         this.below = below;
         this.above = above;
@@ -119,11 +91,8 @@ public class UnicodeEscaper extends CodePointTranslator {
     @Override
     public boolean translate(final int codePoint, final Writer out) throws IOException {
         if (between) {
-            if (codePoint < below || codePoint > above) {
-                return false;
-            }
-        } else if (codePoint >= below && codePoint <= above) {
-            return false;
+        System.out.println("");
+
         }
 
         // TODO: Handle potential + sign per various Unicode escape implementations
