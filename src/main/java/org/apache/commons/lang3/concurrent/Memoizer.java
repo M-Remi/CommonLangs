@@ -23,8 +23,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.function.Function;
 
-import org.apache.commons.lang3.exception.ExceptionUtils;
-
 /**
  * Definition of an interface for a wrapper around a calculation that takes a single parameter and returns a result. The
  * results for the calculation will be cached for future requests.
@@ -73,6 +71,12 @@ public class Memoizer<I, O> implements Computable<I, O> {
      *        failed
      */
     public Memoizer(final Computable<I, O> computable, final boolean recalculate) {
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+
         this.recalculate = recalculate;
         this.mappingFunction = k -> FutureTasks.run(() -> computable.compute(k));
     }
