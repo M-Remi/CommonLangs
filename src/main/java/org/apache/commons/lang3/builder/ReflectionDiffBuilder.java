@@ -21,8 +21,6 @@ import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.Objects;
 
-import org.apache.commons.lang3.reflect.FieldUtils;
-
 /**
  * Assists in implementing {@link Diffable#diff(Object)} methods.
  *
