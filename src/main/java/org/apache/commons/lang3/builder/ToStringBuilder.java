@@ -910,10 +910,6 @@ public class ToStringBuilder implements Builder<String> {
      * @throws NullPointerException if {@code srcObject} is {@code null}
      * @since 2.0
      */
-    public ToStringBuilder appendAsObjectToString(final Object srcObject) {
-        ObjectUtils.identityToString(getStringBuffer(), srcObject);
-        return this;
-    }
 
     /**
      * Append the {@code toString} from the superclass.

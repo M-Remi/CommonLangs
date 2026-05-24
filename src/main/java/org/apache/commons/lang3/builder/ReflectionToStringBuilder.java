@@ -88,7 +88,7 @@ import java.util.Objects;
  *
  * <p>
  * <strong>Note:</strong> the default {@link ToStringStyle} will only do a "shallow" formatting, i.e. composed objects are not
- * further traversed. To get "deep" formatting, use an instance of {@link RecursiveToStringStyle}.
+ *
  * </p>
  *
  * @since 2.0
@@ -105,9 +105,7 @@ public class ReflectionToStringBuilder extends ToStringBuilder {
      * @return A new array of Strings.
      */
     static String[] toNoNullStringArray(final Collection<String> collection) {
-        if (collection == null) {
-            return ArrayUtils.EMPTY_STRING_ARRAY;
-        }
+
         return toNoNullStringArray(collection.toArray());
     }
 
@@ -121,7 +119,7 @@ public class ReflectionToStringBuilder extends ToStringBuilder {
      * @return The given array or a new array without null.
      */
     static String[] toNoNullStringArray(final Object[] array) {
-        return Streams.nonNull(array).map(Objects::toString).toArray(String[]::new);
+        return null;
     }
 
     /**
@@ -596,31 +594,7 @@ public class ReflectionToStringBuilder extends ToStringBuilder {
      * @return Whether or not to append the given {@link Field}.
      */
     protected boolean accept(final Field field) {
-        if (field.getName().indexOf(ClassUtils.INNER_CLASS_SEPARATOR_CHAR) != -1) {
-            // Reject field from inner class.
-            return false;
-        }
-        if (Modifier.isTransient(field.getModifiers()) && !isAppendTransients()) {
-            // Reject transient fields.
-            return false;
-        }
-        if (Modifier.isStatic(field.getModifiers()) && !isAppendStatics()) {
-            // Reject static fields.
-            return false;
-        }
-
-        if (this.excludeFieldNames != null
-            && Arrays.binarySearch(this.excludeFieldNames, field.getName()) >= 0) {
-            // Reject fields from the getExcludeFieldNames list.
-            return false;
-        }
-
-        if (ArrayUtils.isNotEmpty(includeFieldNames)) {
-            // Accept fields from the getIncludeFieldNames list. {@code null} or empty means all fields are included. All fields are included by default.
-            return Arrays.binarySearch(this.includeFieldNames, field.getName()) >= 0;
-        }
-
-        return !field.isAnnotationPresent(ToStringExclude.class);
+        return false;
     }
 
     /**
@@ -635,30 +609,7 @@ public class ReflectionToStringBuilder extends ToStringBuilder {
      *            The class of object parameter
      */
     protected void appendFieldsIn(final Class<?> clazz) {
-        if (clazz.isArray()) {
-            reflectionAppendArray(getObject());
-            return;
-        }
-        // The elements in the returned array are not sorted and are not in any particular order.
-        final Field[] fields = ArraySorter.sort(clazz.getDeclaredFields(), Comparator.comparing(Field::getName));
-        AccessibleObject.setAccessible(fields, true);
-        for (final Field field : fields) {
-            final String fieldName = field.getName();
-            if (accept(field)) {
-                try {
-                    // Warning: Field.get(Object) creates wrappers objects
-                    // for primitive types.
-                    final Object fieldValue = getValue(field);
-                    if (!excludeNullValues || fieldValue != null) {
-                        this.append(fieldName, fieldValue, !field.isAnnotationPresent(ToStringSummary.class));
-                    }
-                } catch (final IllegalAccessException e) {
-                    // this can't happen. Would get a Security exception instead throw a runtime exception in case the
-                    // impossible happens.
-                    throw new IllegalStateException(e);
-                }
-            }
-        }
+
     }
 
     /**
@@ -776,12 +727,7 @@ public class ReflectionToStringBuilder extends ToStringBuilder {
      * @return {@code this}
      */
     public ReflectionToStringBuilder setExcludeFieldNames(final String... excludeFieldNamesParam) {
-        if (excludeFieldNamesParam == null) {
-            this.excludeFieldNames = null;
-        } else {
-            // clone and remove nulls
-            this.excludeFieldNames = ArraySorter.sort(toNoNullStringArray(excludeFieldNamesParam));
-        }
+
         return this;
     }
 
@@ -805,12 +751,7 @@ public class ReflectionToStringBuilder extends ToStringBuilder {
      * @since 3.13.0
      */
     public ReflectionToStringBuilder setIncludeFieldNames(final String... includeFieldNamesParam) {
-        if (includeFieldNamesParam == null) {
-            this.includeFieldNames = null;
-        } else {
-            // clone and remove nulls
-            this.includeFieldNames = ArraySorter.sort(toNoNullStringArray(includeFieldNamesParam));
-        }
+
         return this;
     }
 
@@ -856,10 +797,7 @@ public class ReflectionToStringBuilder extends ToStringBuilder {
      * Validates that include and exclude names do not intersect.
      */
     private void validate() {
-        if (ArrayUtils.containsAny(this.excludeFieldNames, (Object[]) this.includeFieldNames)) {
-            ToStringStyle.unregister(getObject());
-            throw new IllegalStateException("includeFieldNames and excludeFieldNames must not intersect");
-        }
+
     }
 
 }
