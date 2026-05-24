@@ -25,8 +25,6 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.Objects;
 
-import org.apache.commons.lang3.stream.Streams;
-
 /**
  * Assists in implementing {@link Object#toString()} methods using reflection.
  *

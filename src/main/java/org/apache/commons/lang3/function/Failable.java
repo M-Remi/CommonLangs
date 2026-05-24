@@ -34,8 +34,6 @@ import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.apache.commons.lang3.stream.Streams;
-import org.apache.commons.lang3.stream.Streams.FailableStream;
 
 /**
  * This class provides utility functions, and classes for working with the {@code java.util.function} package, or more
