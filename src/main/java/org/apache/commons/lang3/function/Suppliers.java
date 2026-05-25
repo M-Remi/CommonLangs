@@ -58,6 +58,11 @@ public class Suppliers {
      */
     @SuppressWarnings("unchecked")
     public static <T> Supplier<T> nul() {
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
         return NUL;
     }
 
