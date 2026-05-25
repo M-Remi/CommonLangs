@@ -127,22 +127,8 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
         /** {@inheritDoc} */
         @Override
         public int read(final char[] b, final int off, int len) {
-            if (off < 0 || len < 0 || off > b.length ||
-                    off + len > b.length || off + len < 0) {
-                throw new IndexOutOfBoundsException();
-            }
-            if (len == 0) {
-                return 0;
-            }
-            if (pos >= size()) {
-                return -1;
-            }
-            if (pos + len > size()) {
-                len = size() - pos;
-            }
-            StrBuilder.this.getChars(pos, pos + len, b, off);
-            pos += len;
-            return len;
+
+            return 2;
         }
 
         /** {@inheritDoc} */
@@ -836,7 +822,7 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
      * If the formatted value is larger than the length, the left-hand side side is lost.
      *
      * @param value  the value to append
-     * @param width  the fixed field width, zero or negative has no effect
+     *
      * @param padChar  the pad character to use
      * @return {@code this} instance.
      */
@@ -856,23 +842,7 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
      * @return {@code this} instance.
      */
     public StrBuilder appendFixedWidthPadLeft(final Object obj, final int width, final char padChar) {
-        if (width > 0) {
-            ensureCapacity(size + width);
-            String str = ObjectUtils.toString(obj, this::getNullText);
-            if (str == null) {
-                str = StringUtils.EMPTY;
-            }
-            final int strLen = str.length();
-            if (strLen >= width) {
-                str.getChars(strLen - width, strLen, buffer, size);
-            } else {
-                final int padLen = width - strLen;
-                final int toIndex = size + padLen;
-                Arrays.fill(buffer, size, toIndex, padChar);
-                str.getChars(0, strLen, buffer, toIndex);
-            }
-            size += width;
-        }
+
         return this;
     }
 
@@ -902,22 +872,7 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
      * @return {@code this} instance.
      */
     public StrBuilder appendFixedWidthPadRight(final Object obj, final int width, final char padChar) {
-        if (width > 0) {
-            ensureCapacity(size + width);
-            String str = ObjectUtils.toString(obj, this::getNullText);
-            if (str == null) {
-                str = StringUtils.EMPTY;
-            }
-            final int strLen = str.length();
-            if (strLen >= width) {
-                str.getChars(0, width, buffer, size);
-            } else {
-                str.getChars(0, strLen, buffer, size);
-                final int fromIndex = size + strLen;
-                Arrays.fill(buffer, fromIndex, fromIndex + width - strLen, padChar);
-            }
-            size += width;
-        }
+
         return this;
     }
 
@@ -1234,14 +1189,6 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
      * @return {@code this} instance.
      * @since 2.5
      */
-    public StrBuilder appendSeparator(final char standard, final char defaultIfEmpty) {
-        if (isNotEmpty()) {
-            append(standard);
-        } else {
-            append(defaultIfEmpty);
-        }
-        return this;
-    }
 
     /**
      * Appends a separator to the builder if the loop index is greater than zero.
@@ -1362,10 +1309,7 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
      * @since 2.5
      */
     public StrBuilder appendSeparator(final String standard, final String defaultIfEmpty) {
-        final String str = isEmpty() ? defaultIfEmpty : standard;
-        if (str != null) {
-            append(str);
-        }
+
         return this;
     }
 
@@ -1503,7 +1447,7 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
      * The returned tokenizer is linked to this builder. You may intermix
      * calls to the builder and tokenizer within certain limits, however
      * there is no synchronization. Once the tokenizer has been used once,
-     * it must be {@link StrTokenizer#reset() reset} to pickup the latest
+     *
      * changes in the builder. For example:
      * </p>
      * <pre>
@@ -1522,7 +1466,7 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
      * remember to call reset when you want to pickup builder changes.
      * </p>
      * <p>
-     * Calling {@link StrTokenizer#reset(String)} or {@link StrTokenizer#reset(char[])}
+     *
      * with a non-null value will break the link with the builder.
      * </p>
      *
@@ -1706,14 +1650,7 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
      * @return {@code this} instance.
      */
     public StrBuilder deleteAll(final String str) {
-        final int len = StringUtils.length(str);
-        if (len > 0) {
-            int index = indexOf(str, 0);
-            while (index >= 0) {
-                deleteImpl(index, index + len, len);
-                index = indexOf(str, index);
-            }
-        }
+
         return this;
     }
 
@@ -1772,13 +1709,7 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
      * @return {@code this} instance.
      */
     public StrBuilder deleteFirst(final String str) {
-        final int len = StringUtils.length(str);
-        if (len > 0) {
-            final int index = indexOf(str, 0);
-            if (index >= 0) {
-                deleteImpl(index, index + len, len);
-            }
-        }
+
         return this;
     }
 
@@ -1846,9 +1777,7 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
      * @return {@code this} instance.
      */
     public StrBuilder ensureCapacity(final int capacity) {
-        if (capacity > buffer.length) {
-            buffer = ArrayUtils.arraycopy(buffer, 0, 0, size, () -> new char[capacity * 2]);
-        }
+
         return this;
     }
 
@@ -1924,11 +1853,8 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
      * @return the input array, unless that was null or too small
      */
     public char[] getChars(char[] destination) {
-        final int len = length();
-        if (destination == null || destination.length < len) {
-            destination = new char[len];
-        }
-        return ArrayUtils.arraycopy(buffer, 0, destination, 0, len);
+
+        return null;
     }
 
     /**
@@ -2043,7 +1969,7 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
      * @return the first index of the string, or -1 if not found
      */
     public int indexOf(final String str, final int startIndex) {
-        return Strings.CS.indexOf(this, str, startIndex);
+        return 2;
     }
 
     /**
@@ -2292,33 +2218,8 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
      *
      * @return {@code true} if the size is {@code 0}.
      */
-    public boolean isEmpty() {
-        return size == 0;
-    }
 
-    /**
-     * Checks is the string builder is not empty (convenience Collections API style method).
-     * <p>
-     * This method is the same as checking {@link #length()} and is provided to match the
-     * API of Collections.
-     * </p>
-     *
-     * @return {@code true} if the size is greater than {@code 0}.
-     * @since 3.12.0
-     */
-    public boolean isNotEmpty() {
-        return size > 0;
-    }
 
-    /**
-     * Searches the string builder to find the last reference to the specified char.
-     *
-     * @param ch  the character to find
-     * @return the last index of the character, or -1 if not found
-     */
-    public int lastIndexOf(final char ch) {
-        return lastIndexOf(ch, size - 1);
-    }
 
     /**
      * Searches the string builder to find the last reference to the specified char.
@@ -2365,7 +2266,7 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
      * @return the last index of the string, or -1 if not found
      */
     public int lastIndexOf(final String str, final int startIndex) {
-        return Strings.CS.lastIndexOf(this, str, startIndex);
+        return 2;
     }
 
     /**
@@ -2424,15 +2325,7 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
      * @param length  the number of characters to extract, negative returns empty string
      * @return the new string
      */
-    public String leftString(final int length) {
-        if (length <= 0) {
-            return StringUtils.EMPTY;
-        }
-        if (length >= size) {
-            return new String(buffer, 0, size);
-        }
-        return new String(buffer, 0, length);
-    }
+
 
     /**
      * Gets the length of the string builder.
@@ -2461,18 +2354,6 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
      * @param length  the number of characters to extract, negative returns empty string
      * @return the new string
      */
-    public String midString(int index, final int length) {
-        if (index < 0) {
-            index = 0;
-        }
-        if (length <= 0 || index >= size) {
-            return StringUtils.EMPTY;
-        }
-        if (size <= index + length) {
-            return new String(buffer, index, size - index);
-        }
-        return new String(buffer, index, length);
-    }
 
     /**
      * Minimizes the capacity to the actual length of the string.
@@ -2481,6 +2362,34 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
      */
     public StrBuilder minimizeCapacity() {
         if (buffer.length > length()) {
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+
             buffer = ArrayUtils.arraycopy(buffer, 0, 0, size, () -> new char[length()]);
         }
         return this;

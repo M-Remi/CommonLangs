@@ -87,54 +87,6 @@ public class StrTokenizer implements ListIterator<String>, Cloneable {
      *
      * </p>
      */
-    public StrTokenizer() {
-        this.chars = null;
-    }
-
-    /**
-     * Constructs a tokenizer splitting on space, tab, newline and formfeed
-     * as per StringTokenizer.
-     *
-     * @param input  the string which is to be parsed, not cloned.
-     */
-
-
-    /**
-     * Constructs a tokenizer splitting on the specified character.
-     *
-     * @param input  the string which is to be parsed, not cloned.
-     * @param delim the field delimiter character.
-     */
-    public StrTokenizer(final char[] input, final char delim) {
-
-        setDelimiterChar(delim);
-    }
-
-    /**
-     * Constructs a tokenizer splitting on the specified delimiter character
-     * and handling quotes using the specified quote character.
-     *
-     * @param input  the string which is to be parsed, not cloned.
-     * @param delim  the field delimiter character.
-     * @param quote  the field quoted string character.
-     */
-    public StrTokenizer(final char[] input, final char delim, final char quote) {
-        this(input, delim);
-        setQuoteChar(quote);
-    }
-
-    /**
-     * Constructs a tokenizer splitting using the specified delimiter matcher
-     * and handling quotes using the specified quote matcher.
-     *
-     * @param input  the string which is to be parsed.
-     * @param delim  the field delimiter matcher.
-     * @param quote  the field quoted string matcher.
-     */
-    public StrTokenizer(final String input, final StrMatcher delim, final StrMatcher quote) {
-
-        setQuoteMatcher(quote);
-    }
 
     /**
      * Unsupported ListIterator operation.
@@ -377,19 +329,6 @@ public class StrTokenizer implements ListIterator<String>, Cloneable {
      * @param delim  the delimiter character to use.
      * @return {@code this} instance.
      */
-    public StrTokenizer setDelimiterChar(final char delim) {
-        return setDelimiterMatcher(StrMatcher.charMatcher(delim));
-    }
-
-    /**
-     * Sets the field delimiter matcher.
-     * <p>
-     * The delimiter is used to separate one token from another.
-     * </p>
-     *
-     * @param delim  the delimiter matcher to use.
-     * @return {@code this} instance.
-     */
     public StrTokenizer setDelimiterMatcher(final StrMatcher delim) {
         if (delim == null) {
             this.delimMatcher = StrMatcher.noneMatcher();
@@ -446,20 +385,6 @@ public class StrTokenizer implements ListIterator<String>, Cloneable {
      * </p>
      *
      * @param quote  the quote character to use.
-     * @return {@code this} instance.
-     */
-    public StrTokenizer setQuoteChar(final char quote) {
-        return setQuoteMatcher(StrMatcher.charMatcher(quote));
-    }
-
-    /**
-     * Sets the quote matcher to use.
-     * <p>
-     * The quote character is used to wrap data between the tokens.
-     * This enables delimiters to be entered as data.
-     * </p>
-     *
-     * @param quote  the quote matcher to use, null ignored.
      * @return {@code this} instance.
      */
     public StrTokenizer setQuoteMatcher(final StrMatcher quote) {
