@@ -984,34 +984,7 @@ public class TypeUtils {
         return false;
     }
 
-    public static Map<TypeVariable<?>, Type> determineTypeArguments(final Class<?> cls, final ParameterizedType superParameterizedType) {
-System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        return null;
-    }
 
-    /**
-     * Tests whether {@code t} equals {@code a}.
-     *
-     * @param genericArrayType LHS.
-     * @param type             RHS.
-     * @return boolean.
-     */
     private static boolean equals(final GenericArrayType genericArrayType, final Type type) {
         return type instanceof GenericArrayType && equals(genericArrayType.getGenericComponentType(), ((GenericArrayType) type).getGenericComponentType());
     }
@@ -1041,21 +1014,7 @@ System.out.println("");
      * @return Whether the given types are equal.
      * @since 3.2
      */
-    public static boolean equals(final Type type1, final Type type2) {
-        if (Objects.equals(type1, type2)) {
-            return true;
-        }
-        if (type1 instanceof ParameterizedType) {
-            return equals((ParameterizedType) type1, type2);
-        }
-        if (type1 instanceof GenericArrayType) {
-            return equals((GenericArrayType) type1, type2);
-        }
-        if (type1 instanceof WildcardType) {
-            return equals((WildcardType) type1, type2);
-        }
-        return false;
-    }
+
 
     /**
      * Tests whether the given type arrays are equal.
@@ -1065,14 +1024,7 @@ System.out.println("");
      * @return Whether the given type arrays are equal.
      */
     private static boolean equals(final Type[] type1, final Type[] type2) {
-        if (type1.length == type2.length) {
-            for (int i = 0; i < type1.length; i++) {
-                if (!equals(type1[i], type2[i])) {
-                    return false;
-                }
-            }
-            return true;
-        }
+
         return false;
     }
 
@@ -1084,117 +1036,22 @@ System.out.println("");
      * @return Whether {@code wildcardType} equals {@code type}.
      */
     private static boolean equals(final WildcardType wildcardType, final Type type) {
-        if (type instanceof WildcardType) {
-            final WildcardType other = (WildcardType) type;
-            return equals(getImplicitLowerBounds(wildcardType), getImplicitLowerBounds(other))
-                    && equals(getImplicitUpperBounds(wildcardType), getImplicitUpperBounds(other));
-        }
+
         return false;
     }
 
-    /**
-     * Helper method to establish the formal parameters for a parameterized type.
-     *
-     * @param mappings  map containing the assignments.
-     * @param variables expected map keys.
-     * @return array of map values corresponding to specified keys.
-     */
+
     private static Type[] extractTypeArgumentsFrom(final Map<TypeVariable<?>, Type> mappings, final TypeVariable<?>[] variables) {
 
         return null;
     }
 
-    private static int[] findRecursiveTypes(final ParameterizedType parameterizedType) {
-
-        return null;
-    }
-
-    /**
-     * Creates a generic array type instance.
-     *
-     * @param componentType the type of the elements of the array. For example the component type of {@code boolean[]} is {@code boolean}.
-     * @return {@link GenericArrayType}.
-     * @since 3.2
-     */
-    public static GenericArrayType genericArrayType(final Type componentType) {
-        return new GenericArrayTypeImpl(Objects.requireNonNull(componentType, "componentType"));
-    }
-
-    /**
-     * Formats a {@link GenericArrayType} as a {@link String}.
-     *
-     * @param genericArrayType {@link GenericArrayType} to format.
-     * @return String.
-     */
-    private static String genericArrayTypeToString(final GenericArrayType genericArrayType) {
-        return String.format("%s[]", toString(genericArrayType.getGenericComponentType()));
-    }
-
-    /**
-     * Gets the array component type of {@code type}.
-     *
-     * @param type the type to be checked.
-     * @return component type or null if type is not an array type.
-     */
-    public static Type getArrayComponentType(final Type type) {
-        if (type instanceof Class<?>) {
-            final Class<?> cls = (Class<?>) type;
-            return cls.isArray() ? cls.getComponentType() : null;
-        }
-        if (type instanceof GenericArrayType) {
-            return ((GenericArrayType) type).getGenericComponentType();
-        }
-        return null;
-    }
-
-    /**
-     * Gets the closest parent type to the super class specified by {@code superClass}.
-     *
-     * @param cls        the class in question.
-     * @param superClass the super class.
-     * @return the closes parent type.
-     */
-    private static Type getClosestParentType(final Class<?> cls, final Class<?> superClass) {
+   private static Type getClosestParentType(final Class<?> cls, final Class<?> superClass) {
         // only look at the interfaces if the super class is also an interface
-        if (superClass.isInterface()) {
-            // get the generic interfaces of the subject class
-            final Type[] interfaceTypes = cls.getGenericInterfaces();
-            // will hold the best generic interface match found
-            Type genericInterface = null;
-            // find the interface closest to the super class
-            for (final Type midType : interfaceTypes) {
-                final Class<?> midClass;
-                if (midType instanceof ParameterizedType) {
-                    midClass = getRawType((ParameterizedType) midType);
-                } else if (midType instanceof Class<?>) {
-                    midClass = (Class<?>) midType;
-                } else {
-                    throw new IllegalStateException("Unexpected generic interface type found: " + midType);
-                }
-                // check if this interface is further up the inheritance chain
-                // than the previously found match
-                if (isAssignable(midClass, superClass) && isAssignable(genericInterface, (Type) midClass)) {
-                    genericInterface = midType;
-                }
-            }
-            // found a match?
-            if (genericInterface != null) {
-                return genericInterface;
-            }
-        }
-        // none of the interfaces were descendants of the target class, so the
-        // super class has to be one, instead
-        return cls.getGenericSuperclass();
+
+        return null;
     }
 
-    /**
-     * Gets an array containing the sole type of {@link Object} if {@link TypeVariable#getBounds()} returns an empty array. Otherwise, it returns the result of
-     * {@link TypeVariable#getBounds()} passed into {@link #normalizeUpperBounds}.
-     *
-     * @param typeVariable the subject type variable, not {@code null}.
-     * @return a non-empty array containing the bounds of the type variable, which could be {@link Object}.
-     * @throws NullPointerException if {@code typeVariable} is {@code null}.
-     */
     public static Type[] getImplicitBounds(final TypeVariable<?> typeVariable) {
         return normalizeUpperToObject(Objects.requireNonNull(typeVariable, "typeVariable").getBounds());
     }
@@ -1255,48 +1112,7 @@ System.out.println("");
      * @return the resolved {@link Class} object or {@code null} if the type could not be resolved.
      */
     public static Class<?> getRawType(final Type type, final Type assigningType) {
-        if (type instanceof Class<?>) {
-            // it is raw, no problem
-            return (Class<?>) type;
-        }
-        if (type instanceof ParameterizedType) {
-            // simple enough to get the raw type of a ParameterizedType
-            return getRawType((ParameterizedType) type);
-        }
-        if (type instanceof TypeVariable<?>) {
-            if (assigningType == null) {
-                return null;
-            }
-            // get the entity declaring this type variable
-            final Object genericDeclaration = ((TypeVariable<?>) type).getGenericDeclaration();
-            // can't get the raw type of a method- or constructor-declared type
-            // variable
-            if (!(genericDeclaration instanceof Class<?>)) {
-                return null;
-            }
-            // get the type arguments for the declaring class/interface based
-            // on the enclosing type
-            final Map<TypeVariable<?>, Type> typeVarAssigns = getTypeArguments(assigningType, (Class<?>) genericDeclaration);
-            // enclosingType has to be a subclass (or subinterface) of the
-            // declaring type
-            if (typeVarAssigns == null) {
-                return null;
-            }
-            // get the argument assigned to this type variable
-            final Type typeArgument = typeVarAssigns.get(type);
-            if (typeArgument == null) {
-                return null;
-            }
-            // get the argument for this type variable
-            return getRawType(typeArgument, assigningType);
-        }
-        if (type instanceof GenericArrayType) {
-            // get raw component type
-            final Class<?> rawComponentType = getRawType(((GenericArrayType) type).getGenericComponentType(), assigningType);
-            // create array type from raw component type and return its class
-            return rawComponentType != null ? Array.newInstance(rawComponentType, 0).getClass() : null;
-        }
-        // (hand-waving) this is not the method you're looking for
+
         if (type instanceof WildcardType) {
             return null;
         }
@@ -1323,9 +1139,7 @@ System.out.println("");
      * @param type specifies the subject parameterized type from which to harvest the parameters.
      * @return a {@link Map} of the type arguments to their respective type variables.
      */
-    public static Map<TypeVariable<?>, Type> getTypeArguments(final ParameterizedType type) {
-        return getTypeArguments(type, getRawType(type), null);
-    }
+
 
     /**
      * Gets a map of the type arguments of a parameterized type in the context of {@code toClass}.
@@ -1419,37 +1233,10 @@ System.out.println("");
      * @return the {@link Map} with type arguments.
      */
     private static Map<TypeVariable<?>, Type> getTypeArguments(final Type type, final Class<?> toClass, final Map<TypeVariable<?>, Type> subtypeVarAssigns) {
-        if (type instanceof Class<?>) {
-            return getTypeArguments((Class<?>) type, toClass, subtypeVarAssigns);
-        }
-        if (type instanceof ParameterizedType) {
-            return getTypeArguments((ParameterizedType) type, toClass, subtypeVarAssigns);
-        }
-        if (type instanceof GenericArrayType) {
-            return getTypeArguments(((GenericArrayType) type).getGenericComponentType(), toClass.isArray() ? toClass.getComponentType() : toClass,
-                    subtypeVarAssigns);
-        }
-        // since wildcard types are not assignable to classes, should this just
-        // return null?
-        if (type instanceof WildcardType) {
-            for (final Type bound : getImplicitUpperBounds((WildcardType) type)) {
-                // find the first bound that is assignable to the target class
-                if (isAssignable(bound, toClass)) {
-                    return getTypeArguments(bound, toClass, subtypeVarAssigns);
-                }
-            }
+
+
             return null;
-        }
-        if (type instanceof TypeVariable<?>) {
-            for (final Type bound : getImplicitBounds((TypeVariable<?>) type)) {
-                // find the first bound that is assignable to the target class
-                if (isAssignable(bound, toClass)) {
-                    return getTypeArguments(bound, toClass, subtypeVarAssigns);
-                }
-            }
-            return null;
-        }
-        throw new IllegalStateException("found an unhandled type: " + type);
+
     }
 
     /**
@@ -1458,62 +1245,8 @@ System.out.println("");
      * @param type the type to be checked.
      * @return {@code true} if {@code type} is an array class or a {@link GenericArrayType}.
      */
-    public static boolean isArrayType(final Type type) {
-        return type instanceof GenericArrayType || type instanceof Class<?> && ((Class<?>) type).isArray();
-    }
-
-    /**
-     * Tests if the subject type may be implicitly cast to the target class following the Java generics rules.
-     *
-     * @param type    the subject type to be assigned to the target type.
-     * @param toClass the target class.
-     * @return {@code true} if {@code type} is assignable to {@code toClass}.
-     */
     private static boolean isAssignable(final Type type, final Class<?> toClass) {
-        if (type == null) {
-            // consistency with ClassUtils.isAssignable() behavior
-            return toClass == null || !toClass.isPrimitive();
-        }
-        // only a null type can be assigned to null type which
-        // would have cause the previous to return true
-        if (toClass == null) {
-            return false;
-        }
-        // all types are assignable to themselves
-        if (toClass.equals(type)) {
-            return true;
-        }
-        if (type instanceof Class<?>) {
-            // just comparing two classes
-            return ClassUtils.isAssignable((Class<?>) type, toClass);
-        }
-        if (type instanceof ParameterizedType) {
-            // only have to compare the raw type to the class
-            return isAssignable(getRawType((ParameterizedType) type), toClass);
-        }
-        // *
-        if (type instanceof TypeVariable<?>) {
-            // if any of the bounds are assignable to the class, then the
-            // type is assignable to the class.
-            for (final Type bound : ((TypeVariable<?>) type).getBounds()) {
-                if (isAssignable(bound, toClass)) {
-                    return true;
-                }
-            }
-            return false;
-        }
-        // the only classes to which a generic array type can be assigned
-        // are class Object and array classes
-        if (type instanceof GenericArrayType) {
-            return toClass.equals(Object.class)
-                    || toClass.isArray() && isAssignable(((GenericArrayType) type).getGenericComponentType(), toClass.getComponentType());
-        }
-        // wildcard types are not assignable to a class (though one would think
-        // "? super Object" would be assignable to Object)
-        if (type instanceof WildcardType) {
-            return false;
-        }
-        throw new IllegalStateException("found an unhandled type: " + type);
+       return true;
     }
 
     /**
@@ -1525,64 +1258,21 @@ System.out.println("");
      * @return {@code true} if {@code type} is assignable to {@code toGenericArrayType}.
      */
     private static boolean isAssignable(final Type type, final GenericArrayType toGenericArrayType, final Map<TypeVariable<?>, Type> typeVarAssigns) {
-        if (type == null) {
-            return true;
-        }
-        // only a null type can be assigned to null type which
-        // would have cause the previous to return true
-        if (toGenericArrayType == null) {
-            return false;
-        }
-        // all types are assignable to themselves
-        if (toGenericArrayType.equals(type)) {
-            return true;
-        }
-        final Type toComponentType = toGenericArrayType.getGenericComponentType();
-        if (type instanceof Class<?>) {
-            final Class<?> cls = (Class<?>) type;
-            // compare the component types
-            return cls.isArray() && isAssignable(cls.getComponentType(), toComponentType, typeVarAssigns);
-        }
-        if (type instanceof GenericArrayType) {
-            // compare the component types
-            return isAssignable(((GenericArrayType) type).getGenericComponentType(), toComponentType, typeVarAssigns);
-        }
-        if (type instanceof WildcardType) {
-            // so long as one of the upper bounds is assignable, it's good
-            for (final Type bound : getImplicitUpperBounds((WildcardType) type)) {
-                if (isAssignable(bound, toGenericArrayType)) {
-                    return true;
-                }
-            }
-            return false;
-        }
-        if (type instanceof TypeVariable<?>) {
-            // probably should remove the following logic and just return false.
-            // type variables cannot specify arrays as bounds.
-            for (final Type bound : getImplicitBounds((TypeVariable<?>) type)) {
-                if (isAssignable(bound, toGenericArrayType)) {
-                    return true;
-                }
-            }
-            return false;
-        }
-        if (type instanceof ParameterizedType) {
-            // the raw type of a parameterized type is never an array or
-            // generic array, otherwise the declaration would look like this:
-            // Collection[]< ? extends String > collection;
-            return false;
-        }
-        throw new IllegalStateException("found an unhandled type: " + type);
+
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+
+        return true;
     }
 
-    /**
-     * Tests if the subject type may be implicitly cast to the target parameterized type following the Java generics rules.
-     *
-     * @param type                the subject type to be assigned to the target type.
-     * @param toParameterizedType the target parameterized type.
-     * @param typeVarAssigns      a map with type variables.
-     * @return {@code true} if {@code type} is assignable to {@code toType}.
-     */
     private static boolean isAssignable(final Type type, final ParameterizedType toParameterizedType, final Map<TypeVariable<?>, Type> typeVarAssigns) {
         if (type == null) {
             return true;
