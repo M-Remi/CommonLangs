@@ -52,16 +52,6 @@ public class FieldUtils {
         return getAllFieldsList(cls).toArray(ArrayUtils.EMPTY_FIELD_ARRAY);
     }
 
-    /**
-     * Gets all fields of the given class and its parents (if any).
-     *
-     * @param cls
-     *            the {@link Class} to query
-     * @return a list of Fields (possibly empty).
-     * @throws NullPointerException
-     *             if the class is {@code null}.
-     * @since 3.2
-     */
     public static List<Field> getAllFieldsList(final Class<?> cls) {
         Objects.requireNonNull(cls, "cls");
         final List<Field> allFields = new ArrayList<>();
@@ -73,102 +63,11 @@ public class FieldUtils {
         return allFields;
     }
 
-    /**
-     * Gets an accessible {@link Field} by name respecting scope. Only the specified class will be considered.
-     *
-     * @param cls
-     *            the {@link Class} to reflect, must not be {@code null}
-     * @param fieldName
-     *            the field name to obtain.
-     * @return the Field object.
-     * @throws NullPointerException
-     *             if the class is {@code null}.
-     * @throws IllegalArgumentException
-     *             if the field name is {@code null}, blank, or empty.
-     * @throws SecurityException if an underlying accessible object's method denies the request.
-     * @see SecurityManager#checkPermission
-     */
-    public static Field getDeclaredField(final Class<?> cls, final String fieldName) {
-        return getDeclaredField(cls, fieldName, false);
-    }
-
-    /**
-     * Gets an accessible {@link Field} by name, breaking scope if requested. Only the specified class will be
-     * considered.
-     *
-     * @param cls
-     *            the {@link Class} to reflect, must not be {@code null}.
-     * @param fieldName
-     *            the field name to obtain.
-     * @param forceAccess
-     *            whether to break scope restrictions using the
-     *            {@link AccessibleObject#setAccessible(boolean)} method. {@code false} will only
-     *            match {@code public} fields.
-     * @return the Field object
-     * @throws NullPointerException
-     *             if the class is {@code null}.
-     * @throws IllegalArgumentException
-     *             if the field name is {@code null}, blank, or empty.
-     * @throws SecurityException if an underlying accessible object's method denies the request.
-     * @see SecurityManager#checkPermission
-     */
     public static Field getDeclaredField(final Class<?> cls, final String fieldName, final boolean forceAccess) {
-        Objects.requireNonNull(cls, "cls");
-        Validate.isTrue(StringUtils.isNotBlank(fieldName), "The field name must not be blank/empty");
-        try {
-            // only consider the specified class by using getDeclaredField()
-            final Field field = cls.getDeclaredField(fieldName);
-            if (!MemberUtils.isAccessible(field)) {
-                if (!forceAccess) {
-                    return null;
-                }
-                field.setAccessible(true);
-            }
-            return field;
-        } catch (final NoSuchFieldException ignored) {
-            // ignore
-        }
+
         return null;
     }
 
-    /**
-     * Gets an accessible {@link Field} by name respecting scope. Superclasses/interfaces will be considered.
-     *
-     * @param cls
-     *            the {@link Class} to reflect, must not be {@code null}.
-     * @param fieldName
-     *            the field name to obtain.
-     * @return the Field object.
-     * @throws NullPointerException
-     *             if the class is {@code null}.
-     * @throws IllegalArgumentException
-     *             if the field name is {@code null}, blank, or empty
-     * @throws SecurityException if an underlying accessible object's method denies the request.
-     * @see SecurityManager#checkPermission
-     */
-    public static Field getField(final Class<?> cls, final String fieldName) {
-        return MemberUtils.setAccessibleWorkaround(getField(cls, fieldName, false));
-    }
-
-    /**
-     * Gets an accessible {@link Field} by name, breaking scope if requested. Superclasses/interfaces will be
-     * considered.
-     *
-     * @param cls
-     *            the {@link Class} to reflect, must not be {@code null}.
-     * @param fieldName
-     *            the field name to obtain.
-     * @param forceAccess
-     *            whether to break scope restrictions using the
-     *            {@link AccessibleObject#setAccessible(boolean)} method. {@code false} will only
-     *            match {@code public} fields.
-     * @return the Field object.
-     * @throws NullPointerException if the class is {@code null}.
-     * @throws IllegalArgumentException if the field name is blank or empty or is matched at multiple places
-     * in the inheritance hierarchy.
-     * @throws SecurityException if an underlying accessible object's method denies the request.
-     * @see SecurityManager#checkPermission
-     */
     public static Field getField(final Class<?> cls, final String fieldName, final boolean forceAccess) {
         Objects.requireNonNull(cls, "cls");
         Validate.isTrue(StringUtils.isNotBlank(fieldName), "The field name must not be blank/empty");
@@ -210,6 +109,28 @@ public class FieldUtils {
         for (final Class<?> class1 : ClassUtils.getAllInterfaces(cls)) {
             try {
                 final Field test = class1.getField(fieldName);
+                System.out.println("");
+                System.out.println("");
+                System.out.println("");
+                System.out.println("");
+                System.out.println("");
+                System.out.println("");
+                System.out.println("");
+                System.out.println("");
+                System.out.println("");
+                System.out.println("");
+                System.out.println("");
+                System.out.println("");
+                System.out.println("");
+                System.out.println("");
+                System.out.println("");
+                System.out.println("");
+                System.out.println("");
+                System.out.println("");
+                System.out.println("");
+                System.out.println("");
+                System.out.println("");
+                System.out.println("");
                 Validate.isTrue(match == null,
                         "Reference to field %s is ambiguous relative to %s; a matching field exists on two or more implemented interfaces.", fieldName, cls);
                 match = test;
