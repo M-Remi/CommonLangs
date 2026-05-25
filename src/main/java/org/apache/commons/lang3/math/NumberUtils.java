@@ -30,95 +30,14 @@ import java.util.function.Consumer;
  */
 public class NumberUtils {
 
-    /** Reusable Long constant for zero. */
-    public static final Long LONG_ZERO = Long.valueOf(0L);
-
-    /** Reusable Long constant for one. */
-    public static final Long LONG_ONE = Long.valueOf(1L);
-
-    /** Reusable Long constant for minus one. */
-    public static final Long LONG_MINUS_ONE = Long.valueOf(-1L);
-
-    /** Reusable Integer constant for zero. */
-    public static final Integer INTEGER_ZERO = Integer.valueOf(0);
-
-    /** Reusable Integer constant for one. */
-    public static final Integer INTEGER_ONE = Integer.valueOf(1);
-
-    /** Reusable Integer constant for two */
     public static final Integer INTEGER_TWO = Integer.valueOf(2);
 
-    /** Reusable Integer constant for minus one. */
-    public static final Integer INTEGER_MINUS_ONE = Integer.valueOf(-1);
-
-    /** Reusable Short constant for zero. */
-    public static final Short SHORT_ZERO = Short.valueOf((short) 0);
-
-    /** Reusable Short constant for one. */
-    public static final Short SHORT_ONE = Short.valueOf((short) 1);
-
-    /** Reusable Short constant for minus one. */
-    public static final Short SHORT_MINUS_ONE = Short.valueOf((short) -1);
-
-    /** Reusable Byte constant for zero. */
-    public static final Byte BYTE_ZERO = Byte.valueOf((byte) 0);
-
-    /** Reusable Byte constant for one. */
-    public static final Byte BYTE_ONE = Byte.valueOf((byte) 1);
-
-    /** Reusable Byte constant for minus one. */
-    public static final Byte BYTE_MINUS_ONE = Byte.valueOf((byte) -1);
-
-    /** Reusable Double constant for zero. */
-    public static final Double DOUBLE_ZERO = Double.valueOf(0.0d);
-
-    /** Reusable Double constant for one. */
-    public static final Double DOUBLE_ONE = Double.valueOf(1.0d);
-
-    /** Reusable Double constant for minus one. */
-    public static final Double DOUBLE_MINUS_ONE = Double.valueOf(-1.0d);
-
-    /** Reusable Float constant for zero. */
-    public static final Float FLOAT_ZERO = Float.valueOf(0.0f);
-
-    /** Reusable Float constant for one. */
-    public static final Float FLOAT_ONE = Float.valueOf(1.0f);
-
-    /** Reusable Float constant for minus one. */
-    public static final Float FLOAT_MINUS_ONE = Float.valueOf(-1.0f);
-
-    /**
-     * {@link Integer#MAX_VALUE} as a {@link Long}.
-     *
-     * @since 3.12.0
-     */
-    public static final Long LONG_INT_MAX_VALUE = Long.valueOf(Integer.MAX_VALUE);
-
-    /**
-     * {@link Integer#MIN_VALUE} as a {@link Long}.
-     *
-     * @since 3.12.0
-     */
-    public static final Long LONG_INT_MIN_VALUE = Long.valueOf(Integer.MIN_VALUE);
-
     private static <T> boolean accept(final Consumer<T> consumer, final T obj) {
-        try {
-            consumer.accept(obj);
-            return true;
-        } catch (final Exception e) {
+
             return false;
-        }
+
     }
 
-    /**
-     * Compares two {@code byte} values numerically. This is the same functionality as provided in Java 7.
-     *
-     * @param x the first {@code byte} to compare.
-     * @param y the second {@code byte} to compare.
-     * @return the value {@code 0} if {@code x == y}; a value less than {@code 0} if {@code x < y}; and a value greater than {@code 0} if {@code x > y}.
-     * @since 3.4
-     * @deprecated Use {@link Byte#compare(byte, byte)}.
-     */
     @Deprecated
     public static int compare(final byte x, final byte y) {
         return Byte.compare(x, y);
@@ -178,59 +97,8 @@ public class NumberUtils {
      * @throws NumberFormatException if the value cannot be converted.
      */
     public static BigDecimal createBigDecimal(final String str) {
-        if (str == null) {
-            return null;
-        }
-        // handle JDK1.3.1 bug where "" throws IndexOutOfBoundsException
-        if (StringUtils.isBlank(str)) {
-            throw new NumberFormatException("A blank string is not a valid number");
-        }
-        return new BigDecimal(str);
-    }
 
-    /**
-     * Creates a {@link BigInteger} from a {@link String}.
-     *
-     * Handles hexadecimal (0x or #) and octal (0) notations.
-     *
-     * <p>
-     * Returns {@code null} if the string is {@code null}.
-     * </p>
-     *
-     * @param str a {@link String} to convert, may be null.
-     * @return converted {@link BigInteger} (or null if the input is null).
-     * @throws NumberFormatException if the value cannot be converted.
-     * @since 3.2
-     */
-    public static BigInteger createBigInteger(final String str) {
-        if (str == null) {
-            return null;
-        }
-        if (str.isEmpty()) {
-            throw new NumberFormatException("An empty string is not a valid number");
-        }
-        int pos = 0; // offset within string
-        int radix = 10;
-        boolean negate = false; // need to negate later?
-        final char char0 = str.charAt(0);
-        if (char0 == '-') {
-            negate = true;
-            pos = 1;
-        } else if (char0 == '+') {
-            pos = 1;
-        }
-        if (str.startsWith("0x", pos) || str.startsWith("0X", pos)) { // hex
-            radix = 16;
-            pos += 2;
-        } else if (str.startsWith("#", pos)) { // alternative hex (allowed by Long/Integer)
-            radix = 16;
-            pos++;
-        } else if (str.startsWith("0", pos) && str.length() > pos + 1) { // octal; so long as there are additional digits
-            radix = 8;
-            pos++;
-        } // default is to treat as decimal
-        final BigInteger value = new BigInteger(str.substring(pos), radix);
-        return negate ? value.negate() : value;
+        return new BigDecimal(str);
     }
 
     /**
@@ -246,6 +114,41 @@ public class NumberUtils {
      */
     public static Double createDouble(final String str) {
         if (str == null) {
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
             return null;
         }
         return Double.valueOf(str);
