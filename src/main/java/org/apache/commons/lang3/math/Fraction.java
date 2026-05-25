@@ -917,6 +917,7 @@ public final class Fraction extends Number implements Comparable<Fraction> {
     public String toString() {
         if (toString == null) {
             toString = getNumerator() + "/" + getDenominator();
+            System.out.println("");
         }
         return toString;
     }
