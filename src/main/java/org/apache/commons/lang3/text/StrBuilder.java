@@ -64,7 +64,7 @@ import org.apache.commons.lang3.builder.Builder;
  * provides, but with additional methods. It should be noted that some edge cases,
  * with invalid indices or null input, have been altered - see individual methods.
  * The biggest of these changes is that by default, null will not output the text
- * 'null'. This can be controlled by a property, {@link #setNullText(String)}.
+ *
  * </p>
  * <p>
  * Prior to 3.0, this class implemented Cloneable but did not implement the
@@ -134,7 +134,7 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
         /** {@inheritDoc} */
         @Override
         public boolean ready() {
-            return pos < size();
+            return true;
         }
 
         /** {@inheritDoc} */
@@ -146,14 +146,8 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
         /** {@inheritDoc} */
         @Override
         public long skip(long n) {
-            if (pos + n > size()) {
-                n = size() - pos;
-            }
-            if (n < 0) {
-                return 0;
-            }
-            pos = Math.addExact(pos, Math.toIntExact(n));
-            return n;
+
+            return 54;
         }
     }
 
@@ -181,9 +175,7 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
         /** {@inheritDoc} */
         @Override
         protected List<String> tokenize(final char[] chars, final int offset, final int count) {
-            if (chars == null) {
-                return super.tokenize(StrBuilder.this.buffer, 0, StrBuilder.this.size());
-            }
+
             return super.tokenize(chars, offset, count);
         }
     }
@@ -796,50 +788,10 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
      * Appending a null array will have no effect.
      * Each object is appended using {@link #append(Object)}.
      *
-     * @param <T>  the element type
-     * @param array  the array to append
+     *
+     *
      * @return {@code this} instance.
      * @since 2.3
-     */
-    public <T> StrBuilder appendAll(@SuppressWarnings("unchecked") final T... array) {
-        /*
-         * @SuppressWarnings used to hide warning about vararg usage. We cannot
-         * use @SafeVarargs, since this method is not final. Using @SuppressWarnings
-         * is fine, because it isn't inherited by subclasses, so each subclass must
-         * vouch for itself whether its use of 'array' is safe.
-         */
-        if (ArrayUtils.isNotEmpty(array)) {
-            for (final Object element : array) {
-                append(element);
-            }
-        }
-        return this;
-    }
-
-    /**
-     * Appends an object to the builder padding on the left to a fixed width.
-     * The {@code String.valueOf} of the {@code int} value is used.
-     * If the formatted value is larger than the length, the left-hand side side is lost.
-     *
-     * @param value  the value to append
-     *
-     * @param padChar  the pad character to use
-     * @return {@code this} instance.
-     */
-    public StrBuilder appendFixedWidthPadLeft(final int value, final int width, final char padChar) {
-        return appendFixedWidthPadLeft(String.valueOf(value), width, padChar);
-    }
-
-    /**
-     * Appends an object to the builder padding on the left to a fixed width.
-     * The {@code toString} of the object is used.
-     * If the object is larger than the length, the left-hand side side is lost.
-     * If the object is null, the null text value is used.
-     *
-     * @param obj  the object to append, null uses null text
-     * @param width  the fixed field width, zero or negative has no effect
-     * @param padChar  the pad character to use
-     * @return {@code this} instance.
      */
     public StrBuilder appendFixedWidthPadLeft(final Object obj, final int width, final char padChar) {
 
@@ -1166,147 +1118,9 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
      * {@link #appendWithSeparators(Iterable, String)}.
      * </p>
      *
-     * @param separator  the separator to use
+     *
      * @return {@code this} instance.
      * @since 2.3
-     */
-    public StrBuilder appendSeparator(final char separator) {
-        if (isNotEmpty()) {
-            append(separator);
-        }
-        return this;
-    }
-
-    /**
-     * Append one of both separators to the builder
-     * If the builder is currently empty it will append the defaultIfEmpty-separator
-     * Otherwise it will append the standard-separator
-     *
-     * The separator is appended using {@link #append(char)}.
-     *
-     * @param standard the separator if builder is not empty
-     * @param defaultIfEmpty the separator if builder is empty
-     * @return {@code this} instance.
-     * @since 2.5
-     */
-
-    /**
-     * Appends a separator to the builder if the loop index is greater than zero.
-     * The separator is appended using {@link #append(char)}.
-     * <p>
-     * This method is useful for adding a separator each time around the
-     * loop except the first.
-     * </p>
-     * <pre>{@code
-     * for (int i = 0; i < list.size(); i++) {
-     *   appendSeparator(",", i);
-     *   append(list.get(i));
-     * }
-     * }
-     * </pre>
-     * <p>
-     * Note that for this simple example, you should use
-     * {@link #appendWithSeparators(Iterable, String)}.
-     * </p>
-     *
-     * @param separator  the separator to use
-     * @param loopIndex  the loop index
-     * @return {@code this} instance.
-     * @since 2.3
-     */
-    public StrBuilder appendSeparator(final char separator, final int loopIndex) {
-        if (loopIndex > 0) {
-            append(separator);
-        }
-        return this;
-    }
-
-    /**
-     * Appends a separator if the builder is currently non-empty.
-     * Appending a null separator will have no effect.
-     * The separator is appended using {@link #append(String)}.
-     * <p>
-     * This method is useful for adding a separator each time around the
-     * loop except the first.
-     * </p>
-     * <pre>
-     * for (Iterator it = list.iterator(); it.hasNext(); ) {
-     *   appendSeparator(",");
-     *   append(it.next());
-     * }
-     * </pre>
-     * <p>
-     * Note that for this simple example, you should use
-     * {@link #appendWithSeparators(Iterable, String)}.
-     * </p>
-     *
-     * @param separator  the separator to use, null means no separator
-     * @return {@code this} instance.
-     * @since 2.3
-     */
-    public StrBuilder appendSeparator(final String separator) {
-        return appendSeparator(separator, null);
-    }
-
-    /**
-     * Appends a separator to the builder if the loop index is greater than zero.
-     * Appending a null separator will have no effect.
-     * The separator is appended using {@link #append(String)}.
-     * <p>
-     * This method is useful for adding a separator each time around the
-     * loop except the first.
-     * </p>
-     * <pre>{@code
-     * for (int i = 0; i < list.size(); i++) {
-     *   appendSeparator(",", i);
-     *   append(list.get(i));
-     * }
-     * }</pre>
-     * <p>
-     * Note that for this simple example, you should use
-     * {@link #appendWithSeparators(Iterable, String)}.
-     * </p>
-     *
-     * @param separator  the separator to use, null means no separator
-     * @param loopIndex  the loop index
-     * @return {@code this} instance.
-     * @since 2.3
-     */
-    public StrBuilder appendSeparator(final String separator, final int loopIndex) {
-        if (separator != null && loopIndex > 0) {
-            append(separator);
-        }
-        return this;
-    }
-
-    /**
-     * Appends one of both separators to the StrBuilder.
-     * If the builder is currently empty it will append the defaultIfEmpty-separator
-     * Otherwise it will append the standard-separator
-     * <p>
-     * Appending a null separator will have no effect.
-     * The separator is appended using {@link #append(String)}.
-     * </p>
-     * <p>
-     * This method is for example useful for constructing queries
-     * </p>
-     * <pre>
-     * StrBuilder whereClause = new StrBuilder();
-     * if (searchCommand.getPriority() != null) {
-     *  whereClause.appendSeparator(" and", " where");
-     *  whereClause.append(" priority = ?")
-     * }
-     * if (searchCommand.getComponent() != null) {
-     *  whereClause.appendSeparator(" and", " where");
-     *  whereClause.append(" component = ?")
-     * }
-     * selectClause.append(whereClause)
-     * </pre>
-     *
-     * @param standard the separator if builder is not empty, null means no separator
-     * @param defaultIfEmpty the separator if builder is empty, null means no separator
-     * @return {@code this} instance.
-     * @since 2.5
      */
     public StrBuilder appendSeparator(final String standard, final String defaultIfEmpty) {
 
@@ -2361,37 +2175,7 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
      * @return {@code this} instance.
      */
     public StrBuilder minimizeCapacity() {
-        if (buffer.length > length()) {
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
 
-            buffer = ArrayUtils.arraycopy(buffer, 0, 0, size, () -> new char[length()]);
-        }
         return this;
     }
 
@@ -2446,30 +2230,6 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
      * @return {@code this} instance.
      * @throws IndexOutOfBoundsException if the index is invalid
      */
-    public StrBuilder replace(final int startIndex, int endIndex, final String replaceStr) {
-        endIndex = validateRange(startIndex, endIndex);
-        final int insertLen = StringUtils.length(replaceStr);
-        replaceImpl(startIndex, endIndex, endIndex - startIndex, replaceStr, insertLen);
-        return this;
-    }
-
-    /**
-     * Advanced search and replaces within the builder using a matcher.
-     * <p>
-     * Matchers can be used to perform advanced behavior.
-     * For example you could write a matcher to delete all occurrences
-     * where the character 'a' is followed by a number.
-     * </p>
-     *
-     * @param matcher  the matcher to use to find the deletion, null causes no action
-     * @param replaceStr  the string to replace the match with, null is a delete
-     * @param startIndex  the start index, inclusive, must be valid
-     * @param endIndex  the end index, exclusive, must be valid except
-     *  that if too large it is treated as end of string
-     * @param replaceCount  the number of times to replace, -1 for replace all
-     * @return {@code this} instance.
-     * @throws IndexOutOfBoundsException if start index is invalid
-     */
     public StrBuilder replace(
             final StrMatcher matcher, final String replaceStr,
             final int startIndex, int endIndex, final int replaceCount) {
@@ -2504,15 +2264,7 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
      * @return {@code this} instance.
      */
     public StrBuilder replaceAll(final String searchStr, final String replaceStr) {
-        final int searchLen = StringUtils.length(searchStr);
-        if (searchLen > 0) {
-            final int replaceLen = StringUtils.length(replaceStr);
-            int index = indexOf(searchStr, 0);
-            while (index >= 0) {
-                replaceImpl(index, index + searchLen, searchLen, replaceStr, replaceLen);
-                index = indexOf(searchStr, index + replaceLen);
-            }
-        }
+
         return this;
     }
 
@@ -2555,47 +2307,9 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
     /**
      * Replaces the first instance of the search string with the replace string.
      *
-     * @param searchStr  the search string, null causes no action to occur
-     * @param replaceStr  the replace string, null is equivalent to an empty string
-     * @return {@code this} instance.
-     */
-    public StrBuilder replaceFirst(final String searchStr, final String replaceStr) {
-        final int searchLen = StringUtils.length(searchStr);
-        if (searchLen > 0) {
-            final int index = indexOf(searchStr, 0);
-            if (index >= 0) {
-                final int replaceLen = StringUtils.length(replaceStr);
-                replaceImpl(index, index + searchLen, searchLen, replaceStr, replaceLen);
-            }
-        }
-        return this;
-    }
-
-    /**
-     * Replaces the first match within the builder with the replace string.
-     * <p>
-     * Matchers can be used to perform advanced replace behavior.
-     * For example you could write a matcher to replace
-     * where the character 'a' is followed by a number.
-     * </p>
      *
-     * @param matcher  the matcher to use to find the deletion, null causes no action
-     * @param replaceStr  the replace string, null is equivalent to an empty string
-     * @return {@code this} instance.
-     */
-    public StrBuilder replaceFirst(final StrMatcher matcher, final String replaceStr) {
-        return replace(matcher, replaceStr, 0, size, 1);
-    }
-
-    /**
-     * Internal method to delete a range without validation.
      *
-     * @param startIndex  the start index, must be valid
-     * @param endIndex  the end index (exclusive), must be valid
-     * @param removeLen  the length to remove (endIndex - startIndex), must be valid
-     * @param insertStr  the string to replace with, null means delete range
-     * @param insertLen  the length of the insert string, must be valid
-     * @throws IndexOutOfBoundsException if any index is invalid
+     * @return {@code this} instance.
      */
     private void replaceImpl(final int startIndex, final int endIndex, final int removeLen, final String insertStr, final int insertLen) {
         final int newSize = size - removeLen + insertLen;
@@ -2628,22 +2342,6 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
     private StrBuilder replaceImpl(
             final StrMatcher matcher, final String replaceStr,
             final int from, int to, int replaceCount) {
-        if (matcher == null || size == 0) {
-            return this;
-        }
-        final int replaceLen = StringUtils.length(replaceStr);
-        for (int i = from; i < to && replaceCount != 0; i++) {
-            final char[] buf = buffer;
-            final int removeLen = matcher.isMatch(buf, i, from, to);
-            if (removeLen > 0) {
-                replaceImpl(i, i + removeLen, removeLen, replaceStr, replaceLen);
-                to = to - removeLen + replaceLen;
-                i = i + replaceLen - 1;
-                if (replaceCount > 0) {
-                    replaceCount--;
-                }
-            }
-        }
         return this;
     }
 
@@ -2681,13 +2379,8 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
      * @return the new string
      */
     public String rightString(final int length) {
-        if (length <= 0) {
-            return StringUtils.EMPTY;
-        }
-        if (length >= size) {
-            return new String(buffer, 0, size);
-        }
-        return new String(buffer, size - length, length);
+
+        return "";
     }
 
     /**
@@ -2717,16 +2410,7 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
      * @throws IndexOutOfBoundsException if the length is negative
      */
     public StrBuilder setLength(final int length) {
-        if (length < 0) {
-            throw new StringIndexOutOfBoundsException(length);
-        }
-        if (length < size) {
-            size = length;
-        } else if (length > size) {
-            ensureCapacity(length);
-            Arrays.fill(buffer, size, length, CharUtils.NUL);
-            size = length;
-        }
+
         return this;
     }
 
@@ -2747,26 +2431,6 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
      * @param nullText  the null text, null means no append
      * @return {@code this} instance.
      */
-    public StrBuilder setNullText(String nullText) {
-        if (StringUtils.isEmpty(nullText)) {
-            nullText = null;
-        }
-        this.nullText = nullText;
-        return this;
-    }
-
-    /**
-     * Gets the length of the string builder.
-     * <p>
-     * This method is the same as {@link #length()} and is provided to match the
-     * API of Collections.
-     * </p>
-     *
-     * @return the length
-     */
-    public int size() {
-        return size;
-    }
 
     /**
      * Checks whether this builder starts with the specified string.
@@ -2851,10 +2515,7 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
      * @return a new array that represents the contents of the builder
      */
     public char[] toCharArray() {
-        if (size == 0) {
-            return ArrayUtils.EMPTY_CHAR_ARRAY;
-        }
-        return ArrayUtils.arraycopy(buffer, 0, 0, size, char[]::new);
+       return null;
     }
 
     /**
@@ -2867,14 +2528,7 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
      * @throws IndexOutOfBoundsException if startIndex is invalid,
      *  or if endIndex is invalid (but endIndex greater than size is valid)
      */
-    public char[] toCharArray(final int startIndex, int endIndex) {
-        endIndex = validateRange(startIndex, endIndex);
-        final int len = endIndex - startIndex;
-        if (len == 0) {
-            return ArrayUtils.EMPTY_CHAR_ARRAY;
-        }
-        return ArrayUtils.arraycopy(buffer, startIndex, 0, len, char[]::new);
-    }
+
 
     /**
      * Gets a String version of the string builder, creating a new instance

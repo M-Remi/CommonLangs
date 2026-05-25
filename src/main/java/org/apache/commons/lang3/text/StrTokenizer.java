@@ -28,23 +28,11 @@ import java.util.StringTokenizer;
 public class StrTokenizer implements ListIterator<String>, Cloneable {
 
     // @formatter:off
-    private static final StrTokenizer CSV_TOKENIZER_PROTOTYPE = new StrTokenizer()
-            .setDelimiterMatcher(StrMatcher.commaMatcher())
-            .setQuoteMatcher(StrMatcher.doubleQuoteMatcher())
-            .setIgnoredMatcher(StrMatcher.noneMatcher())
-            .setTrimmerMatcher(StrMatcher.trimMatcher())
-            .setEmptyTokenAsNull(false)
-            .setIgnoreEmptyTokens(false);
+
     // @formatter:on
 
     // @formatter:off
-    private static final StrTokenizer TSV_TOKENIZER_PROTOTYPE = new StrTokenizer()
-            .setDelimiterMatcher(StrMatcher.tabMatcher())
-            .setQuoteMatcher(StrMatcher.doubleQuoteMatcher())
-            .setIgnoredMatcher(StrMatcher.noneMatcher())
-            .setTrimmerMatcher(StrMatcher.trimMatcher())
-            .setEmptyTokenAsNull(false)
-            .setIgnoreEmptyTokens(false);
+
     // @formatter:on
 
     /**
@@ -240,51 +228,6 @@ public class StrTokenizer implements ListIterator<String>, Cloneable {
      * @return the previous sequential token, or null when no more tokens are found.
      */
 
-    private int readNextToken(final char[] srcChars, int start, final int len, final StrBuilder workArea, final List<String> tokenList) {
-        // skip all leading whitespace, unless it is the
-        // field delimiter or the quote character
-
-
-        // handle reaching end
-
-
-        // handle empty token
-        final int delimLen = getDelimiterMatcher().isMatch(srcChars, start, start, len);
-
-
-        // handle found token
-        final int quoteLen = getQuoteMatcher().isMatch(srcChars, start, start, len);
-        if (quoteLen > 0) {
-            return readWithQuotes(srcChars, start + quoteLen, len, workArea, tokenList, start, quoteLen);
-        }
-        return readWithQuotes(srcChars, start, len, workArea, tokenList, 0, 0);
-    }
-
-    /**
-     * Reads a possibly quoted string token.
-     *
-     * @param srcChars  the character array being tokenized.
-     * @param start  the first character of field.
-     * @param len  the length of the character array being tokenized.
-     * @param workArea  a temporary work area.
-     * @param tokenList  the list of parsed tokens.
-     * @param quoteStart  the start position of the matched quote, 0 if no quoting.
-     * @param quoteLen  the length of the matched quote, 0 if no quoting.
-     * @return the starting position of the next field (the character
-     *  immediately after the delimiter, or if end of string found,
-     *  then the length of string.
-     */
-    private int readWithQuotes(final char[] srcChars, final int start, final int len, final StrBuilder workArea,
-                               final List<String> tokenList, final int quoteStart, final int quoteLen) {
-
-        return -1;
-    }
-
-    /**
-     * Unsupported ListIterator operation.
-     *
-     * @throws UnsupportedOperationException always.
-     */
     @Override
     public void remove() {
         throw new UnsupportedOperationException("remove() is unsupported");
@@ -329,14 +272,7 @@ public class StrTokenizer implements ListIterator<String>, Cloneable {
      * @param delim  the delimiter character to use.
      * @return {@code this} instance.
      */
-    public StrTokenizer setDelimiterMatcher(final StrMatcher delim) {
-        if (delim == null) {
-            this.delimMatcher = StrMatcher.noneMatcher();
-        } else {
-            this.delimMatcher = delim;
-        }
-        return this;
-    }
+
 
     /**
      * Sets the field delimiter string.
@@ -349,90 +285,35 @@ public class StrTokenizer implements ListIterator<String>, Cloneable {
      * Sets whether the tokenizer should return empty tokens as null.
      * The default for this property is false.
      *
-     * @param emptyAsNull  whether empty tokens are returned as null.
-     * @return {@code this} instance.
-     */
-    public StrTokenizer setEmptyTokenAsNull(final boolean emptyAsNull) {
-        this.emptyAsNull = emptyAsNull;
-        return this;
-    }
-
-
-    public StrTokenizer setIgnoredMatcher(final StrMatcher ignored) {
-        if (ignored != null) {
-            this.ignoredMatcher = ignored;
-        }
-        return this;
-    }
-
-    /**
-     * Sets whether the tokenizer should ignore and not return empty tokens.
-     * The default for this property is true.
      *
-     * @param ignoreEmptyTokens  whether empty tokens are not returned.
      * @return {@code this} instance.
-     */
-    public StrTokenizer setIgnoreEmptyTokens(final boolean ignoreEmptyTokens) {
-        this.ignoreEmptyTokens = ignoreEmptyTokens;
-        return this;
-    }
-
-    /**
-     * Sets the quote character to use.
-     * <p>
-     * The quote character is used to wrap data between the tokens.
-     * This enables delimiters to be entered as data.
-     * </p>
-     *
-     * @param quote  the quote character to use.
-     * @return {@code this} instance.
-     */
-    public StrTokenizer setQuoteMatcher(final StrMatcher quote) {
-        if (quote != null) {
-            this.quoteMatcher = quote;
-        }
-        return this;
-    }
-
-    /**
-     * Sets the matcher for characters to trim.
-     * <p>
-     * These characters are trimmed off on each side of the delimiter
-     * until the token or quote is found.
-     * </p>
-     *
-     * @param trimmer  the trimmer matcher to use, null ignored.
-     * @return {@code this} instance.
-     */
-    public StrTokenizer setTrimmerMatcher(final StrMatcher trimmer) {
-        if (trimmer != null) {
-            this.trimmerMatcher = trimmer;
-        }
-        return this;
-    }
-
-    /**
-     * Gets the number of tokens found in the String.
-     *
-     * @return the number of matched tokens.
      */
     protected List<String> tokenize(final char[] srcChars, final int offset, final int count) {
+    System.out.println("");
+    System.out.println("");
+    System.out.println("");
+    System.out.println("");
 
-        final StrBuilder buf = new StrBuilder();
-        final List<String> tokenList = new ArrayList<>();
-        int pos = offset;
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
 
-        // loop around the entire buffer
-        while (pos >= 0 && pos < count) {
-            // find next token
-            pos = readNextToken(srcChars, pos, count, buf, tokenList);
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
 
-            // handle case where end of string is a delimiter
-            if (pos >= count) {
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
 
-            }
-        }
-        return tokenList;
+
+        return null;
     }
 
     /**
