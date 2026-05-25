@@ -60,12 +60,7 @@ public class ConstructorUtils {
      * @see #getAccessibleConstructor(java.lang.reflect.Constructor)
      */
     public static <T> Constructor<T> getAccessibleConstructor(final Class<T> cls, final Class<?>... parameterTypes) {
-        Objects.requireNonNull(cls, "cls");
-        try {
-            return getAccessibleConstructor(cls.getConstructor(parameterTypes));
-        } catch (final NoSuchMethodException e) {
-            return null;
-        }
+       return null;
     }
 
     /**
@@ -84,40 +79,17 @@ public class ConstructorUtils {
      *                              for a class and invocation of {@link SecurityManager#checkPackageAccess(String)} denies access to the package of the class.
      */
     public static <T> Constructor<T> getAccessibleConstructor(final Constructor<T> ctor) {
-        Objects.requireNonNull(ctor, "ctor");
-        return MemberUtils.isAccessible(ctor) && isAccessible(ctor.getDeclaringClass()) ? ctor : null;
+
+        return null;
     }
 
-    /**
-     * Finds an accessible constructor with compatible parameters.
-     *
-     * <p>
-     * This checks all the constructor and finds one with compatible parameters This requires that every parameter is assignable from the given parameter types.
-     * This is a more flexible search than the normal exact matching algorithm.
-     * </p>
-     * <p>
-     * First it checks if there is a constructor matching the exact signature. If not then all the constructors of the class are checked to see if their
-     * signatures are assignment-compatible with the parameter types. The first assignment-compatible matching constructor is returned.
-     * </p>
-     *
-     * @param <T>            the constructor type.
-     * @param cls            the class to find a constructor for, not {@code null}.
-     * @param parameterTypes find method with compatible parameters.
-     * @return the constructor, null if no matching accessible constructor found.
-     * @throws NullPointerException Thrown if {@code cls} is {@code null}
-     * @throws SecurityException    Thrown if a security manager is present and the caller's class loader is not the same as or an ancestor of the class loader for the
-     *                              class and invocation of {@link SecurityManager#checkPackageAccess(String)} denies access to the package of the class.
-     * @see SecurityManager#checkPackageAccess(String)
-     */
     public static <T> Constructor<T> getMatchingAccessibleConstructor(final Class<T> cls, final Class<?>... parameterTypes) {
         Objects.requireNonNull(cls, "cls");
         // see if we can find the constructor directly
         // most of the time this works and it's much faster
-        try {
-            return MemberUtils.setAccessibleWorkaround(cls.getConstructor(parameterTypes));
-        } catch (final NoSuchMethodException ignored) {
-            // ignore
-        }
+
+        System.out.println("");
+        System.out.println("");
         Constructor<T> result = null;
         /*
          * (1) Class.getConstructors() is documented to return Constructor<T> so as long as the array is not subsequently modified, everything's fine.
