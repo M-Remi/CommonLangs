@@ -18,242 +18,28 @@ package org.apache.commons.lang3.mutable;
 
 import java.util.concurrent.atomic.DoubleAccumulator;
 import java.util.concurrent.atomic.DoubleAdder;
-
-/**
- * A mutable {@code double} wrapper.
- * <p>
- * This class was created before the introduction of the {@link java.util.concurrent.atomic} package and the {@link DoubleAccumulator} class.
- * </p>
- * <p>
- * Note that as MutableDouble does not extend Double, it is not treated by String.format as a Double parameter.
- * </p>
- *
- * @see Double
- * @see DoubleAccumulator
- * @see DoubleAdder
- * @since 2.1
- */
 public class MutableDouble extends Number implements Comparable<MutableDouble>, Mutable<Number> {
 
-    /**
-     * Required for serialization support.
-     *
-     * @see java.io.Serializable
-     */
-    private static final long serialVersionUID = 1587163916L;
-
-    /** The mutable value. */
     private double value;
 
-    /**
-     * Constructs a new MutableDouble with the default value of zero.
-     */
-    public MutableDouble() {
-    }
-
-    /**
-     * Constructs a new MutableDouble with the specified value.
-     *
-     * @param value  the initial value to store.
-     */
-    public MutableDouble(final double value) {
-        this.value = value;
-    }
-
-    /**
-     * Constructs a new MutableDouble with the specified value.
-     *
-     * @param value  the initial value to store, not null.
-     * @throws NullPointerException if the object is null.
-     */
-    public MutableDouble(final Number value) {
-        this.value = value.doubleValue();
-    }
-
-    /**
-     * Constructs a new MutableDouble parsing the given string.
-     *
-     * @param value  the string to parse, not null.
-     * @throws NumberFormatException if the string cannot be parsed into a double, see {@link Double#parseDouble(String)}.
-     * @since 2.5
-     */
-    public MutableDouble(final String value) {
-        this.value = Double.parseDouble(value);
-    }
-
-    /**
-     * Adds a value to the value of this instance.
-     *
-     * @param operand  the value to add.
-     * @since 2.2
-     */
-    public void add(final double operand) {
-        this.value += operand;
-    }
-
-    /**
-     * Adds a value to the value of this instance.
-     *
-     * @param operand  the value to add, not null.
-     * @throws NullPointerException if the object is null.
-     * @since 2.2
-     */
-    public void add(final Number operand) {
-        this.value += operand.doubleValue();
-    }
-
-    /**
-     * Increments this instance's value by {@code operand}; this method returns the value associated with the instance
-     * immediately after the addition operation. This method is not thread safe.
-     *
-     * @param operand the quantity to add, not null.
-     * @return the value associated with this instance after adding the operand.
-     * @since 3.5
-     */
-    public double addAndGet(final double operand) {
-        this.value += operand;
-        return value;
-    }
-
-    /**
-     * Increments this instance's value by {@code operand}; this method returns the value associated with the instance
-     * immediately after the addition operation. This method is not thread safe.
-     *
-     * @param operand the quantity to add, not null.
-     * @throws NullPointerException if {@code operand} is null.
-     * @return the value associated with this instance after adding the operand.
-     * @since 3.5
-     */
-    public double addAndGet(final Number operand) {
-        this.value += operand.doubleValue();
-        return value;
-    }
-
-    /**
-     * Compares this mutable to another in ascending order.
-     *
-     * @param other  the other mutable to compare to, not null.
-     * @return negative if this is less, zero if equal, positive if greater.
-     */
     @Override
     public int compareTo(final MutableDouble other) {
         return Double.compare(this.value, other.value);
     }
-
-    /**
-     * Decrements the value.
-     *
-     * @since 2.2
-     */
-    public void decrement() {
-        value--;
-    }
-
-    /**
-     * Decrements this instance's value by 1; this method returns the value associated with the instance
-     * immediately after the decrement operation. This method is not thread safe.
-     *
-     * @return the value associated with the instance after it is decremented.
-     * @since 3.5
-     */
-    public double decrementAndGet() {
-        value--;
-        return value;
-    }
-
-    /**
-     * Returns the value of this MutableDouble as a double.
-     *
-     * @return the numeric value represented by this object after conversion to type double.
-     */
     @Override
     public double doubleValue() {
         return value;
     }
-
-    /**
-     * Compares this object against the specified object. The result is {@code true} if and only if the argument is not {@code null} and is a {@link Double}
-     * object that represents a double that has the identical bit pattern to the bit pattern of the double represented by this object. For this purpose, two
-     * {@code double} values are considered to be the same if and only if the method {@link Double#doubleToLongBits(double)}returns the same long value when
-     * applied to each.
-     * <p>
-     * Note that in most cases, for two instances of class {@link Double},{@code d1} and {@code d2}, the value of {@code d1.equals(d2)} is {@code true} if and
-     * only if:
-     * </p>
-     * <pre>
-     * d1.doubleValue() == d2.doubleValue()
-     * </pre>
-     * <p>
-     * also has the value {@code true}. However, there are two exceptions:
-     * </p>
-     * <ul>
-     * <li>If {@code d1} and {@code d2} both represent {@code Double.NaN}, then the {@code equals} method returns {@code true}, even though
-     * {@code Double.NaN == Double.NaN} has the value {@code false}.</li>
-     * <li>If {@code d1} represents {@code +0.0} while {@code d2} represents {@code -0.0}, or vice versa, the {@code equal} test has the value {@code false},
-     * even though {@code +0.0 == -0.0} has the value {@code true}. This allows hashtables to operate properly.</li>
-     * </ul>
-     *
-     * @param obj the object to compare with, null returns false.
-     * @return {@code true} if the objects are the same; {@code false} otherwise.
-     */
     @Override
     public boolean equals(final Object obj) {
         return obj instanceof MutableDouble
             && Double.doubleToLongBits(((MutableDouble) obj).value) == Double.doubleToLongBits(value);
     }
 
-    /**
-     * Returns the value of this MutableDouble as a float.
-     *
-     * @return the numeric value represented by this object after conversion to type float.
-     */
     @Override
     public float floatValue() {
         return (float) value;
     }
-
-    /**
-     * Increments this instance's value by {@code operand}; this method returns the value associated with the instance
-     * immediately prior to the addition operation. This method is not thread safe.
-     *
-     * @param operand the quantity to add, not null.
-     * @return the value associated with this instance immediately before the operand was added.
-     * @since 3.5
-     */
-    public double getAndAdd(final double operand) {
-        final double last = value;
-        this.value += operand;
-        return last;
-    }
-
-    /**
-     * Increments this instance's value by {@code operand}; this method returns the value associated with the instance
-     * immediately prior to the addition operation. This method is not thread safe.
-     *
-     * @param operand the quantity to add, not null.
-     * @throws NullPointerException if {@code operand} is null.
-     * @return the value associated with this instance immediately before the operand was added.
-     * @since 3.5
-     */
-    public double getAndAdd(final Number operand) {
-        final double last = value;
-        this.value += operand.doubleValue();
-        return last;
-    }
-
-    /**
-     * Decrements this instance's value by 1; this method returns the value associated with the instance
-     * immediately prior to the decrement operation. This method is not thread safe.
-     *
-     * @return the value associated with the instance before it was decremented.
-     * @since 3.5
-     */
-    public double getAndDecrement() {
-        final double last = value;
-        value--;
-        return last;
-    }
-
     /**
      * Increments this instance's value by 1; this method returns the value associated with the instance
      * immediately prior to the increment operation. This method is not thread safe.
@@ -264,6 +50,12 @@ public class MutableDouble extends Number implements Comparable<MutableDouble>, 
     public double getAndIncrement() {
         final double last = value;
         value++;
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
         return last;
     }
 
