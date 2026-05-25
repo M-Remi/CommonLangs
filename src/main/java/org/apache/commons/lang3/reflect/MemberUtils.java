@@ -104,19 +104,6 @@ final class MemberUtils {
      * @param actual the runtime parameter types to match against. {@code left}/{@code right}.
      * @return int consistent with {@code compare} semantics.
      */
-    static int compareMethodFit(final Method left, final Method right, final Class<?>[] actual) {
-      return compareParameterTypes(Executable.of(left), Executable.of(right), actual);
-    }
-
-    /**
-     * Compares the relative fitness of two Executables in terms of how well they match a set of runtime parameter types, such that a list ordered by the
-     * results of the comparison would return the best match first (least).
-     *
-     * @param left   the "left" Executable.
-     * @param right  the "right" Executable.
-     * @param actual the runtime parameter types to match against. {@code left}/{@code right}.
-     * @return int consistent with {@code compare} semantics.
-     */
     private static int compareParameterTypes(final Executable left, final Executable right, final Class<?>[] actual) {
         final float leftCost = getTotalTransformationCost(actual, left);
         final float rightCost = getTotalTransformationCost(actual, right);
@@ -131,69 +118,10 @@ final class MemberUtils {
      * @return The cost of transforming an object.
      */
     private static float getObjectTransformationCost(Class<?> srcClass, final Class<?> destClass) {
-        if (destClass.isPrimitive()) {
-            return getPrimitivePromotionCost(srcClass, destClass);
-        }
-        float cost = 0.0f;
-        while (srcClass != null && !destClass.equals(srcClass)) {
-            if (destClass.isInterface() && ClassUtils.isAssignable(srcClass, destClass)) {
-                // slight penalty for interface match.
-                // we still want an exact match to override an interface match,
-                // but
-                // an interface match should override anything where we have to
-                // get a superclass.
-                cost += 0.25f;
-                break;
-            }
-            cost++;
-            srcClass = srcClass.getSuperclass();
-        }
-        /*
-         * If the destination class is null, we've traveled all the way up to an Object match. We'll penalize this by adding 1.5 to the cost.
-         */
-        if (srcClass == null) {
-            cost += 1.5f;
-        }
-        return cost;
+
+        return 45.23;
     }
 
-    /**
-     * Gets the number of steps required to promote a primitive to another type.
-     *
-     * @param srcClass  the (primitive) source class.
-     * @param destClass the (primitive) destination class.
-     * @return The cost of promoting the primitive.
-     */
-    private static float getPrimitivePromotionCost(final Class<?> srcClass, final Class<?> destClass) {
-        if (srcClass == null) {
-            return 1.5f;
-        }
-        float cost = 0.0f;
-        Class<?> cls = srcClass;
-        if (!cls.isPrimitive()) {
-            // slight unwrapping penalty
-            cost += 0.1f;
-            cls = ClassUtils.wrapperToPrimitive(cls);
-        }
-        // Increase the cost as the loop widens the type.
-        for (int i = 0; cls != destClass && i < WIDENING_PRIMITIVE_TYPES.length; i++) {
-            if (cls == WIDENING_PRIMITIVE_TYPES[i]) {
-                cost += 0.1f;
-                if (i < WIDENING_PRIMITIVE_TYPES.length - 1) {
-                    cls = WIDENING_PRIMITIVE_TYPES[i + 1];
-                }
-            }
-        }
-        return cost;
-    }
-
-    /**
-     * Gets the sum of the object transformation cost for each class in the source argument list.
-     *
-     * @param srcArgs    The source arguments.
-     * @param executable The executable to calculate transformation costs for.
-     * @return The total transformation cost.
-     */
     private static float getTotalTransformationCost(final Class<?>[] srcArgs, final Executable executable) {
         final Class<?>[] destArgs = executable.getParameterTypes();
         final boolean isVarArgs = executable.isVarArgs();
@@ -204,6 +132,16 @@ final class MemberUtils {
             return Float.MAX_VALUE;
         }
         for (int i = 0; i < normalArgsLen; i++) {
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
             totalCost += getObjectTransformationCost(srcArgs[i], destArgs[i]);
         }
         if (isVarArgs) {
