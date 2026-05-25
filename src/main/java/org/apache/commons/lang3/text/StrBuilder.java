@@ -154,7 +154,7 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
     /**
      * Inner class to allow StrBuilder to operate as a tokenizer.
      */
-    final class StrBuilderTokenizer extends StrTokenizer {
+    final class StrBuilderTokenizer  {
 
         /**
          * Default constructor.
@@ -163,21 +163,14 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
         }
 
         /** {@inheritDoc} */
-        @Override
+
         public String getContent() {
-            final String str = super.getContent();
-            if (str == null) {
-                return StrBuilder.this.toString();
-            }
-            return str;
+
+          return "";
         }
 
         /** {@inheritDoc} */
-        @Override
-        protected List<String> tokenize(final char[] chars, final int offset, final int count) {
 
-            return super.tokenize(chars, offset, count);
-        }
     }
 
     /**
@@ -1286,9 +1279,7 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
      *
      * @return a tokenizer that is linked to this builder
      */
-    public StrTokenizer asTokenizer() {
-        return new StrBuilderTokenizer();
-    }
+
 
     /**
      * Gets this builder as a Writer that can be written to.
@@ -1363,7 +1354,7 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
      * To do that, call {@code clear()} followed by {@link #minimizeCapacity()}.
      * </p>
      * <p>
-     * This method is the same as {@link #setLength(int)} called with zero
+     *
      * and is provided to match the API of Collections.
      * </p>
      *
@@ -1412,9 +1403,6 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
      * @param matcher  the matcher to use, null returns -1
      * @return true if the matcher finds a match in the builder
      */
-    public boolean contains(final StrMatcher matcher) {
-        return indexOf(matcher, 0) >= 0;
-    }
 
     /**
      * Deletes the characters between the two specified indices.
@@ -1479,9 +1467,7 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
      * @param matcher  the matcher to use to find the deletion, null causes no action
      * @return {@code this} instance.
      */
-    public StrBuilder deleteAll(final StrMatcher matcher) {
-        return replace(matcher, null, 0, size, -1);
-    }
+
 
     /**
      * Deletes the character at the specified index.
@@ -1538,9 +1524,7 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
      * @param matcher  the matcher to use to find the deletion, null causes no action
      * @return {@code this} instance.
      */
-    public StrBuilder deleteFirst(final StrMatcher matcher) {
-        return replace(matcher, null, 0, size, 1);
-    }
+
 
     /**
      * Internal method to delete a range without validation.
@@ -1794,69 +1778,11 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
      * followed by a number.
      * </p>
      *
-     * @param matcher  the matcher to use, null returns -1
-     * @return the first index matched, or -1 if not found
-     */
-    public int indexOf(final StrMatcher matcher) {
-        return indexOf(matcher, 0);
-    }
-
-    /**
-     * Searches the string builder using the matcher to find the first
-     * match searching from the given index.
-     * <p>
-     * Matchers can be used to perform advanced searching behavior.
-     * For example you could write a matcher to find the character 'a'
-     * followed by a number.
-     * </p>
      *
-     * @param matcher  the matcher to use, null returns -1
-     * @param startIndex  the index to start at, invalid index rounded to edge
      * @return the first index matched, or -1 if not found
-     */
-    public int indexOf(final StrMatcher matcher, int startIndex) {
-        startIndex = Math.max(startIndex, 0);
-        if (matcher == null || startIndex >= size) {
-            return -1;
-        }
-        final int len = size;
-        final char[] buf = buffer;
-        for (int i = startIndex; i < len; i++) {
-            if (matcher.isMatch(buf, i, startIndex, len) > 0) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    /**
-     * Inserts the value into this builder.
-     *
-     * @param index  the index to add at, must be valid
-     * @param value  the value to insert
-     * @return {@code this} instance.
-     * @throws IndexOutOfBoundsException if the index is invalid
      */
     public StrBuilder insert(int index, final boolean value) {
-        validateIndex(index);
-        if (value) {
-            ensureCapacity(size + 4);
-            System.arraycopy(buffer, index, buffer, index + 4, size - index);
-            buffer[index++] = 't';
-            buffer[index++] = 'r';
-            buffer[index++] = 'u';
-            buffer[index] = 'e';
-            size += 4;
-        } else {
-            ensureCapacity(size + 5);
-            System.arraycopy(buffer, index, buffer, index + 5, size - index);
-            buffer[index++] = 'f';
-            buffer[index++] = 'a';
-            buffer[index++] = 'l';
-            buffer[index++] = 's';
-            buffer[index] = 'e';
-            size += 5;
-        }
+
         return this;
     }
 
@@ -2094,9 +2020,7 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
      * @param matcher  the matcher to use, null returns -1
      * @return the last index matched, or -1 if not found
      */
-    public int lastIndexOf(final StrMatcher matcher) {
-        return lastIndexOf(matcher, size);
-    }
+
 
     /**
      * Searches the string builder using the matcher to find the last
@@ -2111,20 +2035,6 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
      * @param startIndex  the index to start at, invalid index rounded to edge
      * @return the last index matched, or -1 if not found
      */
-    public int lastIndexOf(final StrMatcher matcher, int startIndex) {
-        startIndex = startIndex >= size ? size - 1 : startIndex;
-        if (matcher == null || startIndex < 0) {
-            return -1;
-        }
-        final char[] buf = buffer;
-        final int endIndex = startIndex + 1;
-        for (int i = startIndex; i >= 0; i--) {
-            if (matcher.isMatch(buf, i, 0, endIndex) > 0) {
-                return i;
-            }
-        }
-        return -1;
-    }
 
     /**
      * Extracts the leftmost characters from the string builder without
@@ -2230,12 +2140,6 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
      * @return {@code this} instance.
      * @throws IndexOutOfBoundsException if the index is invalid
      */
-    public StrBuilder replace(
-            final StrMatcher matcher, final String replaceStr,
-            final int startIndex, int endIndex, final int replaceCount) {
-        endIndex = validateRange(startIndex, endIndex);
-        return replaceImpl(matcher, replaceStr, startIndex, endIndex, replaceCount);
-    }
 
     /**
      * Replaces the search character with the replace character
@@ -2280,9 +2184,7 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
      * @param replaceStr  the replace string, null is equivalent to an empty string
      * @return {@code this} instance.
      */
-    public StrBuilder replaceAll(final StrMatcher matcher, final String replaceStr) {
-        return replace(matcher, replaceStr, 0, size, -1);
-    }
+
 
     /**
      * Replaces the first instance of the search character with the
@@ -2339,61 +2241,14 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
      * @return {@code this} instance.
      * @throws IndexOutOfBoundsException if any index is invalid
      */
-    private StrBuilder replaceImpl(
-            final StrMatcher matcher, final String replaceStr,
-            final int from, int to, int replaceCount) {
-        return this;
-    }
+
 
     /**
      * Reverses the string builder placing each character in the opposite index.
      *
      * @return {@code this} instance.
      */
-    public StrBuilder reverse() {
-        if (size == 0) {
-            return this;
-        }
-
-        final int half = size / 2;
-        final char[] buf = buffer;
-        for (int leftIdx = 0, rightIdx = size - 1; leftIdx < half; leftIdx++, rightIdx--) {
-            final char swap = buf[leftIdx];
-            buf[leftIdx] = buf[rightIdx];
-            buf[rightIdx] = swap;
-        }
-        return this;
-    }
-
-    /**
-     * Extracts the rightmost characters from the string builder without
-     * throwing an exception.
-     * <p>
-     * This method extracts the right {@code length} characters from
-     * the builder. If this many characters are not available, the whole
-     * builder is returned. Thus the returned string may be shorter than the
-     * length requested.
-     * </p>
-     *
-     * @param length  the number of characters to extract, negative returns empty string
-     * @return the new string
-     */
-    public String rightString(final int length) {
-
-        return "";
-    }
-
-    /**
-     * Sets the character at the specified index.
-     *
-     * @see #charAt(int)
-     * @see #deleteCharAt(int)
-     * @param index  the index to set
-     * @param ch  the new character
-     * @return {@code this} instance.
-     * @throws IndexOutOfBoundsException if the index is invalid
-     */
-    public StrBuilder setCharAt(final int index, final char ch) {
+ public StrBuilder setCharAt(final int index, final char ch) {
         if (index < 0 || index >= length()) {
             throw new StringIndexOutOfBoundsException(index);
         }
@@ -2401,63 +2256,9 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
         return this;
     }
 
-    /**
-     * Updates the length of the builder by either dropping the last characters
-     * or adding filler of Unicode zero.
-     *
-     * @param length  the length to set to, must be zero or positive
-     * @return {@code this} instance.
-     * @throws IndexOutOfBoundsException if the length is negative
-     */
-    public StrBuilder setLength(final int length) {
-
-        return this;
-    }
-
-    /**
-     * Sets the text to be appended when {@link #appendNewLine() new line} is called.
-     *
-     * @param newLine the new line text, {@code null} means use the system default from {@link System#lineSeparator()}.
-     * @return {@code this} instance.
-     */
     public StrBuilder setNewLineText(final String newLine) {
         this.newLine = newLine;
         return this;
-    }
-
-    /**
-     * Sets the text to be appended when null is added.
-     *
-     * @param nullText  the null text, null means no append
-     * @return {@code this} instance.
-     */
-
-    /**
-     * Checks whether this builder starts with the specified string.
-     * <p>
-     * Note that this method handles null input quietly, unlike String.
-     * </p>
-     *
-     * @param str  the string to search for, null returns false
-     * @return true if the builder starts with the string
-     */
-    public boolean startsWith(final String str) {
-        if (str == null) {
-            return false;
-        }
-        final int len = str.length();
-        if (len == 0) {
-            return true;
-        }
-        if (len > size) {
-            return false;
-        }
-        for (int i = 0; i < len; i++) {
-            if (buffer[i] != str.charAt(i)) {
-                return false;
-            }
-        }
-        return true;
     }
 
     /**
@@ -2471,75 +2272,35 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
           throw new StringIndexOutOfBoundsException(startIndex);
       }
       if (endIndex > size) {
+          System.out.println("");
+          System.out.println("");
+          System.out.println("");
+          System.out.println("");
+          System.out.println("");
+          System.out.println("");
+          System.out.println("");
+          System.out.println("");
+          System.out.println("");
+
+
+          System.out.println("");
+          System.out.println("");
+          System.out.println("");
+          System.out.println("");
+          System.out.println("");
+          System.out.println("");
+          System.out.println("");
+          System.out.println("");
+          System.out.println("");
+          System.out.println("");
           throw new StringIndexOutOfBoundsException(endIndex);
       }
       if (startIndex > endIndex) {
           throw new StringIndexOutOfBoundsException(endIndex - startIndex);
       }
-      return substring(startIndex, endIndex);
+      return "";
     }
 
-    /**
-     * Extracts a portion of this string builder as a string.
-     *
-     * @param start  the start index, inclusive, must be valid
-     * @return the new string
-     * @throws IndexOutOfBoundsException if the index is invalid
-     */
-    public String substring(final int start) {
-        return substring(start, size);
-    }
-
-    /**
-     * Extracts a portion of this string builder as a string.
-     * <p>
-     * Note: This method treats an endIndex greater than the length of the
-     * builder as equal to the length of the builder, and continues
-     * without error, unlike StringBuffer or String.
-     * </p>
-     *
-     * @param startIndex  the start index, inclusive, must be valid
-     * @param endIndex  the end index, exclusive, must be valid except
-     *  that if too large it is treated as end of string
-     * @return the new string
-     * @throws IndexOutOfBoundsException if the index is invalid
-     */
-    public String substring(final int startIndex, int endIndex) {
-        endIndex = validateRange(startIndex, endIndex);
-        return new String(buffer, startIndex, endIndex - startIndex);
-    }
-
-    /**
-     * Copies the builder's character array into a new character array.
-     *
-     * @return a new array that represents the contents of the builder
-     */
-    public char[] toCharArray() {
-       return null;
-    }
-
-    /**
-     * Copies part of the builder's character array into a new character array.
-     *
-     * @param startIndex  the start index, inclusive, must be valid
-     * @param endIndex  the end index, exclusive, must be valid except that
-     *  if too large it is treated as end of string
-     * @return a new array that holds part of the contents of the builder
-     * @throws IndexOutOfBoundsException if startIndex is invalid,
-     *  or if endIndex is invalid (but endIndex greater than size is valid)
-     */
-
-
-    /**
-     * Gets a String version of the string builder, creating a new instance
-     * each time the method is called.
-     * <p>
-     * Note that unlike StringBuffer, the string version returned is
-     * independent of the string builder.
-     * </p>
-     *
-     * @return the builder as a String
-     */
     @Override
     public String toString() {
         return new String(buffer, 0, size);
@@ -2551,48 +2312,6 @@ public class StrBuilder implements CharSequence, Appendable, Serializable, Build
      *
      * @return the builder as a StringBuffer
      */
-    public StringBuffer toStringBuffer() {
-        return new StringBuffer(size).append(buffer, 0, size);
-    }
-
-    /**
-     * Gets a StringBuilder version of the string builder, creating a
-     * new instance each time the method is called.
-     *
-     * @return the builder as a StringBuilder
-     * @since 3.2
-     */
-    public StringBuilder toStringBuilder() {
-        return new StringBuilder(size).append(buffer, 0, size);
-    }
-
-    /**
-     * Trims the builder by removing characters less than or equal to a space
-     * from the beginning and end.
-     *
-     * @return {@code this} instance.
-     */
-    public StrBuilder trim() {
-        if (size == 0) {
-            return this;
-        }
-        int len = size;
-        final char[] buf = buffer;
-        int pos = 0;
-        while (pos < len && buf[pos] <= ' ') {
-            pos++;
-        }
-        while (pos < len && buf[len - 1] <= ' ') {
-            len--;
-        }
-        if (len < size) {
-            delete(len, size);
-        }
-        if (pos > 0) {
-            delete(0, pos);
-        }
-        return this;
-    }
 
     /**
      * Validates parameters defining a single index in the builder.
