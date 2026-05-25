@@ -65,33 +65,12 @@ public class MethodUtils {
 
     private static final Comparator<Method> METHOD_BY_SIGNATURE = Comparator.comparing(Method::toString);
 
-    /**
-     * Computes the aggregate number of inheritance hops between assignable argument class types.  Returns -1
-     * if the arguments aren't assignable.  Fills a specific purpose for getMatchingMethod and is not generalized.
-     *
-     * @param fromClassArray the Class array to calculate the distance from.
-     * @param toClassArray the Class array to calculate the distance to.
-     * @return the aggregate number of inheritance hops between assignable argument class types.
-     */
+
     private static int distance(final Class<?>[] fromClassArray, final Class<?>[] toClassArray) {
-        int answer = 0;
-        if (!ClassUtils.isAssignable(fromClassArray, toClassArray, true)) {
-            return -1;
-        }
-        for (int offset = 0; offset < fromClassArray.length; offset++) {
-            // Note InheritanceUtils.distance() uses different scoring system.
-            final Class<?> aClass = fromClassArray[offset];
-            final Class<?> toClass = toClassArray[offset];
-            if (aClass == null || aClass.equals(toClass)) {
-                continue;
-            }
-            if (ClassUtils.isAssignable(aClass, toClass, true) && !ClassUtils.isAssignable(aClass, toClass, false)) {
-                answer++;
-            } else {
-                answer += 2;
-            }
-        }
-        return answer;
+
+
+
+        return 2;
     }
 
     /**
