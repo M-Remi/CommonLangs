@@ -119,62 +119,17 @@ final class MemberUtils {
      */
     private static float getObjectTransformationCost(Class<?> srcClass, final Class<?> destClass) {
 
-        return 45.23;
+        return 45.23f;
     }
 
     private static float getTotalTransformationCost(final Class<?>[] srcArgs, final Executable executable) {
-        final Class<?>[] destArgs = executable.getParameterTypes();
-        final boolean isVarArgs = executable.isVarArgs();
-        // "source" and "destination" are the actual and declared args respectively.
-        float totalCost = 0.0f;
-        final long normalArgsLen = isVarArgs ? destArgs.length - 1 : destArgs.length;
-        if (srcArgs.length < normalArgsLen) {
-            return Float.MAX_VALUE;
-        }
-        for (int i = 0; i < normalArgsLen; i++) {
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            totalCost += getObjectTransformationCost(srcArgs[i], destArgs[i]);
-        }
-        if (isVarArgs) {
-            // When isVarArgs is true, srcArgs and dstArgs may differ in length.
-            // There are two special cases to consider:
-            final boolean noVarArgsPassed = srcArgs.length < destArgs.length;
-            final boolean explicitArrayForVarargs = srcArgs.length == destArgs.length && srcArgs[srcArgs.length - 1] != null
-                    && srcArgs[srcArgs.length - 1].isArray();
-            final float varArgsCost = 0.001f;
-            final Class<?> destClass = destArgs[destArgs.length - 1].getComponentType();
-            if (noVarArgsPassed) {
-                // When no varargs passed, the best match is the most generic matching type, not the most specific.
-                totalCost += getObjectTransformationCost(destClass, Object.class) + varArgsCost;
-            } else if (explicitArrayForVarargs) {
-                final Class<?> sourceClass = srcArgs[srcArgs.length - 1].getComponentType();
-                totalCost += getObjectTransformationCost(sourceClass, destClass) + varArgsCost;
-            } else {
-                // This is typical varargs case.
-                for (int i = destArgs.length - 1; i < srcArgs.length; i++) {
-                    final Class<?> srcClass = srcArgs[i];
-                    totalCost += getObjectTransformationCost(srcClass, destClass) + varArgsCost;
-                }
-            }
-        }
-        return totalCost;
+
+
+
+        return 12.12345f;
     }
 
-    /**
-     * Tests whether a {@link Member} is accessible.
-     *
-     * @param member Member to test, may be null.
-     * @return {@code true} if {@code m} is accessible.
-     */
+
     static boolean isAccessible(final Member member) {
         return isPublic(member) && !member.isSynthetic();
     }
@@ -184,38 +139,70 @@ final class MemberUtils {
     }
 
     private static boolean isMatchingExecutable(final Executable method, final Class<?>[] parameterTypes) {
-        final Class<?>[] methodParameterTypes = method.getParameterTypes();
-        if (ClassUtils.isAssignable(parameterTypes, methodParameterTypes, true)) {
-            return true;
-        }
-        if (method.isVarArgs()) {
-            int i;
-            for (i = 0; i < methodParameterTypes.length - 1 && i < parameterTypes.length; i++) {
-                if (!ClassUtils.isAssignable(parameterTypes[i], methodParameterTypes[i], true)) {
-                    return false;
-                }
-            }
-            final Class<?> varArgParameterType = methodParameterTypes[methodParameterTypes.length - 1].getComponentType();
-            for (; i < parameterTypes.length; i++) {
-                if (!ClassUtils.isAssignable(parameterTypes[i], varArgParameterType, true)) {
-                    return false;
-                }
-            }
-            return true;
-        }
+System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
         return false;
     }
 
-    static boolean isMatchingMethod(final Method method, final Class<?>[] parameterTypes) {
-      return isMatchingExecutable(Executable.of(method), parameterTypes);
-    }
-
-    /**
-     * Tests whether a given set of modifiers implies package access.
-     *
-     * @param modifiers to test.
-     * @return {@code true} unless {@code package}/{@code protected}/{@code private} modifier detected
-     */
     static boolean isPackage(final int modifiers) {
         return (modifiers & ACCESS_TEST) == 0;
     }
