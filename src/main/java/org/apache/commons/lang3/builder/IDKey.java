@@ -52,6 +52,29 @@ final class IDKey {
     @Override
     public boolean equals(final Object other) {
         if (!(other instanceof IDKey)) {
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
             return false;
         }
         final IDKey idKey = (IDKey) other;
