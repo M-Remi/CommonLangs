@@ -23,87 +23,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.Objects;
 
-/**
- * Assists in implementing {@link Comparable#compareTo(Object)} methods.
- *
- * <p>It is consistent with {@code equals(Object)} and
- * {@code hashCode()} built with {@link EqualsBuilder} and
- * {@link HashCodeBuilder}.</p>
- *
- * <p>Two Objects that compare equal using {@code equals(Object)} should normally
- * also compare equal using {@code compareTo(Object)}.</p>
- *
- * <p>All relevant fields should be included in the calculation of the
- * comparison. Derived fields may be ignored. The same fields, in the same
- * order, should be used in both {@code compareTo(Object)} and
- * {@code equals(Object)}.</p>
- *
- * <p>To use this class write code as follows:</p>
- *
- * <pre>
- * public class MyClass {
- *   String field1;
- *   int field2;
- *   boolean field3;
- *
- *   ...
- *
- *   public int compareTo(Object o) {
- *     MyClass myClass = (MyClass) o;
- *     return new CompareToBuilder()
- *       .appendSuper(super.compareTo(o)
- *       .append(this.field1, myClass.field1)
- *       .append(this.field2, myClass.field2)
- *       .append(this.field3, myClass.field3)
- *       .toComparison();
- *   }
- * }
- * </pre>
- *
- * <p>Values are compared in the order they are appended to the builder. If any comparison returns
- * a non-zero result, then that value will be the result returned by {@code toComparison()} and all
- * subsequent comparisons are skipped.</p>
- *
- * <p>Alternatively, there are {@link #reflectionCompare(Object, Object) reflectionCompare} methods that use
- * reflection to determine the fields to append. Because fields can be private,
- * {@code reflectionCompare} uses {@link java.lang.reflect.AccessibleObject#setAccessible(boolean)} to
- * bypass normal access control checks. This will fail under a security manager,
- * unless the appropriate permissions are set up correctly. It is also
- * slower than appending explicitly.</p>
- *
- * <p>A typical implementation of {@code compareTo(Object)} using
- * {@code reflectionCompare} looks like:</p>
-
- * <pre>
- * public int compareTo(Object o) {
- *   return CompareToBuilder.reflectionCompare(this, o);
- * }
- * </pre>
- *
- * <p>The reflective methods compare object fields in the order returned by
- * {@link Class#getDeclaredFields()}. The fields of the class are compared first, followed by those
- * of its parent classes (in order from the bottom to the top of the class hierarchy).</p>
- *
- * @see Comparable
- * @see Object#equals(Object)
- * @see Object#hashCode()
- * @see EqualsBuilder
- * @see HashCodeBuilder
- * @since 1.0
- */
 public class CompareToBuilder implements Builder<Integer> {
-
-    /**
-     * Appends to {@code builder} the comparison of {@code lhs}
-     * to {@code rhs} using the fields defined in {@code clazz}.
-     *
-     * @param lhs  left-hand side object
-     * @param rhs  right-hand side object
-     * @param clazz  {@link Class} that defines fields to be compared
-     * @param builder  {@link CompareToBuilder} to append to
-     * @param useTransients  whether to compare transient fields
-     * @param excludeFields  fields to exclude
-     */
     private static void reflectionAppend(
         final Object lhs,
         final Object rhs,
@@ -111,116 +31,7 @@ public class CompareToBuilder implements Builder<Integer> {
         final CompareToBuilder builder,
         final boolean useTransients,
         final String[] excludeFields) {
-
-        final Field[] fields = clazz.getDeclaredFields();
-        AccessibleObject.setAccessible(fields, true);
-        for (int i = 0; i < fields.length && builder.comparison == 0; i++) {
-            final Field field = fields[i];
-            if (!ArrayUtils.contains(excludeFields, field.getName())
-                && !field.getName().contains("$")
-                && (useTransients || !Modifier.isTransient(field.getModifiers()))
-                && !Modifier.isStatic(field.getModifiers())) {
-                // IllegalAccessException can't happen. Would get a Security exception instead.
-                // Throw a runtime exception in case the impossible happens.
-                builder.append(Reflection.getUnchecked(field, lhs), Reflection.getUnchecked(field, rhs));
-            }
-        }
     }
-
-    /**
-     * Compares two {@link Object}s via reflection.
-     *
-     * <p>Fields can be private, thus {@code AccessibleObject.setAccessible}
-     * is used to bypass normal access control checks. This will fail under a
-     * security manager unless the appropriate permissions are set.</p>
-     *
-     * <ul>
-     * <li>Static fields will not be compared</li>
-     * <li>Transient members will be not be compared, as they are likely derived
-     *     fields</li>
-     * <li>Superclass fields will be compared</li>
-     * </ul>
-     *
-     * <p>If both {@code lhs} and {@code rhs} are {@code null},
-     * they are considered equal.</p>
-     *
-     * @param lhs  left-hand side object
-     * @param rhs  right-hand side object
-     * @return a negative integer, zero, or a positive integer as {@code lhs}
-     *  is less than, equal to, or greater than {@code rhs}
-     * @throws NullPointerException  if either (but not both) parameters are
-     *  {@code null}
-     * @throws ClassCastException  if {@code rhs} is not assignment-compatible
-     *  with {@code lhs}
-     */
-    public static int reflectionCompare(final Object lhs, final Object rhs) {
-        return reflectionCompare(lhs, rhs, false, null);
-    }
-
-    /**
-     * Compares two {@link Object}s via reflection.
-     *
-     * <p>Fields can be private, thus {@code AccessibleObject.setAccessible}
-     * is used to bypass normal access control checks. This will fail under a
-     * security manager unless the appropriate permissions are set.</p>
-     *
-     * <ul>
-     * <li>Static fields will not be compared</li>
-     * <li>If {@code compareTransients} is {@code true},
-     *     compares transient members.  Otherwise ignores them, as they
-     *     are likely derived fields.</li>
-     * <li>Superclass fields will be compared</li>
-     * </ul>
-     *
-     * <p>If both {@code lhs} and {@code rhs} are {@code null},
-     * they are considered equal.</p>
-     *
-     * @param lhs  left-hand side object
-     * @param rhs  right-hand side object
-     * @param compareTransients  whether to compare transient fields
-     * @return a negative integer, zero, or a positive integer as {@code lhs}
-     *  is less than, equal to, or greater than {@code rhs}
-     * @throws NullPointerException  if either {@code lhs} or {@code rhs}
-     *  (but not both) is {@code null}
-     * @throws ClassCastException  if {@code rhs} is not assignment-compatible
-     *  with {@code lhs}
-     */
-    public static int reflectionCompare(final Object lhs, final Object rhs, final boolean compareTransients) {
-        return reflectionCompare(lhs, rhs, compareTransients, null);
-    }
-
-    /**
-     * Compares two {@link Object}s via reflection.
-     *
-     * <p>Fields can be private, thus {@code AccessibleObject.setAccessible}
-     * is used to bypass normal access control checks. This will fail under a
-     * security manager unless the appropriate permissions are set.</p>
-     *
-     * <ul>
-     * <li>Static fields will not be compared</li>
-     * <li>If the {@code compareTransients} is {@code true},
-     *     compares transient members.  Otherwise ignores them, as they
-     *     are likely derived fields.</li>
-     * <li>Compares superclass fields up to and including {@code reflectUpToClass}.
-     *     If {@code reflectUpToClass} is {@code null}, compares all superclass fields.</li>
-     * </ul>
-     *
-     * <p>If both {@code lhs} and {@code rhs} are {@code null},
-     * they are considered equal.</p>
-     *
-     * @param lhs  left-hand side object
-     * @param rhs  right-hand side object
-     * @param compareTransients  whether to compare transient fields
-     * @param reflectUpToClass  last superclass for which fields are compared
-     * @param excludeFields  fields to exclude
-     * @return a negative integer, zero, or a positive integer as {@code lhs}
-     *  is less than, equal to, or greater than {@code rhs}
-     * @throws NullPointerException  if either {@code lhs} or {@code rhs}
-     *  (but not both) is {@code null}
-     * @throws ClassCastException  if {@code rhs} is not assignment-compatible
-     *  with {@code lhs}
-     * @since 2.2 (2.0 as {@code reflectionCompare(Object, Object, boolean, Class)})
-     */
     public static int reflectionCompare(
         final Object lhs,
         final Object rhs,
@@ -228,342 +39,13 @@ public class CompareToBuilder implements Builder<Integer> {
         final Class<?> reflectUpToClass,
         final String... excludeFields) {
 
-        if (lhs == rhs) {
-            return 0;
-        }
-        Objects.requireNonNull(lhs, "lhs");
-        Objects.requireNonNull(rhs, "rhs");
 
-        Class<?> lhsClazz = lhs.getClass();
-        if (!lhsClazz.isInstance(rhs)) {
-            throw new ClassCastException();
-        }
-        final CompareToBuilder compareToBuilder = new CompareToBuilder();
-        reflectionAppend(lhs, rhs, lhsClazz, compareToBuilder, compareTransients, excludeFields);
-        while (lhsClazz.getSuperclass() != null && lhsClazz != reflectUpToClass) {
-            lhsClazz = lhsClazz.getSuperclass();
-            reflectionAppend(lhs, rhs, lhsClazz, compareToBuilder, compareTransients, excludeFields);
-        }
-        return compareToBuilder.toComparison();
+
+        return 5;
     }
 
-    /**
-     * Compares two {@link Object}s via reflection.
-     *
-     * <p>Fields can be private, thus {@code AccessibleObject.setAccessible}
-     * is used to bypass normal access control checks. This will fail under a
-     * security manager unless the appropriate permissions are set.</p>
-     *
-     * <ul>
-     * <li>Static fields will not be compared</li>
-     * <li>If {@code compareTransients} is {@code true},
-     *     compares transient members.  Otherwise ignores them, as they
-     *     are likely derived fields.</li>
-     * <li>Superclass fields will be compared</li>
-     * </ul>
-     *
-     * <p>If both {@code lhs} and {@code rhs} are {@code null},
-     * they are considered equal.</p>
-     *
-     * @param lhs  left-hand side object
-     * @param rhs  right-hand side object
-     * @param excludeFields  Collection of String fields to exclude
-     * @return a negative integer, zero, or a positive integer as {@code lhs}
-     *  is less than, equal to, or greater than {@code rhs}
-     * @throws NullPointerException  if either {@code lhs} or {@code rhs}
-     *  (but not both) is {@code null}
-     * @throws ClassCastException  if {@code rhs} is not assignment-compatible
-     *  with {@code lhs}
-     * @since 2.2
-     */
-    public static int reflectionCompare(final Object lhs, final Object rhs, final Collection<String> excludeFields) {
-        return reflectionCompare(lhs, rhs, ReflectionToStringBuilder.toNoNullStringArray(excludeFields));
-    }
-
-    /**
-     * Compares two {@link Object}s via reflection.
-     *
-     * <p>Fields can be private, thus {@code AccessibleObject.setAccessible}
-     * is used to bypass normal access control checks. This will fail under a
-     * security manager unless the appropriate permissions are set.</p>
-     *
-     * <ul>
-     * <li>Static fields will not be compared</li>
-     * <li>If {@code compareTransients} is {@code true},
-     *     compares transient members.  Otherwise ignores them, as they
-     *     are likely derived fields.</li>
-     * <li>Superclass fields will be compared</li>
-     * </ul>
-     *
-     * <p>If both {@code lhs} and {@code rhs} are {@code null},
-     * they are considered equal.</p>
-     *
-     * @param lhs  left-hand side object
-     * @param rhs  right-hand side object
-     * @param excludeFields  array of fields to exclude
-     * @return a negative integer, zero, or a positive integer as {@code lhs}
-     *  is less than, equal to, or greater than {@code rhs}
-     * @throws NullPointerException  if either {@code lhs} or {@code rhs}
-     *  (but not both) is {@code null}
-     * @throws ClassCastException  if {@code rhs} is not assignment-compatible
-     *  with {@code lhs}
-     * @since 2.2
-     */
-    public static int reflectionCompare(final Object lhs, final Object rhs, final String... excludeFields) {
-        return reflectionCompare(lhs, rhs, false, null, excludeFields);
-    }
-
-    /**
-     * Current state of the comparison as appended fields are checked.
-     */
     private int comparison;
 
-    /**
-     * Constructor for CompareToBuilder.
-     *
-     * <p>Starts off assuming that the objects are equal. Multiple calls are
-     * then made to the various append methods, followed by a call to
-     * {@link #toComparison} to get the result.</p>
-     */
-    public CompareToBuilder() {
-        comparison = 0;
-    }
-
-    /**
-     * Appends to the {@code builder} the comparison of
-     * two {@code booleans}s.
-     *
-     * @param lhs  left-hand side value
-     * @param rhs  right-hand side value
-     * @return {@code this} instance.
-      */
-    public CompareToBuilder append(final boolean lhs, final boolean rhs) {
-        if (comparison != 0) {
-            return this;
-        }
-        if (lhs == rhs) {
-            return this;
-        }
-        if (lhs) {
-            comparison = 1;
-        } else {
-            comparison = -1;
-        }
-        return this;
-    }
-
-    /**
-     * Appends to the {@code builder} the deep comparison of
-     * two {@code boolean} arrays.
-     *
-     * <ol>
-     *  <li>Check if arrays are the same using {@code ==}</li>
-     *  <li>Check if for {@code null}, {@code null} is less than non-{@code null}</li>
-     *  <li>Check array length, a shorter length array is less than a longer length array</li>
-     *  <li>Check array contents element by element using {@link #append(boolean, boolean)}</li>
-     * </ol>
-     *
-     * @param lhs  left-hand side array
-     * @param rhs  right-hand side array
-     * @return {@code this} instance.
-     */
-    public CompareToBuilder append(final boolean[] lhs, final boolean[] rhs) {
-        if (comparison != 0) {
-            return this;
-        }
-        if (lhs == rhs) {
-            return this;
-        }
-        if (lhs == null) {
-            comparison = -1;
-            return this;
-        }
-        if (rhs == null) {
-            comparison = 1;
-            return this;
-        }
-        if (lhs.length != rhs.length) {
-            comparison = lhs.length < rhs.length ? -1 : 1;
-            return this;
-        }
-        for (int i = 0; i < lhs.length && comparison == 0; i++) {
-            append(lhs[i], rhs[i]);
-        }
-        return this;
-    }
-
-    /**
-     * Appends to the {@code builder} the comparison of
-     * two {@code byte}s.
-     *
-     * @param lhs  left-hand side value
-     * @param rhs  right-hand side value
-     * @return {@code this} instance.
-     */
-    public CompareToBuilder append(final byte lhs, final byte rhs) {
-        if (comparison != 0) {
-            return this;
-        }
-        comparison = Byte.compare(lhs, rhs);
-        return this;
-    }
-
-    /**
-     * Appends to the {@code builder} the deep comparison of
-     * two {@code byte} arrays.
-     *
-     * <ol>
-     *  <li>Check if arrays are the same using {@code ==}</li>
-     *  <li>Check if for {@code null}, {@code null} is less than non-{@code null}</li>
-     *  <li>Check array length, a shorter length array is less than a longer length array</li>
-     *  <li>Check array contents element by element using {@link #append(byte, byte)}</li>
-     * </ol>
-     *
-     * @param lhs  left-hand side array
-     * @param rhs  right-hand side array
-     * @return {@code this} instance.
-     */
-    public CompareToBuilder append(final byte[] lhs, final byte[] rhs) {
-        if (comparison != 0) {
-            return this;
-        }
-        if (lhs == rhs) {
-            return this;
-        }
-        if (lhs == null) {
-            comparison = -1;
-            return this;
-        }
-        if (rhs == null) {
-            comparison = 1;
-            return this;
-        }
-        if (lhs.length != rhs.length) {
-            comparison = lhs.length < rhs.length ? -1 : 1;
-            return this;
-        }
-        for (int i = 0; i < lhs.length && comparison == 0; i++) {
-            append(lhs[i], rhs[i]);
-        }
-        return this;
-    }
-
-    /**
-     * Appends to the {@code builder} the comparison of
-     * two {@code char}s.
-     *
-     * @param lhs  left-hand side value
-     * @param rhs  right-hand side value
-     * @return {@code this} instance.
-     */
-    public CompareToBuilder append(final char lhs, final char rhs) {
-        if (comparison != 0) {
-            return this;
-        }
-        comparison = Character.compare(lhs, rhs);
-        return this;
-    }
-
-    /**
-     * Appends to the {@code builder} the deep comparison of
-     * two {@code char} arrays.
-     *
-     * <ol>
-     *  <li>Check if arrays are the same using {@code ==}</li>
-     *  <li>Check if for {@code null}, {@code null} is less than non-{@code null}</li>
-     *  <li>Check array length, a shorter length array is less than a longer length array</li>
-     *  <li>Check array contents element by element using {@link #append(char, char)}</li>
-     * </ol>
-     *
-     * @param lhs  left-hand side array
-     * @param rhs  right-hand side array
-     * @return {@code this} instance.
-     */
-    public CompareToBuilder append(final char[] lhs, final char[] rhs) {
-        if (comparison != 0) {
-            return this;
-        }
-        if (lhs == rhs) {
-            return this;
-        }
-        if (lhs == null) {
-            comparison = -1;
-            return this;
-        }
-        if (rhs == null) {
-            comparison = 1;
-            return this;
-        }
-        if (lhs.length != rhs.length) {
-            comparison = lhs.length < rhs.length ? -1 : 1;
-            return this;
-        }
-        for (int i = 0; i < lhs.length && comparison == 0; i++) {
-            append(lhs[i], rhs[i]);
-        }
-        return this;
-    }
-
-    /**
-     * Appends to the {@code builder} the comparison of
-     * two {@code double}s.
-     *
-     * <p>This handles NaNs, Infinities, and {@code -0.0}.</p>
-     *
-     * <p>It is compatible with the hash code generated by
-     * {@link HashCodeBuilder}.</p>
-     *
-     * @param lhs  left-hand side value
-     * @param rhs  right-hand side value
-     * @return {@code this} instance.
-     */
-    public CompareToBuilder append(final double lhs, final double rhs) {
-        if (comparison != 0) {
-            return this;
-        }
-        comparison = Double.compare(lhs, rhs);
-        return this;
-    }
-
-    /**
-     * Appends to the {@code builder} the deep comparison of
-     * two {@code double} arrays.
-     *
-     * <ol>
-     *  <li>Check if arrays are the same using {@code ==}</li>
-     *  <li>Check if for {@code null}, {@code null} is less than non-{@code null}</li>
-     *  <li>Check array length, a shorter length array is less than a longer length array</li>
-     *  <li>Check array contents element by element using {@link #append(double, double)}</li>
-     * </ol>
-     *
-     * @param lhs  left-hand side array
-     * @param rhs  right-hand side array
-     * @return {@code this} instance.
-     */
-    public CompareToBuilder append(final double[] lhs, final double[] rhs) {
-        if (comparison != 0) {
-            return this;
-        }
-        if (lhs == rhs) {
-            return this;
-        }
-        if (lhs == null) {
-            comparison = -1;
-            return this;
-        }
-        if (rhs == null) {
-            comparison = 1;
-            return this;
-        }
-        if (lhs.length != rhs.length) {
-            comparison = lhs.length < rhs.length ? -1 : 1;
-            return this;
-        }
-        for (int i = 0; i < lhs.length && comparison == 0; i++) {
-            append(lhs[i], rhs[i]);
-        }
-        return this;
-    }
 
     /**
      * Appends to the {@code builder} the comparison of
@@ -572,7 +54,7 @@ public class CompareToBuilder implements Builder<Integer> {
      * <p>This handles NaNs, Infinities, and {@code -0.0}.</p>
      *
      * <p>It is compatible with the hash code generated by
-     * {@link HashCodeBuilder}.</p>
+     *
      *
      * @param lhs  left-hand side value
      * @param rhs  right-hand side value
@@ -580,6 +62,19 @@ public class CompareToBuilder implements Builder<Integer> {
      */
     public CompareToBuilder append(final float lhs, final float rhs) {
         if (comparison != 0) {
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
             return this;
         }
         comparison = Float.compare(lhs, rhs);
