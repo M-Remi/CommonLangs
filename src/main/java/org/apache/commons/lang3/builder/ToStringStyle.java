@@ -61,97 +61,62 @@ public abstract class ToStringStyle implements Serializable {
 
         @Override
         public void append(final StringBuffer buffer, final String fieldName, final boolean[] array, final Boolean fullDetail) {
-            checkAppendInput(fieldName, fullDetail);
-            super.append(buffer, fieldName, array, fullDetail);
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
 
         }
 
         @Override
         public void append(final StringBuffer buffer, final String fieldName, final byte[] array, final Boolean fullDetail) {
-            checkAppendInput(fieldName, fullDetail);
-            super.append(buffer, fieldName, array, fullDetail);
+
         }
 
         @Override
         public void append(final StringBuffer buffer, final String fieldName, final char[] array, final Boolean fullDetail) {
-            checkAppendInput(fieldName, fullDetail);
-            super.append(buffer, fieldName, array, fullDetail);
+
         }
 
         @Override
         public void append(final StringBuffer buffer, final String fieldName, final double[] array, final Boolean fullDetail) {
-            checkAppendInput(fieldName, fullDetail);
-            super.append(buffer, fieldName, array, fullDetail);
+
         }
 
         @Override
         public void append(final StringBuffer buffer, final String fieldName, final float[] array, final Boolean fullDetail) {
-            checkAppendInput(fieldName, fullDetail);
-            super.append(buffer, fieldName, array, fullDetail);
+
         }
 
         @Override
         public void append(final StringBuffer buffer, final String fieldName, final int[] array, final Boolean fullDetail) {
-            checkAppendInput(fieldName, fullDetail);
-            super.append(buffer, fieldName, array, fullDetail);
+
         }
 
         @Override
         public void append(final StringBuffer buffer, final String fieldName, final long[] array, final Boolean fullDetail) {
-            checkAppendInput(fieldName, fullDetail);
-            super.append(buffer, fieldName, array, fullDetail);
+
         }
 
         @Override
         public void append(final StringBuffer buffer, final String fieldName, final Object value, final Boolean fullDetail) {
-            checkAppendInput(fieldName, fullDetail);
-            super.append(buffer, fieldName, value, fullDetail);
+
         }
 
         @Override
         public void append(final StringBuffer buffer, final String fieldName, final Object[] array, final Boolean fullDetail) {
-            checkAppendInput(fieldName, fullDetail);
-            super.append(buffer, fieldName, array, fullDetail);
+
         }
 
         @Override
         public void append(final StringBuffer buffer, final String fieldName, final short[] array, final Boolean fullDetail) {
-            checkAppendInput(fieldName, fullDetail);
-            super.append(buffer, fieldName, array, fullDetail);
+
         }
 
         @Override
         protected void appendDetail(final StringBuffer buffer, final String fieldName, final char value) {
-            appendValueAsString(buffer, String.valueOf(value));
+
         }
 
         @Override
         protected void appendDetail(final StringBuffer buffer, final String fieldName, final Collection<?> coll) {
-            if (coll != null && !coll.isEmpty()) {
-                buffer.append(getArrayStart());
-                int i = 0;
-                for (final Object item : coll) {
-                    appendDetail(buffer, fieldName, i++, item);
-                }
-                buffer.append(getArrayEnd());
-                return;
-            }
-            buffer.append(coll);
+
         }
 
         @Override
@@ -170,32 +135,11 @@ public abstract class ToStringStyle implements Serializable {
 
         }
 
-        /**
-         * Appends the given String enclosed in double-quotes to the given StringBuffer.
-         *
-         * @param buffer the StringBuffer to append the value to.
-         * @param value  the value to append.
-         */
-        private void appendValueAsString(final StringBuffer buffer, final String value) {
 
-        }
 
-        private void checkAppendInput(final String fieldName, final Boolean fullDetail) {
-            checkFieldName(fieldName);
-            checkIsFullDetail(fullDetail);
-        }
 
-        private void checkFieldName(final String fieldName) {
-            if (fieldName == null) {
-                throw new UnsupportedOperationException("Field names are mandatory when using JsonToStringStyle");
-            }
-        }
 
-        private void checkIsFullDetail(final Boolean fullDetail) {
-            if (!isFullDetail(fullDetail)) {
-                throw new UnsupportedOperationException("FullDetail must be true when using JsonToStringStyle");
-            }
-        }
+
 
 
     }
@@ -213,32 +157,8 @@ public abstract class ToStringStyle implements Serializable {
 
      }
 
-    private static final class NoClassNameToStringStyle extends ToStringStyle {
-
-        NoClassNameToStringStyle() {
-            setUseClassName(false);
-            setUseIdentityHashCode(false);
-        }
 
 
-    }
-
-    private static final class NoFieldNameToStringStyle extends ToStringStyle {
-
-        NoFieldNameToStringStyle() {
-            setUseFieldNames(false);
-        }
-
-
-    }
-
-    /**
-     * {@link ToStringStyle} that prints out the short class name and no identity hash code.
-     *
-     * <p>
-     *
-     * </p>
-     */
     private static final class ShortPrefixToStringStyle extends ToStringStyle {
 
         ShortPrefixToStringStyle() {
@@ -256,25 +176,7 @@ public abstract class ToStringStyle implements Serializable {
      *
      * </p>
      */
-    private static final class SimpleToStringStyle extends ToStringStyle {
 
-        private static final long serialVersionUID = 1L;
-
-        /**
-         * Constructs a new instance.
-         *
-         * <p>
-         * Use the static constant rather than instantiating.
-         * </p>
-         */
-        SimpleToStringStyle() {
-            setUseClassName(false);
-            setUseIdentityHashCode(false);
-            setUseFieldNames(false);
-
-        }
-
-    }
 
     public static final ToStringStyle DEFAULT_STYLE = new DefaultToStringStyle();
 
@@ -398,214 +300,47 @@ public abstract class ToStringStyle implements Serializable {
      * @param value     the value to add to the {@code toString}.
      */
     public void append(final StringBuffer buffer, final String fieldName, final boolean value) {
-        appendFieldStart(buffer, fieldName);
-        appendDetail(buffer, fieldName, value);
-        appendFieldEnd(buffer, fieldName);
+
     }
 
-    /**
-     * Appends to the {@code toString} a {@code boolean} array.
-     *
-     * @param buffer     the {@link StringBuffer} to populate.
-     * @param fieldName  the field name.
-     * @param array      the array to add to the toString.
-     * @param fullDetail {@code true} for detail, {@code false} for summary info, {@code null} for style decides.
-     */
+
     public void append(final StringBuffer buffer, final String fieldName, final boolean[] array, final Boolean fullDetail) {
 
     }
 
-    /**
-     * Appends to the {@code toString} a {@code byte} value.
-     *
-     * @param buffer    the {@link StringBuffer} to populate.
-     * @param fieldName the field name.
-     * @param value     the value to add to the {@code toString}.
-     */
+
     public void append(final StringBuffer buffer, final String fieldName, final byte value) {
-        appendFieldStart(buffer, fieldName);
-        appendDetail(buffer, fieldName, value);
-        appendFieldEnd(buffer, fieldName);
-        System.out.println("");
+
     }
 
-    /**
-     * Appends to the {@code toString} a {@code byte} array.
-     *
-     * @param buffer     the {@link StringBuffer} to populate.
-     * @param fieldName  the field name.
-     * @param array      the array to add to the {@code toString}.
-     * @param fullDetail {@code true} for detail, {@code false} for summary info, {@code null} for style decides.
-     */
+
     public void append(final StringBuffer buffer, final String fieldName, final byte[] array, final Boolean fullDetail) {
-        appendFieldStart(buffer, fieldName);
-        if (array == null) {
-            appendNullText(buffer, fieldName);
-        } else if (isFullDetail(fullDetail)) {
-            appendDetail(buffer, fieldName, array);
-        } else {
-            appendSummary(buffer, fieldName, array);
-        }
-        appendFieldEnd(buffer, fieldName);
+
     }
 
-    /**
-     * Appends to the {@code toString} a {@code char} value.
-     *
-     * @param buffer    the {@link StringBuffer} to populate.
-     * @param fieldName the field name.
-     * @param value     the value to add to the {@code toString}.
-     */
-    public void append(final StringBuffer buffer, final String fieldName, final char value) {
-        appendFieldStart(buffer, fieldName);
-        appendDetail(buffer, fieldName, value);
-        appendFieldEnd(buffer, fieldName);
-    }
-
-    /**
-     * Appends to the {@code toString} a {@code char} array.
-     *
-     * @param buffer     the {@link StringBuffer} to populate.
-     * @param fieldName  the field name.
-     * @param array      the array to add to the {@code toString}.
-     * @param fullDetail {@code true} for detail, {@code false} for summary info, {@code null} for style decides.
-     */
     public void append(final StringBuffer buffer, final String fieldName, final char[] array, final Boolean fullDetail) {
-        appendFieldStart(buffer, fieldName);
-        if (array == null) {
-            appendNullText(buffer, fieldName);
-        } else if (isFullDetail(fullDetail)) {
-            appendDetail(buffer, fieldName, array);
-        } else {
-            appendSummary(buffer, fieldName, array);
-        }
-        appendFieldEnd(buffer, fieldName);
+
     }
 
-    /**
-     * Appends to the {@code toString} a {@code double} value.
-     *
-     * @param buffer    the {@link StringBuffer} to populate.
-     * @param fieldName the field name.
-     * @param value     the value to add to the {@code toString}.
-     */
-    public void append(final StringBuffer buffer, final String fieldName, final double value) {
-        appendFieldStart(buffer, fieldName);
-        appendDetail(buffer, fieldName, value);
-        appendFieldEnd(buffer, fieldName);
-    }
 
-    /**
-     * Appends to the {@code toString} a {@code double} array.
-     *
-     * @param buffer     the {@link StringBuffer} to populate.
-     * @param fieldName  the field name.
-     * @param array      the array to add to the toString.
-     * @param fullDetail {@code true} for detail, {@code false} for summary info, {@code null} for style decides.
-     */
+
     public void append(final StringBuffer buffer, final String fieldName, final double[] array, final Boolean fullDetail) {
-        appendFieldStart(buffer, fieldName);
-        if (array == null) {
-            appendNullText(buffer, fieldName);
-        } else if (isFullDetail(fullDetail)) {
-            appendDetail(buffer, fieldName, array);
-        } else {
-            appendSummary(buffer, fieldName, array);
-        }
-        appendFieldEnd(buffer, fieldName);
+
     }
 
-    /**
-     * Appends to the {@code toString} a {@code float} value.
-     *
-     * @param buffer    the {@link StringBuffer} to populate.
-     * @param fieldName the field name.
-     * @param value     the value to add to the {@code toString}.
-     */
-    public void append(final StringBuffer buffer, final String fieldName, final float value) {
-        appendFieldStart(buffer, fieldName);
-        appendDetail(buffer, fieldName, value);
-        appendFieldEnd(buffer, fieldName);
-    }
-
-    /**
-     * Appends to the {@code toString} a {@code float} array.
-     *
-     * @param buffer     the {@link StringBuffer} to populate.
-     * @param fieldName  the field name.
-     * @param array      the array to add to the toString.
-     * @param fullDetail {@code true} for detail, {@code false} for summary info, {@code null} for style decides.
-     */
     public void append(final StringBuffer buffer, final String fieldName, final float[] array, final Boolean fullDetail) {
 
     }
-
-    /**
-     * Appends to the {@code toString} an {@code int} value.
-     *
-     * @param buffer    the {@link StringBuffer} to populate.
-     * @param fieldName the field name.
-     * @param value     the value to add to the {@code toString}.
-     */
-    public void append(final StringBuffer buffer, final String fieldName, final int value) {
+public void append(final StringBuffer buffer, final String fieldName, final int[] array, final Boolean fullDetail) {
 
     }
 
-    /**
-     * Appends to the {@code toString} an {@code int} array.
-     *
-     * @param buffer     the {@link StringBuffer} to populate.
-     * @param fieldName  the field name.
-     * @param array      the array to add to the {@code toString}.
-     * @param fullDetail {@code true} for detail, {@code false} for summary info, {@code null} for style decides.
-     */
-    public void append(final StringBuffer buffer, final String fieldName, final int[] array, final Boolean fullDetail) {
-
-    }
-
-    /**
-     * Appends to the {@code toString} a {@code long} value.
-     *
-     * @param buffer    the {@link StringBuffer} to populate.
-     * @param fieldName the field name.
-     * @param value     the value to add to the {@code toString}.
-     */
-    public void append(final StringBuffer buffer, final String fieldName, final long value) {
-
-    }
-
-    /**
-     * Appends to the {@code toString} a {@code long} array.
-     *
-     * @param buffer     the {@link StringBuffer} to populate.
-     * @param fieldName  the field name.
-     * @param array      the array to add to the {@code toString}.
-     * @param fullDetail {@code true} for detail, {@code false} for summary info, {@code null} for style decides.
-     */
     public void append(final StringBuffer buffer, final String fieldName, final long[] array, final Boolean fullDetail) {
 
     }
-
-    /**
-     * Appends to the {@code toString} an {@link Object} value, printing the full {@code toString} of the {@link Object} passed in.
-     *
-     * @param buffer     the {@link StringBuffer} to populate.
-     * @param fieldName  the field name.
-     * @param value      the value to add to the {@code toString}.
-     * @param fullDetail {@code true} for detail, {@code false} for summary info, {@code null} for style decides.
-     */
     public void append(final StringBuffer buffer, final String fieldName, final Object value, final Boolean fullDetail) {
 
     }
-
-    /**
-     * Appends to the {@code toString} an {@link Object} array.
-     *
-     * @param buffer     the {@link StringBuffer} to populate.
-     * @param fieldName  the field name.
-     * @param array      the array to add to the toString.
-     * @param fullDetail {@code true} for detail, {@code false} for summary info, {@code null} for style decides.
-     */
     public void append(final StringBuffer buffer, final String fieldName, final Object[] array, final Boolean fullDetail) {
 
     }
@@ -617,393 +352,15 @@ public abstract class ToStringStyle implements Serializable {
      * @param fieldName the field name.
      * @param value     the value to add to the {@code toString}.
      */
-    public void append(final StringBuffer buffer, final String fieldName, final short value) {
 
-    }
-
-    /**
-     * Appends to the {@code toString} a {@code short} array.
-     *
-     * @param buffer     the {@link StringBuffer} to populate.
-     * @param fieldName  the field name.
-     * @param array      the array to add to the {@code toString}.
-     * @param fullDetail {@code true} for detail, {@code false} for summary info, {@code null} for style decides.
-     */
     public void append(final StringBuffer buffer, final String fieldName, final short[] array, final Boolean fullDetail) {
 
     }
 
-    /**
-     * Appends to the {@code toString} the class name.
-     *
-     * @param buffer the {@link StringBuffer} to populate.
-     * @param object the {@link Object} whose name to output.
-     */
-    protected void appendClassName(final StringBuffer buffer, final Object object) {
-
-    }
-
-    /**
-     * Appends to the {@code toString} the content end.
-     *
-     * @param buffer the {@link StringBuffer} to populate.
-     */
-    protected void appendContentEnd(final StringBuffer buffer) {
-        buffer.append(getContentEnd());
-    }
-
-    /**
-     * Appends to the {@code toString} the content start.
-     *
-     * @param buffer the {@link StringBuffer} to populate.
-     */
-    protected void appendContentStart(final StringBuffer buffer) {
-        buffer.append(getContentStart());
-    }
-
-    /**
-     * Appends to the {@code toString} an {@link Object} value that has been detected to participate in a cycle. This implementation will print the standard
-     * string value of the value.
-     *
-     * @param buffer    the {@link StringBuffer} to populate.
-     * @param fieldName the field name, typically not used as already appended
-     * @param value     the value to add to the {@code toString}, not {@code null}.
-     * @since 2.2
-     */
-    protected void appendCyclicObject(final StringBuffer buffer, final String fieldName, final Object value) {
-
-    }
-
-    /**
-     * Appends to the {@code toString} a {@code boolean} value.
-     *
-     * @param buffer    the {@link StringBuffer} to populate.
-     * @param fieldName the field name, typically not used as already appended.
-     * @param value     the value to add to the {@code toString}.
-     */
-    protected void appendDetail(final StringBuffer buffer, final String fieldName, final boolean value) {
-        buffer.append(value);
-    }
-
-    /**
-     * Appends to the {@code toString} the detail of a {@code boolean} array.
-     *
-     * @param buffer    the {@link StringBuffer} to populate.
-     * @param fieldName the field name, typically not used as already appended.
-     * @param array     the array to add to the {@code toString}, not {@code null}.
-     */
-    protected void appendDetail(final StringBuffer buffer, final String fieldName, final boolean[] array) {
-
-    }
-
-    /**
-     * Appends to the {@code toString} a {@code byte} value.
-     *
-     * @param buffer    the {@link StringBuffer} to populate.
-     * @param fieldName the field name, typically not used as already appended.
-     * @param value     the value to add to the {@code toString}.
-     */
-    protected void appendDetail(final StringBuffer buffer, final String fieldName, final byte value) {
-        buffer.append(value);
-    }
-
-    /**
-     * Appends to the {@code toString} the detail of a {@code byte} array.
-     *
-     * @param buffer    the {@link StringBuffer} to populate.
-     * @param fieldName the field name, typically not used as already appended.
-     * @param array     the array to add to the {@code toString}, not {@code null}.
-     */
-    protected void appendDetail(final StringBuffer buffer, final String fieldName, final byte[] array) {
-
-    }
-
-    /**
-     * Appends to the {@code toString} a {@code char} value.
-     *
-     * @param buffer    the {@link StringBuffer} to populate.
-     * @param fieldName the field name, typically not used as already appended.
-     * @param value     the value to add to the {@code toString}.
-     */
-    protected void appendDetail(final StringBuffer buffer, final String fieldName, final char value) {
-        buffer.append(value);
-    }
-
-    /**
-     * Appends to the {@code toString} the detail of a {@code char} array.
-     *
-     * @param buffer    the {@link StringBuffer} to populate.
-     * @param fieldName the field name, typically not used as already appended.
-     * @param array     the array to add to the {@code toString}, not {@code null}.
-     */
-    protected void appendDetail(final StringBuffer buffer, final String fieldName, final char[] array) {
-
-    }
-
-    /**
-     * Appends to the {@code toString} a {@link Collection}.
-     *
-     * @param buffer    the {@link StringBuffer} to populate.
-     * @param fieldName the field name, typically not used as already appended.
-     * @param coll      the {@link Collection} to add to the {@code toString}, not {@code null}.
-     */
-    protected void appendDetail(final StringBuffer buffer, final String fieldName, final Collection<?> coll) {
-        buffer.append(coll);
-    }
-
-    /**
-     * Appends to the {@code toString} a {@code double} value.
-     *
-     * @param buffer    the {@link StringBuffer} to populate.
-     * @param fieldName the field name, typically not used as already appended.
-     * @param value     the value to add to the {@code toString}.
-     */
-    protected void appendDetail(final StringBuffer buffer, final String fieldName, final double value) {
-        buffer.append(value);
-    }
-
-    /**
-     * Appends to the {@code toString} the detail of a {@code double} array.
-     *
-     * @param buffer    the {@link StringBuffer} to populate.
-     * @param fieldName the field name, typically not used as already appended
-     * @param array     the array to add to the {@code toString}, not {@code null}.
-     */
-    protected void appendDetail(final StringBuffer buffer, final String fieldName, final double[] array) {
-
-    }
-
-    /**
-     * Appends to the {@code toString} a {@code float} value.
-     *
-     * @param buffer    the {@link StringBuffer} to populate.
-     * @param fieldName the field name, typically not used as already appended.
-     * @param value     the value to add to the {@code toString}.
-     */
-    protected void appendDetail(final StringBuffer buffer, final String fieldName, final float value) {
-        buffer.append(value);
-    }
-
-    /**
-     * Appends to the {@code toString} the detail of a {@code float} array.
-     *
-     * @param buffer    the {@link StringBuffer} to populate.
-     * @param fieldName the field name, typically not used as already appended.
-     * @param array     the array to add to the {@code toString}, not {@code null}.
-     */
-    protected void appendDetail(final StringBuffer buffer, final String fieldName, final float[] array) {
-
-    }
-
-    /**
-     * Appends to the {@code toString} an {@code int} value.
-     *
-     * @param buffer    the {@link StringBuffer} to populate.
-     * @param fieldName the field name, typically not used as already appended.
-     * @param value     the value to add to the {@code toString}.
-     */
-    protected void appendDetail(final StringBuffer buffer, final String fieldName, final int value) {
-        buffer.append(value);
-    }
-
-    /**
-     * Appends to the {@code toString} the detail of an {@link Object} array item.
-     *
-     * @param buffer    the {@link StringBuffer} to populate.
-     * @param fieldName the field name, typically not used as already appended.
-     * @param i         the array item index to add.
-     * @param item      the array item to add.
-     * @since 3.11
-     */
-    protected void appendDetail(final StringBuffer buffer, final String fieldName, final int i, final Object item) {
-
-    }
-
-    /**
-     * Appends to the {@code toString} the detail of an {@code int} array.
-     *
-     * @param buffer    the {@link StringBuffer} to populate.
-     * @param fieldName the field name, typically not used as already appended.
-     * @param array     the array to add to the {@code toString}, not {@code null}.
-     */
-    protected void appendDetail(final StringBuffer buffer, final String fieldName, final int[] array) {
-
-    }
-
-    /**
-     * Appends to the {@code toString} a {@code long} value.
-     *
-     * @param buffer    the {@link StringBuffer} to populate.
-     * @param fieldName the field name, typically not used as already appended.
-     * @param value     the value to add to the {@code toString}.
-     */
-    protected void appendDetail(final StringBuffer buffer, final String fieldName, final long value) {
-        buffer.append(value);
-    }
-
-    /**
-     * Appends to the {@code toString} the detail of a {@code long} array.
-     *
-     * @param buffer    the {@link StringBuffer} to populate.
-     * @param fieldName the field name, typically not used as already appended.
-     * @param array     the array to add to the {@code toString}, not {@code null}.
-     */
-    protected void appendDetail(final StringBuffer buffer, final String fieldName, final long[] array) {
-
-    }
-
-    /**
-     * Appends to the {@code toString} a {@link Map}.
-     *
-     * @param buffer    the {@link StringBuffer} to populate.
-     * @param fieldName the field name, typically not used as already appended.
-     * @param map       the {@link Map} to add to the {@code toString}, not {@code null}.
-     */
-    protected void appendDetail(final StringBuffer buffer, final String fieldName, final Map<?, ?> map) {
-        buffer.append(map);
-    }
-
-    /**
-     * Appends to the {@code toString} an {@link Object} value, printing the full detail of the {@link Object}.
-     *
-     * @param buffer    the {@link StringBuffer} to populate.
-     * @param fieldName the field name, typically not used as already appended.
-     * @param value     the value to add to the {@code toString}, not {@code null}.
-     */
-    protected void appendDetail(final StringBuffer buffer, final String fieldName, final Object value) {
-        buffer.append(value);
-    }
-
-    /**
-     * Appends to the {@code toString} the detail of an {@link Object} array.
-     *
-     * @param buffer    the {@link StringBuffer} to populate.
-     * @param fieldName the field name, typically not used as already appended.
-     * @param array     the array to add to the {@code toString}, not {@code null}.
-     */
-    protected void appendDetail(final StringBuffer buffer, final String fieldName, final Object[] array) {
-
-    }
-
-    /**
-     * Appends to the {@code toString} a {@code short} value.
-     *
-     * @param buffer    the {@link StringBuffer} to populate.
-     * @param fieldName the field name, typically not used as already appended.
-     * @param value     the value to add to the {@code toString}.
-     */
-    protected void appendDetail(final StringBuffer buffer, final String fieldName, final short value) {
-        buffer.append(value);
-    }
-
-    /**
-     * Appends to the {@code toString} the detail of a {@code short} array.
-     *
-     * @param buffer    the {@link StringBuffer} to populate.
-     * @param fieldName the field name, typically not used as already appended.
-     * @param array     the array to add to the {@code toString}, not {@code null}.
-     */
-    protected void appendDetail(final StringBuffer buffer, final String fieldName, final short[] array) {
-
-    }
-
-    /**
-     * Appends to the {@code toString} the end of data indicator.
-     *
-     * @param buffer the {@link StringBuffer} to populate.
-     * @param object the {@link Object} to build a {@code toString} for.
-     */
-    public void appendEnd(final StringBuffer buffer, final Object object) {
-
-    }
-
-    /**
-     * Appends to the {@code toString} the field end.
-     *
-     * @param buffer    the {@link StringBuffer} to populate.
-     * @param fieldName the field name, typically not used as already appended.
-     */
-    protected void appendFieldEnd(final StringBuffer buffer, final String fieldName) {
-        appendFieldSeparator(buffer);
-    }
-
-    /**
-     * Appends to the {@code toString} the field separator.
-     *
-     * @param buffer the {@link StringBuffer} to populate.
-     */
     protected void appendFieldSeparator(final StringBuffer buffer) {
         buffer.append(getFieldSeparator());
     }
 
-    /**
-     * Appends to the {@code toString} the field start.
-     *
-     * @param buffer    the {@link StringBuffer} to populate.
-     * @param fieldName the field name.
-     */
-    protected void appendFieldStart(final StringBuffer buffer, final String fieldName) {
-
-    }
-
-    /**
-     * Appends the {@link System#identityHashCode(java.lang.Object)}.
-     *
-     * @param buffer the {@link StringBuffer} to populate.
-     * @param object the {@link Object} whose id to output.
-     */
-    protected void appendIdentityHashCode(final StringBuffer buffer, final Object object) {
-
-    }
-
-    /**
-     * Appends to the {@code toString} an {@link Object}, correctly interpreting its type.
-     *
-     * <p>
-     * This method performs the main lookup by Class type to correctly route arrays, {@link Collection}s, {@link Map}s and {@link Objects} to the appropriate
-     * method.
-     * </p>
-     *
-     * <p>
-     * Either detail or summary views can be specified.
-     * </p>
-     *
-     * <p>
-     * If a cycle is detected, an object will be appended with the {@code Object.toString()} format.
-     * </p>
-     *
-     * @param buffer    the {@link StringBuffer} to populate.
-     * @param fieldName the field name, typically not used as already appended.
-     * @param value     the value to add to the {@code toString}, not {@code null}.
-     * @param detail    output detail or not.
-     */
-    protected void appendInternal(final StringBuffer buffer, final String fieldName, final Object value, final boolean detail) {
-
-    }
-
-    /**
-     * Appends to the {@code toString} an indicator for {@code null}.
-     *
-     * <p>
-     * The default indicator is {@code "<null>"}.
-     * </p>
-     *
-     * @param buffer    the {@link StringBuffer} to populate.
-     * @param fieldName the field name, typically not used as already appended.
-     */
-    protected void appendNullText(final StringBuffer buffer, final String fieldName) {
-        buffer.append(getNullText());
-    }
-
-    /**
-     * Appends to the {@code toString} the start of data indicator.
-     *
-     * @param buffer the {@link StringBuffer} to populate.
-     * @param object the {@link Object} to build a {@code toString} for.
-     */
-    public void appendStart(final StringBuffer buffer, final Object object) {
-
-    }
 
     /**
      * Appends to the {@code toString} a summary of a {@code boolean} array.
@@ -1013,6 +370,18 @@ public abstract class ToStringStyle implements Serializable {
      * @param array     the array to add to the {@code toString}, not {@code null}.
      */
     protected void appendSummary(final StringBuffer buffer, final String fieldName, final boolean[] array) {
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
         appendSummarySize(buffer, fieldName, array.length);
     }
 
