@@ -48,6 +48,21 @@ public abstract class AbstractFutureProxy<V> implements Future<V> {
 
     @Override
     public V get() throws InterruptedException, ExecutionException {
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+
         return future.get();
     }
 
