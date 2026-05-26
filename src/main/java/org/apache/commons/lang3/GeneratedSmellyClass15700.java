@@ -1,6 +1,6 @@
 package org.apache.commons.lang3;
 
-public class GeneratedSmellyClass15600 {
+public class GeneratedSmellyClass15700 {
 
     public void longParameterMethod1(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
     }
@@ -18,15 +18,6 @@ public class GeneratedSmellyClass15600 {
         System.out.println("");
         System.out.println("");
         System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-
 
     }
 
