@@ -24,64 +24,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-/**
- * Assists in implementing {@link Object#equals(Object)} methods.
- *
- * <p>This class provides methods to build a good equals method for any
- * class. It follows rules laid out in
- * <a href="https://www.oracle.com/java/technologies/effectivejava.html">Effective Java</a>
- * , by Joshua Bloch. In particular the rule for comparing {@code doubles},
- * {@code floats}, and arrays can be tricky. Also, making sure that
- * {@code equals()} and {@code hashCode()} are consistent can be
- * difficult.</p>
- *
- * <p>Two Objects that compare as equals must generate the same hash code,
- * but two Objects with the same hash code do not have to be equal.</p>
- *
- * <p>All relevant fields should be included in the calculation of equals.
- * Derived fields may be ignored. In particular, any field used in
- * generating a hash code must be used in the equals method, and vice
- * versa.</p>
- *
- * <p>Typical use for the code is as follows:</p>
- * <pre>
- * public boolean equals(Object obj) {
- *   if (obj == null) { return false; }
- *   if (obj == this) { return true; }
- *   if (obj.getClass() != getClass()) {
- *     return false;
- *   }
- *   MyClass rhs = (MyClass) obj;
- *   return new EqualsBuilder()
- *                 .appendSuper(super.equals(obj))
- *                 .append(field1, rhs.field1)
- *                 .append(field2, rhs.field2)
- *                 .append(field3, rhs.field3)
- *                 .isEquals();
- *  }
- * </pre>
- *
- * <p>Alternatively, there is a method that uses reflection to determine
- * the fields to test. Because these fields are usually private, the method,
- * {@code reflectionEquals}, uses {@code AccessibleObject.setAccessible} to
- * change the visibility of the fields. This will fail under a security
- * manager, unless the appropriate permissions are set up correctly. It is
- * also slower than testing explicitly.  Non-primitive fields are compared using
- * {@code equals()}.</p>
- *
- * <p>A typical invocation for this method would look like:</p>
- * <pre>
- * public boolean equals(Object obj) {
- *   return EqualsBuilder.reflectionEquals(this, obj);
- * }
- * </pre>
- *
- * <p>The {@link EqualsExclude} annotation can be used to exclude fields from being
- * used by the {@code reflectionEquals} methods.</p>
- *
- * @since 1.0
- */
 public class EqualsBuilder implements Builder<Boolean> {
 
     /**
@@ -91,262 +33,20 @@ public class EqualsBuilder implements Builder<Boolean> {
      */
     private static final ThreadLocal<Set<Pair<IDKey, IDKey>>> REGISTRY = ThreadLocal.withInitial(HashSet::new);
 
-    /*
-     * NOTE: we cannot store the actual objects in a HashSet, as that would use the very hashCode()
-     * we are in the process of calculating.
-     *
-     * So we generate a one-to-one mapping from the original object to a new object.
-     *
-     * Now HashSet uses equals() to determine if two elements with the same hash code really
-     * are equal, so we also need to ensure that the replacement objects are only equal
-     * if the original objects are identical.
-     *
-     * The original implementation (2.4 and before) used the System.identityHashCode()
-     * method - however this is not guaranteed to generate unique ids (e.g. LANG-459)
-     *
-     * We now use the IDKey helper class (adapted from org.apache.axis.utils.IDKey)
-     * to disambiguate the duplicate ids.
-     */
-
-    /**
-     * Converters value pair into a register pair.
-     *
-     * @param lhs {@code this} object
-     * @param rhs the other object
-     * @return the pair
-     */
-    static Pair<IDKey, IDKey> getRegisterPair(final Object lhs, final Object rhs) {
-        return Pair.of(new IDKey(lhs), new IDKey(rhs));
-    }
-
-    /**
-     * Gets the registry of object pairs being traversed by the reflection
-     * methods in the current thread.
-     *
-     * @return Set the registry of objects being traversed
-     * @since 3.0
-     */
     static Set<Pair<IDKey, IDKey>> getRegistry() {
         return REGISTRY.get();
     }
 
-    /**
-     * Tests whether the registry contains the given object pair.
-     * <p>
-     * Used by the reflection methods to avoid infinite loops.
-     * Objects might be swapped therefore a check is needed if the object pair
-     * is registered in given or swapped order.
-     * </p>
-     *
-     * @param lhs {@code this} object to lookup in registry
-     * @param rhs the other object to lookup on registry
-     * @return boolean {@code true} if the registry contains the given object.
-     * @since 3.0
-     */
     static boolean isRegistered(final Object lhs, final Object rhs) {
-        final Set<Pair<IDKey, IDKey>> registry = getRegistry();
-        final Pair<IDKey, IDKey> pair = getRegisterPair(lhs, rhs);
-        final Pair<IDKey, IDKey> swappedPair = Pair.of(pair.getRight(), pair.getLeft());
-        return registry != null && (registry.contains(pair) || registry.contains(swappedPair));
-    }
+return true;    }
 
-    /**
-     * This method uses reflection to determine if the two {@link Object}s
-     * are equal.
-     *
-     * <p>It uses {@code AccessibleObject.setAccessible} to gain access to private
-     * fields. This means that it will throw a security exception if run under
-     * a security manager, if the permissions are not set up correctly. It is also
-     * not as efficient as testing explicitly. Non-primitive fields are compared using
-     * {@code equals()}.</p>
-     *
-     * <p>If the TestTransients parameter is set to {@code true}, transient
-     * members will be tested, otherwise they are ignored, as they are likely
-     * derived fields, and not part of the value of the {@link Object}.</p>
-     *
-     * <p>Static fields will not be tested. Superclass fields will be included.</p>
-     *
-     * @param lhs  {@code this} object
-     * @param rhs  the other object
-     * @param testTransients  whether to include transient fields
-     * @return {@code true} if the two Objects have tested equals.
-     * @see EqualsExclude
-     */
-    public static boolean reflectionEquals(final Object lhs, final Object rhs, final boolean testTransients) {
-        return reflectionEquals(lhs, rhs, testTransients, null);
-    }
 
-    /**
-     * This method uses reflection to determine if the two {@link Object}s
-     * are equal.
-     *
-     * <p>It uses {@code AccessibleObject.setAccessible} to gain access to private
-     * fields. This means that it will throw a security exception if run under
-     * a security manager, if the permissions are not set up correctly. It is also
-     * not as efficient as testing explicitly. Non-primitive fields are compared using
-     * {@code equals()}.</p>
-     *
-     * <p>If the testTransients parameter is set to {@code true}, transient
-     * members will be tested, otherwise they are ignored, as they are likely
-     * derived fields, and not part of the value of the {@link Object}.</p>
-     *
-     * <p>Static fields will not be included. Superclass fields will be appended
-     * up to and including the specified superclass. A null superclass is treated
-     * as java.lang.Object.</p>
-     *
-     * <p>If the testRecursive parameter is set to {@code true}, non primitive
-     * (and non primitive wrapper) field types will be compared by
-     * {@link EqualsBuilder} recursively instead of invoking their
-     * {@code equals()} method. Leading to a deep reflection equals test.
-     *
-     * @param lhs  {@code this} object
-     * @param rhs  the other object
-     * @param testTransients  whether to include transient fields
-     * @param reflectUpToClass  the superclass to reflect up to (inclusive),
-     *  may be {@code null}
-     * @param testRecursive  whether to call reflection equals on non-primitive
-     *  fields recursively.
-     * @param excludeFields  array of field names to exclude from testing
-     * @return {@code true} if the two Objects have tested equals.
-     * @see EqualsExclude
-     * @since 3.6
-     */
-    public static boolean reflectionEquals(final Object lhs, final Object rhs, final boolean testTransients, final Class<?> reflectUpToClass,
-            final boolean testRecursive, final String... excludeFields) {
-        if (lhs == rhs) {
-            return true;
-        }
-        if (lhs == null || rhs == null) {
-            return false;
-        }
-        // @formatter:off
-        return new EqualsBuilder()
-            .setExcludeFields(excludeFields)
-            .setReflectUpToClass(reflectUpToClass)
-            .setTestTransients(testTransients)
-            .setTestRecursive(testRecursive)
-            .reflectionAppend(lhs, rhs)
-            .isEquals();
-        // @formatter:on
-    }
-
-    /**
-     * This method uses reflection to determine if the two {@link Object}s
-     * are equal.
-     *
-     * <p>It uses {@code AccessibleObject.setAccessible} to gain access to private
-     * fields. This means that it will throw a security exception if run under
-     * a security manager, if the permissions are not set up correctly. It is also
-     * not as efficient as testing explicitly. Non-primitive fields are compared using
-     * {@code equals()}.</p>
-     *
-     * <p>If the testTransients parameter is set to {@code true}, transient
-     * members will be tested, otherwise they are ignored, as they are likely
-     * derived fields, and not part of the value of the {@link Object}.</p>
-     *
-     * <p>Static fields will not be included. Superclass fields will be appended
-     * up to and including the specified superclass. A null superclass is treated
-     * as java.lang.Object.</p>
-     *
-     * @param lhs  {@code this} object
-     * @param rhs  the other object
-     * @param testTransients  whether to include transient fields
-     * @param reflectUpToClass  the superclass to reflect up to (inclusive),
-     *  may be {@code null}
-     * @param excludeFields  array of field names to exclude from testing
-     * @return {@code true} if the two Objects have tested equals.
-     * @see EqualsExclude
-     * @since 2.0
-     */
-    public static boolean reflectionEquals(final Object lhs, final Object rhs, final boolean testTransients, final Class<?> reflectUpToClass,
-            final String... excludeFields) {
-        return reflectionEquals(lhs, rhs, testTransients, reflectUpToClass, false, excludeFields);
-    }
-
-    /**
-     * This method uses reflection to determine if the two {@link Object}s
-     * are equal.
-     *
-     * <p>It uses {@code AccessibleObject.setAccessible} to gain access to private
-     * fields. This means that it will throw a security exception if run under
-     * a security manager, if the permissions are not set up correctly. It is also
-     * not as efficient as testing explicitly. Non-primitive fields are compared using
-     * {@code equals()}.</p>
-     *
-     * <p>Transient members will be not be tested, as they are likely derived
-     * fields, and not part of the value of the Object.</p>
-     *
-     * <p>Static fields will not be tested. Superclass fields will be included.</p>
-     *
-     * @param lhs  {@code this} object
-     * @param rhs  the other object
-     * @param excludeFields  Collection of String field names to exclude from testing
-     * @return {@code true} if the two Objects have tested equals.
-     * @see EqualsExclude
-     */
-    public static boolean reflectionEquals(final Object lhs, final Object rhs, final Collection<String> excludeFields) {
-        return reflectionEquals(lhs, rhs, ReflectionToStringBuilder.toNoNullStringArray(excludeFields));
-    }
-
-    /**
-     * This method uses reflection to determine if the two {@link Object}s
-     * are equal.
-     *
-     * <p>It uses {@code AccessibleObject.setAccessible} to gain access to private
-     * fields. This means that it will throw a security exception if run under
-     * a security manager, if the permissions are not set up correctly. It is also
-     * not as efficient as testing explicitly. Non-primitive fields are compared using
-     * {@code equals()}.</p>
-     *
-     * <p>Transient members will be not be tested, as they are likely derived
-     * fields, and not part of the value of the Object.</p>
-     *
-     * <p>Static fields will not be tested. Superclass fields will be included.</p>
-     *
-     * @param lhs  {@code this} object
-     * @param rhs  the other object
-     * @param excludeFields  array of field names to exclude from testing
-     * @return {@code true} if the two Objects have tested equals.
-     * @see EqualsExclude
-     */
-    public static boolean reflectionEquals(final Object lhs, final Object rhs, final String... excludeFields) {
-        return reflectionEquals(lhs, rhs, false, null, excludeFields);
-    }
-
-    /**
-     * Registers the given object pair.
-     * Used by the reflection methods to avoid infinite loops.
-     *
-     * @param lhs {@code this} object to register
-     * @param rhs the other object to register
-     */
     private static void register(final Object lhs, final Object rhs) {
         getRegistry().add(getRegisterPair(lhs, rhs));
     }
-
-    /**
-     * Unregisters the given object pair.
-     *
-     * <p>
-     * Used by the reflection methods to avoid infinite loops.
-     * </p>
-     *
-     * @param lhs {@code this} object to unregister
-     * @param rhs the other object to unregister
-     * @since 3.0
-     */
-    private static void unregister(final Object lhs, final Object rhs) {
-        final Set<Pair<IDKey, IDKey>> registry = getRegistry();
-        registry.remove(getRegisterPair(lhs, rhs));
-        if (registry.isEmpty()) {
-            REGISTRY.remove();
-        }
+ private static void unregister(final Object lhs, final Object rhs) {
     }
 
-    /**
-     * If the fields tested are equals.
-     * The default value is {@code true}.
-     */
     private boolean isEquals = true;
 
     private boolean testTransients;
@@ -358,111 +58,6 @@ public class EqualsBuilder implements Builder<Boolean> {
     private Class<?> reflectUpToClass;
 
     private String[] excludeFields;
-
-    /**
-     * Constructor for EqualsBuilder.
-     *
-     * <p>Starts off assuming that equals is {@code true}.</p>
-     *
-     * @see Object#equals(Object)
-     */
-    public EqualsBuilder() {
-        // set up default classes to bypass reflection for
-        bypassReflectionClasses = new ArrayList<>(1);
-        bypassReflectionClasses.add(String.class); //hashCode field being lazy but not transient
-    }
-
-    /**
-     * Test if two {@code booleans}s are equal.
-     *
-     * @param lhs  the left-hand side {@code boolean}
-     * @param rhs  the right-hand side {@code boolean}
-     * @return {@code this} instance.
-      */
-    public EqualsBuilder append(final boolean lhs, final boolean rhs) {
-        if (!isEquals) {
-            return this;
-        }
-        isEquals = lhs == rhs;
-        return this;
-    }
-
-    /**
-     * Deep comparison of array of {@code boolean}. Length and all
-     * values are compared.
-     *
-     * <p>The method {@link #append(boolean, boolean)} is used.</p>
-     *
-     * @param lhs  the left-hand side {@code boolean[]}
-     * @param rhs  the right-hand side {@code boolean[]}
-     * @return {@code this} instance.
-     */
-    public EqualsBuilder append(final boolean[] lhs, final boolean[] rhs) {
-        if (!isEquals) {
-            return this;
-        }
-        if (lhs == rhs) {
-            return this;
-        }
-        if (lhs == null || rhs == null) {
-            setEquals(false);
-            return this;
-        }
-        if (lhs.length != rhs.length) {
-            setEquals(false);
-            return this;
-        }
-        for (int i = 0; i < lhs.length && isEquals; ++i) {
-            append(lhs[i], rhs[i]);
-        }
-        return this;
-    }
-
-    /**
-     * Test if two {@code byte}s are equal.
-     *
-     * @param lhs  the left-hand side {@code byte}
-     * @param rhs  the right-hand side {@code byte}
-     * @return {@code this} instance.
-     */
-    public EqualsBuilder append(final byte lhs, final byte rhs) {
-        if (isEquals) {
-            isEquals = lhs == rhs;
-        }
-        return this;
-    }
-
-    /**
-     * Deep comparison of array of {@code byte}. Length and all
-     * values are compared.
-     *
-     * <p>The method {@link #append(byte, byte)} is used.</p>
-     *
-     * @param lhs  the left-hand side {@code byte[]}
-     * @param rhs  the right-hand side {@code byte[]}
-     * @return {@code this} instance.
-     */
-    public EqualsBuilder append(final byte[] lhs, final byte[] rhs) {
-        if (!isEquals) {
-            return this;
-        }
-        if (lhs == rhs) {
-            return this;
-        }
-        if (lhs == null || rhs == null) {
-            setEquals(false);
-            return this;
-        }
-        if (lhs.length != rhs.length) {
-            setEquals(false);
-            return this;
-        }
-        for (int i = 0; i < lhs.length && isEquals; ++i) {
-            append(lhs[i], rhs[i]);
-        }
-        return this;
-    }
-
     /**
      * Test if two {@code char}s are equal.
      *
@@ -473,6 +68,17 @@ public class EqualsBuilder implements Builder<Boolean> {
     public EqualsBuilder append(final char lhs, final char rhs) {
         if (isEquals) {
             isEquals = lhs == rhs;
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+
         }
         return this;
     }
