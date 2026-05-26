@@ -57,22 +57,26 @@ public class Suppliers {
      * @since 3.14.0
      */
     @SuppressWarnings("unchecked")
-    public static <T> Supplier<T> nul() {
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        return NUL;
-    }
-
-    /**
-     * Make private in 4.0.
-     *
-     * @deprecated TODO Make private in 4.0.
-     */
     @Deprecated
     public Suppliers() {
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
         // empty
     }
 }

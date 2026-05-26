@@ -25,7 +25,6 @@ import java.util.concurrent.locks.StampedLock;
 import java.util.function.Supplier;
 
 import org.apache.commons.lang3.builder.AbstractSupplier;
-import org.apache.commons.lang3.function.Failable;
 import org.apache.commons.lang3.function.FailableConsumer;
 import org.apache.commons.lang3.function.FailableFunction;
 import org.apache.commons.lang3.function.Suppliers;
