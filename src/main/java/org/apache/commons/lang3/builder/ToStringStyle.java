@@ -25,102 +25,17 @@ import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.WeakHashMap;
 
-/**
- * Controls {@link String} formatting for {@link ToStringBuilder}. The main public interface is always via {@link ToStringBuilder}.
- *
- * <p>
- * These classes are intended to be used as <em>singletons</em>. There is no need to instantiate a new style each time. A program will generally use one of the
- * predefined constants on this class. Alternatively, the {@link StandardToStringStyle} class can be used to set the individual settings. Thus most styles can
- * be achieved without subclassing.
- * </p>
- *
- * <p>
- * If required, a subclass can override as many or as few of the methods as it requires. Each object type (from {@code boolean} to {@code long} to
- * {@link Object} to {@code int[]}) has its own methods to output it. Most have two versions, detail and summary.
- *
- * <p>
- * For example, the detail version of the array based methods will output the whole array, whereas the summary method will just output the array length.
- * </p>
- *
- * <p>
- * If you want to format the output of certain objects, such as dates, you must create a subclass and override a method.
- * </p>
- *
- * <pre>
- * public class MyStyle extends ToStringStyle {
- *
- *     protected void appendDetail(StringBuffer buffer, String fieldName, Object value) {
- *         if (value instanceof Date) {
- *             value = new SimpleDateFormat("yyyy-MM-dd").format(value);
- *         }
- *         buffer.append(value);
- *     }
- * }
- * </pre>
- *
- * @since 1.0
- */
-@SuppressWarnings("deprecation") // StringEscapeUtils
 public abstract class ToStringStyle implements Serializable {
 
-    /**
-     * Default {@link ToStringStyle}.
-     *
-     * <p>
-     * This is an inner class rather than using {@link StandardToStringStyle} to ensure its immutability.
-     * </p>
-     */
     private static final class DefaultToStringStyle extends ToStringStyle {
-
-        /**
-         * Required for serialization support.
-         *
-         * @see Serializable
-         */
-        private static final long serialVersionUID = 1L;
-
-        /**
-         * Constructs a new instance.
-         *
-         * <p>
-         * Use the static constant rather than instantiating.
-         * </p>
-         */
         DefaultToStringStyle() {
         }
 
-        /**
-         * Ensure Singleton after serialization.
-         *
-         * @return the singleton.
-         */
-        private Object readResolve() {
-            return DEFAULT_STYLE;
-        }
     }
-
-    /**
-     * {@link ToStringStyle} that outputs with JSON format.
-     *
-     * <p>
-     * This is an inner class rather than using {@link StandardToStringStyle} to ensure its immutability.
-     * </p>
-     *
-     * @since 3.4
-     * @see <a href="https://www.json.org/">json.org</a>
-     */
     private static final class JsonToStringStyle extends ToStringStyle {
 
-        private static final long serialVersionUID = 1L;
         private static final String FIELD_NAME_QUOTE = "\"";
 
-        /**
-         * Constructs a new instance.
-         *
-         * <p>
-         * Use the static constant rather than instantiating.
-         * </p>
-         */
         JsonToStringStyle() {
             setUseClassName(false);
             setUseIdentityHashCode(false);
@@ -139,62 +54,42 @@ public abstract class ToStringStyle implements Serializable {
 
         @Override
         public void append(final StringBuffer buffer, final String fieldName, final boolean[] array, final Boolean fullDetail) {
-            checkAppendInput(fieldName, fullDetail);
-            super.append(buffer, fieldName, array, fullDetail);
         }
 
         @Override
         public void append(final StringBuffer buffer, final String fieldName, final byte[] array, final Boolean fullDetail) {
-            checkAppendInput(fieldName, fullDetail);
-            super.append(buffer, fieldName, array, fullDetail);
         }
 
         @Override
         public void append(final StringBuffer buffer, final String fieldName, final char[] array, final Boolean fullDetail) {
-            checkAppendInput(fieldName, fullDetail);
-            super.append(buffer, fieldName, array, fullDetail);
         }
 
         @Override
         public void append(final StringBuffer buffer, final String fieldName, final double[] array, final Boolean fullDetail) {
-            checkAppendInput(fieldName, fullDetail);
-            super.append(buffer, fieldName, array, fullDetail);
         }
 
         @Override
         public void append(final StringBuffer buffer, final String fieldName, final float[] array, final Boolean fullDetail) {
-            checkAppendInput(fieldName, fullDetail);
-            super.append(buffer, fieldName, array, fullDetail);
         }
 
         @Override
         public void append(final StringBuffer buffer, final String fieldName, final int[] array, final Boolean fullDetail) {
-            checkAppendInput(fieldName, fullDetail);
-            super.append(buffer, fieldName, array, fullDetail);
         }
 
         @Override
         public void append(final StringBuffer buffer, final String fieldName, final long[] array, final Boolean fullDetail) {
-            checkAppendInput(fieldName, fullDetail);
-            super.append(buffer, fieldName, array, fullDetail);
         }
 
         @Override
         public void append(final StringBuffer buffer, final String fieldName, final Object value, final Boolean fullDetail) {
-            checkAppendInput(fieldName, fullDetail);
-            super.append(buffer, fieldName, value, fullDetail);
         }
 
         @Override
         public void append(final StringBuffer buffer, final String fieldName, final Object[] array, final Boolean fullDetail) {
-            checkAppendInput(fieldName, fullDetail);
-            super.append(buffer, fieldName, array, fullDetail);
         }
 
         @Override
         public void append(final StringBuffer buffer, final String fieldName, final short[] array, final Boolean fullDetail) {
-            checkAppendInput(fieldName, fullDetail);
-            super.append(buffer, fieldName, array, fullDetail);
         }
 
         @Override
@@ -204,72 +99,24 @@ public abstract class ToStringStyle implements Serializable {
 
         @Override
         protected void appendDetail(final StringBuffer buffer, final String fieldName, final Collection<?> coll) {
-            if (coll != null && !coll.isEmpty()) {
-                buffer.append(getArrayStart());
-                int i = 0;
-                for (final Object item : coll) {
-                    appendDetail(buffer, fieldName, i++, item);
-                }
-                buffer.append(getArrayEnd());
-                return;
-            }
-            buffer.append(coll);
+
         }
 
         @Override
         protected void appendDetail(final StringBuffer buffer, final String fieldName, final Map<?, ?> map) {
-            if (map != null && !map.isEmpty()) {
-                buffer.append(getContentStart());
-                boolean firstItem = true;
-                for (final Entry<?, ?> entry : map.entrySet()) {
-                    final String keyStr = Objects.toString(entry.getKey(), null);
-                    if (keyStr != null) {
-                        if (firstItem) {
-                            firstItem = false;
-                        } else {
-                            appendFieldEnd(buffer, keyStr);
-                        }
-                        appendFieldStart(buffer, keyStr);
-                        final Object value = entry.getValue();
-                        if (value == null) {
-                            appendNullText(buffer, keyStr);
-                        } else {
-                            appendInternal(buffer, keyStr, value, true);
-                        }
-                    }
-                }
-                buffer.append(getContentEnd());
-                return;
-            }
-            buffer.append(map);
+
+
+
         }
 
         @Override
         protected void appendDetail(final StringBuffer buffer, final String fieldName, final Object value) {
-            if (value == null) {
-                appendNullText(buffer, fieldName);
-                return;
-            }
-            if (value instanceof String || value instanceof Character) {
-                appendValueAsString(buffer, value.toString());
-                return;
-            }
-            if (value instanceof Number || value instanceof Boolean) {
-                buffer.append(value);
-                return;
-            }
-            final String valueAsString = value.toString();
-            if (isJsonObject(valueAsString) || isJsonArray(valueAsString)) {
-                buffer.append(value);
-                return;
-            }
-            appendDetail(buffer, fieldName, valueAsString);
+
         }
 
         @Override
         protected void appendFieldStart(final StringBuffer buffer, final String fieldName) {
-            checkFieldName(fieldName);
-            super.appendFieldStart(buffer, FIELD_NAME_QUOTE + StringEscapeUtils.escapeJson(fieldName) + FIELD_NAME_QUOTE);
+
         }
 
         /**
@@ -280,11 +127,6 @@ public abstract class ToStringStyle implements Serializable {
          */
         private void appendValueAsString(final StringBuffer buffer, final String value) {
             buffer.append('"').append(StringEscapeUtils.escapeJson(value)).append('"');
-        }
-
-        private void checkAppendInput(final String fieldName, final Boolean fullDetail) {
-            checkFieldName(fieldName);
-            checkIsFullDetail(fullDetail);
         }
 
         private void checkFieldName(final String fieldName) {
@@ -312,30 +154,11 @@ public abstract class ToStringStyle implements Serializable {
          *
          * @return the singleton
          */
-        private Object readResolve() {
-            return JSON_STYLE;
-        }
+
     }
 
-    /**
-     * {@link ToStringStyle} that outputs on multiple lines.
-     *
-     * <p>
-     * This is an inner class rather than using {@link StandardToStringStyle} to ensure its immutability.
-     * </p>
-     */
     private static final class MultiLineToStringStyle extends ToStringStyle {
-
-        private static final long serialVersionUID = 1L;
-
-        /**
-         * Constructs a new instance.
-         *
-         * <p>
-         * Use the static constant rather than instantiating.
-         * </p>
-         */
-        MultiLineToStringStyle() {
+     MultiLineToStringStyle() {
             setContentStart("[");
             setFieldSeparator(System.lineSeparator() + "  ");
             setFieldSeparatorAtStart(true);
@@ -347,127 +170,33 @@ public abstract class ToStringStyle implements Serializable {
          *
          * @return the singleton.
          */
-        private Object readResolve() {
-            return MULTI_LINE_STYLE;
-        }
     }
-
-    /**
-     * {@link ToStringStyle} that does not print out the class name and identity hash code but prints content start and field names.
-     *
-     * <p>
-     * This is an inner class rather than using {@link StandardToStringStyle} to ensure its immutability.
-     * </p>
-     */
     private static final class NoClassNameToStringStyle extends ToStringStyle {
 
-        private static final long serialVersionUID = 1L;
-
-        /**
-         * Constructs a new instance.
-         *
-         * <p>
-         * Use the static constant rather than instantiating.
-         * </p>
-         */
         NoClassNameToStringStyle() {
             setUseClassName(false);
             setUseIdentityHashCode(false);
         }
 
-        /**
-         * Ensure Singleton after serialization.
-         *
-         * @return the singleton
-         */
-        private Object readResolve() {
-            return NO_CLASS_NAME_STYLE;
-        }
+
     }
 
-    /**
-     * {@link ToStringStyle} that does not print out the field names.
-     *
-     * <p>
-     * This is an inner class rather than using {@link StandardToStringStyle} to ensure its immutability.
-     * </p>
-     */
     private static final class NoFieldNameToStringStyle extends ToStringStyle {
-
-        private static final long serialVersionUID = 1L;
-
-        /**
-         * Constructs a new instance.
-         *
-         * <p>
-         * Use the static constant rather than instantiating.
-         * </p>
-         */
         NoFieldNameToStringStyle() {
             setUseFieldNames(false);
         }
 
-        /**
-         * Ensure Singleton after serialization.
-         *
-         * @return the singleton
-         */
-        private Object readResolve() {
-            return NO_FIELD_NAMES_STYLE;
-        }
     }
 
-    /**
-     * {@link ToStringStyle} that prints out the short class name and no identity hash code.
-     *
-     * <p>
-     * This is an inner class rather than using {@link StandardToStringStyle} to ensure its immutability.
-     * </p>
-     */
     private static final class ShortPrefixToStringStyle extends ToStringStyle {
 
-        private static final long serialVersionUID = 1L;
-
-        /**
-         * Constructs a new instance.
-         *
-         * <p>
-         * Use the static constant rather than instantiating.
-         * </p>
-         */
         ShortPrefixToStringStyle() {
             setUseShortClassName(true);
             setUseIdentityHashCode(false);
         }
 
-        /**
-         * Ensure {@code Singleton} after serialization.
-         *
-         * @return the singleton.
-         */
-        private Object readResolve() {
-            return SHORT_PREFIX_STYLE;
-        }
     }
-
-    /**
-     * {@link ToStringStyle} that does not print out the class name, identity hash code, content start or field name.
-     *
-     * <p>
-     * This is an inner class rather than using {@link StandardToStringStyle} to ensure its immutability.
-     * </p>
-     */
     private static final class SimpleToStringStyle extends ToStringStyle {
-
-        private static final long serialVersionUID = 1L;
-
-        /**
-         * Constructs a new instance.
-         *
-         * <p>
-         * Use the static constant rather than instantiating.
-         * </p>
-         */
         SimpleToStringStyle() {
             setUseClassName(false);
             setUseIdentityHashCode(false);
@@ -476,28 +205,8 @@ public abstract class ToStringStyle implements Serializable {
             setContentEnd(StringUtils.EMPTY);
         }
 
-        /**
-         * Ensure <code>Singleton</code> after serialization.
-         *
-         * @return the singleton
-         */
-        private Object readResolve() {
-            return SIMPLE_STYLE;
-        }
     }
 
-    /**
-     * Serialization version ID.
-     */
-    private static final long serialVersionUID = -2587890625525655916L;
-
-    /**
-     * The default toString style. Using the {@code Person} example from {@link ToStringBuilder}, the output would look like this:
-     *
-     * <pre>
-     * Person@182f0db[name=John Doe,age=33,smoker=false]
-     * </pre>
-     */
     public static final ToStringStyle DEFAULT_STYLE = new DefaultToStringStyle();
 
     /**
@@ -520,54 +229,7 @@ public abstract class ToStringStyle implements Serializable {
      * Person@182f0db[John Doe,33,false]
      * </pre>
      */
-    public static final ToStringStyle NO_FIELD_NAMES_STYLE = new NoFieldNameToStringStyle();
-
-    /**
-     * The short prefix toString style. Using the {@code Person} example from {@link ToStringBuilder}, the output would look like this:
-     *
-     * <pre>
-     * Person[name=John Doe,age=33,smoker=false]
-     * </pre>
-     *
-     * @since 2.1
-     */
     public static final ToStringStyle SHORT_PREFIX_STYLE = new ShortPrefixToStringStyle();
-
-    /**
-     * The simple toString style. Using the {@code Person} example from {@link ToStringBuilder}, the output would look like this:
-     *
-     * <pre>
-     * John Doe,33,false
-     * </pre>
-     */
-    public static final ToStringStyle SIMPLE_STYLE = new SimpleToStringStyle();
-
-    /**
-     * The no class name toString style. Using the {@code Person} example from {@link ToStringBuilder}, the output would look like this:
-     *
-     * <pre>
-     * [name=John Doe,age=33,smoker=false]
-     * </pre>
-     *
-     * @since 3.4
-     */
-    public static final ToStringStyle NO_CLASS_NAME_STYLE = new NoClassNameToStringStyle();
-
-    /**
-     * The JSON toString style. Using the {@code Person} example from {@link ToStringBuilder}, the output would look like this:
-     *
-     * <pre>
-     * {"name": "John Doe", "age": 33, "smoker": true}
-     * </pre>
-     *
-     * <strong>Note:</strong> Since field names are mandatory in JSON, this ToStringStyle will throw an {@link UnsupportedOperationException} if no field name
-     * is passed in while appending. Furthermore This ToStringStyle will only generate valid JSON if referenced objects also produce JSON when calling
-     * {@code toString()} on them.
-     *
-     * @since 3.4
-     * @see <a href="https://www.json.org/">json.org</a>
-     */
-    public static final ToStringStyle JSON_STYLE = new JsonToStringStyle();
 
     /**
      * A registry of objects used by {@code reflectionToString} methods to detect cyclical object references and avoid infinite loops.
