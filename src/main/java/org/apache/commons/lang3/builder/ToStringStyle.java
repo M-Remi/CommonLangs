@@ -63,6 +63,22 @@ public abstract class ToStringStyle implements Serializable {
         public void append(final StringBuffer buffer, final String fieldName, final boolean[] array, final Boolean fullDetail) {
             checkAppendInput(fieldName, fullDetail);
             super.append(buffer, fieldName, array, fullDetail);
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+
         }
 
         @Override
