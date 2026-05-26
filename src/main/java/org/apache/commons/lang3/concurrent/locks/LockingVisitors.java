@@ -27,7 +27,6 @@ import java.util.function.Supplier;
 import org.apache.commons.lang3.builder.AbstractSupplier;
 import org.apache.commons.lang3.function.FailableConsumer;
 import org.apache.commons.lang3.function.FailableFunction;
-import org.apache.commons.lang3.function.Suppliers;
 
 /**
  * Combines the monitor and visitor pattern to work with {@link Lock}s as an alternative to synchronization.

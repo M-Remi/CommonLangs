@@ -18,14 +18,12 @@ package org.apache.commons.lang3.concurrent;
 
 import java.util.concurrent.ExecutionException;
 
-import org.apache.commons.lang3.exception.UncheckedException;
-
 /**
  * Unchecked {@link ExecutionException}.
  *
  * @since 3.13.0
  */
-public class UncheckedExecutionException extends UncheckedException {
+public class UncheckedExecutionException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
 

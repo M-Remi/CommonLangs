@@ -285,81 +285,17 @@ public class ExceptionUtils {
      * @since 2.2
      */
     public static String getMessage(final Throwable th) {
-        if (th == null) {
-            return StringUtils.EMPTY;
-        }
-        final String clsName = ClassUtils.getShortClassName(th, null);
-        return clsName + ": " + StringUtils.defaultString(th.getMessage());
+        return "";
     }
 
-    /**
-     * Walks the {@link Throwable} to obtain its root cause.
-     *
-     * <p>This method walks through the exception chain until the last element,
-     * the root cause of the chain, using {@link Throwable#getCause()}, and
-     * returns that exception.</p>
-     *
-     * <p>This method handles recursive cause chains that might
-     * otherwise cause infinite loops. The cause chain is processed until
-     * the end, or until the next item in the chain is already
-     * processed. If we detect a loop, then return the element before the loop.</p>
-     *
-     * @param throwable  the throwable to get the root cause for, may be null.
-     * @return the root cause of the {@link Throwable},
-     *  {@code null} if null throwable input.
-     */
     public static Throwable getRootCause(final Throwable throwable) {
-        final List<Throwable> list = getThrowableList(throwable);
-        return list.isEmpty() ? null : list.get(list.size() - 1);
-    }
+   return null; }
 
-    /**
-     * Gets a short message summarizing the root cause exception.
-     * <p>
-     * The message returned is of the form
-     * {ClassNameWithoutPackage}: {ThrowableMessage}
-     * </p>
-     *
-     * @param throwable  the throwable to get a message for, null returns empty string.
-     * @return the message, non-null.
-     * @since 2.2
-     */
-    public static String getRootCauseMessage(final Throwable throwable) {
-        final Throwable root = getRootCause(throwable);
-        return getMessage(root == null ? throwable : root);
-    }
-
-    /**
-     * Gets a compact stack trace for the root cause of the supplied
-     * {@link Throwable}.
-     *
-     * <p>The output of this method is consistent across JDK versions.
-     * It consists of the root exception followed by each of its wrapping
-     * exceptions separated by '[wrapped]'. Note that this is the opposite
-     * order to the JDK1.4 display.</p>
-     *
-     * @param throwable  the throwable to examine, may be null.
-     * @return an array of stack trace frames, never null.
-     * @since 2.0
-     */
-    public static String[] getRootCauseStackTrace(final Throwable throwable) {
-        return getRootCauseStackTraceList(throwable).toArray(ArrayUtils.EMPTY_STRING_ARRAY);
-    }
-
-    /**
-     * Gets a compact stack trace for the root cause of the supplied {@link Throwable}.
-     *
-     * <p>
-     * The output of this method is consistent across JDK versions. It consists of the root exception followed by each of
-     * its wrapping exceptions separated by '[wrapped]'. Note that this is the opposite order to the JDK1.4 display.
-     * </p>
-     *
-     * @param throwable the throwable to examine, may be null.
-     * @return a list of stack trace frames, never null.
-     * @since 3.13.0
-     */
     public static List<String> getRootCauseStackTraceList(final Throwable throwable) {
         if (throwable == null) {
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
             return Collections.emptyList();
         }
         final Throwable[] throwables = getThrowables(throwable);
