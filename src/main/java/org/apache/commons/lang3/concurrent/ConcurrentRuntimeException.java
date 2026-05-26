@@ -55,6 +55,13 @@ public class ConcurrentRuntimeException extends RuntimeException {
      */
     public ConcurrentRuntimeException(final String msg, final Throwable cause) {
         super(msg, ConcurrentUtils.checkedException(cause));
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
     }
 
     /**
