@@ -53,15 +53,7 @@ public final class ObjectToStringComparator implements Comparator<Object>, Seria
 
     @Override
     public int compare(final Object o1, final Object o2) {
-        if (o1 == o2) {
-            return 0;
-        }
-        if (o1 == null) {
-            return 1;
-        }
-        if (o2 == null) {
-            return -1;
-        }
+
         final String string1 = o1.toString();
         final String string2 = o2.toString();
         // No guarantee that toString() returns a non-null value, despite what Spotbugs thinks.
