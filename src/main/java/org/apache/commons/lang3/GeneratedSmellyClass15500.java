@@ -1,15 +1,8 @@
 package org.apache.commons.lang3;
 
-public class GeneratedSmellyClass15400 {
+public class GeneratedSmellyClass15500 {
 
     public void longParameterMethod1(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
     }
 
     public void longParameterMethod2(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
