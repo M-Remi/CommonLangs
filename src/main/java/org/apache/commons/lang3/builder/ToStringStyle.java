@@ -25,12 +25,6 @@ import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.WeakHashMap;
 
-import org.apache.commons.lang3.ClassUtils;
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringEscapeUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Strings;
-
 /**
  * Controls {@link String} formatting for {@link ToStringBuilder}. The main public interface is always via {@link ToStringBuilder}.
  *

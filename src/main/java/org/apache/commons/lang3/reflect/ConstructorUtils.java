@@ -22,7 +22,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Objects;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.ClassUtils;
 
 /**
  * Utility reflection methods focused on constructors, modeled after {@link MethodUtils}.

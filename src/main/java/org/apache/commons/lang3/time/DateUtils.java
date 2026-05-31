@@ -31,8 +31,6 @@ import java.util.Objects;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.commons.lang3.LocaleUtils;
-
 /**
  * A suite of utilities surrounding the use of the
  * {@link java.util.Calendar} and {@link java.util.Date} object.

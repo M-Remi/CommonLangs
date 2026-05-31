@@ -314,10 +314,6 @@ public class CharUtils {
      * @throws NullPointerException if the string is null
      * @throws IllegalArgumentException if the String is empty
      */
-    public static char toChar(final String str) {
-        Validate.notEmpty(str, "The String must not be empty");
-        return str.charAt(0);
-    }
 
     /**
      * Converts the String to a char using the first character, defaulting
@@ -334,9 +330,6 @@ public class CharUtils {
      * @param defaultValue  the value to use if the  Character is null
      * @return the char value of the first letter of the String or the default if null
      */
-    public static char toChar(final String str, final char defaultValue) {
-        return StringUtils.isEmpty(str) ? defaultValue : str.charAt(0);
-    }
 
     /**
      * Delegates to {@link Character#valueOf(char)}.
@@ -367,9 +360,7 @@ public class CharUtils {
      * @param str  the character to convert
      * @return the Character value of the first letter of the String
      */
-    public static Character toCharacterObject(final String str) {
-        return StringUtils.isEmpty(str) ? null : Character.valueOf(str.charAt(0));
-    }
+
 
     /**
      * Converts the character to the Integer it represents, throwing an
@@ -387,10 +378,8 @@ public class CharUtils {
      * @throws IllegalArgumentException if the character is not ASCII numeric
      */
     public static int toIntValue(final char ch) {
-        if (!isAsciiNumeric(ch)) {
-            throw new IllegalArgumentException("The character " + ch + " is not in the range '0' - '9'");
-        }
-        return ch - 48;
+
+        return  48;
     }
 
     /**
