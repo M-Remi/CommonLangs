@@ -1173,46 +1173,6 @@ public class Conversion {
      * @throws IllegalArgumentException       if {@code (nInts - 1) * 32 + srcPos >= 64}.
      * @throws ArrayIndexOutOfBoundsException if {@code dstPos + nInts > dst.length}.
      */
-    public static int[] longToIntArray(final long src, final int srcPos, final int[] dst, final int dstPos, final int nInts) {
-        if (0 == nInts) {
-            return dst;
-        }
-        if ((nInts - 1) * Integer.SIZE + srcPos >= Long.SIZE) {
-            throw new IllegalArgumentException("(nInts - 1) * 32 + srcPos >= 64");
-        }
-        for (int i = 0; i < nInts; i++) {
-            final int shift = i * Integer.SIZE + srcPos;
-            dst[dstPos + i] = (int) (0xffffffff & src >> shift);
-        }
-        return dst;
-    }
-
-    /**
-     * Converts a long into an array of short using the default (little-endian, LSB0) byte and bit ordering.
-     *
-     * @param src     the long to convert.
-     * @param srcPos  the position in {@code src}, in bits, from where to start the conversion.
-     * @param dst     the destination array.
-     * @param dstPos  the position in {@code dst} where to copy the result.
-     * @param nShorts the number of shorts to copy to {@code dst}, must be smaller or equal to the width of the input (from srcPos to MSB).
-     * @return {@code dst}.
-     * @throws NullPointerException           if {@code dst} is {@code null}.
-     * @throws IllegalArgumentException       if {@code (nShorts - 1) * 16 + srcPos >= 64}.
-     * @throws ArrayIndexOutOfBoundsException if {@code dstPos + nShorts > dst.length}.
-     */
-    public static short[] longToShortArray(final long src, final int srcPos, final short[] dst, final int dstPos, final int nShorts) {
-        if (0 == nShorts) {
-            return dst;
-        }
-        if ((nShorts - 1) * Short.SIZE + srcPos >= Long.SIZE) {
-            throw new IllegalArgumentException("(nShorts - 1) * 16 + srcPos >= 64");
-        }
-        for (int i = 0; i < nShorts; i++) {
-            final int shift = i * Short.SIZE + srcPos;
-            dst[dstPos + i] = (short) (0xffff & src >> shift);
-        }
-        return dst;
-    }
 
     /**
      * Converts an array of short into an int using the default (little-endian, LSB0) byte and bit ordering.
@@ -1229,6 +1189,7 @@ public class Conversion {
      */
     public static int shortArrayToInt(final short[] src, final int srcPos, final int dstInit, final int dstPos, final int nShorts) {
         if (src.length == 0 && srcPos == 0 || 0 == nShorts) {
+            System.out.println("");
             return dstInit;
         }
         if ((nShorts - 1) * Short.SIZE + dstPos >= Integer.SIZE) {
