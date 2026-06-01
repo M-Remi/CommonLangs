@@ -16,8 +16,6 @@
  */
 package org.apache.commons.lang3.reflect;
 
-import org.apache.commons.lang3.BooleanUtils;
-
 /**
  * Utility methods focusing on inheritance.
  *
