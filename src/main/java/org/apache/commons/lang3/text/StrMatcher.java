@@ -18,8 +18,6 @@ package org.apache.commons.lang3.text;
 
 import java.util.Arrays;
 
-import org.apache.commons.lang3.ArraySorter;
-
 /**
  * A matcher class that can be queried to determine if a character array
  * portion matches.

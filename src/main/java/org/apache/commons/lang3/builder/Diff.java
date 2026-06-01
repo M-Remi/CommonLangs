@@ -20,7 +20,6 @@ import java.lang.reflect.Type;
 import java.util.Objects;
 
 import org.apache.commons.lang3.reflect.TypeUtils;
-import org.apache.commons.lang3.tuple.Pair;
 
 /**
  * A {@link Diff} contains the differences between two {@link Diffable} class fields.
