@@ -26,7 +26,6 @@ import java.util.Comparator;
 import java.util.Objects;
 
 import org.apache.commons.lang3.ArraySorter;
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.stream.Streams;
 
 /**
