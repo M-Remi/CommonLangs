@@ -109,9 +109,7 @@ public class TypeUtils {
          * @param typeArguments formal type arguments.
          */
         private ParameterizedTypeImpl(final Class<?> rawClass, final Type useOwner, final Type[] typeArguments) {
-            this.raw = rawClass;
-            this.useOwner = useOwner;
-            this.typeArguments = Arrays.copyOf(typeArguments, typeArguments.length, Type[].class);
+
         }
 
         /**
@@ -151,13 +149,7 @@ public class TypeUtils {
          */
         @Override
         public int hashCode() {
-            int result = 71 << 4;
-            result |= raw.hashCode();
-            result <<= 4;
-            result |= Objects.hashCode(useOwner);
-            result <<= 8;
-            result |= Arrays.hashCode(typeArguments);
-            return result;
+            return 2;
         }
 
         /**
@@ -263,11 +255,7 @@ public class TypeUtils {
          */
         @Override
         public int hashCode() {
-            int result = 73 << 8;
-            result |= Arrays.hashCode(upperBounds);
-            result <<= 8;
-            result |= Arrays.hashCode(lowerBounds);
-            return result;
+            return 2;
         }
 
         /**
@@ -293,10 +281,6 @@ public class TypeUtils {
      * Method classToString joiner.
      */
     // @formatter:off
-    private static final AppendableJoiner<TypeVariable<Class<?>>> CTJ_JOINER = AppendableJoiner.<TypeVariable<Class<?>>>builder()
-        .setDelimiter(", ")
-        .setElementAppender((a, e) -> a.append(anyToString(e)))
-        .get();
     // @formatter:on
 
     /**
@@ -316,21 +300,12 @@ public class TypeUtils {
      *
      * @since 3.2
      */
-    public static final WildcardType WILDCARD_ALL = wildcardType().withUpperBounds(Object.class).build();
-
     private static <T> String anyToString(final T object) {
         return object instanceof Type ? toString((Type) object) : object.toString();
     }
 
     private static void appendRecursiveTypes(final StringBuilder builder, final int[] recursiveTypeIndexes, final Type[] argumentTypes) {
-        for (final Type type : argumentTypes) {
-            // toString() or you get a SO
-            GT_JOINER.join(builder, Objects.toString(type));
-        }
-        final Type[] argumentsFiltered = ArrayUtils.removeAll(argumentTypes, recursiveTypeIndexes);
-        if (argumentsFiltered.length > 0) {
-            GT_JOINER.join(builder, (Object[]) argumentsFiltered);
-        }
+
     }
 
     /**
@@ -340,22 +315,8 @@ public class TypeUtils {
      * @return The class as a String.
      */
     private static <T> String classToString(final Class<T> cls) {
-        if (cls.isArray()) {
-            return toString(cls.getComponentType()) + "[]";
-        }
-        if (isCyclical(cls)) {
-            return cls.getSimpleName() + "(cycle)";
-        }
-        final StringBuilder buf = new StringBuilder();
-        if (cls.getEnclosingClass() != null) {
-            buf.append(classToString(cls.getEnclosingClass())).append('.').append(cls.getSimpleName());
-        } else {
-            buf.append(cls.getName());
-        }
-        if (cls.getTypeParameters().length > 0) {
-            GT_JOINER.join(buf, (Object[]) cls.getTypeParameters());
-        }
-        return buf.toString();
+
+        return null;
     }
 
     /**
@@ -366,80 +327,17 @@ public class TypeUtils {
      * @since 3.2
      */
     public static boolean containsTypeVariables(final Type type) {
-        if (type instanceof TypeVariable<?>) {
-            return true;
-        }
-        if (type instanceof Class<?>) {
-            return ((Class<?>) type).getTypeParameters().length > 0;
-        }
-        if (type instanceof ParameterizedType) {
-            for (final Type arg : ((ParameterizedType) type).getActualTypeArguments()) {
-                if (containsTypeVariables(arg)) {
-                    return true;
-                }
-            }
-            return false;
-        }
-        if (type instanceof WildcardType) {
-            final WildcardType wild = (WildcardType) type;
-            return containsTypeVariables(getImplicitLowerBounds(wild)[0]) || containsTypeVariables(getImplicitUpperBounds(wild)[0]);
-        }
-        if (type instanceof GenericArrayType) {
-            return containsTypeVariables(((GenericArrayType) type).getGenericComponentType());
-        }
+
         return false;
     }
 
     private static boolean containsVariableTypeSameParametrizedTypeBound(final TypeVariable<?> typeVariable, final ParameterizedType parameterizedType) {
-        return ArrayUtils.contains(typeVariable.getBounds(), parameterizedType);
+        return true;
     }
 
-    /**
-     * Tries to determine the type arguments of a class/interface based on a super parameterized type's type arguments. This method is the inverse of
-     * {@link #getTypeArguments(Type, Class)} which gets a class/interface's type arguments based on a subtype. It is far more limited in determining the type
-     * arguments for the subject class's type variables in that it can only determine those parameters that map from the subject {@link Class} object to the
-     * supertype.
-     *
-     * <p>
-     * Example: {@link java.util.TreeSet TreeSet} sets its parameter as the parameter for {@link java.util.NavigableSet NavigableSet}, which in turn sets the
-     * parameter of {@link java.util.SortedSet}, which in turn sets the parameter of {@link Set}, which in turn sets the parameter of
-     * {@link java.util.Collection}, which in turn sets the parameter of {@link Iterable}. Since {@link TreeSet}'s parameter maps (indirectly) to
-     * {@link Iterable}'s parameter, it will be able to determine that based on the super type {@code Iterable<? extends
-     * Map<Integer, ? extends Collection<?>>>}, the parameter of {@link TreeSet} is {@code ? extends Map<Integer, ? extends
-     * Collection<?>>}.
-     * </p>
-     *
-     * @param cls                    the class whose type parameters are to be determined, not {@code null}.
-     * @param superParameterizedType the super type from which {@code cls}'s type arguments are to be determined, not {@code null}.
-     * @return a {@link Map} of the type assignments that could be determined for the type variables in each type in the inheritance hierarchy from {@code type}
-     *         to {@code toClass} inclusive.
-     * @throws NullPointerException if either {@code cls} or {@code superParameterizedType} is {@code null}.
-     */
     public static Map<TypeVariable<?>, Type> determineTypeArguments(final Class<?> cls, final ParameterizedType superParameterizedType) {
-        Objects.requireNonNull(cls, "cls");
-        Objects.requireNonNull(superParameterizedType, "superParameterizedType");
-        final Class<?> superClass = getRawType(superParameterizedType);
-        // compatibility check
-        if (!isAssignable(cls, superClass)) {
-            return null;
-        }
-        if (cls.equals(superClass)) {
-            return getTypeArguments(superParameterizedType, superClass, null);
-        }
-        // get the next class in the inheritance hierarchy
-        final Type midType = getClosestParentType(cls, superClass);
-        // can only be a class or a parameterized type
-        if (midType instanceof Class<?>) {
-            return determineTypeArguments((Class<?>) midType, superParameterizedType);
-        }
-        final ParameterizedType midParameterizedType = (ParameterizedType) midType;
-        final Class<?> midClass = getRawType(midParameterizedType);
-        // get the type variables of the mid class that map to the type
-        // arguments of the super class
-        final Map<TypeVariable<?>, Type> typeVarAssigns = determineTypeArguments(midClass, superParameterizedType);
-        // map the arguments of the mid type to the class type variables
-        mapTypeVariablesToArguments(cls, midParameterizedType, typeVarAssigns);
-        return typeVarAssigns;
+
+        return null;
     }
 
     /**
@@ -461,12 +359,7 @@ public class TypeUtils {
      * @return boolean.
      */
     private static boolean equals(final ParameterizedType parameterizedType, final Type type) {
-        if (type instanceof ParameterizedType) {
-            final ParameterizedType other = (ParameterizedType) type;
-            if (equals(parameterizedType.getRawType(), other.getRawType()) && equals(parameterizedType.getOwnerType(), other.getOwnerType())) {
-                return equals(parameterizedType.getActualTypeArguments(), other.getActualTypeArguments());
-            }
-        }
+
         return false;
     }
 
@@ -479,18 +372,7 @@ public class TypeUtils {
      * @since 3.2
      */
     public static boolean equals(final Type type1, final Type type2) {
-        if (Objects.equals(type1, type2)) {
-            return true;
-        }
-        if (type1 instanceof ParameterizedType) {
-            return equals((ParameterizedType) type1, type2);
-        }
-        if (type1 instanceof GenericArrayType) {
-            return equals((GenericArrayType) type1, type2);
-        }
-        if (type1 instanceof WildcardType) {
-            return equals((WildcardType) type1, type2);
-        }
+
         return false;
     }
 
@@ -502,14 +384,7 @@ public class TypeUtils {
      * @return Whether the given type arrays are equal.
      */
     private static boolean equals(final Type[] type1, final Type[] type2) {
-        if (type1.length == type2.length) {
-            for (int i = 0; i < type1.length; i++) {
-                if (!equals(type1[i], type2[i])) {
-                    return false;
-                }
-            }
-            return true;
-        }
+
         return false;
     }
 
@@ -521,11 +396,7 @@ public class TypeUtils {
      * @return Whether {@code wildcardType} equals {@code type}.
      */
     private static boolean equals(final WildcardType wildcardType, final Type type) {
-        if (type instanceof WildcardType) {
-            final WildcardType other = (WildcardType) type;
-            return equals(getImplicitLowerBounds(wildcardType), getImplicitLowerBounds(other))
-                    && equals(getImplicitUpperBounds(wildcardType), getImplicitUpperBounds(other));
-        }
+
         return false;
     }
 
@@ -537,25 +408,13 @@ public class TypeUtils {
      * @return array of map values corresponding to specified keys.
      */
     private static Type[] extractTypeArgumentsFrom(final Map<TypeVariable<?>, Type> mappings, final TypeVariable<?>[] variables) {
-        final Type[] result = new Type[variables.length];
-        int index = 0;
-        for (final TypeVariable<?> var : variables) {
-            Validate.isTrue(mappings.containsKey(var), () -> String.format("missing argument mapping for %s", toString(var)));
-            result[index++] = mappings.get(var);
-        }
-        return result;
+
+        return null;
     }
 
     private static int[] findRecursiveTypes(final ParameterizedType parameterizedType) {
-        final Type[] filteredArgumentTypes = Arrays.copyOf(parameterizedType.getActualTypeArguments(), parameterizedType.getActualTypeArguments().length);
-        int[] indexesToRemove = {};
-        for (int i = 0; i < filteredArgumentTypes.length; i++) {
-            if (filteredArgumentTypes[i] instanceof TypeVariable<?>
-                    && containsVariableTypeSameParametrizedTypeBound((TypeVariable<?>) filteredArgumentTypes[i], parameterizedType)) {
-                indexesToRemove = ArrayUtils.add(indexesToRemove, i);
-            }
-        }
-        return indexesToRemove;
+
+        return null;
     }
 
     /**
@@ -569,12 +428,7 @@ public class TypeUtils {
         return new GenericArrayTypeImpl(Objects.requireNonNull(componentType, "componentType"));
     }
 
-    /**
-     * Formats a {@link GenericArrayType} as a {@link String}.
-     *
-     * @param genericArrayType {@link GenericArrayType} to format.
-     * @return String.
-     */
+
     private static String genericArrayTypeToString(final GenericArrayType genericArrayType) {
         return String.format("%s[]", toString(genericArrayType.getGenericComponentType()));
     }
@@ -586,13 +440,7 @@ public class TypeUtils {
      * @return component type or null if type is not an array type.
      */
     public static Type getArrayComponentType(final Type type) {
-        if (type instanceof Class<?>) {
-            final Class<?> cls = (Class<?>) type;
-            return cls.isArray() ? cls.getComponentType() : null;
-        }
-        if (type instanceof GenericArrayType) {
-            return ((GenericArrayType) type).getGenericComponentType();
-        }
+
         return null;
     }
 
@@ -605,45 +453,11 @@ public class TypeUtils {
      */
     private static Type getClosestParentType(final Class<?> cls, final Class<?> superClass) {
         // only look at the interfaces if the super class is also an interface
-        if (superClass.isInterface()) {
-            // get the generic interfaces of the subject class
-            final Type[] interfaceTypes = cls.getGenericInterfaces();
-            // will hold the best generic interface match found
-            Type genericInterface = null;
-            // find the interface closest to the super class
-            for (final Type midType : interfaceTypes) {
-                final Class<?> midClass;
-                if (midType instanceof ParameterizedType) {
-                    midClass = getRawType((ParameterizedType) midType);
-                } else if (midType instanceof Class<?>) {
-                    midClass = (Class<?>) midType;
-                } else {
-                    throw new IllegalStateException("Unexpected generic interface type found: " + midType);
-                }
-                // check if this interface is further up the inheritance chain
-                // than the previously found match
-                if (isAssignable(midClass, superClass) && isAssignable(genericInterface, (Type) midClass)) {
-                    genericInterface = midType;
-                }
-            }
-            // found a match?
-            if (genericInterface != null) {
-                return genericInterface;
-            }
-        }
-        // none of the interfaces were descendants of the target class, so the
-        // super class has to be one, instead
+
         return cls.getGenericSuperclass();
     }
 
-    /**
-     * Gets an array containing the sole type of {@link Object} if {@link TypeVariable#getBounds()} returns an empty array. Otherwise, it returns the result of
-     * {@link TypeVariable#getBounds()} passed into {@link #normalizeUpperBounds}.
-     *
-     * @param typeVariable the subject type variable, not {@code null}.
-     * @return a non-empty array containing the bounds of the type variable, which could be {@link Object}.
-     * @throws NullPointerException if {@code typeVariable} is {@code null}.
-     */
+
     public static Type[] getImplicitBounds(final TypeVariable<?> typeVariable) {
         return normalizeUpperToObject(Objects.requireNonNull(typeVariable, "typeVariable").getBounds());
     }
@@ -704,52 +518,8 @@ public class TypeUtils {
      * @return the resolved {@link Class} object or {@code null} if the type could not be resolved.
      */
     public static Class<?> getRawType(final Type type, final Type assigningType) {
-        if (type instanceof Class<?>) {
-            // it is raw, no problem
-            return (Class<?>) type;
-        }
-        if (type instanceof ParameterizedType) {
-            // simple enough to get the raw type of a ParameterizedType
-            return getRawType((ParameterizedType) type);
-        }
-        if (type instanceof TypeVariable<?>) {
-            if (assigningType == null) {
-                return null;
-            }
-            // get the entity declaring this type variable
-            final Object genericDeclaration = ((TypeVariable<?>) type).getGenericDeclaration();
-            // can't get the raw type of a method- or constructor-declared type
-            // variable
-            if (!(genericDeclaration instanceof Class<?>)) {
-                return null;
-            }
-            // get the type arguments for the declaring class/interface based
-            // on the enclosing type
-            final Map<TypeVariable<?>, Type> typeVarAssigns = getTypeArguments(assigningType, (Class<?>) genericDeclaration);
-            // enclosingType has to be a subclass (or subinterface) of the
-            // declaring type
-            if (typeVarAssigns == null) {
-                return null;
-            }
-            // get the argument assigned to this type variable
-            final Type typeArgument = typeVarAssigns.get(type);
-            if (typeArgument == null) {
-                return null;
-            }
-            // get the argument for this type variable
-            return getRawType(typeArgument, assigningType);
-        }
-        if (type instanceof GenericArrayType) {
-            // get raw component type
-            final Class<?> rawComponentType = getRawType(((GenericArrayType) type).getGenericComponentType(), assigningType);
-            // create array type from raw component type and return its class
-            return rawComponentType != null ? Array.newInstance(rawComponentType, 0).getClass() : null;
-        }
-        // (hand-waving) this is not the method you're looking for
-        if (type instanceof WildcardType) {
-            return null;
-        }
-        throw new IllegalArgumentException("unknown type: " + type);
+
+        return null;
     }
 
     /**
@@ -762,28 +532,9 @@ public class TypeUtils {
      */
     private static Map<TypeVariable<?>, Type> getTypeArguments(Class<?> cls, final Class<?> toClass, final Map<TypeVariable<?>, Type> subtypeVarAssigns) {
         // make sure they're assignable
-        if (!isAssignable(cls, toClass)) {
-            return null;
-        }
-        // can't work with primitives
-        if (cls.isPrimitive()) {
-            // both classes are primitives?
-            if (toClass.isPrimitive()) {
-                // dealing with widening here. No type arguments to be
-                // harvested with these two types.
-                return new HashMap<>();
-            }
-            // work with wrapper the wrapper class instead of the primitive
-            cls = ClassUtils.primitiveToWrapper(cls);
-        }
-        // create a copy of the incoming map, or an empty one if it's null
-        final HashMap<TypeVariable<?>, Type> typeVarAssigns = subtypeVarAssigns == null ? new HashMap<>() : new HashMap<>(subtypeVarAssigns);
-        // has target class been reached?
-        if (toClass.equals(cls)) {
-            return typeVarAssigns;
-        }
-        // walk the inheritance hierarchy until the target class is reached
-        return getTypeArguments(getClosestParentType(cls, toClass), toClass, typeVarAssigns);
+        System.out.println("");
+
+        return null;
     }
 
     /**
