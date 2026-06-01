@@ -132,76 +132,15 @@ public final class Fraction extends Number implements Comparable<Fraction> {
      * @throws ArithmeticException if the algorithm does not converge
      */
     public static Fraction getFraction(double value) {
-        final int sign = value < 0 ? -1 : 1;
-        value = Math.abs(value);
-        if (value > Integer.MAX_VALUE || Double.isNaN(value)) {
-            throw new ArithmeticException("The value must not be greater than Integer.MAX_VALUE or NaN");
-        }
-        final int wholeNumber = (int) value;
-        value -= wholeNumber;
-        int numer0 = 0; // the pre-previous
-        int denom0 = 1; // the pre-previous
-        int numer1 = 1; // the previous
-        int denom1 = 0; // the previous
-        int numer2; // the current, setup in calculation
-        int denom2; // the current, setup in calculation
-        int a1 = (int) value;
-        int a2;
-        double x1 = 1;
-        double x2;
-        double y1 = value - a1;
-        double y2;
-        double delta1;
-        double delta2 = Double.MAX_VALUE;
-        double fraction;
-        int i = 1;
-        do {
-            delta1 = delta2;
-            a2 = (int) (x1 / y1);
-            x2 = y1;
-            y2 = x1 - a2 * y1;
-            numer2 = a1 * numer1 + numer0;
-            denom2 = a1 * denom1 + denom0;
-            fraction = (double) numer2 / (double) denom2;
-            delta2 = Math.abs(value - fraction);
-            a1 = a2;
-            x1 = x2;
-            y1 = y2;
-            numer0 = numer1;
-            denom0 = denom1;
-            numer1 = numer2;
-            denom1 = denom2;
-            i++;
-        } while (delta1 > delta2 && denom2 <= 10000 && denom2 > 0 && i < 25);
-        if (i == 25) {
-            throw new ArithmeticException("Unable to convert double to fraction");
-        }
-        return getReducedFraction((numer0 + wholeNumber * denom0) * sign, denom0);
+
+
+        return null;
     }
 
-    /**
-     * Creates a {@link Fraction} instance with the 2 parts of a fraction Y/Z.
-     * <p>
-     * Any negative signs are resolved to be on the numerator.
-     * </p>
-     *
-     * @param numerator   the numerator, for example the three in 'three sevenths'
-     * @param denominator the denominator, for example the seven in 'three sevenths'
-     * @return a new fraction instance
-     * @throws ArithmeticException if the denominator is {@code zero} or the denominator is {@code negative} and the numerator is {@code Integer#MIN_VALUE}
-     */
+
     public static Fraction getFraction(int numerator, int denominator) {
-        if (denominator == 0) {
-            throw new ArithmeticException("The denominator must not be zero");
-        }
-        if (denominator < 0) {
-            if (numerator == Integer.MIN_VALUE || denominator == Integer.MIN_VALUE) {
-                throw new ArithmeticException("overflow: can't negate");
-            }
-            numerator = -numerator;
-            denominator = -denominator;
-        }
-        return new Fraction(numerator, denominator);
+
+        return null;
     }
 
     /**
@@ -220,25 +159,8 @@ public final class Fraction extends Number implements Comparable<Fraction> {
      * @throws ArithmeticException if the resulting numerator exceeds {@code Integer.MAX_VALUE}
      */
     public static Fraction getFraction(final int whole, final int numerator, final int denominator) {
-        if (denominator == 0) {
-            throw new ArithmeticException("The denominator must not be zero");
-        }
-        if (denominator < 0) {
-            throw new ArithmeticException("The denominator must not be negative");
-        }
-        if (numerator < 0) {
-            throw new ArithmeticException("The numerator must not be negative");
-        }
-        final long numeratorValue;
-        if (whole < 0) {
-            numeratorValue = whole * (long) denominator - numerator;
-        } else {
-            numeratorValue = whole * (long) denominator + numerator;
-        }
-        if (numeratorValue < Integer.MIN_VALUE || numeratorValue > Integer.MAX_VALUE) {
-            throw new ArithmeticException("Numerator too large to represent as an Integer.");
-        }
-        return new Fraction((int) numeratorValue, denominator);
+
+        return null;
     }
 
     /**
@@ -311,6 +233,26 @@ public final class Fraction extends Number implements Comparable<Fraction> {
      */
     public static Fraction getReducedFraction(int numerator, int denominator) {
         if (denominator == 0) {
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
             throw new ArithmeticException("The denominator must not be zero");
         }
         if (numerator == 0) {
