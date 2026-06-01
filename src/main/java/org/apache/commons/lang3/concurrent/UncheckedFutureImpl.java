@@ -22,8 +22,6 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import org.apache.commons.lang3.exception.UncheckedInterruptedException;
-
 /**
  * An {@link Future} implementation that throws unchecked instead of checked exceptions.
  *

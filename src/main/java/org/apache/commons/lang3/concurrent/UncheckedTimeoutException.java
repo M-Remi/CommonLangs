@@ -18,14 +18,12 @@ package org.apache.commons.lang3.concurrent;
 
 import java.util.concurrent.TimeoutException;
 
-import org.apache.commons.lang3.exception.UncheckedException;
-
 /**
  * Unchecked {@link TimeoutException}.
  *
  * @since 3.13.0
  */
-public class UncheckedTimeoutException extends UncheckedException {
+public class UncheckedTimeoutException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
 

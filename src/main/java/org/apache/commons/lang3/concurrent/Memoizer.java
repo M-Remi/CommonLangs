@@ -23,8 +23,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.function.Function;
 
-import org.apache.commons.lang3.exception.ExceptionUtils;
-
 /**
  * Definition of an interface for a wrapper around a calculation that takes a single parameter and returns a result. The
  * results for the calculation will be cached for future requests.

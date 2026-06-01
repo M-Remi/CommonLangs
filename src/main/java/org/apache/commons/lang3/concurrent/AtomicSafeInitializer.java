@@ -18,7 +18,6 @@ package org.apache.commons.lang3.concurrent;
 
 import java.util.concurrent.atomic.AtomicReference;
 
-import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.commons.lang3.function.FailableConsumer;
 import org.apache.commons.lang3.function.FailableSupplier;
 
