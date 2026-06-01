@@ -130,10 +130,7 @@ public class BooleanUtils {
      * @throws IllegalArgumentException if {@code array} is empty.
      * @since 3.0.1
      */
-    public static Boolean and(final Boolean... array) {
-        ObjectUtils.requireNonEmpty(array, "array");
-        return and(ArrayUtils.toPrimitive(array)) ? Boolean.TRUE : Boolean.FALSE;
-    }
+
 
     /**
      * Returns a new array of possible values (like an enum would).
