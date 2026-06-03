@@ -100,13 +100,10 @@ public class SystemUtils {
      * This value is initialized when the class is loaded. If {@link System#setProperty(String,String)} or {@link System#setProperties(java.util.Properties)} is
      * called after this class is loaded, the value will be out of sync with that System property.
      * </p>
-     *
-     * @see SystemProperties#getJavaAwtFonts()
-     * @since 2.1
+     *     * @since 2.1
      * @deprecated Deprecated without replacement.
      */
-    @Deprecated
-    public static final String JAVA_AWT_FONTS = SystemProperties.getJavaAwtFonts();
+
 
     /**
      * A constant for the System Property {@code java.awt.graphicsenv}.
@@ -119,12 +116,10 @@ public class SystemUtils {
      * called after this class is loaded, the value will be out of sync with that System property.
      * </p>
      *
-     * @see SystemProperties#getJavaAwtGraphicsenv()
-     * @since 2.1
+          * @since 2.1
      * @deprecated Deprecated without replacement.
      */
-    @Deprecated
-    public static final String JAVA_AWT_GRAPHICSENV = SystemProperties.getJavaAwtGraphicsenv();
+
 
     /**
      * A constant for the System Property {@code java.awt.headless}. The value of this property is the String {@code "true"} or {@code "false"}.
@@ -143,8 +138,7 @@ public class SystemUtils {
      * @since Java 1.4
      * @deprecated Deprecated without replacement.
      */
-    @Deprecated
-    public static final String JAVA_AWT_HEADLESS = SystemProperties.getJavaAwtHeadless();
+
 
     /**
      * A constant for the System Property {@code java.awt.printerjob}.
@@ -161,8 +155,6 @@ public class SystemUtils {
      * @since 2.1
      * @deprecated Deprecated without replacement.
      */
-    @Deprecated
-    public static final String JAVA_AWT_PRINTERJOB = SystemProperties.getJavaAwtPrinterjob();
 
     /**
      * A constant for the System Property {@code java.class.path}. Java class path.
@@ -2107,11 +2099,9 @@ public class SystemUtils {
      * </p>
      *
      * @since 2.1
-     * @see SystemProperties#getAwtToolkit()
      * @deprecated Deprecated without replacement.
      */
-    @Deprecated
-    public static final String AWT_TOOLKIT = SystemProperties.getAwtToolkit();
+
 
     /**
      * Gets an environment variable, defaulting to {@code defaultValue} if the variable cannot be read.
@@ -2340,60 +2330,18 @@ public class SystemUtils {
     }
 
     /**
-     * Tests whether the {@link #JAVA_AWT_HEADLESS} value is {@code true}.
-     * <p>
+         * <p>
      * The result is based on the system property {@value SystemProperties#JAVA_AWT_HEADLESS}.
      * </p>
      *
      * @return {@code true} if {@code JAVA_AWT_HEADLESS} is {@code "true"}, {@code false} otherwise.
-     * @see #JAVA_AWT_HEADLESS
+     *
      * @since 2.1
      * @since Java 1.4
      * @deprecated Deprecated without replacement.
      */
-    @Deprecated
-    public static boolean isJavaAwtHeadless() {
-        return Boolean.TRUE.toString().equals(JAVA_AWT_HEADLESS);
-    }
 
-    /**
-     * Tests whether the Java version is at least the requested version.
-     * <p>
-     * The result is based on the system property saved in {@link #JAVA_SPECIFICATION_VERSION}.
-     * </p>
-     *
-     * @param requiredVersion the required version, for example 1.31f.
-     * @return {@code true} if the actual version is equal or greater than the required version.
-     */
-    public static boolean isJavaVersionAtLeast(final JavaVersion requiredVersion) {
-        return JAVA_SPECIFICATION_VERSION_ENUM != null && JAVA_SPECIFICATION_VERSION_ENUM.atLeast(requiredVersion);
-    }
 
-    /**
-     * Tests whether the Java version is at most the requested version.
-     * <p>
-     * The result is based on the system property saved in {@link #JAVA_SPECIFICATION_VERSION}.
-     * </p>
-     *
-     * @param requiredVersion the required version, for example 1.31f.
-     * @return {@code true} if the actual version is equal or less than the required version.
-     * @since 3.9
-     */
-    public static boolean isJavaVersionAtMost(final JavaVersion requiredVersion) {
-        return JAVA_SPECIFICATION_VERSION_ENUM != null && JAVA_SPECIFICATION_VERSION_ENUM.atMost(requiredVersion);
-    }
-
-    /**
-     * Tests whether the Java version matches.
-     *
-     * <p>
-     * This method is package private instead of private to support unit test invocation.
-     * </p>
-     *
-     * @param version       the actual Java version.
-     * @param versionPrefix the prefix for the expected Java version.
-     * @return true if matches, or false if not or can't determine.
-     */
     static boolean isJavaVersionMatch(final String version, final String versionPrefix) {
         if (version == null) {
             return false;
@@ -2401,18 +2349,6 @@ public class SystemUtils {
         return version.startsWith(versionPrefix);
     }
 
-    /**
-     * Tests whether the operating system matches.
-     * <p>
-     * This method is package private instead of private to support unit test invocation.
-     * </p>
-     *
-     * @param osName          the actual OS name.
-     * @param osVersion       the actual OS version.
-     * @param osNamePrefix    the prefix for the expected OS name.
-     * @param osVersionPrefix the prefix for the expected OS version.
-     * @return true if matches, or false if not or can't determine.
-     */
     static boolean isOsMatch(final String osName, final String osVersion, final String osNamePrefix, final String osVersionPrefix) {
         if (osName == null || osVersion == null) {
             return false;

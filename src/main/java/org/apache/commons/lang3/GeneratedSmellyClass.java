@@ -308,6 +308,612 @@ public class GeneratedSmellyClass {
         return result;
     }
 
+    public int featureEnvyMethod51(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod52(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod53(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod54(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod55(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod56(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod57(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod58(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod59(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod60(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod61(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod62(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod63(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod64(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod65(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod66(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod67(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod68(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod69(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod70(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod71(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod72(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod73(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod74(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod75(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod76(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod77(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod78(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod79(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod80(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod81(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod82(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod83(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod84(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod85(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod86(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod87(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod88(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod89(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod90(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+
+
+    public int featureEnvyMethod91(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod92(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod93(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod94(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod95(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod96(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod97(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod98(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod99(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod100(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+
+    public int featureEnvyMethod101(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod102(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod103(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod104(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod105(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod106(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod107(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod108(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod109(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod110(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod111(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod112(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod113(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod114(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod115(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod116(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod117(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod118(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod119(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod120(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod121(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod122(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod123(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod124(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod125(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod126(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod127(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod128(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod129(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod130(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod131(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod132(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod133(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod134(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod135(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod136(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod137(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod138(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod139(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod140(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+
+
+    public int featureEnvyMethod141(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod142(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod143(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod144(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod145(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod146(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod147(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod148(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod149(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod150(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+
 }
 
 class Helper {
