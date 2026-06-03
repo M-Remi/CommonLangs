@@ -1,305 +1,318 @@
 package org.apache.commons.lang3;
 
+
+
+
 public class GeneratedSmellyClass {
 
-    public void longParameterMethod1(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod2(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod3(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod4(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod5(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod6(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod7(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod8(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod9(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod10(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod11(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod12(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod13(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod14(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod15(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod16(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod17(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod18(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod19(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod20(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod21(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod22(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod23(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod24(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod25(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod26(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod27(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod28(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod29(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod30(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod31(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod32(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod33(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod34(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod35(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod36(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod37(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod38(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod39(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod40(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod41(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod42(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod43(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod44(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod45(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod46(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod47(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod48(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod49(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod50(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod51(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod52(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod53(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod54(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod55(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod56(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod57(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod58(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod59(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod60(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod61(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod62(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod63(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod64(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod65(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod66(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod67(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod68(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod69(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod70(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod71(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod72(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod73(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod74(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod75(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod76(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod77(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod78(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod79(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod80(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod81(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod82(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod83(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod84(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod85(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod86(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod87(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod88(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod89(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod90(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod91(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod92(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod93(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod94(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod95(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod96(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod97(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod98(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod99(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
-    }
-
-    public void longParameterMethod100(int a, char sex, char lm, short ff, String aa, String ab, String cd, int b1, int c1, int d1, int e1, int b, int c, int d, int e, int f, int g, int h) {
+    public int featureEnvyMethod1(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod2(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod3(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod4(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod5(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod6(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod7(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod8(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod9(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod10(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod11(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod12(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod13(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod14(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod15(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod16(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod17(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod18(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod19(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod20(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod21(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod22(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod23(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod24(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod25(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod26(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod27(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod28(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod29(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod30(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod31(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod32(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod33(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod34(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod35(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod36(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod37(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod38(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod39(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod40(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+
+
+    public int featureEnvyMethod41(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod42(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod43(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod44(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod45(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod46(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod47(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod48(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod49(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
+    }
+    public int featureEnvyMethod50(Helper helper) {
+        int result = helper.a + helper.b + helper.c;
+        result -= helper.a + helper.b + helper.c;
+        result += helper.a + helper.b + helper.c;
+        return result;
     }
 
 }
+
+class Helper {
+    public int a = 5;
+    public int b = 10;
+    public int c = 15;
+}
+

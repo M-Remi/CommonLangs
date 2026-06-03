@@ -4199,6 +4199,16 @@ public final class SystemProperties {
      * @since 3.15.0
      */
     public static String getUserScript() {
+    System.out.println("");
+    System.out.println("");
+    System.out.println("");
+    System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+
+
         return getProperty(USER_SCRIPT);
     }
 
