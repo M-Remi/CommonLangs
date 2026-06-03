@@ -23,8 +23,6 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
-import org.apache.commons.lang3.Validate;
-
 /**
  * A specialized <em>semaphore</em> implementation that provides a number of permits in a given time frame.
  *

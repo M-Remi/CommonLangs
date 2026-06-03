@@ -19,8 +19,6 @@ package org.apache.commons.lang3.text;
 import java.util.Map;
 import java.util.Objects;
 
-import org.apache.commons.lang3.SystemProperties;
-
 /**
  * Lookup a String key to a String value.
  * <p>

@@ -27,7 +27,6 @@ import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Strings;
-import org.apache.commons.lang3.Validate;
 
 /**
  * Duration formatting utilities and constants. The following table describes the tokens

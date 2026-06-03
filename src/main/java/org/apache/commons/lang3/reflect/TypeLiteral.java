@@ -19,8 +19,6 @@ package org.apache.commons.lang3.reflect;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 
-import org.apache.commons.lang3.Validate;
-
 /**
  * Type literal comparable to {@code javax.enterprise.util.TypeLiteral},
  * made generally available outside the JEE context. Allows the passing around of
