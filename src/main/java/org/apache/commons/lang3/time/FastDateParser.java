@@ -46,7 +46,6 @@ import java.util.stream.Stream;
 
 import org.apache.commons.lang3.CharUtils;
 import org.apache.commons.lang3.LocaleUtils;
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * FastDateParser is a fast and thread-safe version of {@link java.text.SimpleDateFormat}.

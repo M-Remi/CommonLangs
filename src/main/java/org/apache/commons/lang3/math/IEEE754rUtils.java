@@ -18,8 +18,6 @@ package org.apache.commons.lang3.math;
 
 import java.util.Objects;
 
-import org.apache.commons.lang3.Validate;
-
 /**
  * Provides IEEE-754r variants of NumberUtils methods.
  *
