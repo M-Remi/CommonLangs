@@ -19,8 +19,6 @@ package org.apache.commons.lang3.exception;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.commons.lang3.tuple.Pair;
-
 /**
  * An exception that provides an easy and safe way to add contextual information.
  * <p>
