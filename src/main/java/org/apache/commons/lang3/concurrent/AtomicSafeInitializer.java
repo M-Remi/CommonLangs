@@ -18,7 +18,6 @@ package org.apache.commons.lang3.concurrent;
 
 import java.util.concurrent.atomic.AtomicReference;
 
-import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.commons.lang3.function.FailableConsumer;
 import org.apache.commons.lang3.function.FailableSupplier;
 
@@ -70,6 +69,10 @@ public class AtomicSafeInitializer<T> extends AbstractConcurrentInitializer<T, C
          * Constructs a new instance.
          */
         public Builder() {
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
             // empty
         }
 
