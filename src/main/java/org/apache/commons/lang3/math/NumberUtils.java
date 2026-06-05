@@ -178,13 +178,7 @@ public class NumberUtils {
      * @throws NumberFormatException if the value cannot be converted.
      */
     public static BigDecimal createBigDecimal(final String str) {
-        if (str == null) {
-            return null;
-        }
-        // handle JDK1.3.1 bug where "" throws IndexOutOfBoundsException
-        if (StringUtils.isBlank(str)) {
-            throw new NumberFormatException("A blank string is not a valid number");
-        }
+
         return new BigDecimal(str);
     }
 
@@ -344,176 +338,6 @@ public class NumberUtils {
      * @return Number created from the string (or null if the input is null).
      * @throws NumberFormatException if the value cannot be converted.
      */
-    public static Number createNumber(final String str) {
-        if (str == null) {
-            return null;
-        }
-        if (StringUtils.isBlank(str)) {
-            throw new NumberFormatException("A blank string is not a valid number");
-        }
-        // Need to deal with all possible hex prefixes here
-        final String[] hexPrefixes = { "0x", "0X", "#" };
-        final int length = str.length();
-        final int offset = isSign(str.charAt(0)) ? 1 : 0;
-        int pfxLen = 0;
-        for (final String pfx : hexPrefixes) {
-            if (str.startsWith(pfx, offset)) {
-                pfxLen += pfx.length() + offset;
-                break;
-            }
-        }
-        final char lastChar = str.charAt(length - 1);
-        if (pfxLen > 0) { // we have a hex number
-            char firstSigDigit = 0; // strip leading zeroes
-            for (int i = pfxLen; i < length; i++) {
-                firstSigDigit = str.charAt(i);
-                if (firstSigDigit != '0') {
-                    break;
-                }
-                pfxLen++;
-            }
-            final boolean isLongCh = lastChar == 'l' || lastChar == 'L';
-            int hexDigits = length - pfxLen;
-            if (isLongCh) {
-                hexDigits--;
-            }
-            if (hexDigits > 16 || hexDigits == 16 && firstSigDigit > '7') { // too many for Long
-                return createBigInteger(str);
-            }
-            if (isLongCh) {
-                return createLong(str.substring(0, str.length() - 1));
-            }
-            if (hexDigits > 8 || hexDigits == 8 && firstSigDigit > '7') { // too many for an int
-                return createLong(str);
-            }
-            return createInteger(str);
-        }
-        final String mant;
-        final String dec;
-        final String exp;
-        final int decPos = str.indexOf('.');
-        final int expPos = str.indexOf('e') + str.indexOf('E') + 1; // assumes both not present
-        // if both e and E are present, this is caught by the checks on expPos (which prevent IOOBE)
-        // and the parsing which will detect if e or E appear in a number due to using the wrong offset
-        // Detect if the return type has been requested
-        final boolean requestType = !Character.isDigit(lastChar) && lastChar != '.';
-        if (decPos > -1) { // there is a decimal point
-            if (expPos > -1) { // there is an exponent
-                if (expPos <= decPos || expPos > length) { // prevents double exponent causing IOOBE
-                    throw new NumberFormatException(str + " is not a valid number.");
-                }
-                dec = str.substring(decPos + 1, expPos);
-            } else {
-                // No exponent, but there may be a type character to remove
-                dec = str.substring(decPos + 1, requestType ? length - 1 : length);
-            }
-            mant = getMantissa(str, decPos);
-        } else {
-            if (expPos > -1) {
-                if (expPos > length) { // prevents double exponent causing IOOBE
-                    throw new NumberFormatException(str + " is not a valid number.");
-                }
-                mant = getMantissa(str, expPos);
-            } else {
-                // No decimal, no exponent, but there may be a type character to remove
-                mant = getMantissa(str, requestType ? length - 1 : length);
-            }
-            dec = null;
-        }
-        if (requestType) {
-            if (expPos > -1 && expPos < length - 1) {
-                exp = str.substring(expPos + 1, length - 1);
-            } else {
-                exp = null;
-            }
-            // Requesting a specific type.
-            final String numeric = str.substring(0, length - 1);
-            switch (lastChar) {
-            case 'l':
-            case 'L':
-                if (dec == null && exp == null && (!numeric.isEmpty() && numeric.charAt(0) == '-' && isDigits(numeric.substring(1)) || isDigits(numeric))) {
-                    try {
-                        return createLong(numeric);
-                    } catch (final NumberFormatException ignored) {
-                        // Too big for a long
-                    }
-                    return createBigInteger(numeric);
-                }
-                throw new NumberFormatException(str + " is not a valid number.");
-            case 'f':
-            case 'F':
-                try {
-                    final Float f = createFloat(str);
-                    if (!(f.isInfinite() || f.floatValue() == 0.0F && !isZero(mant, dec))) {
-                        // If it's too big for a float or the float value = 0 and the string
-                        // has non-zeros in it, then float does not have the precision we want
-                        return f;
-                    }
-                } catch (final NumberFormatException ignored) {
-                    // ignore the bad number
-                }
-                // falls-through
-            case 'd':
-            case 'D':
-                try {
-                    final Double d = createDouble(str);
-                    if (!(d.isInfinite() || d.doubleValue() == 0.0D && !isZero(mant, dec))) {
-                        return d;
-                    }
-                } catch (final NumberFormatException ignored) {
-                    // ignore the bad number
-                }
-                try {
-                    return createBigDecimal(numeric);
-                } catch (final NumberFormatException ignored) {
-                    // ignore the bad number
-                }
-                // falls-through
-            default:
-                throw new NumberFormatException(str + " is not a valid number.");
-            }
-        }
-        // User doesn't have a preference on the return type, so let's start
-        // small and go from there...
-        if (expPos > -1 && expPos < length - 1) {
-            exp = str.substring(expPos + 1);
-        } else {
-            exp = null;
-        }
-        if (dec == null && exp == null) { // no decimal point and no exponent
-            // Must be an Integer, Long, Biginteger
-            try {
-                return createInteger(str);
-            } catch (final NumberFormatException ignored) {
-                // ignore the bad number
-            }
-            try {
-                return createLong(str);
-            } catch (final NumberFormatException ignored) {
-                // ignore the bad number
-            }
-            return createBigInteger(str);
-        }
-        // Must be a Float, Double, BigDecimal
-        try {
-            final Float f = createFloat(str);
-            final Double d = createDouble(str);
-            if (!f.isInfinite() && !(f.floatValue() == 0.0F && !isZero(mant, dec))
-                    && ((double) d.floatValue() == d.doubleValue() || f.toString().equals(d.toString()))) {
-                return f;
-            }
-            if (!d.isInfinite() && !(d.doubleValue() == 0.0D && !isZero(mant, dec))) {
-                final BigDecimal b = createBigDecimal(str);
-                if (b.compareTo(BigDecimal.valueOf(d.doubleValue())) == 0) {
-                    return d;
-                }
-                return b;
-            }
-        } catch (final NumberFormatException ignored) {
-            // ignore the bad number
-        }
-        return createBigDecimal(str);
-    }
 
     /**
      * Gets the mantissa of the given number.
@@ -569,7 +393,7 @@ public class NumberUtils {
      * </p>
      *
      * <p>
-     * Note, {@link #createNumber(String)} should return a number for every input resulting in {@code true}.
+     *
      * </p>
      *
      * @param str the {@link String} to check.
@@ -577,15 +401,7 @@ public class NumberUtils {
      * @since 3.5
      */
     public static boolean isCreatable(final String str) {
-        if (StringUtils.isEmpty(str)) {
-            return false;
-        }
-        try {
-            createNumber(str);
-            return true;
-        } catch (final RuntimeException e) {
-            return false;
-        }
+       return true;
     }
 
     /**
@@ -598,9 +414,7 @@ public class NumberUtils {
      * @param str the {@link String} to check
      * @return {@code true} if str contains only Unicode numeric
      */
-    public static boolean isDigits(final String str) {
-        return StringUtils.isNumeric(str);
-    }
+
 
     /**
      * Checks whether the String is a valid Java number.
@@ -620,7 +434,7 @@ public class NumberUtils {
      * </p>
      *
      * <p>
-     * Note, {@link #createNumber(String)} should return a number for every input resulting in {@code true}.
+     *
      * </p>
      *
      * @param str the {@link String} to check.
@@ -667,7 +481,7 @@ public class NumberUtils {
     }
 
     /**
-     * Utility method for {@link #createNumber(java.lang.String)}.
+     *
      *
      * <p>
      * This will check if the magnitude of the number is zero by checking if there are only zeros before and after the decimal place.
@@ -709,259 +523,7 @@ public class NumberUtils {
      * @throws IllegalArgumentException if {@code array} is empty.
      * @since 3.4 Changed signature from max(byte[]) to max(byte...).
      */
-    public static byte max(final byte... array) {
-        // Validates input
-        validateArray(array);
-        // Finds and returns max
-        byte max = array[0];
-        for (int i = 1; i < array.length; i++) {
-            if (array[i] > max) {
-                max = array[i];
-            }
-        }
-        return max;
-    }
 
-    /**
-     * Gets the maximum of three {@code byte} values.
-     *
-     * @param a value 1.
-     * @param b value 2.
-     * @param c value 3.
-     * @return the largest of the values.
-     */
-    public static byte max(byte a, final byte b, final byte c) {
-        if (b > a) {
-            a = b;
-        }
-        if (c > a) {
-            a = c;
-        }
-        return a;
-    }
-
-    /**
-     * Returns the maximum value in an array.
-     *
-     * @param array an array, must not be null or empty.
-     * @return the maximum value in the array.
-     * @throws NullPointerException     if {@code array} is {@code null}.
-     * @throws IllegalArgumentException if {@code array} is empty.
-     * @see IEEE754rUtils#max(double[]) IEEE754rUtils for a version of this method that handles NaN differently.
-     * @since 3.4 Changed signature from max(double[]) to max(double...)
-     */
-    public static double max(final double... array) {
-        // Validates input
-        validateArray(array);
-        // Finds and returns max
-        double max = array[0];
-        for (int j = 1; j < array.length; j++) {
-            if (Double.isNaN(array[j])) {
-                return Double.NaN;
-            }
-            if (array[j] > max) {
-                max = array[j];
-            }
-        }
-        return max;
-    }
-
-    /**
-     * Gets the maximum of three {@code double} values.
-     *
-     * <p>
-     * If any value is {@code NaN}, {@code NaN} is returned. Infinity is handled.
-     * </p>
-     *
-     * @param a value 1.
-     * @param b value 2.
-     * @param c value 3.
-     * @return the largest of the values.
-     * @see IEEE754rUtils#max(double, double, double) for a version of this method that handles NaN differently.
-     */
-    public static double max(final double a, final double b, final double c) {
-        return Math.max(Math.max(a, b), c);
-    }
-
-    /**
-     * Returns the maximum value in an array.
-     *
-     * @param array an array, must not be null or empty.
-     * @return the maximum value in the array.
-     * @throws NullPointerException     if {@code array} is {@code null}.
-     * @throws IllegalArgumentException if {@code array} is empty.
-     * @see IEEE754rUtils#max(float[]) IEEE754rUtils for a version of this method that handles NaN differently.
-     * @since 3.4 Changed signature from max(float[]) to max(float...).
-     */
-    public static float max(final float... array) {
-        // Validates input
-        validateArray(array);
-        // Finds and returns max
-        float max = array[0];
-        for (int j = 1; j < array.length; j++) {
-            if (Float.isNaN(array[j])) {
-                return Float.NaN;
-            }
-            if (array[j] > max) {
-                max = array[j];
-            }
-        }
-        return max;
-    }
-    // must handle Long, Float, Integer, Float, Short,
-    // BigDecimal, BigInteger and Byte
-    // useful methods:
-    // Byte.decode(String)
-    // Byte.valueOf(String, int radix)
-    // Byte.valueOf(String)
-    // Double.valueOf(String)
-    // Float.valueOf(String)
-    // Float.valueOf(String)
-    // Integer.valueOf(String, int radix)
-    // Integer.valueOf(String)
-    // Integer.decode(String)
-    // Integer.getInteger(String)
-    // Integer.getInteger(String, int val)
-    // Integer.getInteger(String, Integer val)
-    // Integer.valueOf(String)
-    // Double.valueOf(String)
-    // new Byte(String)
-    // Long.valueOf(String)
-    // Long.getLong(String)
-    // Long.getLong(String, int)
-    // Long.getLong(String, Integer)
-    // Long.valueOf(String, int)
-    // Long.valueOf(String)
-    // Short.valueOf(String)
-    // Short.decode(String)
-    // Short.valueOf(String, int)
-    // Short.valueOf(String)
-    // new BigDecimal(String)
-    // new BigInteger(String)
-    // new BigInteger(String, int radix)
-    // Possible inputs:
-    // 45 45.5 45E7 4.5E7 Hex Oct Binary xxxF xxxD xxxf xxxd
-    // plus minus everything. Prolly more. A lot are not separable.
-
-    /**
-     * Gets the maximum of three {@code float} values.
-     *
-     * <p>
-     * If any value is {@code NaN}, {@code NaN} is returned. Infinity is handled.
-     * </p>
-     *
-     * @param a value 1.
-     * @param b value 2.
-     * @param c value 3.
-     * @return the largest of the values.
-     * @see IEEE754rUtils#max(float, float, float) for a version of this method that handles NaN differently.
-     */
-    public static float max(final float a, final float b, final float c) {
-        return Math.max(Math.max(a, b), c);
-    }
-
-    /**
-     * Returns the maximum value in an array.
-     *
-     * @param array an array, must not be null or empty.
-     * @return the maximum value in the array.
-     * @throws NullPointerException     if {@code array} is {@code null}.
-     * @throws IllegalArgumentException if {@code array} is empty.
-     * @since 3.4 Changed signature from max(int[]) to max(int...).
-     */
-    public static int max(final int... array) {
-        // Validates input
-        validateArray(array);
-        // Finds and returns max
-        int max = array[0];
-        for (int j = 1; j < array.length; j++) {
-            if (array[j] > max) {
-                max = array[j];
-            }
-        }
-        return max;
-    }
-
-    /**
-     * Gets the maximum of three {@code int} values.
-     *
-     * @param a value 1.
-     * @param b value 2.
-     * @param c value 3.
-     * @return the largest of the values.
-     */
-    public static int max(int a, final int b, final int c) {
-        if (b > a) {
-            a = b;
-        }
-        if (c > a) {
-            a = c;
-        }
-        return a;
-    }
-
-    /**
-     * Returns the maximum value in an array.
-     *
-     * @param array an array, must not be null or empty.
-     * @return the maximum value in the array.
-     * @throws NullPointerException     if {@code array} is {@code null}.
-     * @throws IllegalArgumentException if {@code array} is empty.
-     * @since 3.4 Changed signature from max(long[]) to max(long...).
-     */
-    public static long max(final long... array) {
-        // Validates input
-        validateArray(array);
-        // Finds and returns max
-        long max = array[0];
-        for (int j = 1; j < array.length; j++) {
-            if (array[j] > max) {
-                max = array[j];
-            }
-        }
-        return max;
-    }
-
-    // 3 param max
-    /**
-     * Gets the maximum of three {@code long} values.
-     *
-     * @param a value 1.
-     * @param b value 2.
-     * @param c value 3.
-     * @return the largest of the values.
-     */
-    public static long max(long a, final long b, final long c) {
-        if (b > a) {
-            a = b;
-        }
-        if (c > a) {
-            a = c;
-        }
-        return a;
-    }
-
-    /**
-     * Returns the maximum value in an array.
-     *
-     * @param array an array, must not be null or empty.
-     * @return the maximum value in the array.
-     * @throws NullPointerException     if {@code array} is {@code null}.
-     * @throws IllegalArgumentException if {@code array} is empty.
-     * @since 3.4 Changed signature from max(short[]) to max(short...).
-     */
-    public static short max(final short... array) {
-        // Validates input
-        validateArray(array);
-        // Finds and returns max
-        short max = array[0];
-        for (int i = 1; i < array.length; i++) {
-            if (array[i] > max) {
-                max = array[i];
-            }
-        }
-        return max;
-    }
 
     /**
      * Gets the maximum of three {@code short} values.
@@ -973,6 +535,11 @@ public class NumberUtils {
      */
     public static short max(short a, final short b, final short c) {
         if (b > a) {
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
             a = b;
         }
         if (c > a) {
@@ -1692,7 +1259,7 @@ public class NumberUtils {
      */
     private static void validateArray(final Object array) {
         Objects.requireNonNull(array, "array");
-        Validate.isTrue(Array.getLength(array) != 0, "Array cannot be empty.");
+
     }
 
     /**
