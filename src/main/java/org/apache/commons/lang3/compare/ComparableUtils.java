@@ -18,8 +18,6 @@ package org.apache.commons.lang3.compare;
 
 import java.util.function.Predicate;
 
-import org.apache.commons.lang3.ObjectUtils;
-
 /**
  * Helper translating {@link Comparable#compareTo} results to booleans.
  *

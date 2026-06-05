@@ -17,8 +17,6 @@
 
 package org.apache.commons.lang3.builder;
 
-import org.apache.commons.lang3.ClassUtils;
-
 /**
  * Works with {@link ToStringBuilder} to create a "deep" {@code toString}.
  * But instead a single line like the {@link RecursiveToStringStyle} this creates a multiline String

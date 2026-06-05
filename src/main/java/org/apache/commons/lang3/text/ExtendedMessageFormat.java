@@ -25,8 +25,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
-import org.apache.commons.lang3.LocaleUtils;
-
 /**
  * Extends {@link java.text.MessageFormat} to allow pluggable/additional formatting
  * options for embedded format elements.
