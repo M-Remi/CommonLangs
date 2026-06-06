@@ -23,8 +23,6 @@ import java.util.TimeZone;
 import org.apache.commons.lang3.ArraySorter;
 import org.apache.commons.lang3.JavaVersion;
 import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.SystemProperties;
-import org.apache.commons.lang3.SystemUtils;
 
 /**
  * Helps dealing with {@link java.util.TimeZone}s.
