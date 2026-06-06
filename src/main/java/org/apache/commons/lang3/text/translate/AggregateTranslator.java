@@ -19,8 +19,6 @@ package org.apache.commons.lang3.text.translate;
 import java.io.IOException;
 import java.io.Writer;
 
-import org.apache.commons.lang3.ArrayUtils;
-
 /**
  * Executes a sequence of translators one after the other. Execution ends whenever
  * the first translator consumes code points from the input.
