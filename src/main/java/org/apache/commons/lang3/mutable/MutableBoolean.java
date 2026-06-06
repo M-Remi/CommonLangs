@@ -20,8 +20,6 @@ package org.apache.commons.lang3.mutable;
 import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.apache.commons.lang3.BooleanUtils;
-
 /**
  * A mutable {@code boolean} wrapper.
  * <p>

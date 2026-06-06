@@ -22,8 +22,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.EnumSet;
 
-import org.apache.commons.lang3.CharUtils;
-
 /**
  * Translate XML numeric entities of the form &amp;#[xX]?\d+;? to the specific code point.
  *

@@ -43,21 +43,7 @@ import org.apache.commons.lang3.mutable.MutableInt;
 import org.apache.commons.lang3.stream.IntStreams;
 import org.apache.commons.lang3.stream.Streams;
 
-/**
- * Operations on arrays, primitive arrays (like {@code int[]}) and
- * primitive wrapper arrays (like {@code Integer[]}).
- * <p>
- * This class tries to handle {@code null} input gracefully.
- * An exception will not be thrown for a {@code null}
- * array input. However, an Object array that contains a {@code null}
- * element may throw an exception. Each method documents its behavior.
- * </p>
- * <p>
- * #ThreadSafe#
- * </p>
- *
- * @since 2.0
- */
+
 public class ArrayUtils {
 
     /**
@@ -215,485 +201,9 @@ public class ArrayUtils {
      */
     public static final int SAFE_MAX_ARRAY_LENGTH = Integer.MAX_VALUE - 8;
 
-    /**
-     * Copies the given array and adds the given element at the end of the new array.
-     * <p>
-     * The new array contains the same elements of the input
-     * array plus the given element in the last position. The component type of
-     * the new array is the same as that of the input array.
-     * </p>
-     * <p>
-     * If the input array is {@code null}, a new one element array is returned
-     * whose component type is the same as the element.
-     * </p>
-     * <pre>
-     * ArrayUtils.add(null, true)          = [true]
-     * ArrayUtils.add([true], false)       = [true, false]
-     * ArrayUtils.add([true, false], true) = [true, false, true]
-     * </pre>
-     *
-     * @param array  the array to copy and add the element to, may be {@code null}.
-     * @param element  the object to add at the last index of the new array.
-     * @return A new array containing the existing elements plus the new element.
-     * @since 2.1
-     */
-    public static boolean[] add(final boolean[] array, final boolean element) {
-        final boolean[] newArray = (boolean[]) copyArrayGrow1(array, Boolean.TYPE);
-        newArray[newArray.length - 1] = element;
-        return newArray;
-    }
 
-    /**
-     * Inserts the specified element at the specified position in the array.
-     * Shifts the element currently at that position (if any) and any subsequent
-     * elements to the right (adds one to their indices).
-     * <p>
-     * This method returns a new array with the same elements of the input
-     * array plus the given element on the specified position. The component
-     * type of the returned array is always the same as that of the input
-     * array.
-     * </p>
-     * <p>
-     * If the input array is {@code null}, a new one element array is returned
-     * whose component type is the same as the element.
-     * </p>
-     * <pre>
-     * ArrayUtils.add(null, 0, true)          = [true]
-     * ArrayUtils.add([true], 0, false)       = [false, true]
-     * ArrayUtils.add([false], 1, true)       = [false, true]
-     * ArrayUtils.add([true, false], 1, true) = [true, true, false]
-     * </pre>
-     *
-     * @param array  the array to add the element to, may be {@code null}.
-     * @param index  the position of the new object.
-     * @param element  the object to add.
-     * @return A new array containing the existing elements and the new element.
-     * @throws IndexOutOfBoundsException if the index is out of range (index &lt; 0 || index &gt; array.length).
-     * @deprecated this method has been superseded by {@link #insert(int, boolean[], boolean...)} and
-     * may be removed in a future release. Please note the handling of {@code null} input arrays differs
-     * in the new method: inserting {@code X} into a {@code null} array results in {@code null} not {@code X}.
-     */
-    @Deprecated
-    public static boolean[] add(final boolean[] array, final int index, final boolean element) {
-        return (boolean[]) add(array, index, Boolean.valueOf(element), Boolean.TYPE);
-    }
-
-    /**
-     * Copies the given array and adds the given element at the end of the new array.
-     * <p>
-     * The new array contains the same elements of the input
-     * array plus the given element in the last position. The component type of
-     * the new array is the same as that of the input array.
-     * </p>
-     * <p>
-     * If the input array is {@code null}, a new one element array is returned
-     * whose component type is the same as the element.
-     * </p>
-     * <pre>
-     * ArrayUtils.add(null, 0)   = [0]
-     * ArrayUtils.add([1], 0)    = [1, 0]
-     * ArrayUtils.add([1, 0], 1) = [1, 0, 1]
-     * </pre>
-     *
-     * @param array  the array to copy and add the element to, may be {@code null}.
-     * @param element  the object to add at the last index of the new array.
-     * @return A new array containing the existing elements plus the new element.
-     * @since 2.1
-     */
-    public static byte[] add(final byte[] array, final byte element) {
-        final byte[] newArray = (byte[]) copyArrayGrow1(array, Byte.TYPE);
-        newArray[newArray.length - 1] = element;
-        return newArray;
-    }
-
-    /**
-     * Inserts the specified element at the specified position in the array.
-     * Shifts the element currently at that position (if any) and any subsequent
-     * elements to the right (adds one to their indices).
-     * <p>
-     * This method returns a new array with the same elements of the input
-     * array plus the given element on the specified position. The component
-     * type of the returned array is always the same as that of the input
-     * array.
-     * </p>
-     * <p>
-     * If the input array is {@code null}, a new one element array is returned
-     * whose component type is the same as the element.
-     * </p>
-     * <pre>
-     * ArrayUtils.add([1], 0, 2)         = [2, 1]
-     * ArrayUtils.add([2, 6], 2, 3)      = [2, 6, 3]
-     * ArrayUtils.add([2, 6], 0, 1)      = [1, 2, 6]
-     * ArrayUtils.add([2, 6, 3], 2, 1)   = [2, 6, 1, 3]
-     * </pre>
-     *
-     * @param array  the array to add the element to, may be {@code null}.
-     * @param index  the position of the new object.
-     * @param element  the object to add.
-     * @return A new array containing the existing elements and the new element.
-     * @throws IndexOutOfBoundsException if the index is out of range.
-     * (index &lt; 0 || index &gt; array.length).
-     * @deprecated this method has been superseded by {@link #insert(int, byte[], byte...)} and
-     * may be removed in a future release. Please note the handling of {@code null} input arrays differs
-     * in the new method: inserting {@code X} into a {@code null} array results in {@code null} not {@code X}.
-     */
-    @Deprecated
-    public static byte[] add(final byte[] array, final int index, final byte element) {
-        return (byte[]) add(array, index, Byte.valueOf(element), Byte.TYPE);
-    }
-
-    /**
-     * Copies the given array and adds the given element at the end of the new array.
-     * <p>
-     * The new array contains the same elements of the input
-     * array plus the given element in the last position. The component type of
-     * the new array is the same as that of the input array.
-     * </p>
-     * <p>
-     * If the input array is {@code null}, a new one element array is returned
-     * whose component type is the same as the element.
-     * </p>
-     * <pre>
-     * ArrayUtils.add(null, '0')       = ['0']
-     * ArrayUtils.add(['1'], '0')      = ['1', '0']
-     * ArrayUtils.add(['1', '0'], '1') = ['1', '0', '1']
-     * </pre>
-     *
-     * @param array  the array to copy and add the element to, may be {@code null}.
-     * @param element  the object to add at the last index of the new array.
-     * @return A new array containing the existing elements plus the new element.
-     * @since 2.1
-     */
-    public static char[] add(final char[] array, final char element) {
-        final char[] newArray = (char[]) copyArrayGrow1(array, Character.TYPE);
-        newArray[newArray.length - 1] = element;
-        return newArray;
-    }
-
-    /**
-     * Inserts the specified element at the specified position in the array.
-     * Shifts the element currently at that position (if any) and any subsequent
-     * elements to the right (adds one to their indices).
-     * <p>
-     * This method returns a new array with the same elements of the input
-     * array plus the given element on the specified position. The component
-     * type of the returned array is always the same as that of the input
-     * array.
-     * </p>
-     * <p>
-     * If the input array is {@code null}, a new one element array is returned
-     * whose component type is the same as the element.
-     * </p>
-     * <pre>
-     * ArrayUtils.add(null, 0, 'a')            = ['a']
-     * ArrayUtils.add(['a'], 0, 'b')           = ['b', 'a']
-     * ArrayUtils.add(['a', 'b'], 0, 'c')      = ['c', 'a', 'b']
-     * ArrayUtils.add(['a', 'b'], 1, 'k')      = ['a', 'k', 'b']
-     * ArrayUtils.add(['a', 'b', 'c'], 1, 't') = ['a', 't', 'b', 'c']
-     * </pre>
-     *
-     * @param array  the array to add the element to, may be {@code null}.
-     * @param index  the position of the new object.
-     * @param element  the object to add.
-     * @return A new array containing the existing elements and the new element.
-     * @throws IndexOutOfBoundsException if the index is out of range.
-     * (index &lt; 0 || index &gt; array.length).
-     * @deprecated this method has been superseded by {@link #insert(int, char[], char...)} and
-     * may be removed in a future release. Please note the handling of {@code null} input arrays differs
-     * in the new method: inserting {@code X} into a {@code null} array results in {@code null} not {@code X}.
-     */
-    @Deprecated
-    public static char[] add(final char[] array, final int index, final char element) {
-        return (char[]) add(array, index, Character.valueOf(element), Character.TYPE);
-    }
-
-    /**
-     * Copies the given array and adds the given element at the end of the new array.
-     *
-     * <p>
-     * The new array contains the same elements of the input
-     * array plus the given element in the last position. The component type of
-     * the new array is the same as that of the input array.
-     * </p>
-     * <p>
-     * If the input array is {@code null}, a new one element array is returned
-     * whose component type is the same as the element.
-     * </p>
-     * <pre>
-     * ArrayUtils.add(null, 0)   = [0]
-     * ArrayUtils.add([1], 0)    = [1, 0]
-     * ArrayUtils.add([1, 0], 1) = [1, 0, 1]
-     * </pre>
-     *
-     * @param array  the array to copy and add the element to, may be {@code null}.
-     * @param element  the object to add at the last index of the new array.
-     * @return A new array containing the existing elements plus the new element.
-     * @since 2.1
-     */
-    public static double[] add(final double[] array, final double element) {
-        final double[] newArray = (double[]) copyArrayGrow1(array, Double.TYPE);
-        newArray[newArray.length - 1] = element;
-        return newArray;
-    }
-
-    /**
-     * Inserts the specified element at the specified position in the array.
-     * Shifts the element currently at that position (if any) and any subsequent
-     * elements to the right (adds one to their indices).
-     * <p>
-     * This method returns a new array with the same elements of the input
-     * array plus the given element on the specified position. The component
-     * type of the returned array is always the same as that of the input
-     * array.
-     * </p>
-     * <p>
-     * If the input array is {@code null}, a new one element array is returned
-     * whose component type is the same as the element.
-     * </p>
-     * <pre>
-     * ArrayUtils.add([1.1], 0, 2.2)              = [2.2, 1.1]
-     * ArrayUtils.add([2.3, 6.4], 2, 10.5)        = [2.3, 6.4, 10.5]
-     * ArrayUtils.add([2.6, 6.7], 0, -4.8)        = [-4.8, 2.6, 6.7]
-     * ArrayUtils.add([2.9, 6.0, 0.3], 2, 1.0)    = [2.9, 6.0, 1.0, 0.3]
-     * </pre>
-     *
-     * @param array  the array to add the element to, may be {@code null}.
-     * @param index  the position of the new object.
-     * @param element  the object to add.
-     * @return A new array containing the existing elements and the new element.
-     * @throws IndexOutOfBoundsException if the index is out of range
-     * (index &lt; 0 || index &gt; array.length).
-     * @deprecated this method has been superseded by {@link #insert(int, double[], double...)} and
-     * may be removed in a future release. Please note the handling of {@code null} input arrays differs
-     * in the new method: inserting {@code X} into a {@code null} array results in {@code null} not {@code X}.
-     */
-    @Deprecated
-    public static double[] add(final double[] array, final int index, final double element) {
-        return (double[]) add(array, index, Double.valueOf(element), Double.TYPE);
-    }
-
-    /**
-     * Copies the given array and adds the given element at the end of the new array.
-     * <p>
-     * The new array contains the same elements of the input
-     * array plus the given element in the last position. The component type of
-     * the new array is the same as that of the input array.
-     * </p>
-     * <p>
-     * If the input array is {@code null}, a new one element array is returned
-     * whose component type is the same as the element.
-     * </p>
-     * <pre>
-     * ArrayUtils.add(null, 0)   = [0]
-     * ArrayUtils.add([1], 0)    = [1, 0]
-     * ArrayUtils.add([1, 0], 1) = [1, 0, 1]
-     * </pre>
-     *
-     * @param array  the array to copy and add the element to, may be {@code null}.
-     * @param element  the object to add at the last index of the new array.
-     * @return A new array containing the existing elements plus the new element.
-     * @since 2.1
-     */
-    public static float[] add(final float[] array, final float element) {
-        final float[] newArray = (float[]) copyArrayGrow1(array, Float.TYPE);
-        newArray[newArray.length - 1] = element;
-        return newArray;
-    }
-
-    /**
-     * Inserts the specified element at the specified position in the array.
-     * Shifts the element currently at that position (if any) and any subsequent
-     * elements to the right (adds one to their indices).
-     * <p>
-     * This method returns a new array with the same elements of the input
-     * array plus the given element on the specified position. The component
-     * type of the returned array is always the same as that of the input
-     * array.
-     * </p>
-     * <p>
-     * If the input array is {@code null}, a new one element array is returned
-     * whose component type is the same as the element.
-     * </p>
-     * <pre>
-     * ArrayUtils.add([1.1f], 0, 2.2f)               = [2.2f, 1.1f]
-     * ArrayUtils.add([2.3f, 6.4f], 2, 10.5f)        = [2.3f, 6.4f, 10.5f]
-     * ArrayUtils.add([2.6f, 6.7f], 0, -4.8f)        = [-4.8f, 2.6f, 6.7f]
-     * ArrayUtils.add([2.9f, 6.0f, 0.3f], 2, 1.0f)   = [2.9f, 6.0f, 1.0f, 0.3f]
-     * </pre>
-     *
-     * @param array  the array to add the element to, may be {@code null}.
-     * @param index  the position of the new object.
-     * @param element  the object to add.
-     * @return A new array containing the existing elements and the new element.
-     * @throws IndexOutOfBoundsException if the index is out of range
-     * (index &lt; 0 || index &gt; array.length).
-     * @deprecated this method has been superseded by {@link #insert(int, float[], float...)} and
-     * may be removed in a future release. Please note the handling of {@code null} input arrays differs
-     * in the new method: inserting {@code X} into a {@code null} array results in {@code null} not {@code X}.
-     */
-    @Deprecated
-    public static float[] add(final float[] array, final int index, final float element) {
-        return (float[]) add(array, index, Float.valueOf(element), Float.TYPE);
-    }
-
-    /**
-     * Copies the given array and adds the given element at the end of the new array.
-     * <p>
-     * The new array contains the same elements of the input
-     * array plus the given element in the last position. The component type of
-     * the new array is the same as that of the input array.
-     * </p>
-     * <p>
-     * If the input array is {@code null}, a new one element array is returned
-     * whose component type is the same as the element.
-     * </p>
-     * <pre>
-     * ArrayUtils.add(null, 0)   = [0]
-     * ArrayUtils.add([1], 0)    = [1, 0]
-     * ArrayUtils.add([1, 0], 1) = [1, 0, 1]
-     * </pre>
-     *
-     * @param array  the array to copy and add the element to, may be {@code null}.
-     * @param element  the object to add at the last index of the new array.
-     * @return A new array containing the existing elements plus the new element.
-     * @since 2.1
-     */
-    public static int[] add(final int[] array, final int element) {
-        final int[] newArray = (int[]) copyArrayGrow1(array, Integer.TYPE);
-        newArray[newArray.length - 1] = element;
-        return newArray;
-    }
-
-    /**
-     * Inserts the specified element at the specified position in the array.
-     * Shifts the element currently at that position (if any) and any subsequent
-     * elements to the right (adds one to their indices).
-     * <p>
-     * This method returns a new array with the same elements of the input
-     * array plus the given element on the specified position. The component
-     * type of the returned array is always the same as that of the input
-     * array.
-     * </p>
-     * <p>
-     * If the input array is {@code null}, a new one element array is returned
-     * whose component type is the same as the element.
-     * </p>
-     * <pre>
-     * ArrayUtils.add([1], 0, 2)         = [2, 1]
-     * ArrayUtils.add([2, 6], 2, 10)     = [2, 6, 10]
-     * ArrayUtils.add([2, 6], 0, -4)     = [-4, 2, 6]
-     * ArrayUtils.add([2, 6, 3], 2, 1)   = [2, 6, 1, 3]
-     * </pre>
-     *
-     * @param array  the array to add the element to, may be {@code null}.
-     * @param index  the position of the new object.
-     * @param element  the object to add.
-     * @return A new array containing the existing elements and the new element.
-     * @throws IndexOutOfBoundsException if the index is out of range
-     * (index &lt; 0 || index &gt; array.length).
-     * @deprecated this method has been superseded by {@link #insert(int, int[], int...)} and
-     * may be removed in a future release. Please note the handling of {@code null} input arrays differs
-     * in the new method: inserting {@code X} into a {@code null} array results in {@code null} not {@code X}.
-     */
-    @Deprecated
-    public static int[] add(final int[] array, final int index, final int element) {
-        return (int[]) add(array, index, Integer.valueOf(element), Integer.TYPE);
-    }
-
-    /**
-     * Inserts the specified element at the specified position in the array.
-     * Shifts the element currently at that position (if any) and any subsequent
-     * elements to the right (adds one to their indices).
-     * <p>
-     * This method returns a new array with the same elements of the input
-     * array plus the given element on the specified position. The component
-     * type of the returned array is always the same as that of the input
-     * array.
-     * </p>
-     * <p>
-     * If the input array is {@code null}, a new one element array is returned
-     * whose component type is the same as the element.
-     * </p>
-     * <pre>
-     * ArrayUtils.add([1L], 0, 2L)           = [2L, 1L]
-     * ArrayUtils.add([2L, 6L], 2, 10L)      = [2L, 6L, 10L]
-     * ArrayUtils.add([2L, 6L], 0, -4L)      = [-4L, 2L, 6L]
-     * ArrayUtils.add([2L, 6L, 3L], 2, 1L)   = [2L, 6L, 1L, 3L]
-     * </pre>
-     *
-     * @param array  the array to add the element to, may be {@code null}.
-     * @param index  the position of the new object.
-     * @param element  the object to add.
-     * @return A new array containing the existing elements and the new element.
-     * @throws IndexOutOfBoundsException if the index is out of range
-     * (index &lt; 0 || index &gt; array.length).
-     * @deprecated this method has been superseded by {@link #insert(int, long[], long...)} and
-     * may be removed in a future release. Please note the handling of {@code null} input arrays differs
-     * in the new method: inserting {@code X} into a {@code null} array results in {@code null} not {@code X}.
-     */
-    @Deprecated
-    public static long[] add(final long[] array, final int index, final long element) {
-        return (long[]) add(array, index, Long.valueOf(element), Long.TYPE);
-    }
-
-    /**
-     * Copies the given array and adds the given element at the end of the new array.
-     * <p>
-     * The new array contains the same elements of the input
-     * array plus the given element in the last position. The component type of
-     * the new array is the same as that of the input array.
-     * </p>
-     * <p>
-     * If the input array is {@code null}, a new one element array is returned
-     * whose component type is the same as the element.
-     * </p>
-     * <pre>
-     * ArrayUtils.add(null, 0)   = [0]
-     * ArrayUtils.add([1], 0)    = [1, 0]
-     * ArrayUtils.add([1, 0], 1) = [1, 0, 1]
-     * </pre>
-     *
-     * @param array  the array to copy and add the element to, may be {@code null}.
-     * @param element  the object to add at the last index of the new array.
-     * @return A new array containing the existing elements plus the new element.
-     * @since 2.1
-     */
-    public static long[] add(final long[] array, final long element) {
-        final long[] newArray = (long[]) copyArrayGrow1(array, Long.TYPE);
-        newArray[newArray.length - 1] = element;
-        return newArray;
-    }
-
-    /**
-     * Underlying implementation of add(array, index, element) methods.
-     * The last parameter is the class, which may not equal element.getClass
-     * for primitives.
-     *
-     * @param array  the array to add the element to, may be {@code null}.
-     * @param index  the position of the new object.
-     * @param element  the object to add.
-     * @param clazz the type of the element being added.
-     * @return A new array containing the existing elements and the new element.
-     */
     private static Object add(final Object array, final int index, final Object element, final Class<?> clazz) {
-        if (array == null) {
-            if (index != 0) {
-                throw new IndexOutOfBoundsException("Index: " + index + ", Length: 0");
-            }
-            final Object joinedArray = Array.newInstance(clazz, 1);
-            Array.set(joinedArray, 0, element);
-            return joinedArray;
-        }
-        final int length = Array.getLength(array);
-        if (index > length || index < 0) {
-            throw new IndexOutOfBoundsException("Index: " + index + ", Length: " + length);
-        }
-        final Object result = arraycopy(array, 0, 0, index, () -> Array.newInstance(clazz, length + 1));
-        Array.set(result, index, element);
-        if (index < length) {
-            System.arraycopy(array, index, result, index + 1, length - index);
-        }
-        return result;
+        return null;
     }
 
     /**
@@ -723,7 +233,7 @@ public class ArrayUtils {
      * @return A new array containing the existing elements and the new element.
      * @throws IndexOutOfBoundsException if the index is out of range
      * (index &lt; 0 || index &gt; array.length).
-     * @deprecated this method has been superseded by {@link #insert(int, short[], short...)} and
+     *
      * may be removed in a future release. Please note the handling of {@code null} input arrays differs
      * in the new method: inserting {@code X} into a {@code null} array results in {@code null} not {@code X}.
      */
@@ -784,58 +294,11 @@ public class ArrayUtils {
      *
      * @param <T> the component type of the array.
      * @param array  the array to add the element to, may be {@code null}.
-     * @param index  the position of the new object.
-     * @param element  the object to add.
-     * @return A new array containing the existing elements and the new element.
-     * @throws IndexOutOfBoundsException if the index is out of range (index &lt; 0 || index &gt; array.length).
-     * @throws IllegalArgumentException if both array and element are null.
-     * @deprecated this method has been superseded by {@link #insert(int, Object[], Object...) insert(int, T[], T...)} and
      * may be removed in a future release. Please note the handling of {@code null} input arrays differs
      * in the new method: inserting {@code X} into a {@code null} array results in {@code null} not {@code X}.
      */
-    @Deprecated
-    public static <T> T[] add(final T[] array, final int index, final T element) {
-        final Class<T> clazz;
-        if (array != null) {
-            clazz = getComponentType(array);
-        } else if (element != null) {
-            clazz = ObjectUtils.getClass(element);
-        } else {
-            throw new IllegalArgumentException("Array and element cannot both be null");
-        }
-        return (T[]) add(array, index, element, clazz);
-    }
 
-    /**
-     * Copies the given array and adds the given element at the end of the new array.
-     * <p>
-     * The new array contains the same elements of the input
-     * array plus the given element in the last position. The component type of
-     * the new array is the same as that of the input array.
-     * </p>
-     * <p>
-     * If the input array is {@code null}, a new one element array is returned
-     * whose component type is the same as the element, unless the element itself is null,
-     * in which case the return type is Object[]
-     * </p>
-     * <pre>
-     * ArrayUtils.add(null, null)      = Throws {@link IllegalArgumentException}
-     * ArrayUtils.add(null, "a")       = ["a"]
-     * ArrayUtils.add(["a"], null)     = ["a", null]
-     * ArrayUtils.add(["a"], "b")      = ["a", "b"]
-     * ArrayUtils.add(["a", "b"], "c") = ["a", "b", "c"]
-     * </pre>
-     *
-     * @param <T> the component type of the array.
-     * @param array  the array to "add" the element to, may be {@code null}.
-     * @param element  the object to add, may be {@code null}.
-     * @return A new array containing the existing elements plus the new element
-     * The returned array type will be that of the input array (unless null),
-     * in which case it will have the same type as the element.
-     * If both are null, an IllegalArgumentException is thrown.
-     * @throws IllegalArgumentException if both arguments are null.
-     * @since 2.1
-     */
+
     public static <T> T[] add(final T[] array, final T element) {
         final Class<?> type;
         if (array != null) {
@@ -871,18 +334,7 @@ public class ArrayUtils {
      * @return The new boolean[] array or {@code null}.
      * @since 2.1
      */
-    public static boolean[] addAll(final boolean[] array1, final boolean... array2) {
-        if (array1 == null) {
-            return clone(array2);
-        }
-        if (array2 == null) {
-            return clone(array1);
-        }
-        final boolean[] joinedArray = new boolean[array1.length + array2.length];
-        System.arraycopy(array1, 0, joinedArray, 0, array1.length);
-        System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);
-        return joinedArray;
-    }
+
 
     /**
      * Adds all the elements of the given arrays into a new array.
@@ -903,82 +355,11 @@ public class ArrayUtils {
      * @return The new byte[] array or {@code null}.
      * @since 2.1
      */
-    public static byte[] addAll(final byte[] array1, final byte... array2) {
-        if (array1 == null) {
-            return clone(array2);
-        }
-        if (array2 == null) {
-            return clone(array1);
-        }
-        final byte[] joinedArray = new byte[array1.length + array2.length];
-        System.arraycopy(array1, 0, joinedArray, 0, array1.length);
-        System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);
-        return joinedArray;
-    }
 
-    /**
-     * Adds all the elements of the given arrays into a new array.
-     * <p>
-     * The new array contains all of the element of {@code array1} followed
-     * by all of the elements {@code array2}. When an array is returned, it is always
-     * a new array.
-     * </p>
-     * <pre>
-     * ArrayUtils.addAll(array1, null)   = cloned copy of array1
-     * ArrayUtils.addAll(null, array2)   = cloned copy of array2
-     * ArrayUtils.addAll([], [])         = []
-     * ArrayUtils.addAll(null, null)     = null
-     * </pre>
-     *
-     * @param array1  the first array whose elements are added to the new array.
-     * @param array2  the second array whose elements are added to the new array.
-     * @return The new char[] array or {@code null}.
-     * @since 2.1
-     */
-    public static char[] addAll(final char[] array1, final char... array2) {
-        if (array1 == null) {
-            return clone(array2);
-        }
-        if (array2 == null) {
-            return clone(array1);
-        }
-        final char[] joinedArray = new char[array1.length + array2.length];
-        System.arraycopy(array1, 0, joinedArray, 0, array1.length);
-        System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);
-        return joinedArray;
-    }
 
-    /**
-     * Adds all the elements of the given arrays into a new array.
-     * <p>
-     * The new array contains all of the element of {@code array1} followed
-     * by all of the elements {@code array2}. When an array is returned, it is always
-     * a new array.
-     * </p>
-     * <pre>
-     * ArrayUtils.addAll(array1, null)   = cloned copy of array1
-     * ArrayUtils.addAll(null, array2)   = cloned copy of array2
-     * ArrayUtils.addAll([], [])         = []
-     * ArrayUtils.addAll(null, null)     = null
-     * </pre>
-     *
-     * @param array1  the first array whose elements are added to the new array.
-     * @param array2  the second array whose elements are added to the new array.
-     * @return The new double[] array or {@code null}.
-     * @since 2.1
-     */
-    public static double[] addAll(final double[] array1, final double... array2) {
-        if (array1 == null) {
-            return clone(array2);
-        }
-        if (array2 == null) {
-            return clone(array1);
-        }
-        final double[] joinedArray = new double[array1.length + array2.length];
-        System.arraycopy(array1, 0, joinedArray, 0, array1.length);
-        System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);
-        return joinedArray;
-    }
+
+
+
 
     /**
      * Adds all the elements of the given arrays into a new array.
@@ -999,18 +380,6 @@ public class ArrayUtils {
      * @return The new float[] array or {@code null}.
      * @since 2.1
      */
-    public static float[] addAll(final float[] array1, final float... array2) {
-        if (array1 == null) {
-            return clone(array2);
-        }
-        if (array2 == null) {
-            return clone(array1);
-        }
-        final float[] joinedArray = new float[array1.length + array2.length];
-        System.arraycopy(array1, 0, joinedArray, 0, array1.length);
-        System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);
-        return joinedArray;
-    }
 
     /**
      * Adds all the elements of the given arrays into a new array.
@@ -1031,608 +400,11 @@ public class ArrayUtils {
      * @return The new int[] array or {@code null}.
      * @since 2.1
      */
-    public static int[] addAll(final int[] array1, final int... array2) {
-        if (array1 == null) {
-            return clone(array2);
-        }
-        if (array2 == null) {
-            return clone(array1);
-        }
-        final int[] joinedArray = new int[array1.length + array2.length];
-        System.arraycopy(array1, 0, joinedArray, 0, array1.length);
-        System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);
-        return joinedArray;
-    }
 
-    /**
-     * Adds all the elements of the given arrays into a new array.
-     * <p>
-     * The new array contains all of the element of {@code array1} followed
-     * by all of the elements {@code array2}. When an array is returned, it is always
-     * a new array.
-     * </p>
-     * <pre>
-     * ArrayUtils.addAll(array1, null)   = cloned copy of array1
-     * ArrayUtils.addAll(null, array2)   = cloned copy of array2
-     * ArrayUtils.addAll([], [])         = []
-     * ArrayUtils.addAll(null, null)     = null
-     * </pre>
-     *
-     * @param array1  the first array whose elements are added to the new array.
-     * @param array2  the second array whose elements are added to the new array.
-     * @return The new long[] array or {@code null}.
-     * @since 2.1
-     */
-    public static long[] addAll(final long[] array1, final long... array2) {
-        if (array1 == null) {
-            return clone(array2);
-        }
-        if (array2 == null) {
-            return clone(array1);
-        }
-        final long[] joinedArray = new long[array1.length + array2.length];
-        System.arraycopy(array1, 0, joinedArray, 0, array1.length);
-        System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);
-        return joinedArray;
-    }
 
-    /**
-     * Adds all the elements of the given arrays into a new array.
-     * <p>
-     * The new array contains all of the element of {@code array1} followed
-     * by all of the elements {@code array2}. When an array is returned, it is always
-     * a new array.
-     * </p>
-     * <pre>
-     * ArrayUtils.addAll(array1, null)   = cloned copy of array1
-     * ArrayUtils.addAll(null, array2)   = cloned copy of array2
-     * ArrayUtils.addAll([], [])         = []
-     * ArrayUtils.addAll(null, null)     = null
-     * </pre>
-     *
-     * @param array1  the first array whose elements are added to the new array.
-     * @param array2  the second array whose elements are added to the new array.
-     * @return The new short[] array or {@code null}.
-     * @since 2.1
-     */
-    public static short[] addAll(final short[] array1, final short... array2) {
-        if (array1 == null) {
-            return clone(array2);
-        }
-        if (array2 == null) {
-            return clone(array1);
-        }
-        final short[] joinedArray = new short[array1.length + array2.length];
-        System.arraycopy(array1, 0, joinedArray, 0, array1.length);
-        System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);
-        return joinedArray;
-    }
 
-    /**
-     * Adds all the elements of the given arrays into a new array.
-     * <p>
-     * The new array contains all of the element of {@code array1} followed
-     * by all of the elements {@code array2}. When an array is returned, it is always
-     * a new array.
-     * </p>
-     * <pre>
-     * ArrayUtils.addAll(null, null)     = null
-     * ArrayUtils.addAll(array1, null)   = cloned copy of array1
-     * ArrayUtils.addAll(null, array2)   = cloned copy of array2
-     * ArrayUtils.addAll([], [])         = []
-     * ArrayUtils.addAll(null, null)     = null
-     * ArrayUtils.addAll([null], [null]) = [null, null]
-     * ArrayUtils.addAll(["a", "b", "c"], ["1", "2", "3"]) = ["a", "b", "c", "1", "2", "3"]
-     * </pre>
-     *
-     * @param <T> the component type of the array.
-     * @param array1  the first array whose elements are added to the new array, may be {@code null}.
-     * @param array2  the second array whose elements are added to the new array, may be {@code null}.
-     * @return The new array, {@code null} if both arrays are {@code null}.
-     *      The type of the new array is the type of the first array,
-     *      unless the first array is null, in which case the type is the same as the second array.
-     * @throws IllegalArgumentException if the array types are incompatible.
-     * @since 2.1
-     */
-    public static <T> T[] addAll(final T[] array1, @SuppressWarnings("unchecked") final T... array2) {
-        if (array1 == null) {
-            return clone(array2);
-        }
-        if (array2 == null) {
-            return clone(array1);
-        }
-        final Class<T> type1 = getComponentType(array1);
-        final T[] joinedArray = arraycopy(array1, 0, 0, array1.length, () -> newInstance(type1, array1.length + array2.length));
-        try {
-            System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);
-        } catch (final ArrayStoreException ase) {
-            // Check if problem was due to incompatible types
-            /*
-             * We do this here, rather than before the copy because: - it would be a wasted check most of the time - safer, in case check turns out to be too
-             * strict
-             */
-            final Class<?> type2 = array2.getClass().getComponentType();
-            if (!type1.isAssignableFrom(type2)) {
-                throw new IllegalArgumentException("Cannot store " + type2.getName() + " in an array of " + type1.getName(), ase);
-            }
-            throw ase; // No, so rethrow original
-        }
-        return joinedArray;
-    }
 
-    /**
-     * Safely adds the length of an array to a running total, checking for overflow.
-     *
-     * @param totalLength the current accumulated length
-     * @param array the array whose length should be added (can be {@code null},
-     *              in which case its length is considered 0)
-     * @return the new total length after adding the array's length
-     * @throws IllegalArgumentException if total arrays length exceed {@link ArrayUtils#SAFE_MAX_ARRAY_LENGTH}.
-     */
-    private static int addExact(final int totalLength, final Object array) {
-        try {
-            final int length = MathBridge.addExact(totalLength, getLength(array));
-            if (length > SAFE_MAX_ARRAY_LENGTH) {
-                throw new IllegalArgumentException("Total arrays length exceed " + SAFE_MAX_ARRAY_LENGTH);
-            }
-            return length;
-        } catch (final ArithmeticException exception) {
-            throw new IllegalArgumentException("Total arrays length exceed " + SAFE_MAX_ARRAY_LENGTH);
-        }
-    }
 
-    /**
-     * Copies the given array and adds the given element at the beginning of the new array.
-     * <p>
-     * The new array contains the same elements of the input array plus the given element in the first position. The
-     * component type of the new array is the same as that of the input array.
-     * </p>
-     * <p>
-     * If the input array is {@code null}, a new one element array is returned whose component type is the same as the
-     * element.
-     * </p>
-     * <pre>
-     * ArrayUtils.addFirst(null, true)          = [true]
-     * ArrayUtils.addFirst([true], false)       = [false, true]
-     * ArrayUtils.addFirst([true, false], true) = [true, true, false]
-     * </pre>
-     *
-     * @param array the array to "add" the element to, may be {@code null}.
-     * @param element the object to add.
-     * @return A new array containing the existing elements plus the new element The returned array type will be that of
-     *         the input array (unless null), in which case it will have the same type as the element.
-     * @since 3.10
-     */
-    public static boolean[] addFirst(final boolean[] array, final boolean element) {
-        return array == null ? add(array, element) : insert(0, array, element);
-    }
-
-    /**
-     * Copies the given array and adds the given element at the beginning of the new array.
-     * <p>
-     * The new array contains the same elements of the input array plus the given element in the first position. The
-     * component type of the new array is the same as that of the input array.
-     * </p>
-     * <p>
-     * If the input array is {@code null}, a new one element array is returned whose component type is the same as the
-     * element.
-     * </p>
-     * <pre>
-     * ArrayUtils.addFirst(null, 1)   = [1]
-     * ArrayUtils.addFirst([1], 0)    = [0, 1]
-     * ArrayUtils.addFirst([1, 0], 1) = [1, 1, 0]
-     * </pre>
-     *
-     * @param array the array to "add" the element to, may be {@code null}.
-     * @param element the object to add.
-     * @return A new array containing the existing elements plus the new element The returned array type will be that of
-     *         the input array (unless null), in which case it will have the same type as the element.
-     * @since 3.10
-     */
-    public static byte[] addFirst(final byte[] array, final byte element) {
-        return array == null ? add(array, element) : insert(0, array, element);
-    }
-
-    /**
-     * Copies the given array and adds the given element at the beginning of the new array.
-     * <p>
-     * The new array contains the same elements of the input array plus the given element in the first position. The
-     * component type of the new array is the same as that of the input array.
-     * </p>
-     * <p>
-     * If the input array is {@code null}, a new one element array is returned whose component type is the same as the
-     * element.
-     * </p>
-     * <pre>
-     * ArrayUtils.addFirst(null, '1')       = ['1']
-     * ArrayUtils.addFirst(['1'], '0')      = ['0', '1']
-     * ArrayUtils.addFirst(['1', '0'], '1') = ['1', '1', '0']
-     * </pre>
-     *
-     * @param array the array to "add" the element to, may be {@code null}.
-     * @param element the object to add.
-     * @return A new array containing the existing elements plus the new element The returned array type will be that of
-     *         the input array (unless null), in which case it will have the same type as the element.
-     * @since 3.10
-     */
-    public static char[] addFirst(final char[] array, final char element) {
-        return array == null ? add(array, element) : insert(0, array, element);
-    }
-
-    /**
-     * Copies the given array and adds the given element at the beginning of the new array.
-     * <p>
-     * The new array contains the same elements of the input array plus the given element in the first position. The
-     * component type of the new array is the same as that of the input array.
-     * </p>
-     * <p>
-     * If the input array is {@code null}, a new one element array is returned whose component type is the same as the
-     * element.
-     * </p>
-     * <pre>
-     * ArrayUtils.addFirst(null, 1)   = [1]
-     * ArrayUtils.addFirst([1], 0)    = [0, 1]
-     * ArrayUtils.addFirst([1, 0], 1) = [1, 1, 0]
-     * </pre>
-     *
-     * @param array the array to "add" the element to, may be {@code null}.
-     * @param element the object to add.
-     * @return A new array containing the existing elements plus the new element The returned array type will be that of
-     *         the input array (unless null), in which case it will have the same type as the element.
-     * @since 3.10
-     */
-    public static double[] addFirst(final double[] array, final double element) {
-        return array == null ? add(array, element) : insert(0, array, element);
-    }
-
-    /**
-     * Copies the given array and adds the given element at the beginning of the new array.
-     * <p>
-     * The new array contains the same elements of the input array plus the given element in the first position. The
-     * component type of the new array is the same as that of the input array.
-     * </p>
-     * <p>
-     * If the input array is {@code null}, a new one element array is returned whose component type is the same as the
-     * element.
-     * </p>
-     * <pre>
-     * ArrayUtils.addFirst(null, 1)   = [1]
-     * ArrayUtils.addFirst([1], 0)    = [0, 1]
-     * ArrayUtils.addFirst([1, 0], 1) = [1, 1, 0]
-     * </pre>
-     *
-     * @param array the array to "add" the element to, may be {@code null}.
-     * @param element the object to add.
-     * @return A new array containing the existing elements plus the new element The returned array type will be that of
-     *         the input array (unless null), in which case it will have the same type as the element.
-     * @since 3.10
-     */
-    public static float[] addFirst(final float[] array, final float element) {
-        return array == null ? add(array, element) : insert(0, array, element);
-    }
-
-    /**
-     * Copies the given array and adds the given element at the beginning of the new array.
-     * <p>
-     * The new array contains the same elements of the input array plus the given element in the first position. The
-     * component type of the new array is the same as that of the input array.
-     * </p>
-     * <p>
-     * If the input array is {@code null}, a new one element array is returned whose component type is the same as the
-     * element.
-     * </p>
-     * <pre>
-     * ArrayUtils.addFirst(null, 1)   = [1]
-     * ArrayUtils.addFirst([1], 0)    = [0, 1]
-     * ArrayUtils.addFirst([1, 0], 1) = [1, 1, 0]
-     * </pre>
-     *
-     * @param array the array to "add" the element to, may be {@code null}.
-     * @param element the object to add.
-     * @return A new array containing the existing elements plus the new element The returned array type will be that of
-     *         the input array (unless null), in which case it will have the same type as the element.
-     * @since 3.10
-     */
-    public static int[] addFirst(final int[] array, final int element) {
-        return array == null ? add(array, element) : insert(0, array, element);
-    }
-
-    /**
-     * Copies the given array and adds the given element at the beginning of the new array.
-     * <p>
-     * The new array contains the same elements of the input array plus the given element in the first position. The
-     * component type of the new array is the same as that of the input array.
-     * </p>
-     * <p>
-     * If the input array is {@code null}, a new one element array is returned whose component type is the same as the
-     * element.
-     * </p>
-     * <pre>
-     * ArrayUtils.addFirst(null, 1)   = [1]
-     * ArrayUtils.addFirst([1], 0)    = [0, 1]
-     * ArrayUtils.addFirst([1, 0], 1) = [1, 1, 0]
-     * </pre>
-     *
-     * @param array the array to "add" the element to, may be {@code null}.
-     * @param element the object to add.
-     * @return A new array containing the existing elements plus the new element The returned array type will be that of
-     *         the input array (unless null), in which case it will have the same type as the element.
-     * @since 3.10
-     */
-    public static long[] addFirst(final long[] array, final long element) {
-        return array == null ? add(array, element) : insert(0, array, element);
-    }
-
-    /**
-     * Copies the given array and adds the given element at the beginning of the new array.
-     * <p>
-     * The new array contains the same elements of the input array plus the given element in the first position. The
-     * component type of the new array is the same as that of the input array.
-     * </p>
-     * <p>
-     * If the input array is {@code null}, a new one element array is returned whose component type is the same as the
-     * element.
-     * </p>
-     * <pre>
-     * ArrayUtils.addFirst(null, 1)   = [1]
-     * ArrayUtils.addFirst([1], 0)    = [0, 1]
-     * ArrayUtils.addFirst([1, 0], 1) = [1, 1, 0]
-     * </pre>
-     *
-     * @param array the array to "add" the element to, may be {@code null}.
-     * @param element the object to add.
-     * @return A new array containing the existing elements plus the new element The returned array type will be that of
-     *         the input array (unless null), in which case it will have the same type as the element.
-     * @since 3.10
-     */
-    public static short[] addFirst(final short[] array, final short element) {
-        return array == null ? add(array, element) : insert(0, array, element);
-    }
-
-    /**
-     * Copies the given array and adds the given element at the beginning of the new array.
-     * <p>
-     * The new array contains the same elements of the input array plus the given element in the first position. The
-     * component type of the new array is the same as that of the input array.
-     * </p>
-     * <p>
-     * If the input array is {@code null}, a new one element array is returned whose component type is the same as the
-     * element, unless the element itself is null, in which case the return type is Object[]
-     * </p>
-     * <pre>
-     * ArrayUtils.addFirst(null, null)      = Throws {@link IllegalArgumentException}
-     * ArrayUtils.addFirst(null, "a")       = ["a"]
-     * ArrayUtils.addFirst(["a"], null)     = [null, "a"]
-     * ArrayUtils.addFirst(["a"], "b")      = ["b", "a"]
-     * ArrayUtils.addFirst(["a", "b"], "c") = ["c", "a", "b"]
-     * </pre>
-     *
-     * @param <T> the component type of the array.
-     * @param array the array to "add" the element to, may be {@code null}.
-     * @param element the object to add, may be {@code null}.
-     * @return A new array containing the existing elements plus the new element The returned array type will be that of
-     *         the input array (unless null), in which case it will have the same type as the element. If both are null,
-     *         an IllegalArgumentException is thrown.
-     * @throws IllegalArgumentException if both arguments are null.
-     * @since 3.10
-     */
-    public static <T> T[] addFirst(final T[] array, final T element) {
-        return array == null ? add(array, element) : insert(0, array, element);
-    }
-
-    /**
-     * A fluent version of {@link System#arraycopy(Object, int, Object, int, int)} that returns the destination array.
-     *
-     * @param <T>       the type.
-     * @param source    the source array.
-     * @param sourcePos starting position in the source array.
-     * @param destPos   starting position in the destination data.
-     * @param length    the number of array elements to be copied.
-     * @param allocator allocates the array to populate and return.
-     * @return dest
-     * @throws IndexOutOfBoundsException if copying would cause access of data outside array bounds.
-     * @throws ArrayStoreException       if an element in the {@code src} array could not be stored into the {@code dest} array because of a type
-     *                                   mismatch.
-     * @throws NullPointerException      if either {@code src} or {@code dest} is {@code null}.
-     * @since 3.15.0
-     */
-    public static <T> T arraycopy(final T source, final int sourcePos, final int destPos, final int length, final Function<Integer, T> allocator) {
-        return arraycopy(source, sourcePos, allocator.apply(length), destPos, length);
-    }
-
-    /**
-     * A fluent version of {@link System#arraycopy(Object, int, Object, int, int)} that returns the destination array.
-     *
-     * @param <T>       the type.
-     * @param source    the source array.
-     * @param sourcePos starting position in the source array.
-     * @param destPos   starting position in the destination data.
-     * @param length    the number of array elements to be copied.
-     * @param allocator allocates the array to populate and return.
-     * @return dest
-     * @throws IndexOutOfBoundsException if copying would cause access of data outside array bounds.
-     * @throws ArrayStoreException       if an element in the {@code src} array could not be stored into the {@code dest} array because of a type
-     *                                   mismatch.
-     * @throws NullPointerException      if either {@code src} or {@code dest} is {@code null}.
-     * @since 3.15.0
-     */
-    public static <T> T arraycopy(final T source, final int sourcePos, final int destPos, final int length, final Supplier<T> allocator) {
-        return arraycopy(source, sourcePos, allocator.get(), destPos, length);
-    }
-
-    /**
-     * A fluent version of {@link System#arraycopy(Object, int, Object, int, int)} that returns the destination array.
-     *
-     * @param <T>       the type.
-     * @param source    the source array.
-     * @param sourcePos starting position in the source array.
-     * @param dest      the destination array.
-     * @param destPos   starting position in the destination data.
-     * @param length    the number of array elements to be copied.
-     * @return dest
-     * @throws IndexOutOfBoundsException if copying would cause access of data outside array bounds.
-     * @throws ArrayStoreException       if an element in the {@code src} array could not be stored into the {@code dest} array because of a type
-     *                                   mismatch.
-     * @throws NullPointerException      if either {@code src} or {@code dest} is {@code null}.
-     * @since 3.15.0
-     */
-    public static <T> T arraycopy(final T source, final int sourcePos, final T dest, final int destPos, final int length) {
-        System.arraycopy(source, sourcePos, dest, destPos, length);
-        return dest;
-    }
-
-    /**
-     * Clones an array or returns {@code null}.
-     * <p>
-     * This method returns {@code null} for a {@code null} input array.
-     * </p>
-     *
-     * @param array the array to clone, may be {@code null}.
-     * @return the cloned array, {@code null} if {@code null} input.
-     */
-    public static boolean[] clone(final boolean[] array) {
-        return array != null ? array.clone() : null;
-    }
-
-    /**
-     * Clones an array or returns {@code null}.
-     * <p>
-     * This method returns {@code null} for a {@code null} input array.
-     * </p>
-     *
-     * @param array the array to clone, may be {@code null}.
-     * @return the cloned array, {@code null} if {@code null} input.
-     */
-    public static byte[] clone(final byte[] array) {
-        return array != null ? array.clone() : null;
-    }
-
-    /**
-     * Clones an array or returns {@code null}.
-     * <p>
-     * This method returns {@code null} for a {@code null} input array.
-     * </p>
-     *
-     * @param array the array to clone, may be {@code null}.
-     * @return the cloned array, {@code null} if {@code null} input.
-     */
-    public static char[] clone(final char[] array) {
-        return array != null ? array.clone() : null;
-    }
-
-    /**
-     * Clones an array or returns {@code null}.
-     * <p>
-     * This method returns {@code null} for a {@code null} input array.
-     * </p>
-     *
-     * @param array the array to clone, may be {@code null}.
-     * @return the cloned array, {@code null} if {@code null} input.
-     */
-    public static double[] clone(final double[] array) {
-        return array != null ? array.clone() : null;
-    }
-
-    /**
-     * Clones an array or returns {@code null}.
-     * <p>
-     * This method returns {@code null} for a {@code null} input array.
-     * </p>
-     *
-     * @param array the array to clone, may be {@code null}.
-     * @return the cloned array, {@code null} if {@code null} input.
-     */
-    public static float[] clone(final float[] array) {
-        return array != null ? array.clone() : null;
-    }
-
-    /**
-     * Clones an array or returns {@code null}.
-     * <p>
-     * This method returns {@code null} for a {@code null} input array.
-     * </p>
-     *
-     * @param array the array to clone, may be {@code null}.
-     * @return the cloned array, {@code null} if {@code null} input.
-     */
-    public static int[] clone(final int[] array) {
-        return array != null ? array.clone() : null;
-    }
-
-    /**
-     * Clones an array or returns {@code null}.
-     * <p>
-     * This method returns {@code null} for a {@code null} input array.
-     * </p>
-     *
-     * @param array the array to clone, may be {@code null}.
-     * @return the cloned array, {@code null} if {@code null} input.
-     */
-    public static long[] clone(final long[] array) {
-        return array != null ? array.clone() : null;
-    }
-
-    /**
-     * Clones an array or returns {@code null}.
-     * <p>
-     * This method returns {@code null} for a {@code null} input array.
-     * </p>
-     *
-     * @param array the array to clone, may be {@code null}.
-     * @return the cloned array, {@code null} if {@code null} input.
-     */
-    public static short[] clone(final short[] array) {
-        return array != null ? array.clone() : null;
-    }
-
-    /**
-     * Shallow clones an array or returns {@code null}.
-     * <p>
-     * The objects in the array are not cloned, thus there is no special handling for multi-dimensional arrays.
-     * </p>
-     * <p>
-     * This method returns {@code null} for a {@code null} input array.
-     * </p>
-     *
-     * @param <T>   the component type of the array.
-     * @param array the array to shallow clone, may be {@code null}.
-     * @return the cloned array, {@code null} if {@code null} input.
-     */
-    public static <T> T[] clone(final T[] array) {
-        return array != null ? array.clone() : null;
-    }
-
-    /**
-     * Concatenates multiple boolean arrays into a single array.
-     * <p>
-     * This method combines all input arrays in the order they are provided,
-     * creating a new array that contains all elements from the input arrays.
-     * The resulting array length is the sum of lengths of all non-null input arrays.
-     * </p>
-     *
-     * @param arrays the arrays to concatenate. Can be empty, contain nulls,
-     *               or be null itself (treated as empty varargs).
-     * @return a new boolean array containing all elements from the input arrays
-     *         in the order they appear, or an empty array if no elements are present.
-     * @throws NullPointerException if the input array of arrays is null.
-     * @throws IllegalArgumentException if total arrays length exceed {@link ArrayUtils#SAFE_MAX_ARRAY_LENGTH}.
-     * @since 3.21.0
-     */
-    public static boolean[] concat(boolean[]... arrays) {
-        int totalLength = 0;
-        for (boolean[] array : arrays) {
-            totalLength = addExact(totalLength, array);
-        }
-        final boolean[] result = new boolean[totalLength];
-        int currentPos = 0;
-        for (boolean[] array : arrays) {
-            if (array != null && array.length > 0) {
-                System.arraycopy(array, 0, result, currentPos, array.length);
-                currentPos += array.length;
-            }
-        }
-        return result;
-    }
 
     /**
      * Concatenates multiple byte arrays into a single array.
@@ -1682,117 +454,7 @@ public class ArrayUtils {
      * @throws IllegalArgumentException if total arrays length exceed {@link ArrayUtils#SAFE_MAX_ARRAY_LENGTH}.
      * @since 3.21.0
      */
-    public static char[] concat(char[]... arrays) {
-        int totalLength = 0;
-        for (char[] array : arrays) {
-            totalLength = addExact(totalLength, array);
-        }
-        final char[] result = new char[totalLength];
-        int currentPos = 0;
-        for (char[] array : arrays) {
-            if (array != null && array.length > 0) {
-                System.arraycopy(array, 0, result, currentPos, array.length);
-                currentPos += array.length;
-            }
-        }
-        return result;
-    }
 
-    /**
-     * Concatenates multiple double arrays into a single array.
-     * <p>
-     * This method combines all input arrays in the order they are provided,
-     * creating a new array that contains all elements from the input arrays.
-     * The resulting array length is the sum of lengths of all non-null input arrays.
-     * </p>
-     *
-     * @param arrays the arrays to concatenate. Can be empty, contain nulls,
-     *               or be null itself (treated as empty varargs).
-     * @return a new double array containing all elements from the input arrays
-     *         in the order they appear, or an empty array if no elements are present.
-     * @throws NullPointerException if the input array of arrays is null.
-     * @throws IllegalArgumentException if total arrays length exceed {@link ArrayUtils#SAFE_MAX_ARRAY_LENGTH}.
-     * @since 3.21.0
-     */
-    public static double[] concat(double[]... arrays) {
-        int totalLength = 0;
-        for (double[] array : arrays) {
-            totalLength = addExact(totalLength, array);
-        }
-        final double[] result = new double[totalLength];
-        int currentPos = 0;
-        for (double[] array : arrays) {
-            if (array != null && array.length > 0) {
-                System.arraycopy(array, 0, result, currentPos, array.length);
-                currentPos += array.length;
-            }
-        }
-        return result;
-    }
-
-    /**
-     * Concatenates multiple float arrays into a single array.
-     * <p>
-     * This method combines all input arrays in the order they are provided,
-     * creating a new array that contains all elements from the input arrays.
-     * The resulting array length is the sum of lengths of all non-null input arrays.
-     * </p>
-     *
-     * @param arrays the arrays to concatenate. Can be empty, contain nulls,
-     *               or be null itself (treated as empty varargs).
-     * @return a new float array containing all elements from the input arrays
-     *         in the order they appear, or an empty array if no elements are present.
-     * @throws NullPointerException if the input array of arrays is null.
-     * @throws IllegalArgumentException if total arrays length exceed {@link ArrayUtils#SAFE_MAX_ARRAY_LENGTH}.
-     * @since 3.21.0
-     */
-    public static float[] concat(float[]... arrays) {
-        int totalLength = 0;
-        for (float[] array : arrays) {
-            totalLength = addExact(totalLength, array);
-        }
-        final float[] result = new float[totalLength];
-        int currentPos = 0;
-        for (float[] array : arrays) {
-            if (array != null && array.length > 0) {
-                System.arraycopy(array, 0, result, currentPos, array.length);
-                currentPos += array.length;
-            }
-        }
-        return result;
-    }
-
-    /**
-     * Concatenates multiple int arrays into a single array.
-     * <p>
-     * This method combines all input arrays in the order they are provided,
-     * creating a new array that contains all elements from the input arrays.
-     * The resulting array length is the sum of lengths of all non-null input arrays.
-     * </p>
-     *
-     * @param arrays the arrays to concatenate. Can be empty, contain nulls,
-     *               or be null itself (treated as empty varargs).
-     * @return a new int array containing all elements from the input arrays
-     *         in the order they appear, or an empty array if no elements are present.
-     * @throws NullPointerException if the input array of arrays is null.
-     * @throws IllegalArgumentException if total arrays length exceed {@link ArrayUtils#SAFE_MAX_ARRAY_LENGTH}.
-     * @since 3.21.0
-     */
-    public static int[] concat(int[]... arrays) {
-        int totalLength = 0;
-        for (int[] array : arrays) {
-            totalLength = addExact(totalLength, array);
-        }
-        final int[] result = new int[totalLength];
-        int currentPos = 0;
-        for (int[] array : arrays) {
-            if (array != null && array.length > 0) {
-                System.arraycopy(array, 0, result, currentPos, array.length);
-                currentPos += array.length;
-            }
-        }
-        return result;
-    }
 
     /**
      * Concatenates multiple long arrays into a single array.
@@ -1842,35 +504,7 @@ public class ArrayUtils {
      * @throws IllegalArgumentException if total arrays length exceed {@link ArrayUtils#SAFE_MAX_ARRAY_LENGTH}.
      * @since 3.21.0
      */
-    public static short[] concat(short[]... arrays) {
-        int totalLength = 0;
-        for (short[] array : arrays) {
-            totalLength = addExact(totalLength, array);
-        }
-        final short[] result = new short[totalLength];
-        int currentPos = 0;
-        for (short[] array : arrays) {
-            if (array != null && array.length > 0) {
-                System.arraycopy(array, 0, result, currentPos, array.length);
-                currentPos += array.length;
-            }
-        }
-        return result;
-    }
 
-    /**
-     * Checks if the value is in the given array.
-     * <p>
-     * The method returns {@code false} if a {@code null} array is passed in.
-     * </p>
-     *
-     * @param array  the array to search.
-     * @param valueToFind  the value to find.
-     * @return {@code true} if the array contains the object.
-     */
-    public static boolean contains(final boolean[] array, final boolean valueToFind) {
-        return indexOf(array, valueToFind) != INDEX_NOT_FOUND;
-    }
 
     /**
      * Checks if the value is in the given array.
@@ -2131,32 +765,7 @@ public class ArrayUtils {
      * @return The component type.
      * @since 3.13.0
      */
-    public static <T> Class<T> getComponentType(final T[] array) {
-        return ClassUtils.getComponentType(ObjectUtils.getClass(array));
-    }
 
-    /**
-     * Gets the number of dimensions of an array.
-     * <p>
-     * The <a href="https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.3">JVM specification</a> limits the number of dimensions to 255.
-     * </p>
-     *
-     * @param array the array, may be {@code null}.
-     * @return The number of dimensions, 0 if the input is null or not an array. The JVM specification limits the number of dimensions to 255.
-     * @since 3.21.0
-     * @see <a href="https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html#jvms-4.3">JVM specification Field Descriptors</a>
-     */
-    public static int getDimensions(final Object array) {
-        int dimensions = 0;
-        if (array != null) {
-            Class<?> arrayClass = array.getClass();
-            while (arrayClass.isArray()) {
-                dimensions++;
-                arrayClass = arrayClass.getComponentType();
-            }
-        }
-        return dimensions;
-    }
 
     /**
      * Gets the length of the specified array.
@@ -3127,26 +1736,9 @@ public class ArrayUtils {
      * @throws IndexOutOfBoundsException if {@code array} is provided and either {@code index < 0} or {@code index > array.length}.
      * @since 3.6
      */
-    public static boolean[] insert(final int index, final boolean[] array, final boolean... values) {
-        if (array == null) {
-            return null;
-        }
-        if (isEmpty(values)) {
-            return clone(array);
-        }
-        if (index < 0 || index > array.length) {
-            throw new IndexOutOfBoundsException("Index: " + index + ", Length: " + array.length);
-        }
-        final boolean[] result = new boolean[array.length + values.length];
-        System.arraycopy(values, 0, result, index, values.length);
-        if (index > 0) {
-            System.arraycopy(array, 0, result, 0, index);
-        }
-        if (index < array.length) {
-            System.arraycopy(array, index, result, index + values.length, array.length - index);
-        }
-        return result;
-    }
+
+
+
 
     /**
      * Inserts elements into an array at the given index (starting from zero).
@@ -3168,26 +1760,6 @@ public class ArrayUtils {
      * @throws IndexOutOfBoundsException if {@code array} is provided and either {@code index < 0} or {@code index > array.length}.
      * @since 3.6
      */
-    public static byte[] insert(final int index, final byte[] array, final byte... values) {
-        if (array == null) {
-            return null;
-        }
-        if (isEmpty(values)) {
-            return clone(array);
-        }
-        if (index < 0 || index > array.length) {
-            throw new IndexOutOfBoundsException("Index: " + index + ", Length: " + array.length);
-        }
-        final byte[] result = new byte[array.length + values.length];
-        System.arraycopy(values, 0, result, index, values.length);
-        if (index > 0) {
-            System.arraycopy(array, 0, result, 0, index);
-        }
-        if (index < array.length) {
-            System.arraycopy(array, index, result, index + values.length, array.length - index);
-        }
-        return result;
-    }
 
     /**
      * Inserts elements into an array at the given index (starting from zero).
@@ -3209,26 +1781,6 @@ public class ArrayUtils {
      * @throws IndexOutOfBoundsException if {@code array} is provided and either {@code index < 0} or {@code index > array.length}.
      * @since 3.6
      */
-    public static char[] insert(final int index, final char[] array, final char... values) {
-        if (array == null) {
-            return null;
-        }
-        if (isEmpty(values)) {
-            return clone(array);
-        }
-        if (index < 0 || index > array.length) {
-            throw new IndexOutOfBoundsException("Index: " + index + ", Length: " + array.length);
-        }
-        final char[] result = new char[array.length + values.length];
-        System.arraycopy(values, 0, result, index, values.length);
-        if (index > 0) {
-            System.arraycopy(array, 0, result, 0, index);
-        }
-        if (index < array.length) {
-            System.arraycopy(array, index, result, index + values.length, array.length - index);
-        }
-        return result;
-    }
 
     /**
      * Inserts elements into an array at the given index (starting from zero).
@@ -3250,26 +1802,8 @@ public class ArrayUtils {
      * @throws IndexOutOfBoundsException if {@code array} is provided and either {@code index < 0} or {@code index > array.length}.
      * @since 3.6
      */
-    public static double[] insert(final int index, final double[] array, final double... values) {
-        if (array == null) {
-            return null;
-        }
-        if (isEmpty(values)) {
-            return clone(array);
-        }
-        if (index < 0 || index > array.length) {
-            throw new IndexOutOfBoundsException("Index: " + index + ", Length: " + array.length);
-        }
-        final double[] result = new double[array.length + values.length];
-        System.arraycopy(values, 0, result, index, values.length);
-        if (index > 0) {
-            System.arraycopy(array, 0, result, 0, index);
-        }
-        if (index < array.length) {
-            System.arraycopy(array, index, result, index + values.length, array.length - index);
-        }
-        return result;
-    }
+
+
 
     /**
      * Inserts elements into an array at the given index (starting from zero).
@@ -3284,215 +1818,12 @@ public class ArrayUtils {
      * ArrayUtils.insert(index, null, values)    = null
      * </pre>
      *
-     * @param index  the position within {@code array} to insert the new values.
-     * @param array  the array to insert the values into, may be {@code null}.
-     * @param values the new values to insert, may be {@code null}.
      * @return The new array or {@code null} if the given array is {@code null}.
      * @throws IndexOutOfBoundsException if {@code array} is provided and either {@code index < 0} or {@code index > array.length}.
      * @since 3.6
      */
-    public static float[] insert(final int index, final float[] array, final float... values) {
-        if (array == null) {
-            return null;
-        }
-        if (isEmpty(values)) {
-            return clone(array);
-        }
-        if (index < 0 || index > array.length) {
-            throw new IndexOutOfBoundsException("Index: " + index + ", Length: " + array.length);
-        }
-        final float[] result = new float[array.length + values.length];
-        System.arraycopy(values, 0, result, index, values.length);
-        if (index > 0) {
-            System.arraycopy(array, 0, result, 0, index);
-        }
-        if (index < array.length) {
-            System.arraycopy(array, index, result, index + values.length, array.length - index);
-        }
-        return result;
-    }
 
-    /**
-     * Inserts elements into an array at the given index (starting from zero).
-     *
-     * <p>
-     * When an array is returned, it is always a new array.
-     * </p>
-     *
-     * <pre>
-     * ArrayUtils.insert(index, null, null)      = null
-     * ArrayUtils.insert(index, array, null)     = cloned copy of 'array'
-     * ArrayUtils.insert(index, null, values)    = null
-     * </pre>
-     *
-     * @param index  the position within {@code array} to insert the new values.
-     * @param array  the array to insert the values into, may be {@code null}.
-     * @param values the new values to insert, may be {@code null}.
-     * @return The new array or {@code null} if the given array is {@code null}.
-     * @throws IndexOutOfBoundsException if {@code array} is provided and either {@code index < 0} or {@code index > array.length}.
-     * @since 3.6
-     */
-    public static int[] insert(final int index, final int[] array, final int... values) {
-        if (array == null) {
-            return null;
-        }
-        if (isEmpty(values)) {
-            return clone(array);
-        }
-        if (index < 0 || index > array.length) {
-            throw new IndexOutOfBoundsException("Index: " + index + ", Length: " + array.length);
-        }
-        final int[] result = new int[array.length + values.length];
-        System.arraycopy(values, 0, result, index, values.length);
-        if (index > 0) {
-            System.arraycopy(array, 0, result, 0, index);
-        }
-        if (index < array.length) {
-            System.arraycopy(array, index, result, index + values.length, array.length - index);
-        }
-        return result;
-    }
 
-    /**
-     * Inserts elements into an array at the given index (starting from zero).
-     *
-     * <p>
-     * When an array is returned, it is always a new array.
-     * </p>
-     *
-     * <pre>
-     * ArrayUtils.insert(index, null, null)      = null
-     * ArrayUtils.insert(index, array, null)     = cloned copy of 'array'
-     * ArrayUtils.insert(index, null, values)    = null
-     * </pre>
-     *
-     * @param index  the position within {@code array} to insert the new values.
-     * @param array  the array to insert the values into, may be {@code null}.
-     * @param values the new values to insert, may be {@code null}.
-     * @return The new array or {@code null} if the given array is {@code null}.
-     * @throws IndexOutOfBoundsException if {@code array} is provided and either {@code index < 0} or {@code index > array.length}.
-     * @since 3.6
-     */
-    public static long[] insert(final int index, final long[] array, final long... values) {
-        if (array == null) {
-            return null;
-        }
-        if (isEmpty(values)) {
-            return clone(array);
-        }
-        if (index < 0 || index > array.length) {
-            throw new IndexOutOfBoundsException("Index: " + index + ", Length: " + array.length);
-        }
-        final long[] result = new long[array.length + values.length];
-        System.arraycopy(values, 0, result, index, values.length);
-        if (index > 0) {
-            System.arraycopy(array, 0, result, 0, index);
-        }
-        if (index < array.length) {
-            System.arraycopy(array, index, result, index + values.length, array.length - index);
-        }
-        return result;
-    }
-
-    /**
-     * Inserts elements into an array at the given index (starting from zero).
-     *
-     * <p>
-     * When an array is returned, it is always a new array.
-     * </p>
-     *
-     * <pre>
-     * ArrayUtils.insert(index, null, null)      = null
-     * ArrayUtils.insert(index, array, null)     = cloned copy of 'array'
-     * ArrayUtils.insert(index, null, values)    = null
-     * </pre>
-     *
-     * @param index  the position within {@code array} to insert the new values.
-     * @param array  the array to insert the values into, may be {@code null}.
-     * @param values the new values to insert, may be {@code null}.
-     * @return The new array or {@code null} if the given array is {@code null}.
-     * @throws IndexOutOfBoundsException if {@code array} is provided and either {@code index < 0} or {@code index > array.length}.
-     * @since 3.6
-     */
-    public static short[] insert(final int index, final short[] array, final short... values) {
-        if (array == null) {
-            return null;
-        }
-        if (isEmpty(values)) {
-            return clone(array);
-        }
-        if (index < 0 || index > array.length) {
-            throw new IndexOutOfBoundsException("Index: " + index + ", Length: " + array.length);
-        }
-        final short[] result = new short[array.length + values.length];
-        System.arraycopy(values, 0, result, index, values.length);
-        if (index > 0) {
-            System.arraycopy(array, 0, result, 0, index);
-        }
-        if (index < array.length) {
-            System.arraycopy(array, index, result, index + values.length, array.length - index);
-        }
-        return result;
-    }
-
-    /**
-     * Inserts elements into an array at the given index (starting from zero).
-     *
-     * <p>
-     * When an array is returned, it is always a new array.
-     * </p>
-     *
-     * <pre>
-     * ArrayUtils.insert(index, null, null)      = null
-     * ArrayUtils.insert(index, array, null)     = cloned copy of 'array'
-     * ArrayUtils.insert(index, null, values)    = null
-     * </pre>
-     *
-     * @param <T>    The type of elements in {@code array} and {@code values}.
-     * @param index  the position within {@code array} to insert the new values.
-     * @param array  the array to insert the values into, may be {@code null}.
-     * @param values the new values to insert, may be {@code null}.
-     * @return The new array or {@code null} if the given array is {@code null}.
-     * @throws IndexOutOfBoundsException if {@code array} is provided and either {@code index < 0} or {@code index > array.length}.
-     * @since 3.6
-     */
-    @SafeVarargs
-    public static <T> T[] insert(final int index, final T[] array, final T... values) {
-        /*
-         * Note on use of @SafeVarargs:
-         *
-         * By returning null when 'array' is null, we avoid returning the vararg
-         * array to the caller. We also avoid relying on the type of the vararg
-         * array, by inspecting the component type of 'array'.
-         */
-        if (array == null) {
-            return null;
-        }
-        if (isEmpty(values)) {
-            return clone(array);
-        }
-        if (index < 0 || index > array.length) {
-            throw new IndexOutOfBoundsException("Index: " + index + ", Length: " + array.length);
-        }
-        final Class<T> type = getComponentType(array);
-        final int length = array.length + values.length;
-        final T[] result = newInstance(type, length);
-        System.arraycopy(values, 0, result, index, values.length);
-        if (index > 0) {
-            System.arraycopy(array, 0, result, 0, index);
-        }
-        if (index < array.length) {
-            System.arraycopy(array, index, result, index + values.length, array.length - index);
-        }
-        return result;
-    }
-
-    /**
-     * Checks if an array is empty or {@code null}.
-     *
-     * @param array the array to test.
-     * @return {@code true} if the array is empty or {@code null}.
-     */
     private static boolean isArrayEmpty(final Object array) {
         return getLength(array) == 0;
     }
@@ -3872,29 +2203,6 @@ public class ArrayUtils {
      * @return whether the array is sorted according to natural ordering.
      * @since 3.4
      */
-    public static boolean isSorted(final boolean[] array) {
-        if (getLength(array) < 2) {
-            return true;
-        }
-        boolean previous = array[0];
-        final int n = array.length;
-        for (int i = 1; i < n; i++) {
-            final boolean current = array[i];
-            if (BooleanUtils.compare(previous, current) > 0) {
-                return false;
-            }
-            previous = current;
-        }
-        return true;
-    }
-
-    /**
-     * Tests whether the provided array is sorted according to natural ordering.
-     *
-     * @param array the array to check.
-     * @return whether the array is sorted according to natural ordering.
-     * @since 3.4
-     */
     public static boolean isSorted(final byte[] array) {
         if (getLength(array) < 2) {
             return true;
@@ -3904,29 +2212,6 @@ public class ArrayUtils {
         for (int i = 1; i < n; i++) {
             final byte current = array[i];
             if (Byte.compare(previous, current) > 0) {
-                return false;
-            }
-            previous = current;
-        }
-        return true;
-    }
-
-    /**
-     * Tests whether the provided array is sorted according to natural ordering.
-     *
-     * @param array the array to check.
-     * @return whether the array is sorted according to natural ordering.
-     * @since 3.4
-     */
-    public static boolean isSorted(final char[] array) {
-        if (getLength(array) < 2) {
-            return true;
-        }
-        char previous = array[0];
-        final int n = array.length;
-        for (int i = 1; i < n; i++) {
-            final char current = array[i];
-            if (CharUtils.compare(previous, current) > 0) {
                 return false;
             }
             previous = current;
@@ -4549,7 +2834,7 @@ public class ArrayUtils {
      */
     private static <T, R, E extends Throwable> R[] map(final T[] array, final Class<R> componentType, final FailableFunction<? super T, ? extends R, E> mapper)
             throws E {
-        return ArrayFill.fill(newInstance(componentType, array.length), i -> mapper.apply(array[i]));
+        return null;
     }
 
     private static int max0(final int other) {
@@ -5478,291 +3763,10 @@ public class ArrayUtils {
      */
     // package protected for access by unit tests
     static Object removeAll(final Object array, final int... indices) {
-        if (array == null) {
-            return null;
-        }
-        final int length = getLength(array);
-        int diff = 0; // number of distinct indexes, i.e. number of entries that will be removed
-        final int[] clonedIndices = ArraySorter.sort(clone(indices));
-        // identify length of result array
-        if (isNotEmpty(clonedIndices)) {
-            int i = clonedIndices.length;
-            int prevIndex = length;
-            while (--i >= 0) {
-                final int index = clonedIndices[i];
-                if (index < 0 || index >= length) {
-                    throw new IndexOutOfBoundsException("Index: " + index + ", Length: " + length);
-                }
-                if (index >= prevIndex) {
-                    continue;
-                }
-                diff++;
-                prevIndex = index;
-            }
-        }
-        // create result array
-        final Object result = Array.newInstance(array.getClass().getComponentType(), length - diff);
-        if (diff < length && clonedIndices != null) {
-            int end = length; // index just after last copy
-            int dest = length - diff; // number of entries so far not copied
-            for (int i = clonedIndices.length - 1; i >= 0; i--) {
-                final int index = clonedIndices[i];
-                if (end - index > 1) { // same as (cp > 0)
-                    final int cp = end - index - 1;
-                    dest -= cp;
-                    System.arraycopy(array, index + 1, result, dest, cp);
-                    // After this copy, we still have room for dest items.
-                }
-                end = index;
-            }
-            if (end > 0) {
-                System.arraycopy(array, 0, result, 0, end);
-            }
-        }
-        return result;
+
+        return null;
     }
 
-    /**
-     * Removes the elements at the specified positions from the specified array. All remaining elements are shifted to the left.
-     * <p>
-     * This method returns a new array with the same elements of the input array except those at the specified positions. The component type of the returned
-     * array is always the same as that of the input array.
-     * </p>
-     * <p>
-     * If the input array is {@code null}, then return {@code null}.
-     * </p>
-     *
-     * <pre>
-     * ArrayUtils.removeAll([1], 0)             = []
-     * ArrayUtils.removeAll([2, 6], 0)          = [6]
-     * ArrayUtils.removeAll([2, 6], 0, 1)       = []
-     * ArrayUtils.removeAll([2, 6, 3], 1, 2)    = [2]
-     * ArrayUtils.removeAll([2, 6, 3], 0, 2)    = [6]
-     * ArrayUtils.removeAll([2, 6, 3], 0, 1, 2) = []
-     * </pre>
-     *
-     * @param array   the array to remove the element from, may not be {@code null}.
-     * @param indices the positions of the elements to be removed.
-     * @return A new array containing the existing elements except those at the specified positions or {@code null} if the input array is {@code null}.
-     * @throws IndexOutOfBoundsException if any index is out of range (index &lt; 0 || index &gt;= array.length).
-     * @since 3.0.1
-     */
-    public static short[] removeAll(final short[] array, final int... indices) {
-        return (short[]) removeAll((Object) array, indices);
-    }
-
-    /**
-     * Removes the elements at the specified positions from the specified array. All remaining elements are shifted to the left.
-     * <p>
-     * This method returns a new array with the same elements of the input array except those at the specified positions. The component type of the returned
-     * array is always the same as that of the input array.
-     * </p>
-     * <p>
-     * If the input array is {@code null}, then return {@code null}.
-     * </p>
-     *
-     * <pre>
-     * ArrayUtils.removeAll(["a", "b", "c"], 0, 2) = ["b"]
-     * ArrayUtils.removeAll(["a", "b", "c"], 1, 2) = ["a"]
-     * </pre>
-     *
-     * @param <T>     the component type of the array.
-     * @param array   the array to remove the element from, may not be {@code null}.
-     * @param indices the positions of the elements to be removed.
-     * @return A new array containing the existing elements except those at the specified positions or {@code null} if the input array is {@code null}.
-     * @throws IndexOutOfBoundsException if any index is out of range (index &lt; 0 || index &gt;= array.length).
-     * @since 3.0.1
-     */
-    @SuppressWarnings("unchecked") // removeAll() always creates an array of the same type as its input
-    public static <T> T[] removeAll(final T[] array, final int... indices) {
-        return (T[]) removeAll((Object) array, indices);
-    }
-
-    /**
-     * Removes the occurrences of the specified element from the specified boolean array.
-     * <p>
-     * All subsequent elements are shifted to the left (subtracts one from their indices).
-     * If the array doesn't contain such an element, no elements are removed from the array.
-     * {@code null} will be returned if the input array is {@code null}.
-     * </p>
-     *
-     * @param array the input array, will not be modified, and may be {@code null}.
-     * @param element the element to remove.
-     * @return A new array containing the existing elements except the occurrences of the specified element.
-     * @since 3.5
-     * @deprecated Use {@link #removeAllOccurrences(boolean[], boolean)}.
-     */
-    @Deprecated
-    public static boolean[] removeAllOccurences(final boolean[] array, final boolean element) {
-        return (boolean[]) removeAt(array, indexesOf(array, element));
-    }
-
-    /**
-     * Removes the occurrences of the specified element from the specified byte array.
-     * <p>
-     * All subsequent elements are shifted to the left (subtracts one from their indices).
-     * If the array doesn't contain such an element, no elements are removed from the array.
-     * {@code null} will be returned if the input array is {@code null}.
-     * </p>
-     *
-     * @param array the input array, will not be modified, and may be {@code null}.
-     * @param element the element to remove.
-     * @return A new array containing the existing elements except the occurrences of the specified element.
-     * @since 3.5
-     * @deprecated Use {@link #removeAllOccurrences(byte[], byte)}.
-     */
-    @Deprecated
-    public static byte[] removeAllOccurences(final byte[] array, final byte element) {
-        return (byte[]) removeAt(array, indexesOf(array, element));
-    }
-
-    /**
-     * Removes the occurrences of the specified element from the specified char array.
-     * <p>
-     * All subsequent elements are shifted to the left (subtracts one from their indices).
-     * If the array doesn't contain such an element, no elements are removed from the array.
-     * {@code null} will be returned if the input array is {@code null}.
-     * </p>
-     *
-     * @param array the input array, will not be modified, and may be {@code null}.
-     * @param element the element to remove.
-     * @return A new array containing the existing elements except the occurrences of the specified element.
-     * @since 3.5
-     * @deprecated Use {@link #removeAllOccurrences(char[], char)}.
-     */
-    @Deprecated
-    public static char[] removeAllOccurences(final char[] array, final char element) {
-        return (char[]) removeAt(array, indexesOf(array, element));
-    }
-
-    /**
-     * Removes the occurrences of the specified element from the specified double array.
-     * <p>
-     * All subsequent elements are shifted to the left (subtracts one from their indices).
-     * If the array doesn't contain such an element, no elements are removed from the array.
-     * {@code null} will be returned if the input array is {@code null}.
-     * </p>
-     *
-     * @param array the input array, will not be modified, and may be {@code null}.
-     * @param element the element to remove.
-     * @return A new array containing the existing elements except the occurrences of the specified element.
-     * @since 3.5
-     * @deprecated Use {@link #removeAllOccurrences(double[], double)}.
-     */
-    @Deprecated
-    public static double[] removeAllOccurences(final double[] array, final double element) {
-        return (double[]) removeAt(array, indexesOf(array, element));
-    }
-
-    /**
-     * Removes the occurrences of the specified element from the specified float array.
-     * <p>
-     * All subsequent elements are shifted to the left (subtracts one from their indices).
-     * If the array doesn't contain such an element, no elements are removed from the array.
-     * {@code null} will be returned if the input array is {@code null}.
-     * </p>
-     *
-     * @param array the input array, will not be modified, and may be {@code null}.
-     * @param element the element to remove.
-     * @return A new array containing the existing elements except the occurrences of the specified element.
-     * @since 3.5
-     * @deprecated Use {@link #removeAllOccurrences(float[], float)}.
-     */
-    @Deprecated
-    public static float[] removeAllOccurences(final float[] array, final float element) {
-        return (float[]) removeAt(array, indexesOf(array, element));
-    }
-
-    /**
-     * Removes the occurrences of the specified element from the specified int array.
-     * <p>
-     * All subsequent elements are shifted to the left (subtracts one from their indices).
-     * If the array doesn't contain such an element, no elements are removed from the array.
-     * {@code null} will be returned if the input array is {@code null}.
-     * </p>
-     *
-     * @param array the input array, will not be modified, and may be {@code null}.
-     * @param element the element to remove.
-     * @return A new array containing the existing elements except the occurrences of the specified element.
-     * @since 3.5
-     * @deprecated Use {@link #removeAllOccurrences(int[], int)}.
-     */
-    @Deprecated
-    public static int[] removeAllOccurences(final int[] array, final int element) {
-        return (int[]) removeAt(array, indexesOf(array, element));
-    }
-
-    /**
-     * Removes the occurrences of the specified element from the specified long array.
-     * <p>
-     * All subsequent elements are shifted to the left (subtracts one from their indices).
-     * If the array doesn't contain such an element, no elements are removed from the array.
-     * {@code null} will be returned if the input array is {@code null}.
-     * </p>
-     *
-     * @param array the input array, will not be modified, and may be {@code null}.
-     * @param element the element to remove.
-     * @return A new array containing the existing elements except the occurrences of the specified element.
-     * @since 3.5
-     * @deprecated Use {@link #removeAllOccurrences(long[], long)}.
-     */
-    @Deprecated
-    public static long[] removeAllOccurences(final long[] array, final long element) {
-        return (long[]) removeAt(array, indexesOf(array, element));
-    }
-
-    /**
-     * Removes the occurrences of the specified element from the specified short array.
-     * <p>
-     * All subsequent elements are shifted to the left (subtracts one from their indices).
-     * If the array doesn't contain such an element, no elements are removed from the array.
-     * {@code null} will be returned if the input array is {@code null}.
-     * </p>
-     *
-     * @param array the input array, will not be modified, and may be {@code null}.
-     * @param element the element to remove.
-     * @return A new array containing the existing elements except the occurrences of the specified element.
-     * @since 3.5
-     * @deprecated Use {@link #removeAllOccurrences(short[], short)}.
-     */
-    @Deprecated
-    public static short[] removeAllOccurences(final short[] array, final short element) {
-        return (short[]) removeAt(array, indexesOf(array, element));
-    }
-
-    /**
-     * Removes the occurrences of the specified element from the specified array.
-     * <p>
-     * All subsequent elements are shifted to the left (subtracts one from their indices).
-     * If the array doesn't contain such an element, no elements are removed from the array.
-     * {@code null} will be returned if the input array is {@code null}.
-     * </p>
-     *
-     * @param <T> the type of object in the array, may be {@code null}.
-     * @param array the input array, will not be modified, and may be {@code null}.
-     * @param element the element to remove, may be {@code null}.
-     * @return A new array containing the existing elements except the occurrences of the specified element.
-     * @since 3.5
-     * @deprecated Use {@link #removeAllOccurrences(Object[], Object)}.
-     */
-    @Deprecated
-    public static <T> T[] removeAllOccurences(final T[] array, final T element) {
-        return (T[]) removeAt(array, indexesOf(array, element));
-    }
-
-    /**
-     * Removes the occurrences of the specified element from the specified boolean array.
-     * <p>
-     * All subsequent elements are shifted to the left (subtracts one from their indices).
-     * If the array doesn't contain such an element, no elements are removed from the array.
-     * {@code null} will be returned if the input array is {@code null}.
-     * </p>
-     *
-     * @param array the input array, will not be modified, and may be {@code null}.
-     * @param element the element to remove.
-     * @return A new array containing the existing elements except the occurrences of the specified element.
-     * @since 3.10
-     */
     public static boolean[] removeAllOccurrences(final boolean[] array, final boolean element) {
         return (boolean[]) removeAt(array, indexesOf(array, element));
     }
@@ -5969,10 +3973,7 @@ public class ArrayUtils {
      *         occurrence of the specified element.
      * @since 2.1
      */
-    public static boolean[] removeElement(final boolean[] array, final boolean element) {
-        final int index = indexOf(array, element);
-        return index == INDEX_NOT_FOUND ? clone(array) : remove(array, index);
-    }
+
 
     /**
      * Removes the first occurrence of the specified element from the
@@ -5999,10 +4000,7 @@ public class ArrayUtils {
      *         occurrence of the specified element.
      * @since 2.1
      */
-    public static byte[] removeElement(final byte[] array, final byte element) {
-        final int index = indexOf(array, element);
-        return index == INDEX_NOT_FOUND ? clone(array) : remove(array, index);
-    }
+
 
     /**
      * Removes the first occurrence of the specified element from the
@@ -6029,10 +4027,7 @@ public class ArrayUtils {
      *         occurrence of the specified element.
      * @since 2.1
      */
-    public static char[] removeElement(final char[] array, final char element) {
-        final int index = indexOf(array, element);
-        return index == INDEX_NOT_FOUND ? clone(array) : remove(array, index);
-    }
+
 
     /**
      * Removes the first occurrence of the specified element from the
@@ -6059,40 +4054,8 @@ public class ArrayUtils {
      *         occurrence of the specified element.
      * @since 2.1
      */
-    public static double[] removeElement(final double[] array, final double element) {
-        final int index = indexOf(array, element);
-        return index == INDEX_NOT_FOUND ? clone(array) : remove(array, index);
-    }
 
-    /**
-     * Removes the first occurrence of the specified element from the
-     * specified array. All subsequent elements are shifted to the left
-     * (subtracts one from their indices). If the array doesn't contain
-     * such an element, no elements are removed from the array.
-     * <p>
-     * This method returns a new array with the same elements of the input
-     * array except the first occurrence of the specified element. The component
-     * type of the returned array is always the same as that of the input
-     * array.
-     * </p>
-     * <pre>
-     * ArrayUtils.removeElement(null, 1.1)            = null
-     * ArrayUtils.removeElement([], 1.1)              = []
-     * ArrayUtils.removeElement([1.1], 1.2)           = [1.1]
-     * ArrayUtils.removeElement([1.1, 2.3], 1.1)      = [2.3]
-     * ArrayUtils.removeElement([1.1, 2.3, 1.1], 1.1) = [2.3, 1.1]
-     * </pre>
-     *
-     * @param array the input array, may be {@code null}.
-     * @param element  the element to be removed.
-     * @return A new array containing the existing elements except the first
-     *         occurrence of the specified element.
-     * @since 2.1
-     */
-    public static float[] removeElement(final float[] array, final float element) {
-        final int index = indexOf(array, element);
-        return index == INDEX_NOT_FOUND ? clone(array) : remove(array, index);
-    }
+
 
     /**
      * Removes the first occurrence of the specified element from the
@@ -6119,101 +4082,10 @@ public class ArrayUtils {
      *         occurrence of the specified element.
      * @since 2.1
      */
-    public static int[] removeElement(final int[] array, final int element) {
-        final int index = indexOf(array, element);
-        return index == INDEX_NOT_FOUND ? clone(array) : remove(array, index);
-    }
 
-    /**
-     * Removes the first occurrence of the specified element from the
-     * specified array. All subsequent elements are shifted to the left
-     * (subtracts one from their indices). If the array doesn't contain
-     * such an element, no elements are removed from the array.
-     * <p>
-     * This method returns a new array with the same elements of the input
-     * array except the first occurrence of the specified element. The component
-     * type of the returned array is always the same as that of the input
-     * array.
-     * </p>
-     * <pre>
-     * ArrayUtils.removeElement(null, 1)      = null
-     * ArrayUtils.removeElement([], 1)        = []
-     * ArrayUtils.removeElement([1], 2)       = [1]
-     * ArrayUtils.removeElement([1, 3], 1)    = [3]
-     * ArrayUtils.removeElement([1, 3, 1], 1) = [3, 1]
-     * </pre>
-     *
-     * @param array the input array, may be {@code null}.
-     * @param element  the element to be removed.
-     * @return A new array containing the existing elements except the first
-     *         occurrence of the specified element.
-     * @since 2.1
-     */
-    public static long[] removeElement(final long[] array, final long element) {
-        final int index = indexOf(array, element);
-        return index == INDEX_NOT_FOUND ? clone(array) : remove(array, index);
-    }
 
-    /**
-     * Removes the first occurrence of the specified element from the
-     * specified array. All subsequent elements are shifted to the left
-     * (subtracts one from their indices). If the array doesn't contain
-     * such an element, no elements are removed from the array.
-     * <p>
-     * This method returns a new array with the same elements of the input
-     * array except the first occurrence of the specified element. The component
-     * type of the returned array is always the same as that of the input
-     * array.
-     * </p>
-     * <pre>
-     * ArrayUtils.removeElement(null, 1)      = null
-     * ArrayUtils.removeElement([], 1)        = []
-     * ArrayUtils.removeElement([1], 2)       = [1]
-     * ArrayUtils.removeElement([1, 3], 1)    = [3]
-     * ArrayUtils.removeElement([1, 3, 1], 1) = [3, 1]
-     * </pre>
-     *
-     * @param array the input array, may be {@code null}.
-     * @param element  the element to be removed.
-     * @return A new array containing the existing elements except the first
-     *         occurrence of the specified element.
-     * @since 2.1
-     */
-    public static short[] removeElement(final short[] array, final short element) {
-        final int index = indexOf(array, element);
-        return index == INDEX_NOT_FOUND ? clone(array) : remove(array, index);
-    }
 
-    /**
-     * Removes the first occurrence of the specified element from the
-     * specified array. All subsequent elements are shifted to the left
-     * (subtracts one from their indices). If the array doesn't contain
-     * such an element, no elements are removed from the array.
-     * <p>
-     * This method returns a new array with the same elements of the input
-     * array except the first occurrence of the specified element. The component
-     * type of the returned array is always the same as that of the input
-     * array.
-     * </p>
-     * <pre>
-     * ArrayUtils.removeElement(null, "a")            = null
-     * ArrayUtils.removeElement([], "a")              = []
-     * ArrayUtils.removeElement(["a"], "b")           = ["a"]
-     * ArrayUtils.removeElement(["a", "b"], "a")      = ["b"]
-     * ArrayUtils.removeElement(["a", "b", "a"], "a") = ["b", "a"]
-     * </pre>
-     *
-     * @param <T> the component type of the array
-     * @param array the input array, may be {@code null}.
-     * @param element  the element to be removed, may be {@code null}.
-     * @return A new array containing the existing elements except the first
-     *         occurrence of the specified element.
-     * @since 2.1
-     */
-    public static <T> T[] removeElement(final T[] array, final Object element) {
-        final int index = indexOf(array, element);
-        return index == INDEX_NOT_FOUND ? clone(array) : remove(array, index);
-    }
+
 
     /**
      * Removes occurrences of specified elements, in specified quantities,
@@ -6243,25 +4115,8 @@ public class ArrayUtils {
      * @since 3.0.1
      */
     public static boolean[] removeElements(final boolean[] array, final boolean... values) {
-        if (isEmpty(array) || isEmpty(values)) {
-            return clone(array);
-        }
-        final HashMap<Boolean, MutableInt> occurrences = new HashMap<>(2); // only two possible values here
-        for (final boolean v : values) {
-            increment(occurrences, Boolean.valueOf(v));
-        }
-        final BitSet toRemove = new BitSet();
-        for (int i = 0; i < array.length; i++) {
-            final boolean key = array[i];
-            final MutableInt count = occurrences.get(key);
-            if (count != null) {
-                if (count.decrementAndGet() == 0) {
-                    occurrences.remove(key);
-                }
-                toRemove.set(i);
-            }
-        }
-        return (boolean[]) removeAt(array, toRemove);
+
+        return null;
     }
 
     /**
@@ -6292,9 +4147,7 @@ public class ArrayUtils {
      * @since 3.0.1
      */
     public static byte[] removeElements(final byte[] array, final byte... values) {
-        if (isEmpty(array) || isEmpty(values)) {
-            return clone(array);
-        }
+
         final HashMap<Byte, MutableInt> occurrences = new HashMap<>(values.length);
         for (final byte v : values) {
             increment(occurrences, Byte.valueOf(v));
@@ -6341,9 +4194,7 @@ public class ArrayUtils {
      * @since 3.0.1
      */
     public static char[] removeElements(final char[] array, final char... values) {
-        if (isEmpty(array) || isEmpty(values)) {
-            return clone(array);
-        }
+
         final HashMap<Character, MutableInt> occurrences = new HashMap<>(values.length);
         for (final char v : values) {
             increment(occurrences, Character.valueOf(v));
@@ -6439,9 +4290,7 @@ public class ArrayUtils {
      * @since 3.0.1
      */
     public static float[] removeElements(final float[] array, final float... values) {
-        if (isEmpty(array) || isEmpty(values)) {
-            return clone(array);
-        }
+
         final HashMap<Float, MutableInt> occurrences = new HashMap<>(values.length);
         for (final float v : values) {
             increment(occurrences, Float.valueOf(v));
@@ -6537,9 +4386,7 @@ public class ArrayUtils {
      * @since 3.0.1
      */
     public static long[] removeElements(final long[] array, final long... values) {
-        if (isEmpty(array) || isEmpty(values)) {
-            return clone(array);
-        }
+
         final HashMap<Long, MutableInt> occurrences = new HashMap<>(values.length);
         for (final long v : values) {
             increment(occurrences, Long.valueOf(v));
@@ -8332,19 +6179,7 @@ public class ArrayUtils {
      * @since 2.1
      * @see Arrays#copyOfRange(Object[], int, int)
      */
-    public static <T> T[] subarray(final T[] array, int startIndexInclusive, int endIndexExclusive) {
-        if (array == null) {
-            return null;
-        }
-        startIndexInclusive = max0(startIndexInclusive);
-        endIndexExclusive = max0(Math.min(endIndexExclusive, array.length));
-        final int newSize = endIndexExclusive - startIndexInclusive;
-        final Class<T> type = getComponentType(array);
-        if (newSize <= 0) {
-            return newInstance(type, 0);
-        }
-        return arraycopy(array, startIndexInclusive, 0, newSize, () -> newInstance(type, newSize));
-    }
+
 
     /**
      * Swaps two elements in the given boolean array.
@@ -9498,48 +7333,11 @@ public class ArrayUtils {
      * @since 3.5
      */
     public static Object toPrimitive(final Object array) {
-        if (array == null) {
-            return null;
-        }
-        final Class<?> ct = array.getClass().getComponentType();
-        final Class<?> pt = ClassUtils.wrapperToPrimitive(ct);
-        if (Boolean.TYPE.equals(pt)) {
-            return toPrimitive((Boolean[]) array);
-        }
-        if (Character.TYPE.equals(pt)) {
-            return toPrimitive((Character[]) array);
-        }
-        if (Byte.TYPE.equals(pt)) {
-            return toPrimitive((Byte[]) array);
-        }
-        if (Integer.TYPE.equals(pt)) {
-            return toPrimitive((Integer[]) array);
-        }
-        if (Long.TYPE.equals(pt)) {
-            return toPrimitive((Long[]) array);
-        }
-        if (Short.TYPE.equals(pt)) {
-            return toPrimitive((Short[]) array);
-        }
-        if (Double.TYPE.equals(pt)) {
-            return toPrimitive((Double[]) array);
-        }
-        if (Float.TYPE.equals(pt)) {
-            return toPrimitive((Float[]) array);
-        }
-        return array;
+
+        return null;
     }
 
-    /**
-     * Converts an array of object Shorts to primitives.
-     * <p>
-     * This method returns {@code null} for a {@code null} input array.
-     * </p>
-     *
-     * @param array  a {@link Short} array, may be {@code null}.
-     * @return a {@code byte} array, {@code null} if null array input.
-     * @throws NullPointerException if an array element is {@code null}.
-     */
+
     public static short[] toPrimitive(final Short[] array) {
         if (array == null) {
             return null;

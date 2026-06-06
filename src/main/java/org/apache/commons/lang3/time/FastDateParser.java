@@ -44,9 +44,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
-import org.apache.commons.lang3.CharUtils;
-import org.apache.commons.lang3.LocaleUtils;
-
 /**
  * FastDateParser is a fast and thread-safe version of {@link java.text.SimpleDateFormat}.
  *
