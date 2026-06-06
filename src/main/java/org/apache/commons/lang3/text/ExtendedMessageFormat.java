@@ -27,7 +27,6 @@ import java.util.Objects;
 
 import org.apache.commons.lang3.LocaleUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
 
 /**
  * Extends {@link java.text.MessageFormat} to allow pluggable/additional formatting

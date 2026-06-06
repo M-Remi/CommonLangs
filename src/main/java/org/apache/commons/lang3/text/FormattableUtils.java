@@ -22,7 +22,6 @@ import java.util.Formatter;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
 
 /**
  * Provides utilities for working with the {@link Formattable} interface.
