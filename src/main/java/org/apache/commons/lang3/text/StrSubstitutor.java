@@ -24,8 +24,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Properties;
 
-import org.apache.commons.lang3.StringUtils;
-
 /**
  * Substitutes variables within a string by values.
  * <p>

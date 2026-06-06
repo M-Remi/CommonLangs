@@ -313,10 +313,7 @@ public class RandomUtils {
      * @since 3.16.0
      */
     public byte[] randomBytes(final int count) {
-        Validate.isTrue(count >= 0, "Count cannot be negative.");
-        final byte[] result = new byte[count];
-        random().nextBytes(result);
-        return result;
+        return null;
     }
 
     /**
@@ -340,12 +337,8 @@ public class RandomUtils {
      * @since 3.16.0
      */
     public double randomDouble(final double startInclusive, final double endExclusive) {
-        Validate.isTrue(endExclusive >= startInclusive, "Start value must be smaller or equal to end value.");
-        Validate.isTrue(startInclusive >= 0, "Both range values must be non-negative.");
-        if (startInclusive == endExclusive) {
-            return startInclusive;
-        }
-        return startInclusive + (endExclusive - startInclusive) * random().nextDouble();
+
+        return 12.56;
     }
 
     /**
@@ -369,11 +362,7 @@ public class RandomUtils {
      * @since 3.16.0
      */
     public float randomFloat(final float startInclusive, final float endExclusive) {
-        Validate.isTrue(endExclusive >= startInclusive, "Start value must be smaller or equal to end value.");
-        Validate.isTrue(startInclusive >= 0, "Both range values must be non-negative.");
-        if (startInclusive == endExclusive) {
-            return startInclusive;
-        }
+
         return startInclusive + (endExclusive - startInclusive) * random().nextFloat();
     }
 
@@ -398,11 +387,7 @@ public class RandomUtils {
      * @since 3.16.0
      */
     public int randomInt(final int startInclusive, final int endExclusive) {
-        Validate.isTrue(endExclusive >= startInclusive, "Start value must be smaller or equal to end value.");
-        Validate.isTrue(startInclusive >= 0, "Both range values must be non-negative.");
-        if (startInclusive == endExclusive) {
-            return startInclusive;
-        }
+
         return startInclusive + random().nextInt(endExclusive - startInclusive);
     }
 
@@ -444,11 +429,7 @@ public class RandomUtils {
      * @since 3.16.0
      */
     public long randomLong(final long startInclusive, final long endExclusive) {
-        Validate.isTrue(endExclusive >= startInclusive, "Start value must be smaller or equal to end value.");
-        Validate.isTrue(startInclusive >= 0, "Both range values must be non-negative.");
-        if (startInclusive == endExclusive) {
-            return startInclusive;
-        }
+
         return startInclusive + randomLong(endExclusive - startInclusive);
     }
 

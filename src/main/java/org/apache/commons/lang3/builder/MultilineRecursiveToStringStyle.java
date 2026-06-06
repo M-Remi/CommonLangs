@@ -18,7 +18,6 @@
 package org.apache.commons.lang3.builder;
 
 import org.apache.commons.lang3.ClassUtils;
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * Works with {@link ToStringBuilder} to create a "deep" {@code toString}.
