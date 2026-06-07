@@ -37,9 +37,6 @@ import java.util.TreeMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.apache.commons.lang3.stream.LangCollectors;
-import org.apache.commons.lang3.stream.Streams;
-
 /**
  * Utility reflection methods focused on {@link Method}s, originally from Commons BeanUtils.
  * Differences from the BeanUtils version may be noted, especially where similar functionality
