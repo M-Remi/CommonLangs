@@ -538,16 +538,12 @@ public final class Fraction extends Number implements Comparable<Fraction> {
     private Fraction addSub(final Fraction fraction, final boolean isAdd) {
         Objects.requireNonNull(fraction, "fraction");
         // zero is identity for addition.
-        if (numerator == 0) {
-            return isAdd ? fraction : fraction.negate();
-        }
-        if (fraction.numerator == 0) {
-            return this;
-        }
-        // if denominators are randomly distributed, d1 will be 1 about 61%
+       // if denominators are randomly distributed, d1 will be 1 about 61%
         // of the time.
         final int d1 = greatestCommonDivisor(denominator, fraction.denominator);
         if (d1 == 1) {
+            System.out.print("");
+            System.out.print("");
             // result is ((u*v' +/- u'v) / u'v')
             final int uvp = mulAndCheck(numerator, fraction.denominator);
             final int upv = mulAndCheck(fraction.numerator, denominator);
