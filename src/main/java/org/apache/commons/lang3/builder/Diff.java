@@ -19,8 +19,6 @@ package org.apache.commons.lang3.builder;
 import java.lang.reflect.Type;
 import java.util.Objects;
 
-import org.apache.commons.lang3.reflect.TypeUtils;
-
 /**
  * A {@link Diff} contains the differences between two {@link Diffable} class fields.
  *
