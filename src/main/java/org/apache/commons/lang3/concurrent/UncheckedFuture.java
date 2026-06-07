@@ -25,8 +25,6 @@ import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.apache.commons.lang3.exception.UncheckedInterruptedException;
-
 /**
  * An {@link Future} that throws unchecked instead checked exceptions.
  *

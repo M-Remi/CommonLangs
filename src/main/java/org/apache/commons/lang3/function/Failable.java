@@ -33,8 +33,6 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-import org.apache.commons.lang3.exception.ExceptionUtils;
-
 /**
  * This class provides utility functions, and classes for working with the {@code java.util.function} package, or more
  * generally, with Java 8 lambdas. More specifically, it attempts to address the fact that lambdas are supposed not to

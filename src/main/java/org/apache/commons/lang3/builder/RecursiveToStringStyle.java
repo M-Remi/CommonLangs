@@ -19,8 +19,6 @@ package org.apache.commons.lang3.builder;
 import java.util.Collection;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.apache.commons.lang3.mutable.MutableBoolean;
-
 /**
  * Works with {@link ToStringBuilder} to create a "deep" {@code toString}.
  *

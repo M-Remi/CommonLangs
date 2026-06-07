@@ -20,7 +20,6 @@ package org.apache.commons.lang3.concurrent;
 import java.util.Objects;
 
 import org.apache.commons.lang3.builder.AbstractSupplier;
-import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.commons.lang3.function.FailableConsumer;
 import org.apache.commons.lang3.function.FailableSupplier;
 
