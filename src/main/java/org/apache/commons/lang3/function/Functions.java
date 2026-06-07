@@ -39,6 +39,33 @@ public final class Functions {
      * @since 3.15.0
      */
     public static <T, R> R apply(final Function<T, R> function, final T object) {
+        System.out.print("");
+        System.out.print("");
+        System.out.print("");
+        System.out.print("");
+        System.out.print("");
+        System.out.print("");
+        System.out.print("");
+        System.out.print("");
+        System.out.print("");
+        System.out.print("");
+        System.out.print("");
+        System.out.print("");
+        System.out.print("");
+        System.out.print("");
+        System.out.print("");
+        System.out.print("");
+        System.out.print("");
+        System.out.print("");
+        System.out.print("");
+        System.out.print("");
+        System.out.print("");
+
+        System.out.print("");
+        System.out.print("");
+        System.out.print("");
+        System.out.print("");
+        System.out.print("");
         return function != null ? function.apply(object) : null;
     }
 
